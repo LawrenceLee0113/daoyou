@@ -1,0 +1,53 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(npx astro:*)",
+      "Bash(astro dev:*)",
+      "mcp__talk-to-figma__join_channel",
+      "mcp__talk-to-figma__get_document_info",
+      "mcp__talk-to-figma__get_selection",
+      "mcp__talk-to-figma__read_my_design",
+      "mcp__talk-to-figma__get_node_info",
+      "mcp__talk-to-figma__get_nodes_info",
+      "mcp__talk-to-figma__get_styles",
+      "mcp__talk-to-figma__get_local_components",
+      "mcp__talk-to-figma__get_annotations",
+      "mcp__talk-to-figma__get_instance_overrides",
+      "mcp__talk-to-figma__get_reactions",
+      "mcp__talk-to-figma__scan_text_nodes",
+      "mcp__talk-to-figma__scan_nodes_by_types",
+      "mcp__talk-to-figma__export_node_as_image"
+    ],
+    "deny": [
+      "mcp__talk-to-figma__create_rectangle",
+      "mcp__talk-to-figma__create_frame",
+      "mcp__talk-to-figma__create_text",
+      "mcp__talk-to-figma__create_component_instance",
+      "mcp__talk-to-figma__create_section",
+      "mcp__talk-to-figma__create_connections",
+      "mcp__talk-to-figma__clone_node",
+      "mcp__talk-to-figma__delete_node",
+      "mcp__talk-to-figma__delete_multiple_nodes",
+      "mcp__talk-to-figma__move_node",
+      "mcp__talk-to-figma__resize_node",
+      "mcp__talk-to-figma__rename_node",
+      "mcp__talk-to-figma__set_parent",
+      "mcp__talk-to-figma__set_fill_color",
+      "mcp__talk-to-figma__set_stroke_color",
+      "mcp__talk-to-figma__set_corner_radius",
+      "mcp__talk-to-figma__set_text_content",
+      "mcp__talk-to-figma__set_multiple_text_contents",
+      "mcp__talk-to-figma__set_annotation",
+      "mcp__talk-to-figma__set_multiple_annotations",
+      "mcp__talk-to-figma__set_instance_overrides",
+      "mcp__talk-to-figma__set_layout_mode",
+      "mcp__talk-to-figma__set_padding",
+      "mcp__talk-to-figma__set_axis_align",
+      "mcp__talk-to-figma__set_layout_sizing",
+      "mcp__talk-to-figma__set_item_spacing",
+      "mcp__talk-to-figma__set_default_connector",
+      "mcp__talk-to-figma__set_image_fill"
+    ]
+  }
+}

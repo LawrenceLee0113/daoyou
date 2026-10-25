@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+/* Figma design tokens：從設計稿 get_styles 取得後寫在這裡，Tailwind 會自動產生對應 class
+   例：--color-primary: #1e40af;  →  bg-primary / text-primary
+       --font-sans: "Noto Sans TC", sans-serif;
+       --text-display: 48px;     →  text-display */
+@theme {
+}
