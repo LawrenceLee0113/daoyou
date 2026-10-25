@@ -58,8 +58,23 @@
 Figma 裡的登入、上傳照片等流程**只做前端**，不串接任何後端或第三方 API。所有狀態存在使用者這支手機的瀏覽器裡，換手機、換瀏覽器、清除網站資料後就從頭開始，這是預期中的行為。
 
 - 所有讀寫都集中在 `src/lib/store.ts`，頁面和元件不要直接碰 `localStorage` 或 IndexedDB。之後要接真的後端時只需要改這個檔案。
-- 登入：只有一組預設帳號，寫成 `store.ts` 裡的常數（帳密使用者已提供，存在 Claude 記憶 `demo-account`；repo 和網站都是公開的，寫進程式前要先跟使用者確認可以公開）。登入狀態存在 `localStorage`。需要登入的頁面用前端 JS 檢查，沒登入就導回登入頁。這不是安全機制，不要存任何真實的密碼或個資。
-- 照片：每位使用者**最多 3 張**。存在 IndexedDB（以 Blob 形式），**不能用 localStorage**（上限只有約 5MB）。存之前先用 canvas 把最長邊縮到 1600px、轉成 JPEG（品質 0.8）。
+- 登入：只有一組預設帳號，寫成 `store.ts` 裡的常數（帳號 `repost116.grad@gmail.com`、密碼 `re123456`，使用者已確認可以公開）。登入狀態存在 `localStorage`。需要登入的頁面用前端 JS 檢查，沒登入就導回登入頁。這不是安全機制，不要存任何真實的密碼或個資。
+- 照片：**每個郵筒最多 3 張**（郵筒數量不限）。用 `<input type="file" accept="image/*" capture="environment">` 叫出手機內建相機（也可從相簿選），不在網頁裡做即時取景。存在 IndexedDB（以 Blob 形式），**不能用 localStorage**（上限只有約 5MB）。存之前先用 canvas 把最長邊縮到 1600px、轉成 JPEG（品質 0.8）。
 - 命名：`localStorage` 的 key 和 IndexedDB 的資料庫名稱都要加上 `daoyou` 前綴，因為 `lawrencelee0113.github.io` 底下的其他專案共用同一塊儲存空間。
 - 首次寫入時呼叫 `navigator.storage.persist()`，降低 iOS Safari 清除資料的機率。不做 PWA／加入主畫面：使用者已接受 iOS Safari 在 7 天沒使用後可能清掉資料。
 - 所有讀取都要能處理「資料不存在」（無痕模式、被清除）的情況，畫面退回初始狀態，不可以壞掉。
+
+## 遊戲規則
+
+所有數字集中寫在 `src/lib/rules.ts`，頁面不要寫死。
+
+- 上傳照片：某個郵筒**第一次**上傳 → 得到該郵筒的郵票（收進郵票冊）＋ 10 幣；同一郵筒第 2、3 張各 + 5 幣。
+- 等級依郵票數：Lv.1 見習郵差（0）→ Lv.2 正式郵差（3）→ Lv.3 資深郵差（8）→ Lv.4 郵務達人（15）→ Lv.5 島郵大使（22）。只有 Lv.1 名稱來自設計稿，其他是暫定。
+- 幣的用途：「島郵周邊」商品折抵，1 幣 = NT$1，最多折售價 20%（暫定）。純前端不能真的結帳，只顯示折抵後價格、扣幣。
+
+## 內容與素材
+
+- 字型：中文內文用系統字型（`-apple-system, "PingFang TC", "Noto Sans TC", sans-serif`），跟設計師在 Mac 上看到的一致，不下載中文字型。Chiron GoRound TC、Chiron Hei HK、Chiron Sung HK 用 Google Fonts。設計稿標 Inter／Jura／Noto Sans 的中文其實都是系統字型在顯示。大標題、logo、「NEWS最新消息」（AsobiMemogaki）從 Figma 匯出成圖片。
+- 照片：不用 Wikimedia 等第三方照片，一律用使用者自己拍的；還沒提供前用設計稿匯出的圖暫代，並在回報中列出缺哪些照片。
+- 台灣地圖：用政府開放資料的縣市界線做成 SVG，每個縣市可點擊，樣式（綠框、點點底紋）照設計稿；在程式碼註明資料來源與授權。
+- 郵筒資料集中在 `src/data/mailboxes.ts`。目前只有台北（歪腰郵筒），其他縣市頁做好版型、顯示「即將開放」，有資料時填進去就會出現。
