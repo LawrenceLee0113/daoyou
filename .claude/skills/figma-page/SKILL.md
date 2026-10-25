@@ -12,12 +12,13 @@ argument-hint: "[Figma 連結，或 frame 名稱]"
 
 1. 確認 WebSocket relay 正在跑：`lsof -iTCP:3055 -sTCP:LISTEN`。沒有的話，請使用者在另一個終端機執行
    `cd ~/workspace/talk-to-figma-mcp && bun socket`（這是長時間執行的程序，不要自己在前景跑）。
-2. Talk to Figma **不會用連結讀檔案**，只會讀 Figma 桌面版目前打開的檔案。請使用者在 Figma 打開**這次給的連結**，執行 **Cursor Talk to Figma MCP Plugin**，再把 channel ID 給你。同時需要連結跟 channel ID，缺一個就問。
+2. Talk to Figma **不會用連結讀檔案**，只會讀 Figma 桌面版目前打開的檔案。請使用者在 Figma 打開這一版的檔案，執行 **Cursor Talk to Figma MCP Plugin**，再把 channel ID 給你。
+   **channel ID 必填；連結選填**，只用來記錄，腳本跟比對都不需要（外掛也不回傳檔案 ID，無法用連結核對打開的檔案）。
 3. `join_channel` 加入（後面讀細節要用）。外掛只讀得到**目前所在的 page**，有多個 page 時要請使用者切換。
 
-## 2. 記錄版本（給了新連結時）
+## 2. 記錄版本
 
-在 `figma/versions.md` 的「版本紀錄」最上面新增一版：版本號、日期、連結。比對結果在第 3 步之後補上。
+在 `figma/versions.md` 的「版本紀錄」最上面新增一版：版本號、日期、連結（沒給就寫「未提供」）。比對結果在第 3 步之後補上。
 
 ## 3. 擷取快照、找出變更
 
@@ -30,6 +31,7 @@ argument-hint: "[Figma 連結，或 frame 名稱]"
      - 只有 `render` 變了 → 結構文字都沒變，是圖片或 Auto Layout 等外掛抓不到的變化，一定要看截圖
    - `??` 新增 → 新頁面，或是被改名的 frame
    - `D` 刪除 → 頁面被移除，或是被改名的 frame
+   - 差異看起來像「改回舊版」或大量 frame 消失 → 可能打開了錯的檔案，先停下來問使用者
    - 同一次同時有新增跟刪除，很可能是改名：**不要假設改名前後內容一樣**，要整個 frame 重新看一次，並更新「Frame → 頁面對照」。
 4. 視覺比對：用 Read 打開 `figma/.cache/<名稱>.png`（新）跟 `<名稱>.prev.png`（舊）並排看。`.cache` 只存在這台電腦，換電腦後第一次沒有舊截圖，改看 git diff。
 5. 把變更清單整理給使用者，**確認後**才開始改程式碼。沒有任何變更就回報後結束。
