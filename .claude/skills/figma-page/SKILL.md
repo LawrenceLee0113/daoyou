@@ -24,17 +24,19 @@ argument-hint: "[Figma 連結，或 frame 名稱]"
 
 1. 確認工作區乾淨：`git status --porcelain figma/` 應該是空的（上一版有 commit 才能當比對基準）。
 2. `node figma/snapshot.mjs <channel ID>`：腳本直接連 WebSocket 抓所有頂層 frame，**不要**自己用 MCP 一個個 `get_node_info` 再寫檔（幾 MB 的 JSON 經過對話既浪費又容易抄錯）。
-   - 輸出每個 frame 的 node id，後續讀細節時直接用。
-   - frame 名稱重複時腳本會停下來，請使用者處理。
-3. `git status --porcelain figma/snapshots/`：
-   - `M` 修改 → `git diff --stat` 看規模，再用 `git diff figma/snapshots/<檔案>` 看改了什麼
-     - 只有 `render` 變了 → 結構文字都沒變，是圖片或 Auto Layout 等外掛抓不到的變化，一定要看截圖
-   - `??` 新增 → 新頁面，或是被改名的 frame
-   - `D` 刪除 → 頁面被移除，或是被改名的 frame
-   - 差異看起來像「改回舊版」或大量 frame 消失 → 可能打開了錯的檔案，先停下來問使用者
+   - 輸出每個 frame 的 node id（每份檔案都不一樣），後續讀細節時直接用。
+   - 每個 frame 存 `<名稱>.json`（結構）跟 `<名稱>.png`（截圖），都進 git。
+   - 同名 frame 會依圖層順序存成「名稱 #2」並印警告：請使用者確認對應，建議設計師改成有意義的名稱。
+3. `node figma/snapshot.mjs --report`：跟上一次 commit 比，分成四類，**先看這份摘要，不要直接讀幾千行的 git diff**：
+   - **視覺變更**（截圖變了）→ 要改網頁。用 Read 並排看新截圖 `figma/snapshots/<名稱>.png` 跟舊截圖（`git show HEAD:figma/snapshots/<名稱>.png > <scratchpad>/舊.png`）
+   - **非視覺變更**（截圖沒變）→ 通常是原型互動、轉場設定，必要時才看 `git diff`，優先度低
+   - **新增** → 新頁面，或是被改名的 frame
+   - **刪除** → 頁面被移除，或是被改名的 frame
    - 同一次同時有新增跟刪除，很可能是改名：**不要假設改名前後內容一樣**，要整個 frame 重新看一次，並更新「Frame → 頁面對照」。
-4. 視覺比對：用 Read 打開 `figma/.cache/<名稱>.png`（新）跟 `<名稱>.prev.png`（舊）並排看。`.cache` 只存在這台電腦，換電腦後第一次沒有舊截圖，改看 git diff。
+   - 差異看起來像「改回舊版」（之前加的東西消失、frame 被刪）→ 可能打開了錯的檔案或順序弄反，先停下來問使用者
+4. 快照刻意不比對的東西：node ID 與所有 ID 參照（複製檔案後全會變）、畫布座標、浮點誤差。所以**原型連結改指到哪一頁**比不出來，實作時用 `get_reactions` 確認。
 5. 把變更清單整理給使用者，**確認後**才開始改程式碼。沒有任何變更就回報後結束。
+6. 調整了 `normalize` 規則後，先 `node figma/snapshot.mjs --renormalize` 重整已 commit 的基準並 commit，否則會出現大量假差異。
 
 ## 4. 讀取細節（只針對有變更的 frame）
 
@@ -55,5 +57,5 @@ argument-hint: "[Figma 連結，或 frame 名稱]"
 1. `node --test figma/snapshot.test.mjs` 跟 `npm run build` 都要通過。
 2. 起 dev server，用瀏覽器截圖跟 frame 截圖並排比對：手機（設計稿寬度）跟桌機（1280px）兩種寬度。
 3. 更新 `figma/versions.md`：這一版的變更清單、改了哪些頁面，以及「Frame → 頁面對照」表。
-4. Commit `figma/`（快照 + versions.md）。**這一步不能省**：下一版是跟最後一次 commit 的快照比對，沒有 commit 的話，下一版的差異會算錯。
+4. Commit `figma/`（快照、截圖、versions.md）。**這一步不能省**：下一版是跟最後一次 commit 的快照比對，沒有 commit 的話，下一版的差異會算錯。
 5. 回報：改了哪些檔案、新增了哪些 token、哪些地方跟設計稿不一致或是自行推斷的。

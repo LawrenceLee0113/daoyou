@@ -4,7 +4,7 @@
 
 - `snapshots/`：每個 frame 一份最新快照（`node figma/snapshot.mjs <channel ID>` 產生），舊版本在 git 歷史裡。
 - 比對：執行 `git status --porcelain figma/snapshots/`，`M` 是修改，`??` 是新增，`D` 是刪除。
-- `.cache/`：frame 截圖，只存在本機、不進 git。
+- 每個 frame 有 `<名稱>.json`（結構）跟 `<名稱>.png`（截圖）。`node figma/snapshot.mjs --report` 產生變更摘要。
 
 ## Frame → 頁面對照
 

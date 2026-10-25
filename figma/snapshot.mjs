@@ -3,10 +3,11 @@
 // 把目前 page 上每個頂層 frame 存成 figma/snapshots/<frame 名稱>.json，之後用 git status / git diff 看哪些 frame 改了。
 // - 去掉 node id、座標改成相對於 frame 左上角，避免「複製檔案」「在畫布上搬動 frame」被誤判成修改。
 // - 外掛不回傳圖片內容跟 Auto Layout，所以另外記錄 frame 截圖的 sha256（render），畫面有任何變化都會反映出來。
-// - 截圖存在 figma/.cache/（不進 git）；render 有變時，舊截圖改名成 <名稱>.prev.png 方便並排比對。
-import { writeFileSync, mkdirSync, readdirSync, rmSync, renameSync, existsSync, readFileSync } from 'node:fs';
+// - 截圖 <名稱>.png 跟快照一起進 git，舊版用 git show HEAD:figma/snapshots/<名稱>.png 取回。
+import { writeFileSync, mkdirSync, readdirSync, rmSync, readFileSync } from 'node:fs';
 import { createHash, randomUUID } from 'node:crypto';
 import { join } from 'node:path';
+import { execFileSync } from 'node:child_process';
 
 const round = (n) => Math.round(n * 100) / 100;
 // 所有數字取到小數 2 位，消掉 Figma 浮點誤差（5.635654 vs 5.635650）；更細的顏色變化由 render 雜湊兜底
@@ -68,9 +69,7 @@ function connect(channel) {
 async function main(channel) {
 	if (!channel) throw new Error('用法：node figma/snapshot.mjs <channel ID>');
 	const snapDir = join(import.meta.dirname, 'snapshots');
-	const cacheDir = join(import.meta.dirname, '.cache');
 	mkdirSync(snapDir, { recursive: true });
-	mkdirSync(cacheDir, { recursive: true });
 
 	const figma = await connect(channel);
 	const doc = await figma.send('get_document_info');
@@ -86,10 +85,7 @@ async function main(channel) {
 		const png = Buffer.from((await figma.send('export_node_as_image', { nodeId: f.id, scale: 1 })).imageData, 'base64');
 		snap.render = createHash('sha256').update(png).digest('hex').slice(0, 16);
 
-		const pngPath = join(cacheDir, `${name}.png`);
-		const prev = existsSync(pngPath) && createHash('sha256').update(readFileSync(pngPath)).digest('hex').slice(0, 16);
-		if (prev && prev !== snap.render) renameSync(pngPath, join(cacheDir, `${name}.prev.png`));
-		writeFileSync(pngPath, png);
+		writeFileSync(join(snapDir, `${name}.png`), png);
 		writeFileSync(join(snapDir, `${name}.json`), JSON.stringify(snap, null, '\t') + '\n');
 		console.log(`${f.id}\t${name}`);
 	}
@@ -97,22 +93,53 @@ async function main(channel) {
 
 	// 這一版已經不存在的 frame 刪掉快照，git status 會顯示成 D
 	for (const file of readdirSync(snapDir)) {
-		if (!names.includes(file.replace(/\.json$/, ''))) rmSync(join(snapDir, file));
+		if (!names.includes(file.replace(/\.(json|png)$/, ''))) rmSync(join(snapDir, file));
 	}
 }
 
 // node figma/snapshot.mjs --renormalize：正規化規則改了之後，用新規則重整現有快照（不用連 Figma）
 function renormalize() {
 	const snapDir = join(import.meta.dirname, 'snapshots');
-	for (const file of readdirSync(snapDir)) {
+	for (const file of readdirSync(snapDir).filter((f) => f.endsWith('.json'))) {
 		const path = join(snapDir, file);
 		const { render, ...node } = JSON.parse(readFileSync(path, 'utf8'));
 		writeFileSync(path, JSON.stringify({ ...normalize(node), render }, null, '\t') + '\n'); // render 固定放最後，跟 main() 的欄位順序一致
 	}
 }
 
+// node figma/snapshot.mjs --report：跟最後一次 commit 比，列出每個 frame 是視覺還是非視覺變更、文字與圖層增減
+const layers = (n, path = '', out = []) => {
+	const p = path ? `${path}/${n.name}` : n.name;
+	if (path) out.push(`${p.split('/').slice(1).join('/')} [${n.type}${n.characters ? ` "${n.characters.slice(0, 30)}"` : ''}]`);
+	(n.children ?? []).forEach((c) => layers(c, p, out));
+	return out;
+};
+function report() {
+	const git = (...args) => execFileSync('git', ['-c', 'core.quotepath=false', ...args], { cwd: import.meta.dirname, encoding: 'utf8' });
+	git('add', '-N', 'snapshots');
+	const lines = git('diff', '--name-status', 'HEAD', '--', 'snapshots/*.json').trim().split('\n').filter(Boolean);
+	if (!lines.length) return console.log('沒有任何變更');
+	const groups = { 視覺變更: [], 非視覺變更: [], 新增: [], 刪除: [] };
+	for (const line of lines) {
+		const [st, file] = line.split('\t');
+		const name = file.replace(/^.*snapshots\//, '').replace(/\.json$/, '');
+		if (st === 'D') { groups.刪除.push(name); continue; }
+		const b = JSON.parse(readFileSync(join(import.meta.dirname, 'snapshots', `${name}.json`), 'utf8'));
+		if (st === 'A') { groups.新增.push(`${name}（${layers(b).length} 個圖層）`); continue; }
+		const a = JSON.parse(git('show', `HEAD:figma/snapshots/${name}.json`));
+		const [la, lb] = [layers(a), layers(b)];
+		const del = la.filter((x) => !lb.includes(x)), add = lb.filter((x) => !la.includes(x));
+		const detail = [...del.slice(0, 6).map((x) => `    - ${x}`), ...add.slice(0, 6).map((x) => `    + ${x}`)];
+		if (del.length > 6 || add.length > 6) detail.push(`    …共 -${del.length} +${add.length} 個圖層`);
+		const head = `${name}（圖層 ${la.length}→${lb.length}）`;
+		(a.render === b.render ? groups.非視覺變更 : groups.視覺變更).push([head, ...(detail.length ? detail : ['    （圖層沒增減，屬性改變，看 git diff）'])].join('\n'));
+	}
+	for (const [k, v] of Object.entries(groups)) if (v.length) console.log(`\n## ${k}（${v.length}）\n${v.join('\n')}`);
+}
+
 if (import.meta.main ?? process.argv[1] === import.meta.filename) {
-	(process.argv[2] === '--renormalize' ? Promise.resolve().then(renormalize) : main(process.argv[2])).catch((e) => {
+	const cmd = { '--renormalize': renormalize, '--report': report }[process.argv[2]];
+	(cmd ? Promise.resolve().then(cmd) : main(process.argv[2])).catch((e) => {
 		console.error(e.message);
 		process.exit(1);
 	});
