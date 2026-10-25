@@ -6,18 +6,36 @@
 // - 截圖存在 figma/.cache/（不進 git）；render 有變時，舊截圖改名成 <名稱>.prev.png 方便並排比對。
 import { writeFileSync, mkdirSync, readdirSync, rmSync, renameSync, existsSync, readFileSync } from 'node:fs';
 import { createHash, randomUUID } from 'node:crypto';
+import { join } from 'node:path';
 
 const round = (n) => Math.round(n * 100) / 100;
+// 所有數字取到小數 2 位，消掉 Figma 浮點誤差（5.635654 vs 5.635650）；更細的顏色變化由 render 雜湊兜底
+// ponytail: 指向其他節點的 ID（componentId、transitionNodeID、overrides[].id…）複製檔案後全部會變，一律去掉；
+// 代價是比不出「原型連結改指到別頁」，實作時用 get_reactions 即時確認
+const isIdKey = (k) => k === 'id' || /(Id|ID)s?$/.test(k);
+const clean = (v) =>
+	typeof v === 'number' ? round(v)
+	: Array.isArray(v) ? v.map(clean)
+	: v && typeof v === 'object' ? Object.fromEntries(Object.entries(v).filter(([k]) => !isIdKey(k)).map(([k, x]) => [k, clean(x)]))
+	: v;
 
+// 對已經正規化過的快照再跑一次結果不變，規則調整後可以直接重整 git 裡的舊快照
 export function normalize(node, origin = node.absoluteBoundingBox ?? { x: 0, y: 0 }) {
-	const { id, children, absoluteBoundingBox: b, ...rest } = node;
-	const out = rest;
+	// absoluteRenderBounds、localPosition 是畫布上的絕對座標，搬動 frame 就會全變
+	const { id, children, absoluteBoundingBox: b, absoluteRenderBounds, localPosition, ...rest } = node;
+	const out = clean(rest);
 	if (b) out.box = { x: round(b.x - origin.x), y: round(b.y - origin.y), w: round(b.width), h: round(b.height) };
 	if (children) out.children = children.map((c) => normalize(c, origin));
 	return out;
 }
 
 export const fileName = (name) => name.replace(/[\/\\:*?"<>|]/g, '_').trim();
+
+// ponytail: 同名 frame 依圖層順序加「 #2」「 #3」；設計師調整圖層順序時對應會錯開，所以印警告交給人確認
+export const dedupe = (names) => names.map((n, i) => {
+	const k = names.slice(0, i).filter((m) => m === n).length;
+	return k ? `${n} #${k + 1}` : n;
+});
 
 // 頁面跟元件才拍快照；畫布上散落的 group、圖片、文字是素材，不是頁面
 const SNAPSHOT_TYPES = new Set(['FRAME', 'COMPONENT', 'COMPONENT_SET']);
@@ -49,8 +67,8 @@ function connect(channel) {
 
 async function main(channel) {
 	if (!channel) throw new Error('用法：node figma/snapshot.mjs <channel ID>');
-	const snapDir = new URL('./snapshots/', import.meta.url);
-	const cacheDir = new URL('./.cache/', import.meta.url);
+	const snapDir = join(import.meta.dirname, 'snapshots');
+	const cacheDir = join(import.meta.dirname, '.cache');
 	mkdirSync(snapDir, { recursive: true });
 	mkdirSync(cacheDir, { recursive: true });
 
@@ -58,34 +76,43 @@ async function main(channel) {
 	const doc = await figma.send('get_document_info');
 	const frames = doc.children.filter((n) => SNAPSHOT_TYPES.has(n.type));
 
-	const names = frames.map((f) => fileName(f.name));
-	const dupes = [...new Set(names.filter((n, i) => names.indexOf(n) !== i))];
-	if (dupes.length) throw new Error(`frame 名稱重複，無法對應快照：${dupes.join('、')}`);
+	const names = dedupe(frames.map((f) => fileName(f.name)));
+	for (const n of names.filter((n) => / #\d+$/.test(n))) console.warn(`⚠ frame 名稱重複，依圖層順序存成「${n}」，請人工確認對應`);
 
 	console.log(`page「${doc.name}」：${frames.length} 個 frame（略過 ${doc.children.length - frames.length} 個散落素材）`);
-	for (const f of frames) {
-		const name = fileName(f.name);
+	for (const [i, f] of frames.entries()) {
+		const name = names[i];
 		const snap = normalize(await figma.send('get_node_info', { nodeId: f.id }));
 		const png = Buffer.from((await figma.send('export_node_as_image', { nodeId: f.id, scale: 1 })).imageData, 'base64');
 		snap.render = createHash('sha256').update(png).digest('hex').slice(0, 16);
 
-		const pngPath = new URL(`${name}.png`, cacheDir);
+		const pngPath = join(cacheDir, `${name}.png`);
 		const prev = existsSync(pngPath) && createHash('sha256').update(readFileSync(pngPath)).digest('hex').slice(0, 16);
-		if (prev && prev !== snap.render) renameSync(pngPath, new URL(`${name}.prev.png`, cacheDir));
+		if (prev && prev !== snap.render) renameSync(pngPath, join(cacheDir, `${name}.prev.png`));
 		writeFileSync(pngPath, png);
-		writeFileSync(new URL(`${name}.json`, snapDir), JSON.stringify(snap, null, '\t') + '\n');
+		writeFileSync(join(snapDir, `${name}.json`), JSON.stringify(snap, null, '\t') + '\n');
 		console.log(`${f.id}\t${name}`);
 	}
 	figma.close();
 
 	// 這一版已經不存在的 frame 刪掉快照，git status 會顯示成 D
 	for (const file of readdirSync(snapDir)) {
-		if (!names.includes(file.replace(/\.json$/, ''))) rmSync(new URL(file, snapDir));
+		if (!names.includes(file.replace(/\.json$/, ''))) rmSync(join(snapDir, file));
+	}
+}
+
+// node figma/snapshot.mjs --renormalize：正規化規則改了之後，用新規則重整現有快照（不用連 Figma）
+function renormalize() {
+	const snapDir = join(import.meta.dirname, 'snapshots');
+	for (const file of readdirSync(snapDir)) {
+		const path = join(snapDir, file);
+		const { render, ...node } = JSON.parse(readFileSync(path, 'utf8'));
+		writeFileSync(path, JSON.stringify({ ...normalize(node), render }, null, '\t') + '\n'); // render 固定放最後，跟 main() 的欄位順序一致
 	}
 }
 
 if (import.meta.main ?? process.argv[1] === import.meta.filename) {
-	main(process.argv[2]).catch((e) => {
+	(process.argv[2] === '--renormalize' ? Promise.resolve().then(renormalize) : main(process.argv[2])).catch((e) => {
 		console.error(e.message);
 		process.exit(1);
 	});

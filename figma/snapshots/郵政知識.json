@@ -37,12 +37,6 @@
 		"b": 1,
 		"a": 1
 	},
-	"absoluteRenderBounds": {
-		"x": 950,
-		"y": -2392,
-		"width": 497,
-		"height": 852
-	},
 	"constraints": {
 		"vertical": "TOP",
 		"horizontal": "LEFT"
@@ -51,10 +45,6 @@
 	"interactions": [],
 	"complexStrokeProperties": {
 		"strokeType": "BASIC"
-	},
-	"localPosition": {
-		"x": 1004,
-		"y": -2392
 	},
 	"box": {
 		"x": 0,
@@ -81,12 +71,6 @@
 				"a": 0
 			},
 			"overflowDirection": "VERTICAL_SCROLLING",
-			"absoluteRenderBounds": {
-				"x": 950,
-				"y": -2245,
-				"width": 497,
-				"height": 703
-			},
 			"constraints": {
 				"vertical": "TOP",
 				"horizontal": "LEFT"
@@ -120,12 +104,6 @@
 						"b": 0,
 						"a": 0
 					},
-					"absoluteRenderBounds": {
-						"x": 952,
-						"y": -2245,
-						"width": 495,
-						"height": 703
-					},
 					"constraints": {
 						"vertical": "TOP",
 						"horizontal": "LEFT"
@@ -158,12 +136,6 @@
 								"g": 0,
 								"b": 0,
 								"a": 0
-							},
-							"absoluteRenderBounds": {
-								"x": 958,
-								"y": -2245,
-								"width": 489,
-								"height": 703
 							},
 							"constraints": {
 								"vertical": "TOP",
@@ -200,8 +172,8 @@
 												],
 												[
 													0,
-													0.8590776324272156,
-													0.14050142467021942
+													0.86,
+													0.14
 												]
 											]
 										}
@@ -209,12 +181,6 @@
 									"strokes": [],
 									"strokeWeight": 1,
 									"strokeAlign": "INSIDE",
-									"absoluteRenderBounds": {
-										"x": 958,
-										"y": -2245,
-										"width": 489,
-										"height": 703
-									},
 									"preserveRatio": true,
 									"targetAspectRatio": {
 										"x": 453,
@@ -256,12 +222,6 @@
 									"strokes": [],
 									"strokeWeight": 1,
 									"strokeAlign": "OUTSIDE",
-									"absoluteRenderBounds": {
-										"x": 1037.364013671875,
-										"y": -2142.830078125,
-										"width": 307.2860107421875,
-										"height": 302.02001953125
-									},
 									"constraints": {
 										"vertical": "TOP",
 										"horizontal": "LEFT"
@@ -294,7 +254,7 @@
 										"textAlignHorizontal": "LEFT",
 										"textAlignVertical": "TOP",
 										"letterSpacing": 0,
-										"lineHeightPx": 16.94318199157715,
+										"lineHeightPx": 16.94,
 										"lineHeightPercent": 100,
 										"lineHeightUnit": "INTRINSIC_%"
 									},
@@ -329,12 +289,6 @@
 								"g": 0,
 								"b": 0,
 								"a": 0
-							},
-							"absoluteRenderBounds": {
-								"x": 957,
-								"y": -1670,
-								"width": 490,
-								"height": 128
 							},
 							"constraints": {
 								"vertical": "TOP",
@@ -371,8 +325,8 @@
 												],
 												[
 													0,
-													0.8590776324272156,
-													0.14050142467021942
+													0.86,
+													0.14
 												]
 											]
 										}
@@ -380,12 +334,6 @@
 									"strokes": [],
 									"strokeWeight": 1,
 									"strokeAlign": "INSIDE",
-									"absoluteRenderBounds": {
-										"x": 957,
-										"y": -1670,
-										"width": 490,
-										"height": 128
-									},
 									"preserveRatio": true,
 									"targetAspectRatio": {
 										"x": 453,
@@ -427,12 +375,6 @@
 									"strokes": [],
 									"strokeWeight": 1,
 									"strokeAlign": "OUTSIDE",
-									"absoluteRenderBounds": {
-										"x": 1047.2939453125,
-										"y": -1587.8299560546875,
-										"width": 307.3980712890625,
-										"height": 45.8299560546875
-									},
 									"constraints": {
 										"vertical": "TOP",
 										"horizontal": "LEFT"
@@ -467,7 +409,7 @@
 										"textAlignHorizontal": "LEFT",
 										"textAlignVertical": "TOP",
 										"letterSpacing": 0,
-										"lineHeightPx": 16.94318199157715,
+										"lineHeightPx": 16.94,
 										"lineHeightPercent": 100,
 										"lineHeightUnit": "INTRINSIC_%"
 									},
@@ -503,7 +445,6 @@
 								"b": 0,
 								"a": 0
 							},
-							"absoluteRenderBounds": null,
 							"constraints": {
 								"vertical": "TOP",
 								"horizontal": "LEFT"
@@ -539,8 +480,8 @@
 												],
 												[
 													0,
-													0.8590776324272156,
-													0.14050142467021942
+													0.86,
+													0.14
 												]
 											]
 										}
@@ -548,7 +489,6 @@
 									"strokes": [],
 									"strokeWeight": 1,
 									"strokeAlign": "INSIDE",
-									"absoluteRenderBounds": null,
 									"preserveRatio": true,
 									"targetAspectRatio": {
 										"x": 453,
@@ -590,7 +530,6 @@
 									"strokes": [],
 									"strokeWeight": 1,
 									"strokeAlign": "OUTSIDE",
-									"absoluteRenderBounds": null,
 									"constraints": {
 										"vertical": "TOP",
 										"horizontal": "LEFT"
@@ -623,7 +562,7 @@
 										"textAlignHorizontal": "LEFT",
 										"textAlignVertical": "TOP",
 										"letterSpacing": 0,
-										"lineHeightPx": 16.94318199157715,
+										"lineHeightPx": 16.94,
 										"lineHeightPercent": 100,
 										"lineHeightUnit": "INTRINSIC_%"
 									},
@@ -659,7 +598,6 @@
 								"b": 0,
 								"a": 0
 							},
-							"absoluteRenderBounds": null,
 							"constraints": {
 								"vertical": "TOP",
 								"horizontal": "LEFT"
@@ -695,8 +633,8 @@
 												],
 												[
 													0,
-													0.8590776324272156,
-													0.14050142467021942
+													0.86,
+													0.14
 												]
 											]
 										}
@@ -704,7 +642,6 @@
 									"strokes": [],
 									"strokeWeight": 1,
 									"strokeAlign": "INSIDE",
-									"absoluteRenderBounds": null,
 									"preserveRatio": true,
 									"targetAspectRatio": {
 										"x": 453,
@@ -746,7 +683,6 @@
 									"strokes": [],
 									"strokeWeight": 1,
 									"strokeAlign": "OUTSIDE",
-									"absoluteRenderBounds": null,
 									"constraints": {
 										"vertical": "TOP",
 										"horizontal": "LEFT"
@@ -777,7 +713,7 @@
 										"textAlignHorizontal": "LEFT",
 										"textAlignVertical": "TOP",
 										"letterSpacing": 0,
-										"lineHeightPx": 16.94318199157715,
+										"lineHeightPx": 16.94,
 										"lineHeightPercent": 100,
 										"lineHeightUnit": "INTRINSIC_%"
 									},
@@ -817,12 +753,6 @@
 				"b": 0,
 				"a": 0
 			},
-			"absoluteRenderBounds": {
-				"x": 1004,
-				"y": -2392,
-				"width": 393,
-				"height": 147.00001525878906
-			},
 			"constraints": {
 				"vertical": "TOP",
 				"horizontal": "LEFT"
@@ -843,7 +773,7 @@
 					"name": "資產 4 1",
 					"type": "RECTANGLE",
 					"scrollBehavior": "SCROLLS",
-					"rotation": 3.1415925661670165,
+					"rotation": 3.14,
 					"blendMode": "PASS_THROUGH",
 					"fills": [
 						{
@@ -856,12 +786,6 @@
 					"strokes": [],
 					"strokeWeight": 1,
 					"strokeAlign": "INSIDE",
-					"absoluteRenderBounds": {
-						"x": 1004,
-						"y": -2305,
-						"width": 393,
-						"height": 60
-					},
 					"preserveRatio": true,
 					"targetAspectRatio": {
 						"x": 4096,
@@ -887,7 +811,7 @@
 					"name": "資產 3 1",
 					"type": "RECTANGLE",
 					"scrollBehavior": "SCROLLS",
-					"rotation": -3.1415925661670165,
+					"rotation": -3.14,
 					"blendMode": "PASS_THROUGH",
 					"fills": [
 						{
@@ -900,12 +824,6 @@
 					"strokes": [],
 					"strokeWeight": 1,
 					"strokeAlign": "INSIDE",
-					"absoluteRenderBounds": {
-						"x": 1004,
-						"y": -2392,
-						"width": 393,
-						"height": 87
-					},
 					"preserveRatio": true,
 					"targetAspectRatio": {
 						"x": 4096,
@@ -931,7 +849,6 @@
 					"name": "跑嗎燈燈",
 					"type": "INSTANCE",
 					"scrollBehavior": "SCROLLS",
-					"componentId": "47:6722",
 					"componentProperties": {
 						"Property 1": {
 							"value": "Frame 12",
@@ -941,7 +858,6 @@
 					},
 					"overrides": [
 						{
-							"id": "184:223",
 							"overriddenFields": [
 								"targetAspectRatio"
 							]
@@ -960,12 +876,6 @@
 						"b": 0,
 						"a": 0
 					},
-					"absoluteRenderBounds": {
-						"x": 1035,
-						"y": -2330,
-						"width": 331,
-						"height": 11
-					},
 					"preserveRatio": true,
 					"targetAspectRatio": {
 						"x": 331,
@@ -976,7 +886,6 @@
 						"horizontal": "CENTER"
 					},
 					"effects": [],
-					"transitionNodeID": "47:6719",
 					"transitionDuration": 300,
 					"transitionEasing": "EASE_OUT",
 					"interactions": [
@@ -988,7 +897,6 @@
 							"actions": [
 								{
 									"type": "NODE",
-									"destinationId": "47:6719",
 									"navigation": "CHANGE_TO",
 									"transition": null
 								}
@@ -1022,12 +930,6 @@
 								"b": 0,
 								"a": 0
 							},
-							"absoluteRenderBounds": {
-								"x": 1072.4310302734375,
-								"y": -2329.489990234375,
-								"width": 256.16796875,
-								"height": 9.3701171875
-							},
 							"constraints": {
 								"vertical": "TOP",
 								"horizontal": "LEFT"
@@ -1060,12 +962,6 @@
 										"g": 0,
 										"b": 0,
 										"a": 0
-									},
-									"absoluteRenderBounds": {
-										"x": 1072.4310302734375,
-										"y": -2329.489990234375,
-										"width": 256.16796875,
-										"height": 9.3701171875
 									},
 									"constraints": {
 										"vertical": "TOP",
@@ -1103,12 +999,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1324.8189697265625,
-												"y": -2323.949951171875,
-												"width": 3.780029296875,
-												"height": 3.77001953125
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1145,12 +1035,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1321.183837890625,
-												"y": -2325.949951171875,
-												"width": 2.52001953125,
-												"height": 2.449951171875
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1187,12 +1071,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1308.6873779296875,
-												"y": -2328.989990234375,
-												"width": 8.9000244140625,
-												"height": 8.72998046875
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1229,12 +1107,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1298.25732421875,
-												"y": -2329.43994140625,
-												"width": 9.3900146484375,
-												"height": 9.280029296875
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1271,12 +1143,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1288.227294921875,
-												"y": -2329.39990234375,
-												"width": 9.6099853515625,
-												"height": 9.1201171875
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1313,12 +1179,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1278.83740234375,
-												"y": -2329.4599609375,
-												"width": 8.5400390625,
-												"height": 9.16259765625
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1355,12 +1215,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1268.307373046875,
-												"y": -2329.449951171875,
-												"width": 9.5,
-												"height": 9.300048828125
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1397,12 +1251,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1258.307373046875,
-												"y": -2329.43994140625,
-												"width": 9.4200439453125,
-												"height": 9.31005859375
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1439,12 +1287,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1248.33740234375,
-												"y": -2329.39990234375,
-												"width": 9.27001953125,
-												"height": 9.239990234375
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1481,12 +1323,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1239.1072998046875,
-												"y": -2329.3701171875,
-												"width": 7.9000244140625,
-												"height": 9.2099609375
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1523,12 +1359,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1228.58740234375,
-												"y": -2329.43994140625,
-												"width": 8.8800048828125,
-												"height": 9.27001953125
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1565,12 +1395,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1218.307373046875,
-												"y": -2329.419921875,
-												"width": 9.3399658203125,
-												"height": 9.050048828125
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1607,12 +1431,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1208.3773193359375,
-												"y": -2328.719970703125,
-												"width": 9.3599853515625,
-												"height": 8.580078125
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1649,12 +1467,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1198.327392578125,
-												"y": -2329.489990234375,
-												"width": 9.429931640625,
-												"height": 9.3701171875
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1691,12 +1503,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1193.2012939453125,
-												"y": -2328.272705078125,
-												"width": 1.4205322265625,
-												"height": 7.340087890625
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1733,12 +1539,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1180.1448974609375,
-												"y": -2329.340087890625,
-												"width": 9.3399658203125,
-												"height": 9.18994140625
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1775,12 +1575,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1170.7049560546875,
-												"y": -2329.47998046875,
-												"width": 8.6099853515625,
-												"height": 9.330078125
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1817,12 +1611,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1160.1549072265625,
-												"y": -2329.159912109375,
-												"width": 8.8900146484375,
-												"height": 9
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1859,12 +1647,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1150.1148681640625,
-												"y": -2329.43994140625,
-												"width": 9.3699951171875,
-												"height": 9.280029296875
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1901,12 +1683,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1140.0849609375,
-												"y": -2329.4599609375,
-												"width": 9.4200439453125,
-												"height": 9.2099609375
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1943,12 +1719,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1129.994873046875,
-												"y": -2329.4599609375,
-												"width": 9.5,
-												"height": 9.300048828125
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -1985,12 +1755,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1120.1148681640625,
-												"y": -2329.47998046875,
-												"width": 3.0400390625,
-												"height": 9.360107421875
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -2027,12 +1791,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1114.39453125,
-												"y": -2326.525634765625,
-												"width": 4.93603515625,
-												"height": 5.6357421875
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -2069,12 +1827,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1105.8016357421875,
-												"y": -2326.525634765625,
-												"width": 7.414794921875,
-												"height": 5.525634765625
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -2111,12 +1863,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1099.53125,
-												"y": -2326.525634765625,
-												"width": 5.085205078125,
-												"height": 5.6357421875
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -2153,12 +1899,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1093.857421875,
-												"y": -2326.525634765625,
-												"width": 4.7833251953125,
-												"height": 5.6357421875
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -2195,12 +1935,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1091.6121826171875,
-												"y": -2328.272705078125,
-												"width": 1.061767578125,
-												"height": 7.272705078125
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -2237,12 +1971,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1085.498046875,
-												"y": -2326.525634765625,
-												"width": 4.93603515625,
-												"height": 5.6357421875
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -2279,12 +2007,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1075.9969482421875,
-												"y": -2328.272705078125,
-												"width": 9.367919921875,
-												"height": 7.272705078125
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -2321,12 +2043,6 @@
 											"strokes": [],
 											"strokeWeight": 1,
 											"strokeAlign": "OUTSIDE",
-											"absoluteRenderBounds": {
-												"x": 1072.4310302734375,
-												"y": -2329.47998046875,
-												"width": 3.0400390625,
-												"height": 9.360107421875
-											},
 											"constraints": {
 												"vertical": "TOP",
 												"horizontal": "CENTER"
@@ -2366,12 +2082,6 @@
 						"b": 0,
 						"a": 0
 					},
-					"absoluteRenderBounds": {
-						"x": 1301,
-						"y": -2286,
-						"width": 21.8004150390625,
-						"height": 19.051733016967773
-					},
 					"constraints": {
 						"vertical": "TOP",
 						"horizontal": "LEFT"
@@ -2399,9 +2109,9 @@
 									"blendMode": "NORMAL",
 									"type": "SOLID",
 									"color": {
-										"r": 0.7960784435272217,
-										"g": 0.30588236451148987,
-										"b": 0.5529412031173706,
+										"r": 0.8,
+										"g": 0.31,
+										"b": 0.55,
 										"a": 1
 									}
 								}
@@ -2410,12 +2120,6 @@
 							"strokeAlign": "CENTER",
 							"strokeJoin": "ROUND",
 							"strokeCap": "ROUND",
-							"absoluteRenderBounds": {
-								"x": 1301,
-								"y": -2286,
-								"width": 16.8387451171875,
-								"height": 16.18359375
-							},
 							"constraints": {
 								"vertical": "SCALE",
 								"horizontal": "SCALE"
@@ -2436,7 +2140,7 @@
 							"name": "Line 4",
 							"type": "LINE",
 							"scrollBehavior": "SCROLLS",
-							"rotation": 0.6431619583573008,
+							"rotation": 0.64,
 							"blendMode": "PASS_THROUGH",
 							"fills": [],
 							"strokes": [
@@ -2444,9 +2148,9 @@
 									"blendMode": "NORMAL",
 									"type": "SOLID",
 									"color": {
-										"r": 0.7960784435272217,
-										"g": 0.30588236451148987,
-										"b": 0.5529412031173706,
+										"r": 0.8,
+										"g": 0.31,
+										"b": 0.55,
 										"a": 1
 									}
 								}
@@ -2454,12 +2158,6 @@
 							"strokeWeight": 2,
 							"strokeAlign": "CENTER",
 							"strokeCap": "ROUND",
-							"absoluteRenderBounds": {
-								"x": 1314.658203125,
-								"y": -2273.9501953125,
-								"width": 8.1422119140625,
-								"height": 6.602294921875
-							},
 							"constraints": {
 								"vertical": "TOP",
 								"horizontal": "LEFT"
@@ -2502,18 +2200,11 @@
 						"b": 0,
 						"a": 0
 					},
-					"absoluteRenderBounds": {
-						"x": 1343.68994140625,
-						"y": -2284.739990234375,
-						"width": 20,
-						"height": 17.98492431640625
-					},
 					"constraints": {
 						"vertical": "TOP",
 						"horizontal": "LEFT"
 					},
 					"effects": [],
-					"transitionNodeID": "61:749",
 					"transitionDuration": 300,
 					"transitionEasing": "EASE_OUT",
 					"interactions": [
@@ -2524,10 +2215,9 @@
 							"actions": [
 								{
 									"type": "NODE",
-									"destinationId": "61:749",
 									"overlayRelativePosition": {
-										"x": -131.69000244140625,
-										"y": 35.73999786376953
+										"x": -131.69,
+										"y": 35.74
 									},
 									"navigation": "OVERLAY",
 									"transition": null,
@@ -2557,9 +2247,9 @@
 									"blendMode": "NORMAL",
 									"type": "SOLID",
 									"color": {
-										"r": 0.7960784435272217,
-										"g": 0.30588236451148987,
-										"b": 0.5529412031173706,
+										"r": 0.8,
+										"g": 0.31,
+										"b": 0.55,
 										"a": 1
 									}
 								}
@@ -2567,12 +2257,6 @@
 							"strokeWeight": 2,
 							"strokeAlign": "CENTER",
 							"strokeCap": "ROUND",
-							"absoluteRenderBounds": {
-								"x": 1343.68994140625,
-								"y": -2284.739990234375,
-								"width": 20,
-								"height": 2
-							},
 							"constraints": {
 								"vertical": "TOP",
 								"horizontal": "LEFT"
@@ -2600,9 +2284,9 @@
 									"blendMode": "NORMAL",
 									"type": "SOLID",
 									"color": {
-										"r": 0.7960784435272217,
-										"g": 0.30588236451148987,
-										"b": 0.5529412031173706,
+										"r": 0.8,
+										"g": 0.31,
+										"b": 0.55,
 										"a": 1
 									}
 								}
@@ -2610,12 +2294,6 @@
 							"strokeWeight": 2,
 							"strokeAlign": "CENTER",
 							"strokeCap": "ROUND",
-							"absoluteRenderBounds": {
-								"x": 1343.68994140625,
-								"y": -2276.74755859375,
-								"width": 20,
-								"height": 2
-							},
 							"constraints": {
 								"vertical": "TOP",
 								"horizontal": "LEFT"
@@ -2643,9 +2321,9 @@
 									"blendMode": "NORMAL",
 									"type": "SOLID",
 									"color": {
-										"r": 0.7960784435272217,
-										"g": 0.30588236451148987,
-										"b": 0.5529412031173706,
+										"r": 0.8,
+										"g": 0.31,
+										"b": 0.55,
 										"a": 1
 									}
 								}
@@ -2653,12 +2331,6 @@
 							"strokeWeight": 2,
 							"strokeAlign": "CENTER",
 							"strokeCap": "ROUND",
-							"absoluteRenderBounds": {
-								"x": 1343.68994140625,
-								"y": -2268.755126953125,
-								"width": 20,
-								"height": 2
-							},
 							"constraints": {
 								"vertical": "TOP",
 								"horizontal": "LEFT"
@@ -2693,12 +2365,6 @@
 					"strokes": [],
 					"strokeWeight": 1,
 					"strokeAlign": "INSIDE",
-					"absoluteRenderBounds": {
-						"x": 1024,
-						"y": -2290,
-						"width": 48,
-						"height": 30
-					},
 					"preserveRatio": true,
 					"targetAspectRatio": {
 						"x": 860,
@@ -2709,7 +2375,6 @@
 						"horizontal": "LEFT"
 					},
 					"effects": [],
-					"transitionNodeID": "1:2",
 					"transitionDuration": 300,
 					"transitionEasing": "EASE_OUT",
 					"interactions": [
@@ -2720,7 +2385,6 @@
 							"actions": [
 								{
 									"type": "NODE",
-									"destinationId": "1:2",
 									"navigation": "NAVIGATE",
 									"transition": null
 								}
