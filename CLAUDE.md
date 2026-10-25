@@ -37,9 +37,11 @@
 
 ## Figma 設計稿
 
-- 檔案：https://www.figma.com/design/25olxEkC2qMiP1xUuxeAH7/Untitled--claude%E7%94%A8-
-- 透過 **Talk to Figma MCP**（`mcp__talk-to-figma__*`）讀取。實作頁面時照 `/figma-page` skill 的流程走。
+- 設計師每一版都會複製成新檔案，**連結會一直換**。所有連結、每一版的變更、frame 對應的頁面都記在 `figma/versions.md`。
+- 使用者給新連結或說設計更新了 → 一律照 `/figma-page` skill：記錄連結 → 擷取快照 → 比對出變更 → 確認後只更新有變的頁面。
+- 透過 **Talk to Figma MCP**（`mcp__talk-to-figma__*`）讀取。
 - **設計稿是唯讀的**：這是設計師的工作檔案，所有會修改 Figma 的工具都已在 `.claude/settings.json` 禁用，不要試圖繞過。
+- Figma 畫的是**手機版**。
 
 ### 切版規則
 
@@ -48,5 +50,16 @@
 - 同一個 Figma component 只做成一個 Astro 元件，用 props 處理變體。
 - 文字內容以 `scan_text_nodes` 取得的原文為準，不要自己改寫文案。
 - 圖示、插圖用 `export_node_as_image` 匯出到 `src/assets/`；能用 SVG 的就用 SVG。
-- 預設做 RWD：設計稿只有桌機版時，手機版自行合理推斷，並在回報中註明是推斷的。
+- **手機優先**：照設計稿寬度做，Tailwind 不加前綴的 class 就是手機版。電腦版只做簡單 RWD：內容置中、限制最大寬度（例如 `max-w-md mx-auto`），版面能自然變寬的地方才用 `md:` 調整。不要另外發明桌機版設計。
 - 基本 a11y：圖片要有 `alt`、語意化標籤（`header`/`nav`/`main`/`footer`）、可點擊的元素用 `a` 或 `button`。
+
+## 純前端資料規則
+
+Figma 裡的登入、上傳照片等流程**只做前端**，不串接任何後端或第三方 API。所有狀態存在使用者這支手機的瀏覽器裡，換手機、換瀏覽器、清除網站資料後就從頭開始，這是預期中的行為。
+
+- 所有讀寫都集中在 `src/lib/store.ts`，頁面和元件不要直接碰 `localStorage` 或 IndexedDB。之後要接真的後端時只需要改這個檔案。
+- 登入：只有一組預設帳號，寫成 `store.ts` 裡的常數（帳密使用者已提供，存在 Claude 記憶 `demo-account`；repo 和網站都是公開的，寫進程式前要先跟使用者確認可以公開）。登入狀態存在 `localStorage`。需要登入的頁面用前端 JS 檢查，沒登入就導回登入頁。這不是安全機制，不要存任何真實的密碼或個資。
+- 照片：每位使用者**最多 3 張**。存在 IndexedDB（以 Blob 形式），**不能用 localStorage**（上限只有約 5MB）。存之前先用 canvas 把最長邊縮到 1600px、轉成 JPEG（品質 0.8）。
+- 命名：`localStorage` 的 key 和 IndexedDB 的資料庫名稱都要加上 `daoyou` 前綴，因為 `lawrencelee0113.github.io` 底下的其他專案共用同一塊儲存空間。
+- 首次寫入時呼叫 `navigator.storage.persist()`，降低 iOS Safari 清除資料的機率。不做 PWA／加入主畫面：使用者已接受 iOS Safari 在 7 天沒使用後可能清掉資料。
+- 所有讀取都要能處理「資料不存在」（無痕模式、被清除）的情況，畫面退回初始狀態，不可以壞掉。
