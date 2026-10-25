@@ -223,13 +223,30 @@
 				{
 					"blendMode": "NORMAL",
 					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "c40a17cbdb4893ea0c42e52a70e1853bbfed45d2"
+					"scaleMode": "STRETCH",
+					"imageRef": "0acae5ec7ba19df6af7e3bce7977a7e8e17f87b2",
+					"imageTransform": [
+						[
+							0.35,
+							0,
+							0.32
+						],
+						[
+							0,
+							0.27,
+							0.37
+						]
+					]
 				}
 			],
 			"strokes": [],
 			"strokeWeight": 1,
 			"strokeAlign": "INSIDE",
+			"preserveRatio": true,
+			"targetAspectRatio": {
+				"x": 393,
+				"y": 524
+			},
 			"constraints": {
 				"vertical": "TOP",
 				"horizontal": "LEFT"
@@ -764,5 +781,5 @@
 			}
 		}
 	],
-	"render": "849ffdb5216cbc66"
+	"render": "5a135035a584ec0c"
 }

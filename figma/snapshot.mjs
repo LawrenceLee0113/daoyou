@@ -32,11 +32,39 @@ export function normalize(node, origin = node.absoluteBoundingBox ?? { x: 0, y: 
 
 export const fileName = (name) => name.replace(/[\/\\:*?"<>|]/g, '_').trim();
 
-// ponytail: 同名 frame 依圖層順序加「 #2」「 #3」；設計師調整圖層順序時對應會錯開，所以印警告交給人確認
-export const dedupe = (names) => names.map((n, i) => {
-	const k = names.slice(0, i).filter((m) => m === n).length;
-	return k ? `${n} #${k + 1}` : n;
-});
+const layers = (n, path = '', out = []) => {
+	const p = path ? `${path}/${n.name}` : n.name;
+	if (path) out.push(`${p.split('/').slice(1).join('/')} [${n.type}${n.characters ? ` "${n.characters.slice(0, 30)}"` : ''}]`);
+	(n.children ?? []).forEach((c) => layers(c, p, out));
+	return out;
+};
+
+// 截圖一樣就是同一個；否則用圖層（名稱、類型、文字）的重疊比例
+export function similarity(a, b) {
+	if (a.render && a.render === b.render) return 1;
+	const [la, lb] = [new Set(layers(a)), new Set(layers(b))];
+	const inter = [...la].filter((x) => lb.has(x)).length;
+	return inter / (la.size + lb.size - inter || 1);
+}
+
+// 同名 frame：跟上一版的「名稱」「名稱 #2」…比內容，最像的沿用舊名，剩下的才編新號。
+// 不依圖層順序，設計師調整順序或在中間多複製一份都不會對錯。
+// ponytail: 貪婪配對，同名 frame 通常只有幾個，夠用
+export function assignNames(base, snaps, prev) {
+	const pairs = snaps.flatMap((s, i) => [...prev].map(([name, p]) => ({ i, name, sim: similarity(s, p) })));
+	pairs.sort((x, y) => y.sim - x.sim);
+	const names = [], used = new Set(), sims = [];
+	for (const { i, name, sim } of pairs) {
+		if (names[i] || used.has(name) || sim < 0.3) continue;
+		names[i] = name, sims[i] = sim, used.add(name);
+	}
+	let k = 1;
+	const next = () => { while (used.has(k === 1 ? base : `${base} #${k}`)) k++; const n = k === 1 ? base : `${base} #${k}`; used.add(n); return n; };
+	return snaps.map((_, i) => ({ name: names[i] ?? next(), sim: sims[i] }));
+}
+
+const git = (...args) => execFileSync('git', ['-c', 'core.quotepath=false', ...args], { cwd: import.meta.dirname, encoding: 'utf8' });
+const gitFiles = (rev, dir) => { try { return git('ls-tree', '--name-only', '-r', rev, dir).trim().split('\n').filter(Boolean); } catch { return []; } };
 
 // 頁面跟元件才拍快照；畫布上散落的 group、圖片、文字是素材，不是頁面
 const SNAPSHOT_TYPES = new Set(['FRAME', 'COMPONENT', 'COMPONENT_SET']);
@@ -75,21 +103,34 @@ async function main(channel) {
 	const doc = await figma.send('get_document_info');
 	const frames = doc.children.filter((n) => SNAPSHOT_TYPES.has(n.type));
 
-	const names = dedupe(frames.map((f) => fileName(f.name)));
-	for (const n of names.filter((n) => / #\d+$/.test(n))) console.warn(`⚠ frame 名稱重複，依圖層順序存成「${n}」，請人工確認對應`);
-
 	console.log(`page「${doc.name}」：${frames.length} 個 frame（略過 ${doc.children.length - frames.length} 個散落素材）`);
-	for (const [i, f] of frames.entries()) {
-		const name = names[i];
+	const items = [];
+	for (const f of frames) {
 		const snap = normalize(await figma.send('get_node_info', { nodeId: f.id }));
 		const png = Buffer.from((await figma.send('export_node_as_image', { nodeId: f.id, scale: 1 })).imageData, 'base64');
 		snap.render = createHash('sha256').update(png).digest('hex').slice(0, 16);
-
-		writeFileSync(join(snapDir, `${name}.png`), png);
-		writeFileSync(join(snapDir, `${name}.json`), JSON.stringify(snap, null, '\t') + '\n');
-		console.log(`${f.id}\t${name}`);
+		items.push({ id: f.id, base: fileName(f.name), snap, png });
 	}
 	figma.close();
+
+	// 上一版（最後一次 commit）的快照，用來配對同名 frame
+	const committed = gitFiles('HEAD', 'snapshots/').filter((f) => f.endsWith('.json')).map((f) => f.replace(/^snapshots\//, '').replace(/\.json$/, ''));
+	for (const base of new Set(items.map((x) => x.base))) {
+		const group = items.filter((x) => x.base === base);
+		if (group.length === 1) { group[0].name = base; continue; }
+		const prev = new Map(committed.filter((n) => n === base || n.startsWith(`${base} #`)).map((n) => [n, JSON.parse(git('show', `HEAD:figma/snapshots/${n}.json`))]));
+		const result = assignNames(base, group.map((x) => x.snap), prev);
+		group.forEach((x, i) => (x.name = result[i].name));
+		console.warn(`⚠ 同名 frame「${base}」×${group.length}，依內容對應上一版：` +
+			group.map((x, i) => `${x.id}→「${x.name}」${result[i].sim === undefined ? '（新的）' : `（相似度 ${result[i].sim.toFixed(2)}）`}`).join('、'));
+	}
+
+	for (const { id, name, snap, png } of items) {
+		writeFileSync(join(snapDir, `${name}.png`), png);
+		writeFileSync(join(snapDir, `${name}.json`), JSON.stringify(snap, null, '\t') + '\n');
+		console.log(`${id}\t${name}`);
+	}
+	const names = items.map((x) => x.name);
 
 	// 這一版已經不存在的 frame 刪掉快照，git status 會顯示成 D
 	for (const file of readdirSync(snapDir)) {
@@ -108,14 +149,7 @@ function renormalize() {
 }
 
 // node figma/snapshot.mjs --report：跟最後一次 commit 比，列出每個 frame 是視覺還是非視覺變更、文字與圖層增減
-const layers = (n, path = '', out = []) => {
-	const p = path ? `${path}/${n.name}` : n.name;
-	if (path) out.push(`${p.split('/').slice(1).join('/')} [${n.type}${n.characters ? ` "${n.characters.slice(0, 30)}"` : ''}]`);
-	(n.children ?? []).forEach((c) => layers(c, p, out));
-	return out;
-};
 function report() {
-	const git = (...args) => execFileSync('git', ['-c', 'core.quotepath=false', ...args], { cwd: import.meta.dirname, encoding: 'utf8' });
 	git('add', '-N', 'snapshots');
 	const lines = git('diff', '--name-status', 'HEAD', '--', 'snapshots/*.json').trim().split('\n').filter(Boolean);
 	if (!lines.length) return console.log('沒有任何變更');

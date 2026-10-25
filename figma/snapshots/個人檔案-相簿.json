@@ -176,7 +176,10 @@
 					"overrides": [
 						{
 							"overriddenFields": [
-								"targetAspectRatio"
+								"targetAspectRatio",
+								"transitionDuration",
+								"transitionEasing",
+								"transitionNodeID"
 							]
 						}
 					],
@@ -1522,8 +1525,6 @@
 						"horizontal": "LEFT"
 					},
 					"effects": [],
-					"transitionDuration": 300,
-					"transitionEasing": "EASE_OUT",
 					"interactions": [
 						{
 							"trigger": {
@@ -1532,10 +1533,6 @@
 							"actions": [
 								{
 									"type": "NODE",
-									"overlayRelativePosition": {
-										"x": -131.69,
-										"y": 35.74
-									},
 									"navigation": "OVERLAY",
 									"transition": null,
 									"resetVideoPosition": false
@@ -1550,7 +1547,7 @@
 						"x": 339.69,
 						"y": 109.26,
 						"w": 20,
-						"h": 15.98
+						"h": 15.99
 					},
 					"children": [
 						{
@@ -1692,8 +1689,6 @@
 						"horizontal": "LEFT"
 					},
 					"effects": [],
-					"transitionDuration": 300,
-					"transitionEasing": "EASE_OUT",
 					"interactions": [
 						{
 							"trigger": {
@@ -3208,7 +3203,7 @@
 			}
 		},
 		{
-			"name": "相片-台北歪腰郵筒",
+			"name": "S__50495566 1",
 			"type": "RECTANGLE",
 			"scrollBehavior": "SCROLLS",
 			"blendMode": "PASS_THROUGH",
@@ -3216,8 +3211,20 @@
 				{
 					"blendMode": "NORMAL",
 					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "c40a17cbdb4893ea0c42e52a70e1853bbfed45d2"
+					"scaleMode": "STRETCH",
+					"imageRef": "0acae5ec7ba19df6af7e3bce7977a7e8e17f87b2",
+					"imageTransform": [
+						[
+							0.45,
+							0,
+							0.28
+						],
+						[
+							0,
+							0.25,
+							0.4
+						]
+					]
 				}
 			],
 			"strokes": [],
@@ -3225,6 +3232,11 @@
 			"strokeAlign": "INSIDE",
 			"cornerRadius": 10,
 			"cornerSmoothing": 0,
+			"preserveRatio": true,
+			"targetAspectRatio": {
+				"x": 119,
+				"y": 119
+			},
 			"constraints": {
 				"vertical": "TOP",
 				"horizontal": "LEFT"
@@ -3235,7 +3247,7 @@
 				"strokeType": "BASIC"
 			},
 			"box": {
-				"x": 28,
+				"x": 27,
 				"y": 408,
 				"w": 107,
 				"h": 107
@@ -3987,5 +3999,5 @@
 			}
 		}
 	],
-	"render": "cd0966d0fad27131"
+	"render": "ac80dea4f29af46c"
 }

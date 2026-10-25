@@ -176,7 +176,10 @@
 					"overrides": [
 						{
 							"overriddenFields": [
-								"targetAspectRatio"
+								"targetAspectRatio",
+								"transitionDuration",
+								"transitionEasing",
+								"transitionNodeID"
 							]
 						}
 					],
@@ -1522,8 +1525,6 @@
 						"horizontal": "LEFT"
 					},
 					"effects": [],
-					"transitionDuration": 300,
-					"transitionEasing": "EASE_OUT",
 					"interactions": [
 						{
 							"trigger": {
@@ -1532,10 +1533,6 @@
 							"actions": [
 								{
 									"type": "NODE",
-									"overlayRelativePosition": {
-										"x": -131.69,
-										"y": 35.74
-									},
 									"navigation": "OVERLAY",
 									"transition": null,
 									"resetVideoPosition": false
@@ -1550,7 +1547,7 @@
 						"x": 339.69,
 						"y": 109.26,
 						"w": 20,
-						"h": 15.98
+						"h": 15.99
 					},
 					"children": [
 						{
@@ -1692,8 +1689,6 @@
 						"horizontal": "LEFT"
 					},
 					"effects": [],
-					"transitionDuration": 300,
-					"transitionEasing": "EASE_OUT",
 					"interactions": [
 						{
 							"trigger": {
@@ -1927,31 +1922,7 @@
 				"horizontal": "LEFT"
 			},
 			"effects": [],
-			"transitionDuration": 300,
-			"transitionEasing": "EASE_OUT",
-			"interactions": [
-				{
-					"trigger": {
-						"type": "ON_CLICK"
-					},
-					"actions": [
-						{
-							"type": "NODE",
-							"navigation": "NAVIGATE",
-							"transition": {
-								"type": "SMART_ANIMATE",
-								"easing": {
-									"type": "EASE_OUT"
-								},
-								"duration": 0.3
-							},
-							"resetVideoPosition": false,
-							"resetScrollPosition": false,
-							"resetInteractiveComponents": false
-						}
-					]
-				}
-			],
+			"interactions": [],
 			"complexStrokeProperties": {
 				"strokeType": "BASIC"
 			},
@@ -2232,7 +2203,22 @@
 					},
 					"layoutVersion": 5,
 					"effects": [],
-					"interactions": [],
+					"transitionDuration": 300,
+					"transitionEasing": "EASE_OUT",
+					"interactions": [
+						{
+							"trigger": {
+								"type": "ON_CLICK"
+							},
+							"actions": [
+								{
+									"type": "NODE",
+									"navigation": "NAVIGATE",
+									"transition": null
+								}
+							]
+						}
+					],
 					"complexStrokeProperties": {
 						"strokeType": "BASIC"
 					},

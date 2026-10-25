@@ -71,7 +71,7 @@
 	},
 	"children": [
 		{
-			"name": "取景畫面",
+			"name": "我們拍的圖",
 			"type": "RECTANGLE",
 			"scrollBehavior": "SCROLLS",
 			"blendMode": "PASS_THROUGH",
@@ -80,12 +80,17 @@
 					"blendMode": "NORMAL",
 					"type": "IMAGE",
 					"scaleMode": "FILL",
-					"imageRef": "3b9eeed02a9e2f3928f285857e3cf8989cbf333a"
+					"imageRef": "0acae5ec7ba19df6af7e3bce7977a7e8e17f87b2"
 				}
 			],
 			"strokes": [],
 			"strokeWeight": 1,
 			"strokeAlign": "INSIDE",
+			"preserveRatio": true,
+			"targetAspectRatio": {
+				"x": 959,
+				"y": 1705
+			},
 			"constraints": {
 				"vertical": "TOP",
 				"horizontal": "LEFT"
@@ -96,10 +101,10 @@
 				"strokeType": "BASIC"
 			},
 			"box": {
-				"x": 0,
-				"y": 0,
-				"w": 393,
-				"h": 852
+				"x": -229,
+				"y": -403,
+				"w": 852,
+				"h": 1515
 			}
 		},
 		{
@@ -549,5 +554,5 @@
 			}
 		}
 	],
-	"render": "00d03d3b6e5adcaf"
+	"render": "9cb4e8c24caaba89"
 }

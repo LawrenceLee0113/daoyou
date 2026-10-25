@@ -3,7 +3,7 @@
 	"type": "FRAME",
 	"scrollBehavior": "SCROLLS",
 	"blendMode": "PASS_THROUGH",
-	"clipsContent": true,
+	"clipsContent": false,
 	"background": [
 		{
 			"blendMode": "NORMAL",
@@ -176,7 +176,10 @@
 					"overrides": [
 						{
 							"overriddenFields": [
-								"targetAspectRatio"
+								"targetAspectRatio",
+								"transitionDuration",
+								"transitionEasing",
+								"transitionNodeID"
 							]
 						}
 					],
@@ -1522,8 +1525,6 @@
 						"horizontal": "LEFT"
 					},
 					"effects": [],
-					"transitionDuration": 300,
-					"transitionEasing": "EASE_OUT",
 					"interactions": [
 						{
 							"trigger": {
@@ -1532,10 +1533,6 @@
 							"actions": [
 								{
 									"type": "NODE",
-									"overlayRelativePosition": {
-										"x": -131.69,
-										"y": 35.74
-									},
 									"navigation": "OVERLAY",
 									"transition": null,
 									"resetVideoPosition": false
@@ -1550,7 +1547,7 @@
 						"x": 339.69,
 						"y": 109.26,
 						"w": 20,
-						"h": 15.98
+						"h": 15.99
 					},
 					"children": [
 						{
@@ -1692,8 +1689,6 @@
 						"horizontal": "LEFT"
 					},
 					"effects": [],
-					"transitionDuration": 300,
-					"transitionEasing": "EASE_OUT",
 					"interactions": [
 						{
 							"trigger": {
@@ -1721,60 +1716,23 @@
 			]
 		},
 		{
-			"name": "資產 10 1",
-			"type": "RECTANGLE",
+			"name": "Frame 14",
+			"type": "FRAME",
 			"scrollBehavior": "SCROLLS",
 			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "e43d658e6f3832366a1ad0bf0bcf3e069fb61cb6"
-				}
-			],
+			"clipsContent": false,
+			"background": [],
+			"fills": [],
 			"strokes": [],
 			"strokeWeight": 1,
 			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 2497,
-				"y": 4096
+			"backgroundColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
 			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "CENTER"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 0,
-				"y": 147,
-				"w": 393,
-				"h": 645
-			}
-		},
-		{
-			"name": "照片-歪腰郵筒",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "3b9eeed02a9e2f3928f285857e3cf8989cbf333a"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"cornerRadius": 16,
-			"cornerSmoothing": 0,
+			"overflowDirection": "HORIZONTAL_SCROLLING",
 			"constraints": {
 				"vertical": "TOP",
 				"horizontal": "LEFT"
@@ -1787,9 +1745,133 @@
 			"box": {
 				"x": 28,
 				"y": 200,
-				"w": 337,
+				"w": 365,
 				"h": 200
-			}
+			},
+			"children": [
+				{
+					"name": "Group 30",
+					"type": "GROUP",
+					"scrollBehavior": "SCROLLS",
+					"blendMode": "PASS_THROUGH",
+					"clipsContent": false,
+					"background": [],
+					"fills": [],
+					"strokes": [],
+					"cornerRadius": 16,
+					"cornerSmoothing": 0,
+					"strokeWeight": 1,
+					"strokeAlign": "INSIDE",
+					"backgroundColor": {
+						"r": 0,
+						"g": 0,
+						"b": 0,
+						"a": 0
+					},
+					"constraints": {
+						"vertical": "TOP",
+						"horizontal": "LEFT"
+					},
+					"effects": [],
+					"interactions": [],
+					"complexStrokeProperties": {
+						"strokeType": "BASIC"
+					},
+					"box": {
+						"x": 375,
+						"y": 200,
+						"w": 337,
+						"h": 200
+					},
+					"children": [
+						{
+							"name": "照片-歪腰郵筒",
+							"type": "RECTANGLE",
+							"scrollBehavior": "SCROLLS",
+							"blendMode": "PASS_THROUGH",
+							"fills": [
+								{
+									"blendMode": "NORMAL",
+									"type": "IMAGE",
+									"scaleMode": "FILL",
+									"imageRef": "3b9eeed02a9e2f3928f285857e3cf8989cbf333a"
+								}
+							],
+							"strokes": [],
+							"strokeWeight": 1,
+							"strokeAlign": "INSIDE",
+							"cornerRadius": 16,
+							"cornerSmoothing": 0,
+							"constraints": {
+								"vertical": "TOP",
+								"horizontal": "LEFT"
+							},
+							"effects": [],
+							"interactions": [],
+							"complexStrokeProperties": {
+								"strokeType": "BASIC"
+							},
+							"box": {
+								"x": 375,
+								"y": 200,
+								"w": 337,
+								"h": 200
+							}
+						}
+					]
+				},
+				{
+					"name": "剛拍的照片",
+					"type": "RECTANGLE",
+					"scrollBehavior": "SCROLLS",
+					"blendMode": "PASS_THROUGH",
+					"fills": [
+						{
+							"blendMode": "NORMAL",
+							"type": "IMAGE",
+							"scaleMode": "STRETCH",
+							"imageRef": "0acae5ec7ba19df6af7e3bce7977a7e8e17f87b2",
+							"imageTransform": [
+								[
+									0.35,
+									0,
+									0.32
+								],
+								[
+									0,
+									0.12,
+									0.44
+								]
+							]
+						}
+					],
+					"strokes": [],
+					"strokeWeight": 1,
+					"strokeAlign": "INSIDE",
+					"cornerRadius": 16,
+					"cornerSmoothing": 0,
+					"preserveRatio": true,
+					"targetAspectRatio": {
+						"x": 337,
+						"y": 200
+					},
+					"constraints": {
+						"vertical": "TOP",
+						"horizontal": "LEFT"
+					},
+					"effects": [],
+					"interactions": [],
+					"complexStrokeProperties": {
+						"strokeType": "BASIC"
+					},
+					"box": {
+						"x": 28,
+						"y": 200,
+						"w": 337,
+						"h": 200
+					}
+				}
+			]
 		},
 		{
 			"name": "返回",
@@ -1873,66 +1955,6 @@
 				"y": 172,
 				"w": 68,
 				"h": 16
-			}
-		},
-		{
-			"name": "照片出處",
-			"type": "TEXT",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "SOLID",
-					"color": {
-						"r": 0.55,
-						"g": 0.55,
-						"b": 0.55,
-						"a": 1
-					}
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "OUTSIDE",
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"characters": "照片：范姜中岑／CC BY-SA 2.0（Wikimedia Commons）",
-			"characterStyleOverrides": [],
-			"styleOverrideTable": {},
-			"lineTypes": [
-				"NONE"
-			],
-			"lineIndentations": [
-				0
-			],
-			"style": {
-				"fontFamily": "Inter",
-				"fontPostScriptName": null,
-				"fontStyle": "Regular",
-				"fontWeight": 400,
-				"textAutoResize": "WIDTH_AND_HEIGHT",
-				"fontSize": 10,
-				"textAlignHorizontal": "LEFT",
-				"textAlignVertical": "TOP",
-				"letterSpacing": 0,
-				"lineHeightPx": 12.1,
-				"lineHeightPercent": 100,
-				"lineHeightUnit": "INTRINSIC_%"
-			},
-			"layoutVersion": 5,
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 28,
-				"y": 406,
-				"w": 264,
-				"h": 12
 			}
 		},
 		{
@@ -2804,7 +2826,45 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "資產 10 1",
+			"type": "RECTANGLE",
+			"locked": true,
+			"scrollBehavior": "SCROLLS",
+			"blendMode": "PASS_THROUGH",
+			"fills": [
+				{
+					"blendMode": "NORMAL",
+					"type": "IMAGE",
+					"scaleMode": "FILL",
+					"imageRef": "e43d658e6f3832366a1ad0bf0bcf3e069fb61cb6"
+				}
+			],
+			"strokes": [],
+			"strokeWeight": 1,
+			"strokeAlign": "INSIDE",
+			"preserveRatio": true,
+			"targetAspectRatio": {
+				"x": 2497,
+				"y": 4096
+			},
+			"constraints": {
+				"vertical": "TOP",
+				"horizontal": "CENTER"
+			},
+			"effects": [],
+			"interactions": [],
+			"complexStrokeProperties": {
+				"strokeType": "BASIC"
+			},
+			"box": {
+				"x": 0,
+				"y": 147,
+				"w": 393,
+				"h": 645
+			}
 		}
 	],
-	"render": "2be0e2aa2aa9f1a1"
+	"render": "4305ee10a2b2119a"
 }
