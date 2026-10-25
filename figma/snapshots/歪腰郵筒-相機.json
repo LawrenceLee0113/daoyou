@@ -1,0 +1,621 @@
+{
+	"name": "歪腰郵筒-相機",
+	"type": "FRAME",
+	"scrollBehavior": "SCROLLS",
+	"blendMode": "PASS_THROUGH",
+	"clipsContent": true,
+	"background": [
+		{
+			"blendMode": "NORMAL",
+			"type": "SOLID",
+			"color": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 1
+			}
+		}
+	],
+	"fills": [
+		{
+			"blendMode": "NORMAL",
+			"type": "SOLID",
+			"color": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 1
+			}
+		}
+	],
+	"strokes": [],
+	"strokeWeight": 1,
+	"strokeAlign": "INSIDE",
+	"backgroundColor": {
+		"r": 0,
+		"g": 0,
+		"b": 0,
+		"a": 1
+	},
+	"layoutGrids": [
+		{
+			"pattern": "COLUMNS",
+			"sectionSize": 73.25,
+			"visible": false,
+			"color": {
+				"r": 1,
+				"g": 0,
+				"b": 0,
+				"a": 0.10000000149011612
+			},
+			"alignment": "STRETCH",
+			"gutterSize": 20,
+			"offset": 20,
+			"count": 4
+		}
+	],
+	"absoluteRenderBounds": {
+		"x": 3899,
+		"y": 981,
+		"width": 393,
+		"height": 852
+	},
+	"constraints": {
+		"vertical": "TOP",
+		"horizontal": "LEFT"
+	},
+	"effects": [],
+	"interactions": [],
+	"complexStrokeProperties": {
+		"strokeType": "BASIC"
+	},
+	"localPosition": {
+		"x": 3899,
+		"y": 981
+	},
+	"box": {
+		"x": 0,
+		"y": 0,
+		"w": 393,
+		"h": 852
+	},
+	"children": [
+		{
+			"name": "取景畫面",
+			"type": "RECTANGLE",
+			"scrollBehavior": "SCROLLS",
+			"blendMode": "PASS_THROUGH",
+			"fills": [
+				{
+					"blendMode": "NORMAL",
+					"type": "IMAGE",
+					"scaleMode": "FILL",
+					"imageRef": "3b9eeed02a9e2f3928f285857e3cf8989cbf333a"
+				}
+			],
+			"strokes": [],
+			"strokeWeight": 1,
+			"strokeAlign": "INSIDE",
+			"absoluteRenderBounds": {
+				"x": 3899,
+				"y": 981,
+				"width": 393,
+				"height": 852
+			},
+			"constraints": {
+				"vertical": "TOP",
+				"horizontal": "LEFT"
+			},
+			"effects": [],
+			"interactions": [],
+			"complexStrokeProperties": {
+				"strokeType": "BASIC"
+			},
+			"box": {
+				"x": 0,
+				"y": 0,
+				"w": 393,
+				"h": 852
+			}
+		},
+		{
+			"name": "上方遮罩",
+			"type": "RECTANGLE",
+			"scrollBehavior": "SCROLLS",
+			"blendMode": "PASS_THROUGH",
+			"fills": [
+				{
+					"opacity": 0.550000011920929,
+					"blendMode": "NORMAL",
+					"type": "SOLID",
+					"color": {
+						"r": 0,
+						"g": 0,
+						"b": 0,
+						"a": 1
+					}
+				}
+			],
+			"strokes": [],
+			"strokeWeight": 1,
+			"strokeAlign": "INSIDE",
+			"absoluteRenderBounds": {
+				"x": 3899,
+				"y": 981,
+				"width": 393,
+				"height": 100
+			},
+			"constraints": {
+				"vertical": "TOP",
+				"horizontal": "LEFT"
+			},
+			"effects": [],
+			"interactions": [],
+			"complexStrokeProperties": {
+				"strokeType": "BASIC"
+			},
+			"box": {
+				"x": 0,
+				"y": 0,
+				"w": 393,
+				"h": 100
+			}
+		},
+		{
+			"name": "下方遮罩",
+			"type": "RECTANGLE",
+			"scrollBehavior": "SCROLLS",
+			"blendMode": "PASS_THROUGH",
+			"fills": [
+				{
+					"opacity": 0.550000011920929,
+					"blendMode": "NORMAL",
+					"type": "SOLID",
+					"color": {
+						"r": 0,
+						"g": 0,
+						"b": 0,
+						"a": 1
+					}
+				}
+			],
+			"strokes": [],
+			"strokeWeight": 1,
+			"strokeAlign": "INSIDE",
+			"absoluteRenderBounds": {
+				"x": 3899,
+				"y": 1653,
+				"width": 393,
+				"height": 180
+			},
+			"constraints": {
+				"vertical": "TOP",
+				"horizontal": "LEFT"
+			},
+			"effects": [],
+			"interactions": [],
+			"complexStrokeProperties": {
+				"strokeType": "BASIC"
+			},
+			"box": {
+				"x": 0,
+				"y": 672,
+				"w": 393,
+				"h": 180
+			}
+		},
+		{
+			"name": "關閉",
+			"type": "TEXT",
+			"scrollBehavior": "SCROLLS",
+			"blendMode": "PASS_THROUGH",
+			"fills": [
+				{
+					"blendMode": "NORMAL",
+					"type": "SOLID",
+					"color": {
+						"r": 1,
+						"g": 1,
+						"b": 1,
+						"a": 1
+					}
+				}
+			],
+			"strokes": [],
+			"strokeWeight": 1,
+			"strokeAlign": "OUTSIDE",
+			"absoluteRenderBounds": {
+				"x": 3924.1220703125,
+				"y": 1039.7760009765625,
+				"width": 16.763916015625,
+				"height": 16.89599609375
+			},
+			"constraints": {
+				"vertical": "TOP",
+				"horizontal": "LEFT"
+			},
+			"characters": "✕",
+			"characterStyleOverrides": [],
+			"styleOverrideTable": {},
+			"lineTypes": [
+				"NONE"
+			],
+			"lineIndentations": [
+				0
+			],
+			"style": {
+				"fontFamily": "Inter",
+				"fontPostScriptName": null,
+				"fontStyle": "Bold",
+				"fontWeight": 700,
+				"textAutoResize": "WIDTH_AND_HEIGHT",
+				"fontSize": 22,
+				"textAlignHorizontal": "LEFT",
+				"textAlignVertical": "TOP",
+				"letterSpacing": 0,
+				"lineHeightPx": 26.625,
+				"lineHeightPercent": 100,
+				"lineHeightUnit": "INTRINSIC_%"
+			},
+			"layoutVersion": 5,
+			"effects": [],
+			"transitionNodeID": "2002:1302",
+			"transitionDuration": 250,
+			"transitionEasing": "EASE_OUT",
+			"interactions": [
+				{
+					"trigger": {
+						"type": "ON_CLICK"
+					},
+					"actions": [
+						{
+							"type": "NODE",
+							"destinationId": "2002:1302",
+							"navigation": "NAVIGATE",
+							"transition": {
+								"type": "DISSOLVE",
+								"easing": {
+									"type": "EASE_OUT"
+								},
+								"duration": 0.25
+							},
+							"resetVideoPosition": false,
+							"resetScrollPosition": false,
+							"resetInteractiveComponents": false
+						}
+					]
+				}
+			],
+			"complexStrokeProperties": {
+				"strokeType": "BASIC"
+			},
+			"box": {
+				"x": 24,
+				"y": 52,
+				"w": 20,
+				"h": 27
+			}
+		},
+		{
+			"name": "標題",
+			"type": "TEXT",
+			"scrollBehavior": "SCROLLS",
+			"blendMode": "PASS_THROUGH",
+			"fills": [
+				{
+					"blendMode": "NORMAL",
+					"type": "SOLID",
+					"color": {
+						"r": 1,
+						"g": 1,
+						"b": 1,
+						"a": 1
+					}
+				}
+			],
+			"strokes": [],
+			"strokeWeight": 1,
+			"strokeAlign": "OUTSIDE",
+			"absoluteRenderBounds": {
+				"x": 4051.010009765625,
+				"y": 1038.1300048828125,
+				"width": 88.769775390625,
+				"height": 14.25
+			},
+			"constraints": {
+				"vertical": "TOP",
+				"horizontal": "LEFT"
+			},
+			"characters": "對準歪腰郵筒",
+			"characterStyleOverrides": [],
+			"styleOverrideTable": {},
+			"lineTypes": [
+				"NONE"
+			],
+			"lineIndentations": [
+				0
+			],
+			"style": {
+				"fontFamily": "Inter",
+				"fontPostScriptName": null,
+				"fontStyle": "Bold",
+				"fontWeight": 700,
+				"textAutoResize": "WIDTH_AND_HEIGHT",
+				"fontSize": 15,
+				"textAlignHorizontal": "LEFT",
+				"textAlignVertical": "TOP",
+				"letterSpacing": 0,
+				"lineHeightPx": 18.15340805053711,
+				"lineHeightPercent": 100,
+				"lineHeightUnit": "INTRINSIC_%"
+			},
+			"layoutVersion": 5,
+			"effects": [],
+			"interactions": [],
+			"complexStrokeProperties": {
+				"strokeType": "BASIC"
+			},
+			"box": {
+				"x": 151.5,
+				"y": 56,
+				"w": 90,
+				"h": 18
+			}
+		},
+		{
+			"name": "取景框",
+			"type": "RECTANGLE",
+			"scrollBehavior": "SCROLLS",
+			"blendMode": "PASS_THROUGH",
+			"fills": [
+				{
+					"opacity": 0,
+					"blendMode": "NORMAL",
+					"type": "SOLID",
+					"color": {
+						"r": 1,
+						"g": 1,
+						"b": 1,
+						"a": 1
+					}
+				}
+			],
+			"strokes": [
+				{
+					"blendMode": "NORMAL",
+					"type": "SOLID",
+					"color": {
+						"r": 1,
+						"g": 1,
+						"b": 1,
+						"a": 1
+					}
+				}
+			],
+			"strokeWeight": 1,
+			"strokeAlign": "INSIDE",
+			"cornerRadius": 16,
+			"cornerSmoothing": 0,
+			"absoluteRenderBounds": {
+				"x": 3945,
+				"y": 1161,
+				"width": 301,
+				"height": 420
+			},
+			"constraints": {
+				"vertical": "TOP",
+				"horizontal": "LEFT"
+			},
+			"effects": [],
+			"interactions": [],
+			"complexStrokeProperties": {
+				"strokeType": "BASIC"
+			},
+			"box": {
+				"x": 46,
+				"y": 180,
+				"w": 301,
+				"h": 420
+			}
+		},
+		{
+			"name": "取景提示",
+			"type": "TEXT",
+			"scrollBehavior": "SCROLLS",
+			"blendMode": "PASS_THROUGH",
+			"fills": [
+				{
+					"blendMode": "NORMAL",
+					"type": "SOLID",
+					"color": {
+						"r": 1,
+						"g": 1,
+						"b": 1,
+						"a": 1
+					}
+				}
+			],
+			"strokes": [],
+			"strokeWeight": 1,
+			"strokeAlign": "OUTSIDE",
+			"absoluteRenderBounds": {
+				"x": 4037.299072265625,
+				"y": 1594.93701171875,
+				"width": 116.363037109375,
+				"height": 12.2330322265625
+			},
+			"constraints": {
+				"vertical": "TOP",
+				"horizontal": "LEFT"
+			},
+			"characters": "把小紅小綠都框進來",
+			"characterStyleOverrides": [],
+			"styleOverrideTable": {},
+			"lineTypes": [
+				"NONE"
+			],
+			"lineIndentations": [
+				0
+			],
+			"style": {
+				"fontFamily": "Inter",
+				"fontPostScriptName": null,
+				"fontStyle": "Bold",
+				"fontWeight": 700,
+				"textAutoResize": "WIDTH_AND_HEIGHT",
+				"fontSize": 13,
+				"textAlignHorizontal": "LEFT",
+				"textAlignVertical": "TOP",
+				"letterSpacing": 0,
+				"lineHeightPx": 15.732954025268555,
+				"lineHeightPercent": 100,
+				"lineHeightUnit": "INTRINSIC_%"
+			},
+			"layoutVersion": 5,
+			"effects": [],
+			"interactions": [],
+			"complexStrokeProperties": {
+				"strokeType": "BASIC"
+			},
+			"box": {
+				"x": 138,
+				"y": 612,
+				"w": 117,
+				"h": 16
+			}
+		},
+		{
+			"name": "快門-內",
+			"type": "ELLIPSE",
+			"scrollBehavior": "SCROLLS",
+			"blendMode": "PASS_THROUGH",
+			"fills": [
+				{
+					"blendMode": "NORMAL",
+					"type": "SOLID",
+					"color": {
+						"r": 1,
+						"g": 1,
+						"b": 1,
+						"a": 1
+					}
+				}
+			],
+			"strokes": [],
+			"strokeWeight": 1,
+			"strokeAlign": "INSIDE",
+			"absoluteRenderBounds": {
+				"x": 4065,
+				"y": 1703,
+				"width": 60,
+				"height": 60
+			},
+			"constraints": {
+				"vertical": "TOP",
+				"horizontal": "LEFT"
+			},
+			"effects": [],
+			"arcData": {
+				"startingAngle": 0,
+				"endingAngle": 6.2831854820251465,
+				"innerRadius": 0
+			},
+			"interactions": [],
+			"complexStrokeProperties": {
+				"strokeType": "BASIC"
+			},
+			"box": {
+				"x": 166,
+				"y": 722,
+				"w": 60,
+				"h": 60
+			}
+		},
+		{
+			"name": "快門",
+			"type": "ELLIPSE",
+			"scrollBehavior": "SCROLLS",
+			"blendMode": "PASS_THROUGH",
+			"fills": [
+				{
+					"opacity": 0,
+					"blendMode": "NORMAL",
+					"type": "SOLID",
+					"color": {
+						"r": 1,
+						"g": 1,
+						"b": 1,
+						"a": 1
+					}
+				}
+			],
+			"strokes": [
+				{
+					"blendMode": "NORMAL",
+					"type": "SOLID",
+					"color": {
+						"r": 1,
+						"g": 1,
+						"b": 1,
+						"a": 1
+					}
+				}
+			],
+			"strokeWeight": 1,
+			"strokeAlign": "INSIDE",
+			"absoluteRenderBounds": {
+				"x": 4059,
+				"y": 1697,
+				"width": 72,
+				"height": 72
+			},
+			"constraints": {
+				"vertical": "TOP",
+				"horizontal": "LEFT"
+			},
+			"effects": [],
+			"arcData": {
+				"startingAngle": 0,
+				"endingAngle": 6.2831854820251465,
+				"innerRadius": 0
+			},
+			"transitionNodeID": "2002:1385",
+			"transitionDuration": 250,
+			"transitionEasing": "EASE_OUT",
+			"interactions": [
+				{
+					"trigger": {
+						"type": "ON_CLICK"
+					},
+					"actions": [
+						{
+							"type": "NODE",
+							"destinationId": "2002:1385",
+							"navigation": "NAVIGATE",
+							"transition": {
+								"type": "DISSOLVE",
+								"easing": {
+									"type": "EASE_OUT"
+								},
+								"duration": 0.25
+							},
+							"resetVideoPosition": false,
+							"resetScrollPosition": false,
+							"resetInteractiveComponents": false
+						}
+					]
+				}
+			],
+			"complexStrokeProperties": {
+				"strokeType": "BASIC"
+			},
+			"box": {
+				"x": 160,
+				"y": 716,
+				"w": 72,
+				"h": 72
+			}
+		}
+	],
+	"render": "00d03d3b6e5adcaf"
+}

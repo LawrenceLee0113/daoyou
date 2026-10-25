@@ -19,5 +19,5 @@ test('子元素座標相對於 frame', () => {
 });
 
 test('檔名去掉不合法字元', () => {
-	assert.equal(fileName('首頁 / 登入'), '首頁 _ 登入.json');
+	assert.equal(fileName('首頁 / 登入'), '首頁 _ 登入');
 });
