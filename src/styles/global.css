@@ -1,8 +1,57 @@
 @import "tailwindcss";
 
-/* Figma design tokens：從設計稿 get_styles 取得後寫在這裡，Tailwind 會自動產生對應 class
-   例：--color-primary: #1e40af;  →  bg-primary / text-primary
-       --font-sans: "Noto Sans TC", sans-serif;
-       --text-display: 48px;     →  text-display */
+/* Figma design tokens（v3 設計稿）。Tailwind 會自動產生對應 class：--color-pink → bg-pink / text-pink */
 @theme {
+	/* 中文用系統字型（設計稿的 Inter／Jura／Noto Sans 中文其實都是系統字型在顯示） */
+	--font-sans: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", sans-serif;
+	--font-round: "Chiron GoRound TC", var(--font-sans);
+	--font-sung: "Chiron Sung HK", serif;
+	--font-hei: "Chiron Hei HK", var(--font-sans);
+
+	/* 主色：島郵粉、郵筒綠 */
+	--color-pink: #c93378;
+	--color-pink-soft: #ffedf5;
+	--color-header-pink: #cc4f8c;
+	--color-forest: #01715a;
+	--color-pine: #006b4f;
+	--color-pine-soft: #e0f2eb;
+	--color-news: #66ba7a;
+	--color-signup: #ff873d;
+
+	/* 文字與灰階 */
+	--color-ink: #333333;
+	--color-body: #4d4d4d;
+	--color-muted: #8c8c8c;
+	--color-faint: #b3b3b3;
+	--color-line: #e0e0e0;
+	--color-empty: #f2f2f2;
+	--color-input: #d9d9d9;
+	--color-toast: #1f1f1feb;
+
+	/* 島郵探索面板（米色系） */
+	--color-paper: #faf2e0;
+	--color-paper-light: #fffcf5;
+	--color-paper-line: #dbc9ad;
+	--color-paper-ink: #333833;
+	--color-paper-muted: #737066;
+	--color-brick: #c74a2e;
+
+	/* 字級：設計稿的 px 值 */
+	--text-2xs: 10px;
+	--text-3xs: 9px;
+	--text-xs: 11px;
+	--text-sm: 12px;
+	--text-md: 13px;
+	--text-base: 14px;
+	--text-lg: 15px;
+	--text-xl: 18px;
+	--text-2xl: 20px;
+	--text-3xl: 22px;
+	--text-4xl: 26px;
+
+	--radius-card: 40px;
+	--radius-news: 24px;
+
+	--shadow-soft: 0 4px 4px #00000040;
+	--shadow-panel: 0 3px 10px #0000001f;
 }

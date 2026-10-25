@@ -1,0 +1,66 @@
+---
+// Figma：登入。只有一組示範帳號（在 src/lib/store.ts），第三方登入、註冊都還沒有
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import google from '../assets/social-google.png';
+import facebook from '../assets/social-facebook.png';
+import apple from '../assets/social-apple.png';
+
+const field = 'mt-1.5 block h-[50px] w-full rounded-[20px] border-2 border-black bg-white px-4 text-md outline-none placeholder:text-input focus:border-pink';
+---
+
+<Layout title="登入">
+	<main class="flex flex-1 flex-col px-[42px] pt-[125px] pb-16">
+		<h1 class="sr-only">登入島郵</h1>
+		<form id="login" class="flex flex-col tracking-[0.1em]" novalidate>
+			<label class="text-lg">
+				帳號
+				<input name="email" type="email" autocomplete="username" placeholder="repost116.grad@gmail.com" class:list={[field, 'ml-[5px] w-[304px] max-w-[calc(100%-5px)] tracking-normal']} />
+			</label>
+			<label class="mt-[42px] text-lg">
+				密碼
+				<input name="password" type="password" autocomplete="current-password" placeholder="••••••••" class:list={[field, 'ml-[5px] w-[304px] max-w-[calc(100%-5px)] tracking-[0.3em]']} />
+			</label>
+			<p id="error" class="mt-3 ml-[5px] min-h-5 text-sm text-pink" aria-live="polite"></p>
+			<button class="mt-2 ml-[5px] h-[50px] w-[304px] max-w-[calc(100%-5px)] rounded-[20px] bg-input text-lg tracking-[0.2em] shadow-soft">登入</button>
+		</form>
+
+		<div class="mt-auto flex flex-col items-center">
+			<div class="flex gap-[26px]">
+				{
+					[
+						[google, 'Google'],
+						[facebook, 'Facebook'],
+						[apple, 'Apple'],
+					].map(([src, name]) => (
+						<button type="button" class="social rounded-full shadow-soft" aria-label={`使用 ${name} 登入`}>
+							<Image src={src} alt="" width={55} height={55} />
+						</button>
+					))
+				}
+			</div>
+			<p class="mt-5 text-lg tracking-[0.1em]">還不是會員? <span class="text-signup">趕快加入島郵吧!</span></p>
+		</div>
+	</main>
+</Layout>
+
+<script>
+	import { login } from '../lib/store';
+
+	const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+	const error = document.getElementById('error')!;
+	document.getElementById('login')!.addEventListener('submit', (e) => {
+		e.preventDefault();
+		const data = new FormData(e.target as HTMLFormElement);
+		if (!login(String(data.get('email')), String(data.get('password')))) {
+			error.textContent = '帳號或密碼錯誤';
+			return;
+		}
+		// 只接受站內路徑，避免被帶到別的網站
+		const next = new URLSearchParams(location.search).get('next');
+		location.href = next?.startsWith(`${base}/`) && !next.startsWith('//') ? next : `${base}/map/`;
+	});
+	document.querySelectorAll('.social').forEach((b) =>
+		b.addEventListener('click', () => (error.textContent = '目前只開放示範帳號登入')),
+	);
+</script>

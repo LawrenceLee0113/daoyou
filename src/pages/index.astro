@@ -1,9 +1,46 @@
 ---
+// Figma：封面
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import cover from '../assets/cover.png';
+import newsTitle from '../assets/news-title.png';
+import texture from '../assets/header-top.png';
+
+// ponytail: 設計稿的 5 張活動照片匯不出來（外掛只匯得出畫面內的部分），先放空白框，拿到照片後換成 import 的圖片
+const newsPhotos = 5;
+const post = `回顧 08/14-08/15｜在戀曲盛典，讓故事透過《島郵》持續流動
+
+這兩天，我們帶著《島郵》計畫與「迴郵明信片交換」來到了戀曲盛典！
+「寫下一段給陌生人的祝福，就能帶走另一位旅人的故事。」
+
+這兩天最深刻的畫面，是看到好多人在攤位前靜下心來，握著筆認真思考、一字一句寫下對遠方陌生人的溫暖鼓勵，再親手將明信片投進我們準備的特色郵筒裡。那一刻，市集的喧囂彷彿慢了下來，只剩下手寫的專注與期待。
+
+好多朋友蓋下專屬紀念郵戳、換到上一位陌生人留下的溫暖文字時，臉上露出的驚喜與感動，真的給了我們好大好大的力量！這證明了：在這個訊息秒發秒收的時代，大家依然深深渴望著手寫的溫度與「等待」的浪漫。
+
+謝謝每一個在戀曲盛典駐足、寫下故事、參與島郵的你。
+
+因為有你們的加入，讓這些明信片有了生命，也讓這趟島嶼尋郵之旅變得更加溫暖美好！
+
+我們下個據點見，繼續把愛與故事寄向遠方。`;
 ---
 
 <Layout>
-	<main class="grid min-h-screen place-items-center">
-		<h1 class="text-3xl font-bold">daoyou</h1>
+	<main class="flex-1">
+		<h1 class="sr-only">島郵 Isle Post：寄存島嶼的地方郵誌</h1>
+		<Image src={cover} alt="島郵 Isle Post：寄存島嶼的地方郵誌" widths={[393, 786]} sizes="(min-width: 448px) 448px, 100vw" class="w-full" loading="eager" />
+
+		<section class="pt-[53px]" aria-labelledby="news">
+			<h2 id="news" class="px-[22px]"><Image src={newsTitle} alt="NEWS 最新消息" width={93} height={16} /></h2>
+			<div class="mt-10 flex snap-x snap-mandatory gap-[26px] overflow-x-auto px-[45px] [scrollbar-width:none]">
+				{Array.from({ length: newsPhotos }, () => <div class="h-[200px] w-[300px] shrink-0 snap-center rounded-news bg-empty" role="img" aria-label="活動照片（準備中）" />)}
+			</div>
+			<p class="mx-auto mt-[18px] w-[300px] max-w-[calc(100%-84px)] text-sm whitespace-pre-line">{post}</p>
+		</section>
 	</main>
+
+	<footer class="relative isolate mt-10 flex h-[89px] flex-col items-center justify-center text-white">
+		<Image src={texture} alt="" class="absolute inset-0 -z-10 size-full object-cover" />
+		<h2 class="font-sung text-lg font-bold">聯繫方式</h2>
+		<p class="mt-1 font-hei text-2xs font-medium">活動信箱 : <a href="mailto:repost116.grad@gmail.com">repost116.grad@gmail.com</a></p>
+	</footer>
 </Layout>

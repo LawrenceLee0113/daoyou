@@ -1,0 +1,77 @@
+---
+// Figma：特色郵筒（含併入的「島郵探索面板」）
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import Panel from '../../components/Panel.astro';
+import TaiwanMap from '../../components/TaiwanMap.astro';
+import { counties, mailboxes, regions } from '../../data/mailboxes';
+import mapTitle from '../../assets/map-title.png';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// 搜尋用：縣市名、郵筒名稱、地點、簡介
+const index = [
+	...mailboxes.map((m) => ({ href: `${base}/map/${m.county}/${m.id}/`, text: [m.name, m.area, m.summary, counties.find((c) => c.slug === m.county)!.name].join(' ') })),
+	...counties.map((c) => ({ href: `${base}/map/${c.slug}/`, text: c.name })),
+];
+---
+
+<Layout title="特色郵筒">
+	<Panel>
+		<h1 class="absolute top-[18px] left-[17px]"><Image src={mapTitle} alt="臺灣特色郵筒地圖" width={187} height={20} loading="eager" /></h1>
+		<a href={`${base}/map/taipei/`} class="absolute top-[93px] left-[21px] text-md font-bold text-black">先點這裡</a>
+		<TaiwanMap region="north" />
+	</Panel>
+
+	<section
+		class="fixed inset-x-4 bottom-[18px] mx-auto max-w-[361px] rounded-2xl border border-paper-line bg-paper px-3.5 pt-3.5 pb-5 text-paper-ink shadow-panel"
+		aria-labelledby="explore-title"
+	>
+		<h2 id="explore-title" class="px-0.5 text-xl font-bold">探索全台特色郵筒</h2>
+		<p class="mt-1 px-0.5 text-xs">沿著地圖，收藏每一座島嶼故事</p>
+		<form id="search" class="mt-3.5" role="search">
+			<label class="flex h-[37px] items-center gap-2 rounded-[9px] border border-paper-line bg-paper-light px-3 text-xs text-paper-muted">
+				<span aria-hidden="true">⌕</span>
+				<input name="q" type="search" placeholder="搜尋縣市、郵筒名稱或特色" class="w-full bg-transparent text-paper-ink outline-none placeholder:text-paper-muted" />
+			</label>
+		</form>
+		<div class="mt-2.5 flex gap-2" role="group" aria-label="地區">
+			{
+				regions.map((r, i) => (
+					<button
+						type="button"
+						data-region={r.id}
+						aria-pressed={i === 0 ? 'true' : 'false'}
+						class="h-[27px] w-16 rounded-full border border-paper-line bg-paper-light text-xs aria-pressed:border-brick aria-pressed:bg-brick aria-pressed:font-bold aria-pressed:text-paper-light"
+					>
+						{r.name}
+					</button>
+				))
+			}
+		</div>
+		<p id="explore-hint" class="mt-3 text-2xs font-bold text-brick" aria-live="polite">從北到南，發現郵筒裡的地方記憶。</p>
+	</section>
+</Layout>
+
+<script is:inline define:vars={{ index }}>
+	const map = document.getElementById('taiwan-map');
+	const chips = document.querySelectorAll('[data-region][aria-pressed]');
+	chips.forEach((chip) =>
+		chip.addEventListener('click', () => {
+			const on = chip.getAttribute('aria-pressed') !== 'true';
+			chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip && on)));
+			on ? map.setAttribute('data-region', chip.dataset.region) : map.removeAttribute('data-region');
+		}),
+	);
+
+	if (location.hash === '#search') document.querySelector('#search input').focus();
+
+	// 臺／台、縣市字尾都當成一樣
+	const norm = (s) => s.replace(/臺/g, '台').replace(/[縣市\s]/g, '').toLowerCase();
+	document.getElementById('search').addEventListener('submit', (e) => {
+		e.preventDefault();
+		const q = norm(new FormData(e.target).get('q'));
+		const hit = q && index.find((x) => norm(x.text).includes(q));
+		if (hit) location.href = hit.href;
+		else document.getElementById('explore-hint').textContent = '找不到符合的縣市或郵筒，換個關鍵字試試。';
+	});
+</script>

@@ -69,7 +69,7 @@ const gitFiles = (rev, dir) => { try { return git('ls-tree', '--name-only', '-r'
 // 頁面跟元件才拍快照；畫布上散落的 group、圖片、文字是素材，不是頁面
 const SNAPSHOT_TYPES = new Set(['FRAME', 'COMPONENT', 'COMPONENT_SET']);
 
-function connect(channel) {
+export function connect(channel) {
 	const ws = new WebSocket('ws://localhost:3055');
 	const pending = new Map();
 	ws.onmessage = ({ data }) => {

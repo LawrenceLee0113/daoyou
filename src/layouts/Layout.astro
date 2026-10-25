@@ -1,25 +1,38 @@
 ---
 import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
 
 interface Props {
 	title?: string;
 	description?: string;
+	// 相機、預覽這類全螢幕畫面不要頁首
+	header?: boolean;
 }
 
-const { title = 'daoyou', description = '' } = Astro.props;
+const { title, description = '寄存島嶼的地方郵誌', header = true } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <html lang="zh-Hant">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
 		<meta name="generator" content={Astro.generator} />
-		{description && <meta name="description" content={description} />}
-		<title>{title}</title>
+		<meta name="description" content={description} />
+		<title>{title ? `${title}｜島郵 Isle Post` : '島郵 Isle Post'}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC&family=Chiron+Hei+HK:wght@500&family=Chiron+Sung+HK:wght@700&display=swap"
+		/>
 	</head>
-	<body>
-		<slot />
+	<body class="bg-white font-sans text-ink antialiased">
+		<!-- 設計稿是手機版；電腦上置中、限制寬度 -->
+		<div class="mx-auto flex min-h-dvh w-full max-w-md flex-col">
+			{header && <SiteHeader />}
+			<slot />
+		</div>
 	</body>
 </html>

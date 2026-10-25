@@ -1,0 +1,79 @@
+---
+// Figma：台灣分開_*（每個縣市一張圖）。改用政府開放資料畫成 SVG，資料來源見 scripts/gen-taiwan-map.mjs。
+// selected：縣市頁用，其他縣市淡出，只留選到的那塊（設計稿「台北 #2」→「台北」的過場）。
+import map from '../data/taiwan-map.json';
+import { counties } from '../data/mailboxes';
+
+interface Props {
+	selected?: string;
+	region?: string;
+}
+const { selected, region } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<svg
+	id="taiwan-map"
+	viewBox={map.viewBox}
+	preserveAspectRatio="none"
+	class="absolute top-[87px] left-[70px] h-[470px] w-[245px]"
+	data-region={region}
+	aria-label="臺灣特色郵筒地圖"
+	role="group"
+>
+	<defs>
+		<pattern id="dots" width="4" height="4" patternUnits="userSpaceOnUse">
+			<circle cx="2" cy="2" r="0.7" class="fill-forest/50" />
+		</pattern>
+		<pattern id="dots-on" width="4" height="4" patternUnits="userSpaceOnUse">
+			<rect width="4" height="4" class="fill-pink-soft" /><circle cx="2" cy="2" r="0.8" class="fill-pink/60" />
+		</pattern>
+	</defs>
+	{
+		counties.map((c) => (
+			<a
+				href={`${base}/map/${c.slug}/`}
+				data-region={c.region}
+				aria-label={c.name}
+				tabindex={selected && c.slug !== selected ? -1 : undefined}
+				aria-hidden={selected && c.slug !== selected ? 'true' : undefined}
+				class:list={['county', selected && (c.slug === selected ? 'selected' : 'faded')]}
+			>
+				<path d={map.paths[c.slug as keyof typeof map.paths]} />
+			</a>
+		))
+	}
+</svg>
+
+<style>
+	.county path {
+		fill: url(#dots);
+		stroke: var(--color-forest);
+		stroke-width: 3;
+		stroke-linejoin: round;
+		vector-effect: non-scaling-stroke;
+		transition: fill 0.2s;
+	}
+	.county:hover path,
+	.county:focus-visible path,
+	svg[data-region='north'] [data-region='north'] path,
+	svg[data-region='central'] [data-region='central'] path,
+	svg[data-region='south'] [data-region='south'] path,
+	svg[data-region='east'] [data-region='east'] path {
+		fill: url(#dots-on);
+	}
+	.faded {
+		pointer-events: none;
+		animation: fade-out 0.6s ease forwards;
+	}
+	@keyframes fade-out {
+		to {
+			opacity: 0;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.faded {
+			animation-duration: 1ms;
+		}
+	}
+</style>

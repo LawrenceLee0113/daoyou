@@ -1,0 +1,96 @@
+---
+// Figma：Group 23（頁首）＋ 跑嗎燈燈（跑馬燈，每 5 秒換一句）＋ 目錄封面（三槓打開的選單）
+import { Image } from 'astro:assets';
+import headerTop from '../assets/header-top.png';
+import headerBar from '../assets/header-bar.png';
+import logo from '../assets/logo.png';
+import logoWhite from '../assets/logo-white.png';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const messages = [
+	'【Welcome】歡迎來到島郵！今天想寄出什麼樣的心情呢 ⋆⸜',
+	'【島郵廣播】生活需要一點儀式感，用文字紀錄今天的特別吧！',
+	'天氣真好，最適合寫一封信給重要的人了°⋰˚', // 設計稿結尾的「୭̥」多數手機沒有字型，會顯示成方框
+	'初次見面，慢慢逛、慢慢看，挑一張喜歡的明信片吧！',
+	'你知道嗎？台灣的綠色郵筒寄平信，紅色則是寄限時與航空信件喔！',
+	'臺灣最深的郵筒在綠島海底，要潛水才能寄信呢 🤿',
+	'台灣有一對被颱風吹歪的「歪腰郵筒」，充滿了可愛的生命力！',
+	'為什麼許多國家的郵筒是紅色的？因為紅色最醒目，遠遠就能看見它 📮',
+	'全台海拔最高的郵筒在阿里山上，是一座離天空最近的郵筒 ☁️',
+	'「郵票」就像是信件的專屬車票，貼上它就能展開一場漫長的旅行囉 🚂',
+];
+
+// 還沒做的頁面先不給連結
+const menu = [
+	{ name: '特色郵筒', href: `${base}/map/` },
+	{ name: '郵政知識' },
+	{ name: '在地風味' },
+	{ name: '島郵周邊' },
+	{ name: '關於島郵' },
+];
+---
+
+<header class="relative">
+	<div class="relative h-[87px] overflow-hidden">
+		<Image src={headerTop} alt="" class="absolute inset-0 size-full object-cover" loading="eager" />
+		<p
+			id="ticker"
+			class="absolute inset-x-0 top-[59px] truncate px-8 text-center text-2xs text-white transition-opacity duration-500"
+			aria-live="off"
+		>
+			{messages[0]}
+		</p>
+	</div>
+	<nav class="relative isolate flex h-[60px] items-center px-5" aria-label="主選單">
+		<Image src={headerBar} alt="" class="absolute inset-0 -z-10 size-full object-cover" loading="eager" />
+		<a href={`${base}/`} class="mr-auto"><Image src={logo} alt="島郵 Isle Post 首頁" width={48} height={30} /></a>
+		<a href={`${base}/map/#search`} class="p-2 text-header-pink" aria-label="搜尋郵筒">
+			<svg width="22" height="20" viewBox="0 0 22 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+				<circle cx="8.5" cy="8" r="7" /><path d="M13.8 13l6.6 5.5" />
+			</svg>
+		</a>
+		<button popovertarget="site-menu" class="ml-2 p-2 text-header-pink" aria-label="開啟選單">
+			<svg width="20" height="18" viewBox="0 0 20 18" stroke="currentColor" stroke-width="2" aria-hidden="true">
+				<path d="M0 1h20M0 9h20M0 17h20" />
+			</svg>
+		</button>
+	</nav>
+
+	<div
+		id="site-menu"
+		popover
+		class="fixed inset-auto top-[146px] right-0 m-0 h-[271px] w-[184px] bg-header-pink p-0 text-white shadow-soft md:right-[calc((100vw-28rem)/2)]"
+	>
+		<div class="flex items-start justify-between px-2.5 pt-4">
+			<a href={`${base}/`}><Image src={logoWhite} alt="島郵 Isle Post 首頁" width={48} height={30} /></a>
+			<button popovertarget="site-menu" popovertargetaction="hide" class="mr-6 p-1" aria-label="關閉選單">
+				<svg width="20" height="20" viewBox="0 0 20 20" stroke="currentColor" stroke-width="2" aria-hidden="true">
+					<path d="M0 0l20 20M20 0L0 20" />
+				</svg>
+			</button>
+		</div>
+		<ul class="mt-5 flex flex-col gap-3.5 px-2.5 font-round text-sm">
+			{
+				menu.map((m) => (
+					<li>{m.href ? <a href={m.href}>{m.name}</a> : <span class="opacity-60">{m.name}<span class="sr-only">（即將開放）</span></span>}</li>
+				))
+			}
+		</ul>
+		<svg class="mt-3.5 ml-[23px]" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f2ede6" stroke-width="2" aria-label="Instagram">
+			<rect x="1" y="1" width="22" height="22" rx="6" /><circle cx="12" cy="12" r="4.9" /><circle cx="17.5" cy="6" r="1" fill="#f2ede6" />
+		</svg>
+	</div>
+</header>
+
+<script is:inline define:vars={{ messages }}>
+	const el = document.getElementById('ticker');
+	let i = 0;
+	setInterval(() => {
+		el.style.opacity = '0';
+		setTimeout(() => {
+			el.textContent = messages[(i = (i + 1) % messages.length)];
+			el.style.opacity = '1';
+		}, 500);
+	}, 5000);
+</script>

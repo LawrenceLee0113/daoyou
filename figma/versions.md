@@ -10,8 +10,23 @@
 
 | Frame 名稱 | 頁面檔案 | 備註 |
 |---|---|---|
+| 封面 | `src/pages/index.astro` | 5 張活動照片匯不出來，先放空白框 |
+| 登入 | `src/pages/login.astro` | 第三方登入、註冊沒有功能 |
+| 特色郵筒 | `src/pages/map/index.astro` | 含併入的「島郵探索面板」；地圖改用開放資料 SVG（`src/components/TaiwanMap.astro`） |
+| 台北、台北 #2 | `src/pages/map/[county]/index.astro` | 「台北 #2」是點進縣市時、卡片出現前的過場狀態（做成淡出＋卡片滑入動畫） |
+| 新北…臺東（16 個縣市） | `src/pages/map/[county]/index.astro` | 沒有郵筒資料，顯示「即將開放」 |
+| 台北-歪腰郵筒、台北-歪腰郵筒（已上傳） | `src/pages/map/[county]/[mailbox].astro` | 同一頁的「上傳前／上傳後」狀態 |
+| 歪腰郵筒-預覽 | `src/pages/map/[county]/[mailbox].astro` | 郵筒頁裡的全螢幕 `<dialog>` |
+| 歪腰郵筒-相機 | （不做） | 改叫出手機內建相機 |
+| 個人檔案-相簿 | `src/pages/profile/index.astro` | |
+| 目錄封面 | `src/components/SiteHeader.astro` | 三槓打開的選單（popover） |
+| 跑嗎燈燈 | `src/components/SiteHeader.astro` | 跑馬燈，10 句每 5 秒輪播 |
 
 ## 版本紀錄（新的寫在最上面）
+
+### v3（同一份）— 2026-10-25 第一批頁面
+- 連結：未提供。重新擷取快照，跟 v3 基準比對沒有任何變更
+- 實作主線流程：封面、登入、特色郵筒、台北（含其他縣市的「即將開放」版型）、台北-歪腰郵筒（上傳前／後）、預覽、個人檔案-相簿、選單、跑馬燈
 
 ### v3 — 2026-10-25（流程測試：第二份，討論後的新版）
 - 連結：未提供

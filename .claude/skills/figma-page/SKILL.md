@@ -50,7 +50,9 @@ argument-hint: "[Figma 連結，或 frame 名稱]"
 - `get_local_components`：對照 `src/components/`，看有沒有已經做過的元件
 - `scan_text_nodes`：文案原文
 - `get_annotations`：設計師的標註（互動、狀態、備註），一定要看
-- `export_node_as_image`：frame 截圖當作比對基準；圖示、插圖匯出到 `src/assets/`
+- 匯出素材用 `node figma/export.mjs <channel ID> <frame id> <資料夾> "<圖層名稱>=<檔名>" ...`（PNG、scale 2，不經過對話）；
+  原型連結指到哪一頁用 `node figma/export.mjs <channel ID> --reactions <frame id>`。
+  外掛只匯得出**在 frame 畫面範圍內**的部分：超出 frame 的圖層（封面下方的活動照片等）會是 1×1 的空圖，要請使用者在 Figma 手動匯出。
 
 ## 5. 實作
 

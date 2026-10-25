@@ -1,0 +1,13 @@
+---
+// Figma：資產 10 1（綠底＋白色圓角卡片），特色郵筒、縣市、郵筒、個人檔案共用
+interface Props {
+	class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+
+<main class="flex flex-1 flex-col bg-forest px-2.5 py-3.5">
+	<div class:list={['relative min-h-[617px] flex-1 rounded-card bg-white', cls]}>
+		<slot />
+	</div>
+</main>
