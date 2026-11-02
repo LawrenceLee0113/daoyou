@@ -75,23 +75,24 @@ const slide = 'h-[190px] w-[320px] max-w-full shrink-0 snap-start rounded-2xl ob
 	<dialog
 		id="preview"
 		tabindex="-1"
-		class="m-0 h-dvh outline-none max-h-none w-full max-w-none bg-black text-white backdrop:bg-black md:m-auto md:h-auto md:max-h-[95dvh] md:max-w-md md:rounded-3xl md:pb-8 md:backdrop:bg-black/70"
+		class="m-0 h-dvh flex-col overflow-hidden overscroll-none outline-none open:flex max-h-none w-full max-w-none bg-black text-white backdrop:bg-black md:m-auto md:h-auto md:overflow-auto md:max-h-[95dvh] md:max-w-md md:rounded-3xl md:pb-8 md:backdrop:bg-black/70"
 		aria-labelledby="preview-title"
 	>
-		<div class="relative flex h-[100px] items-start justify-center pt-14">
+		<!-- 手機不能上下滑（使用者要求）：照片吃剩下的高度，矮的手機照片縮小，整個畫面剛好一頁 -->
+		<div class="relative flex h-[100px] shrink-0 items-start justify-center pt-14">
 			<button id="close" type="button" class="absolute top-[52px] left-6 text-3xl leading-none font-bold" aria-label="關閉">✕</button>
 			<h2 id="preview-title" class="text-lg font-bold">預覽</h2>
 		</div>
-		<img id="preview-img" alt="剛拍的照片" class="h-[524px] w-full object-contain md:h-[min(524px,55dvh)]" />
-		<label class="mt-6 flex items-center gap-2.5 px-10 text-base">
+		<img id="preview-img" alt="剛拍的照片" class="max-h-[524px] min-h-0 w-full flex-1 object-contain md:h-[min(524px,55dvh)] md:flex-none" />
+		<label class="mt-6 flex shrink-0 items-center gap-2.5 px-10 text-base">
 			<input id="save" type="checkbox" checked class="size-5 accent-pink" />
 			同時儲存到手機相簿
 		</label>
-		<div class="mt-8 flex gap-4 px-10">
+		<div class="mt-8 flex shrink-0 gap-4 px-10">
 			<button id="retake" type="button" class="h-12 w-[140px] rounded-full border border-white text-lg font-bold">重拍</button>
 			<button id="upload" type="button" class="h-12 flex-1 rounded-full bg-pink text-lg font-bold disabled:opacity-50">上傳到此頁</button>
 		</div>
-		<p class="mt-5 text-center text-sm text-muted">照片會自動收進「個人檔案 › 我的相簿」</p>
+		<p class="mt-5 mb-[max(20px,env(safe-area-inset-bottom))] shrink-0 text-center text-sm text-muted md:mb-0">照片會自動收進「個人檔案 › 我的相簿」</p>
 	</dialog>
 	<!-- 上傳後的獎勵：第一次蓋郵票＋島幣，之後只飄島幣 -->
 	<div id="reward" hidden class="pointer-events-none fixed inset-0 z-50 grid place-items-center" aria-live="polite">

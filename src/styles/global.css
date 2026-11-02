@@ -270,6 +270,11 @@ header:has(#site-menu:popover-open) .burger line {
 	}
 }
 
+/* 全螢幕預覽、照片檢視（<dialog>）打開時，後面的頁面不能跟著上下滑（iOS 會穿透捲動） */
+html:has(dialog[open]) {
+	overflow: hidden;
+}
+
 /* 11. 按鈕按下去縮一下再彈回來 */
 :where(button, .press) {
 	transition: transform 0.12s ease-out;
