@@ -26,3 +26,4 @@ pnpm-debug.log*
 # 使用者提供的原始圖檔（很大，不進 git；要用的會另外壓縮放進 src/assets）
 /網站放的圖片/
 /網站放的圖片-*.zip
+.playwright-cli

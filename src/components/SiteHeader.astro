@@ -35,7 +35,8 @@ const menu = [
 ];
 ---
 
-<header class="relative">
+<!-- 使用者要求：手機、電腦版滑動時頁首都固定在最上面（高 87＋60＝147px） -->
+<header class="sticky top-0 z-40">
 	<div class="relative h-[87px] overflow-hidden">
 		<picture>
 			<source media="(min-width: 1024px)" srcset={desktopBand.src} />
