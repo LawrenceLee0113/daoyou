@@ -1,43 +1,19 @@
 ---
-// Figma：個人檔案-相簿（郵票冊、我的信件、編輯還沒做）
+// Figma：個人檔案-相簿
 import Layout from '../../layouts/Layout.astro';
 import Panel from '../../components/Panel.astro';
+import ProfileHeader from '../../components/ProfileHeader.astro';
 import { counties, mailboxes } from '../../data/mailboxes';
-import { COINS_FIRST_PHOTO, LEVELS } from '../../lib/rules';
+import { COINS_FIRST_PHOTO } from '../../lib/rules';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 // 相簿格子上的「台北・歪腰郵筒」
 const labels = Object.fromEntries(mailboxes.map((m) => [m.id, `${counties.find((c) => c.slug === m.county)!.name}・${m.name}`]));
-const stat = 'flex h-16 flex-1 flex-col-reverse items-center justify-center rounded-xl bg-butter/70';
-const tab = 'flex h-8 flex-1 items-start justify-center pt-1.5 text-base font-bold';
 ---
 
 <Layout title="個人檔案">
 	<Panel class="pt-[34px] pb-6 md:max-w-3xl">
-		<a id="back" href={`${base}/map/`} class="text-md font-bold text-olive">← 返回</a>
-
-		<div class="mt-2 flex items-start gap-4">
-			<div class="grid size-16 shrink-0 place-items-center rounded-full bg-butter/70 text-4xl font-bold text-pink" aria-hidden="true">旅</div>
-			<div class="flex-1 pt-1">
-				<h1 class="text-2xl font-bold">旅人小島</h1>
-				<p id="level" class="mt-2 inline-block rounded-full bg-sage/50 px-3 py-[3px] text-xs font-bold text-olive">{LEVELS[0].name}</p>
-			</div>
-			<span class="mt-2.5 rounded-full border border-pink px-4 py-1.5 text-sm font-bold text-pink">編輯</span>
-		</div>
-
-		<dl class="mt-5 flex gap-2">
-			<div class={stat}><dt class="text-xs text-muted">島幣</dt><dd id="coins" class="text-3xl font-bold text-pink">0</dd></div>
-			<div class={stat}><dt class="text-xs text-muted">打卡郵筒</dt><dd id="stamps" class="text-3xl font-bold text-pink">0</dd></div>
-			<div class={stat}><dt class="text-xs text-muted">寄出明信片</dt><dd class="text-3xl font-bold text-pink">0</dd></div>
-		</dl>
-
-		<nav class="mt-4 flex border-b border-line" aria-label="個人檔案分頁">
-			<span class:list={[tab, 'relative text-pink']} aria-current="page">
-				相簿<span class="absolute bottom-0 h-[3px] w-16 rounded-sm bg-pink"></span>
-			</span>
-			<span class:list={[tab, 'text-muted']}>郵票冊</span>
-			<span class:list={[tab, 'text-muted']}>我的信件</span>
-		</nav>
+		<ProfileHeader tab="album" />
 
 		<ul id="album" class="mt-4 grid grid-cols-3 gap-2 md:grid-cols-4 md:gap-3" data-labels={JSON.stringify(labels)}></ul>
 		<template id="empty-cell">
@@ -57,21 +33,11 @@ const tab = 'flex h-8 flex-1 items-start justify-center pt-1.5 text-base font-bo
 </Layout>
 
 <script>
-	import { getPhotos, requireLogin } from '../../lib/store';
-	import { summarize } from '../../lib/rules';
+	import { getPhotos, isLoggedIn } from '../../lib/store';
 
 	const $ = (id: string) => document.getElementById(id)!;
-	$('back').addEventListener('click', (e) => {
-		if (history.length > 1) (e.preventDefault(), history.back());
-	});
-
-	if (requireLogin()) {
+	if (isLoggedIn()) {
 		const photos = await getPhotos();
-		const { coins, stamps, level } = summarize(photos);
-		$('coins').textContent = String(coins);
-		$('stamps').textContent = String(stamps);
-		$('level').textContent = level;
-
 		const album = $('album');
 		const labels = JSON.parse(album.dataset.labels!);
 		photos.forEach((p) => {

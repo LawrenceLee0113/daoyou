@@ -1,0 +1,34 @@
+---
+// Figma：郵政知識/一、郵筒的起源 … 四、郵筒的文化價值
+import { Image, getImage } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import { articles } from '../../data/knowledge';
+
+export const getStaticPaths = () => articles.map((a, i) => ({ params: { slug: a.slug }, props: { a, next: articles[i + 1] } }));
+
+const { a, next } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const bg = await getImage({ src: a.background, width: 740, format: 'webp' });
+---
+
+<Layout title={a.title.replace(/^.、/, '')}>
+	<main class="flex-1 px-3 pt-2.5 pb-12 md:px-8 md:pt-10">
+		<article class="relative isolate mx-auto max-w-[370px] overflow-hidden rounded-card px-[27px] pt-[42px] pb-32 md:max-w-2xl md:px-14 md:pt-14">
+			<!-- 設計稿的漸層點點底圖（不透明度 0.7／0.4），內容變長時跟著拉伸 -->
+			<div class="absolute inset-0 -z-10 bg-cover bg-top opacity-60" style={`background-image:url(${bg.src})`}></div>
+			<a href={`${base}/knowledge/`} class="text-md font-bold text-olive">← 郵政知識</a>
+			<!-- 設計稿用 Nightgazer 字型，找不到下載來源，先用系統粗體（已記入待辦） -->
+			<h1 class="mt-4 text-5xl font-bold tracking-wider">{a.title}</h1>
+			{a.illustrationAt === 'behind' && <Image src={a.illustration} alt="" class="absolute top-[165px] left-1/2 -z-10 w-[262px] -translate-x-1/2 opacity-5" />}
+			<p class="mt-6 text-base leading-[1.9] font-light whitespace-pre-line">{a.body}</p>
+			{a.illustrationAt === 'bottom' && <Image src={a.illustration} alt="" class="absolute right-[27px] bottom-6 h-auto w-24 opacity-75" />}
+		</article>
+		{
+			next && (
+				<p class="mx-auto mt-6 max-w-[370px] text-right md:max-w-2xl">
+					<a href={`${base}/knowledge/${next.slug}/`} class="text-md font-bold text-pink">下一篇：{next.title} →</a>
+				</p>
+			)
+		}
+	</main>
+</Layout>

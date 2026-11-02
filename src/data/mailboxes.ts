@@ -7,14 +7,13 @@ import xinshePhoto from '../assets/mailboxes/xinshe.jpg';
 import xinsheCard from '../assets/mailboxes/xinshe-card.jpg';
 import xinsheIllust from '../assets/mailboxes/xinshe-illust.png';
 
-// slug 對應 src/data/taiwan-map.json 的 paths。name：「← 返回台北」這類短名；fullName：地圖標籤、縣市頁大標
+// 順序照設計稿郵票冊（北→南，宜花東在最後）。slug 對應 src/data/taiwan-map.json 的 paths。name：「← 返回台北」這類短名；fullName：地圖標籤、縣市頁大標
 export const counties: { slug: string; name: string; fullName: string }[] = [
 	{ slug: 'taipei', name: '台北', fullName: '臺北市' },
 	{ slug: 'new-taipei', name: '新北', fullName: '新北市' },
 	{ slug: 'keelung', name: '基隆', fullName: '基隆市' },
 	{ slug: 'taoyuan', name: '桃園', fullName: '桃園市' },
 	{ slug: 'hsinchu', name: '新竹', fullName: '新竹縣' },
-	{ slug: 'yilan', name: '宜蘭', fullName: '宜蘭縣' },
 	{ slug: 'miaoli', name: '苗栗', fullName: '苗栗縣' },
 	{ slug: 'taichung', name: '台中', fullName: '臺中市' },
 	{ slug: 'changhua', name: '彰化', fullName: '彰化縣' },
@@ -24,6 +23,7 @@ export const counties: { slug: string; name: string; fullName: string }[] = [
 	{ slug: 'tainan', name: '台南', fullName: '臺南市' },
 	{ slug: 'kaohsiung', name: '高雄', fullName: '高雄市' },
 	{ slug: 'pingtung', name: '屏東', fullName: '屏東縣' },
+	{ slug: 'yilan', name: '宜蘭', fullName: '宜蘭縣' },
 	{ slug: 'hualien', name: '花蓮', fullName: '花蓮縣' },
 	{ slug: 'taitung', name: '臺東', fullName: '臺東縣' },
 ];
@@ -33,6 +33,8 @@ export const mailboxes = [
 		id: 'waiyao',
 		county: 'taipei',
 		name: '歪腰郵筒',
+		nickname: '小紅小綠', // 明信片「小紅小綠會把你的心意送到…」
+		postmark: ['台北', '中山'],
 		area: '臺北市中山區・南京東路',
 		address: '臺北市中山區・南京東路 × 龍江路口',
 		summary: '2015 年蘇迪勒颱風吹落招牌，\n砸彎了路邊一紅一綠的郵筒。\n歪腰的模樣意外爆紅，\n如今成了台北最萌的打卡景點。',
@@ -48,6 +50,8 @@ export const mailboxes = [
 		id: 'xinshe',
 		county: 'taichung',
 		name: '菇鴿寄幸福',
+		nickname: '菇鴿',
+		postmark: ['台中', '新社'],
 		area: '臺中市新社區・協中街',
 		address: '臺中市新社區・協中街（新社香菇街/菇神旁）',
 		summary: '結合新社在地香菇產業與郵政意象，可愛的「菇鴿」公仔抱著特色郵筒佇立於香菇街旁，成為旅人走訪新社必拍的萌系地圖標誌。',

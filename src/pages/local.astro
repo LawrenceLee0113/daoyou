@@ -1,0 +1,51 @@
+---
+// Figma：在地風味（商品列表＋搜尋）。設計稿沒有購買流程，只展示
+import Layout from '../layouts/Layout.astro';
+import { products } from '../data/products';
+---
+
+<Layout title="在地風味">
+	<main class="mx-auto w-full max-w-5xl flex-1 px-[15px] pt-[18px] pb-12 md:px-8 md:pt-10">
+		<h1 class="sr-only">在地風味</h1>
+		<form id="search" role="search" class="mx-auto max-w-xl px-2" onsubmit="return false">
+			<label class="flex h-[30px] items-center rounded-full bg-sand px-3.5 font-round text-sm">
+				<span class="sr-only">搜尋商品</span>
+				<input name="q" type="search" placeholder="搜尋商品" class="w-full bg-transparent outline-none placeholder:text-black/40" />
+				<svg width="13" height="12" viewBox="0 0 13 12" fill="none" class="shrink-0 stroke-stone" stroke-width="2" aria-hidden="true">
+					<circle cx="5" cy="5" r="4" /><path d="M8 8l4 3.5" />
+				</svg>
+			</label>
+		</form>
+
+		<ul id="products" class="mt-[33px] grid grid-cols-2 gap-x-6 gap-y-10 font-round md:grid-cols-3 lg:grid-cols-4">
+			{
+				products.map((p) => (
+					<li data-text={`${p.name} ${p.shop}`} class="flex flex-col rounded-product bg-sand p-[7px] pb-3 shadow-soft">
+						<div class="grid aspect-square place-items-center rounded-product-photo bg-empty text-sm text-faint" role="img" aria-label="商品照片（準備中）">照片準備中</div>
+						<h2 class="mt-1 px-0.5 text-sm leading-tight whitespace-pre-line">{p.name}</h2>
+						<p class="mt-auto flex items-baseline gap-1.5 px-0.5 pt-1">
+							<span class="text-2xl text-price">NT${p.price}</span>
+							<s class="text-sm text-stone">NT${p.original}</s>
+						</p>
+						<p class="px-0.5 text-2xs text-black/60">{p.shop}</p>
+					</li>
+				))
+			}
+		</ul>
+		<p id="none" hidden class="mt-16 text-center text-sm text-muted">找不到符合的商品</p>
+	</main>
+</Layout>
+
+<script>
+	// 依商品名稱、店家篩選
+	const items = document.querySelectorAll<HTMLElement>('#products > li');
+	document.querySelector<HTMLInputElement>('#search input')!.addEventListener('input', (e) => {
+		const q = (e.target as HTMLInputElement).value.trim().toLowerCase();
+		let shown = 0;
+		items.forEach((li) => {
+			li.hidden = !!q && !li.dataset.text!.toLowerCase().includes(q);
+			if (!li.hidden) shown++;
+		});
+		document.getElementById('none')!.hidden = shown > 0;
+	});
+</script>

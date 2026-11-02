@@ -1,0 +1,26 @@
+---
+// Figma：郵政知識（4 張文章卡片，點了進文章）
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import { articles } from '../../data/knowledge';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<Layout title="郵政知識">
+	<main class="flex-1 px-3 pt-[34px] pb-12 md:px-8 md:pt-12">
+		<h1 class="sr-only">郵政知識</h1>
+		<!-- 手機一欄；平板以上兩欄 -->
+		<ul class="mx-auto grid max-w-[370px] gap-9 md:max-w-4xl md:grid-cols-2 md:gap-8">
+			{
+				articles.map((a) => (
+					<li>
+						<a href={`${base}/knowledge/${a.slug}/`} class="block transition-transform hover:-translate-y-1">
+							<Image src={a.card} alt={a.title} widths={[370, 740]} sizes="370px" class="h-auto w-full" />
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</main>
+</Layout>

@@ -18,6 +18,13 @@
 	--color-butter: #faf5ad;
 	--color-new: #fff200;
 	--color-map-line: #01715a;
+
+	/* 在地風味（商品卡）、明信片 */
+	--color-sand: #f2ede6;
+	--color-stone: #96948f;
+	--color-price: #cc4f4f;
+	--color-postcard: #fffcf5;
+	--color-postmark: #666666;
 	--color-news: #66ba7a;
 	--color-signup: #ff873d;
 	--color-facebook: #3a5896;
@@ -45,12 +52,17 @@
 	--text-2xl: 20px;
 	--text-3xl: 22px;
 	--text-4xl: 26px;
+	--text-avatar: 30px;
+	--text-emoji: 40px;
+	--text-emoji-lg: 64px;
 	--text-5xl: 24px; /* 縣市大標（設計稿用 Nightgazer，找不到字型，先用系統粗體） */
 
 	--radius-card: 40px;
 	--radius-mailbox: 35px;
 	--radius-photo: 30px;
 	--radius-news: 24px;
+	--radius-product: 20px;
+	--radius-product-photo: 25px;
 
 	--shadow-soft: 0 4px 4px #00000040;
 }

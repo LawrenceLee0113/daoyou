@@ -1,0 +1,52 @@
+---
+// Figma：個人檔案-郵票冊。某個縣市只要有一個郵筒打卡過，就點亮那個縣市的郵票
+import Layout from '../../layouts/Layout.astro';
+import Panel from '../../components/Panel.astro';
+import ProfileHeader from '../../components/ProfileHeader.astro';
+import { counties, mailboxes } from '../../data/mailboxes';
+
+const countyOfMailbox = Object.fromEntries(mailboxes.map((m) => [m.id, m.county]));
+---
+
+<Layout title="郵票冊">
+	<Panel class="pt-[34px] pb-6 md:max-w-3xl">
+		<ProfileHeader tab="stamps" />
+
+		<p id="progress-text" class="mt-4 text-md font-bold">已收集 0 / {counties.length} 縣市</p>
+		<div class="mt-2 h-2 overflow-hidden rounded bg-empty" role="progressbar" aria-labelledby="progress-text">
+			<div id="progress" class="h-full w-0 rounded bg-new transition-[width] duration-500"></div>
+		</div>
+
+		<ul id="stamps-grid" class="mt-3 grid grid-cols-5 gap-2 md:grid-cols-9" data-map={JSON.stringify(countyOfMailbox)}>
+			{
+				counties.map((c) => (
+					<li
+						data-county={c.slug}
+						class="grid aspect-square place-items-center rounded-lg border border-transparent bg-empty text-md font-bold text-faint data-[on]:border-new data-[on]:bg-butter/70 data-[on]:text-pink"
+					>
+						{c.name}
+					</li>
+				))
+			}
+		</ul>
+	</Panel>
+</Layout>
+
+<script>
+	import { getPhotos, isLoggedIn } from '../../lib/store';
+	import { summarize } from '../../lib/rules';
+
+	if (isLoggedIn()) {
+		const grid = document.getElementById('stamps-grid')!;
+		const map = JSON.parse(grid.dataset.map!) as Record<string, string>;
+		const got = new Set(summarize(await getPhotos()).stampIds.map((id) => map[id]));
+		grid.querySelectorAll<HTMLElement>('[data-county]').forEach((li) => {
+			if (!got.has(li.dataset.county!)) return;
+			li.dataset.on = '';
+			li.append(Object.assign(document.createElement('span'), { className: 'sr-only', textContent: '（已收集）' }));
+		});
+		const total = grid.children.length;
+		document.getElementById('progress-text')!.textContent = `已收集 ${got.size} / ${total} 縣市`;
+		document.getElementById('progress')!.style.width = `${(got.size / total) * 100}%`;
+	}
+</script>

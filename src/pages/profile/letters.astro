@@ -1,0 +1,67 @@
+---
+// Figma：個人檔案-我的信件、個人檔案-我的信件（已寄出）
+import Layout from '../../layouts/Layout.astro';
+import Panel from '../../components/Panel.astro';
+import ProfileHeader from '../../components/ProfileHeader.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const writeBtn = 'inline-grid h-10 w-40 place-items-center rounded-full bg-butter text-lg font-bold text-rose';
+---
+
+<Layout title="我的信件">
+	<Panel class="pt-[34px] pb-6 md:max-w-3xl">
+		<ProfileHeader tab="letters" />
+
+		<div id="empty" hidden class="mt-12 text-center">
+			<p class="text-emoji leading-none" aria-hidden="true">✉️</p>
+			<h2 class="mt-6 text-lg font-bold">還沒有寄出的明信片</h2>
+			<p class="mt-2.5 text-sm text-muted">在特色郵筒前手寫一張明信片，<br />寄給朋友，或寄給未來的自己。</p>
+			<a href={`${base}/postcard/`} class:list={[writeBtn, 'mt-9']}>寫一張明信片</a>
+		</div>
+
+		<div id="list" hidden class="mt-4">
+			<ul id="letters" class="flex flex-col gap-3"></ul>
+			<p class="mt-5 text-center"><a href={`${base}/postcard/`} class={writeBtn}>寫一張明信片</a></p>
+		</div>
+
+		<template id="letter">
+			<li class="flex gap-3 rounded-xl bg-butter/70 p-3">
+				<img alt="" class="size-[72px] shrink-0 rounded-md object-cover" />
+				<div class="min-w-0 flex-1">
+					<div class="flex items-baseline justify-between gap-2">
+						<h3 class="to truncate text-base font-bold"></h3>
+						<time class="text-xs text-muted"></time>
+					</div>
+					<p class="message mt-1.5 truncate text-sm text-muted"></p>
+					<span class="mt-2 inline-block rounded-full bg-sage/50 px-3 py-0.5 text-xs font-bold text-olive">寄送中</span>
+				</div>
+			</li>
+		</template>
+	</Panel>
+</Layout>
+
+<script>
+	import { getPhotos, getPostcards, isLoggedIn } from '../../lib/store';
+
+	const $ = (id: string) => document.getElementById(id)!;
+	if (isLoggedIn()) {
+		const [cards, photos] = await Promise.all([getPostcards(), getPhotos()]);
+		$('empty').hidden = cards.length > 0;
+		$('list').hidden = cards.length === 0;
+		const blobs = new Map(photos.map((p) => [p.id, p.blob]));
+		for (const c of cards) {
+			const li = ($('letter') as HTMLTemplateElement).content.cloneNode(true) as DocumentFragment;
+			const blob = blobs.get(c.photoId);
+			if (blob) li.querySelector('img')!.src = URL.createObjectURL(blob);
+			li.querySelector('.to')!.textContent = `給 ${c.to}`;
+			const d = new Date(c.createdAt);
+			const time = li.querySelector('time')!;
+			time.dateTime = d.toISOString();
+			time.textContent = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+			li.querySelector('.message')!.textContent = c.message.split('\n')[0];
+			$('letters').append(li);
+		}
+	} else {
+		$('empty').hidden = false;
+	}
+</script>

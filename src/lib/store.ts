@@ -29,6 +29,9 @@ export function login(email: string, password: string) {
 
 export const isLoggedIn = () => safe(() => localStorage.getItem(LOGIN_KEY) === DEMO_EMAIL, false);
 
+// 登出只清登入狀態，照片、明信片留在這支手機上，再登入就回來
+export const logout = () => safe(() => localStorage.removeItem(LOGIN_KEY), undefined);
+
 // 沒登入就導到登入頁，登入後回到原本的頁面
 export function requireLogin() {
 	if (isLoggedIn()) return true;
@@ -43,20 +46,27 @@ export interface Photo {
 	createdAt: number;
 }
 
+type StoreName = 'photos' | 'postcards' | 'avatar';
+
 function openDb() {
 	return new Promise<IDBDatabase>((resolve, reject) => {
-		const req = indexedDB.open(DB_NAME, 1);
-		req.onupgradeneeded = () => req.result.createObjectStore('photos', { keyPath: 'id', autoIncrement: true });
+		// v2：加上明信片、頭像
+		const req = indexedDB.open(DB_NAME, 2);
+		req.onupgradeneeded = () => {
+			for (const name of ['photos', 'postcards'] as const)
+				if (!req.result.objectStoreNames.contains(name)) req.result.createObjectStore(name, { keyPath: 'id', autoIncrement: true });
+			if (!req.result.objectStoreNames.contains('avatar')) req.result.createObjectStore('avatar');
+		};
 		req.onsuccess = () => resolve(req.result);
 		req.onerror = () => reject(req.error);
 	});
 }
 
-function tx<T>(mode: IDBTransactionMode, fn: (s: IDBObjectStore) => IDBRequest<T>) {
+function tx<T>(mode: IDBTransactionMode, fn: (s: IDBObjectStore) => IDBRequest<T>, name: StoreName = 'photos') {
 	return openDb().then(
 		(db) =>
 			new Promise<T>((resolve, reject) => {
-				const req = fn(db.transaction('photos', mode).objectStore('photos'));
+				const req = fn(db.transaction(name, mode).objectStore(name));
 				req.onsuccess = () => resolve(req.result);
 				req.onerror = () => reject(req.error);
 			}),
@@ -70,9 +80,9 @@ export async function getPhotos(mailboxId?: string): Promise<Photo[]> {
 }
 
 // 最長邊縮到 1600px、轉成 JPEG 0.8 再存，避免一張手機照片就好幾 MB
-async function shrink(file: Blob) {
+async function shrink(file: Blob, max = 1600) {
 	const img = await createImageBitmap(file);
-	const scale = Math.min(1, 1600 / Math.max(img.width, img.height));
+	const scale = Math.min(1, max / Math.max(img.width, img.height));
 	const canvas = document.createElement('canvas');
 	canvas.width = Math.round(img.width * scale);
 	canvas.height = Math.round(img.height * scale);
@@ -88,4 +98,50 @@ export async function addPhoto(mailboxId: string, file: Blob) {
 	navigator.storage?.persist?.(); // 降低 iOS Safari 清除資料的機率
 	const blob = await shrink(file);
 	await tx('readwrite', (s) => s.add({ mailboxId, blob, createdAt: Date.now() }));
+}
+
+export interface Postcard {
+	id: number;
+	photoId: number;
+	mailboxId: string;
+	message: string;
+	to: string;
+	address: string;
+	mode: 'friend' | 'future';
+	createdAt: number;
+}
+
+export async function getPostcards(): Promise<Postcard[]> {
+	const all = await tx<Postcard[]>('readonly', (s) => s.getAll(), 'postcards').catch(() => []);
+	return all.sort((a, b) => b.createdAt - a.createdAt);
+}
+
+// 純前端：不會真的寄出，只記錄在「我的信件」，狀態一直是「寄送中」
+export async function addPostcard(card: Omit<Postcard, 'id' | 'createdAt'>) {
+	navigator.storage?.persist?.();
+	await tx('readwrite', (s) => s.add({ ...card, createdAt: Date.now() }), 'postcards');
+}
+
+export interface Profile {
+	nickname: string;
+	bio: string;
+	county: string;
+	publicAlbum: boolean;
+}
+
+const PROFILE_KEY = 'daoyou:profile';
+// 設計稿的預設內容
+const DEFAULT_PROFILE: Profile = { nickname: '旅人小島', bio: '喜歡在城市裡找可愛的郵筒，\n收集每一座島嶼的郵戳。', county: 'taipei', publicAlbum: true };
+
+export const getProfile = (): Profile =>
+	safe(() => ({ ...DEFAULT_PROFILE, ...JSON.parse(localStorage.getItem(PROFILE_KEY) ?? '{}') }), DEFAULT_PROFILE);
+
+export const saveProfile = (p: Profile) => safe(() => localStorage.setItem(PROFILE_KEY, JSON.stringify(p)), undefined);
+
+// 頭像也是照片，存 IndexedDB（縮到 400px）
+export const getAvatar = () => tx<Blob | undefined>('readonly', (s) => s.get('me'), 'avatar').catch(() => undefined);
+
+export async function saveAvatar(file: Blob) {
+	const blob = await shrink(file, 400);
+	await tx('readwrite', (s) => s.put(blob, 'me'), 'avatar');
 }

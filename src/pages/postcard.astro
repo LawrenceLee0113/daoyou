@@ -1,0 +1,195 @@
+---
+// Figma：明信片-撰寫 → 明信片-確認 → 明信片-已寄出（同一頁的三個步驟）。
+// 純前端：不會真的寄出，只記在「我的信件」、狀態「寄送中」；每張 +10 島幣
+import Layout from '../layouts/Layout.astro';
+import Panel from '../components/Panel.astro';
+import { counties, mailboxes } from '../data/mailboxes';
+import { COINS_POSTCARD } from '../lib/rules';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const meta = Object.fromEntries(
+	mailboxes.map((m) => [m.id, { label: `${counties.find((c) => c.slug === m.county)!.name}・${m.name}`, nickname: m.nickname, postmark: m.postmark }]),
+);
+const bigBtn = 'mt-auto grid h-12 w-full place-items-center rounded-full bg-butter text-lg font-bold text-rose disabled:opacity-50';
+const line = 'block w-full border-b border-input bg-transparent py-1.5 text-sm outline-none focus:border-pink';
+const pill = 'inline-flex h-9 items-center rounded-full border border-input px-5 text-lg font-bold text-muted peer-checked:border-butter peer-checked:bg-butter peer-checked:text-rose peer-focus-visible:outline-2 peer-focus-visible:outline-pink';
+const row = 'flex gap-6 border-b border-input py-3.5 text-md';
+---
+
+<Layout title="寫明信片">
+	<Panel class="flex min-h-[620px] flex-col pt-[34px] pb-6 md:max-w-xl">
+		<!-- 還沒打卡就沒有照片可以當正面 -->
+		<div id="no-photo" hidden class="my-auto text-center">
+			<p class="text-emoji leading-none" aria-hidden="true">📷</p>
+			<h1 class="mt-6 text-lg font-bold">先去郵筒打卡吧</h1>
+			<p class="mt-2.5 text-sm text-muted">明信片的正面會用你的打卡照，<br />到特色郵筒拍一張再回來寫。</p>
+			<a href={`${base}/map/`} class="mt-9 inline-grid h-10 w-40 place-items-center rounded-full bg-butter text-lg font-bold text-rose">去打卡</a>
+		</div>
+
+		<form id="compose" data-step="compose" hidden class="flex flex-1 flex-col" data-meta={JSON.stringify(meta)} novalidate>
+			<div class="flex items-center justify-between">
+				<a href={`${base}/profile/letters/`} class="text-md font-bold text-olive">取消</a>
+				<h1 class="text-lg font-bold">寫明信片</h1>
+				<button class="text-md font-bold text-pink">下一步</button>
+			</div>
+
+			<!-- 明信片背面 -->
+			<div class="mt-2.5 -mx-1 flex min-h-[224px] rounded-lg border border-input bg-postcard p-3.5">
+				<label class="flex flex-1 flex-col pr-3">
+					<span class="sr-only">留言</span>
+					<textarea name="message" required maxlength="120" placeholder="嗨！今天終於見到歪腰的小紅小綠了，它們比照片裡還要可愛。下次一起來打卡吧！" class="flex-1 resize-none bg-transparent text-md leading-relaxed outline-none placeholder:text-faint"></textarea>
+					<span class="mt-2 text-md">—— <span class="signature">旅人小島</span></span>
+				</label>
+				<div class="w-px bg-input"></div>
+				<div class="flex w-[45%] flex-col pl-3">
+					<div class="flex items-start justify-end gap-1">
+						<span class="postmark mt-3 grid size-[54px] place-items-center rounded-full border border-postmark/70 text-center text-2xs leading-tight font-bold text-postmark"></span>
+						<img class="stamp h-[62px] w-[52px] border border-pink object-cover" alt="郵票" />
+					</div>
+					<label class="mt-3 flex items-center text-md font-bold">To：<input name="to" required maxlength="20" placeholder="阿樹" class:list={[line, 'font-bold']} /></label>
+					<label class="mt-2"><span class="sr-only">地址第一行</span><input name="address1" required maxlength="30" placeholder="臺北市大安區" class={line} /></label>
+					<label class="mt-2"><span class="sr-only">地址第二行</span><input name="address2" maxlength="30" placeholder="復興南路一段 100 號" class={line} /></label>
+				</div>
+			</div>
+
+			<fieldset class="mt-5">
+				<legend class="text-md font-bold">正面照片</legend>
+				<div id="photos" class="mt-2 flex gap-2 overflow-x-auto pt-1 pb-1 [scrollbar-width:none]"></div>
+			</fieldset>
+
+			<fieldset class="mt-5">
+				<legend class="text-md font-bold">寄送方式</legend>
+				<div class="mt-2 flex gap-2">
+					<label><input type="radio" name="mode" value="friend" checked class="peer sr-only" /><span class={pill}>寄給朋友</span></label>
+					<label><input type="radio" name="mode" value="future" class="peer sr-only" /><span class={pill}>寄給未來的自己</span></label>
+				</div>
+			</fieldset>
+			<p class="mt-4 mb-8 text-sm text-muted">由在地郵局寄出實體明信片，寄出可獲得 {COINS_POSTCARD} 島幣</p>
+			<p id="error" class="mb-3 text-sm text-pink" aria-live="polite"></p>
+
+			<button class={bigBtn}>下一步：確認寄出</button>
+		</form>
+
+		<div id="confirm" data-step="confirm" hidden class="flex flex-1 flex-col">
+			<div class="relative flex items-center justify-center">
+				<button type="button" data-go="compose" class="absolute left-0 text-md font-bold text-olive">← 返回</button>
+				<h1 class="text-lg font-bold">確認寄出</h1>
+			</div>
+			<div class="relative mt-2.5 -mx-1 overflow-hidden rounded-lg">
+				<img id="front" alt="明信片正面" class="aspect-[3/2] w-full object-cover" />
+				<p id="from" class="absolute inset-x-0 bottom-0 bg-black/45 px-3.5 py-2 text-sm font-bold text-white"></p>
+			</div>
+			<dl class="mt-2.5">
+				<div class={row}><dt class="w-14 shrink-0 text-muted">收件人</dt><dd id="c-to" class="font-bold"></dd></div>
+				<div class={row}><dt class="w-14 shrink-0 text-muted">地址</dt><dd id="c-address" class="font-bold"></dd></div>
+				<div class={row}><dt class="w-14 shrink-0 text-muted">寄送方式</dt><dd id="c-mode" class="font-bold"></dd></div>
+				<div class={row}><dt class="w-14 shrink-0 text-muted">預計送達</dt><dd class="font-bold">3–5 個工作天</dd></div>
+			</dl>
+			<button id="send" type="button" class={bigBtn}>寄出明信片 📮</button>
+		</div>
+
+		<div id="sent" data-step="sent" hidden class="flex flex-1 flex-col items-center text-center">
+			<p class="mt-28 text-emoji-lg leading-none" aria-hidden="true">📮</p>
+			<h1 class="mt-8 text-3xl font-bold text-pink">明信片已寄出！</h1>
+			<p id="sent-text" class="mt-2 text-md text-muted"></p>
+			<p class="mt-5 rounded-full bg-butter/70 px-6 py-1.5 text-md font-bold text-pink">+{COINS_POSTCARD} 島幣</p>
+			<a href={`${base}/profile/letters/`} class:list={[bigBtn, 'mt-auto']}>查看我的信件</a>
+			<button type="button" data-go="compose" data-reset class="mt-4 text-md font-bold text-olive">再寫一張</button>
+		</div>
+	</Panel>
+</Layout>
+
+<script>
+	import { addPostcard, getPhotos, getProfile, requireLogin, type Photo } from '../lib/store';
+
+	const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+	const form = $<HTMLFormElement>('compose');
+	const meta = JSON.parse(form.dataset.meta!) as Record<string, { label: string; nickname: string; postmark: string[] }>;
+	const urls = new Map<number, string>();
+	let photos: Photo[] = [];
+
+	// 原型是 DISSOLVE 換頁；這裡同一頁切步驟，用 View Transition 做一樣的淡入淡出
+	function go(step: string) {
+		const show = () => {
+			document.querySelectorAll<HTMLElement>('[data-step]').forEach((el) => (el.hidden = el.dataset.step !== step));
+			scrollTo(0, 0);
+		};
+		document.startViewTransition ? document.startViewTransition(show) : show();
+	}
+	document.querySelectorAll<HTMLElement>('[data-go]').forEach((b) =>
+		b.addEventListener('click', () => {
+			if (b.hasAttribute('data-reset')) form.reset(), pickPhoto(photos[0].id);
+			go(b.dataset.go!);
+		}),
+	);
+
+	const selected = () => photos.find((p) => p.id === Number(new FormData(form).get('photo')))!;
+	function pickPhoto(id: number) {
+		(form.querySelector(`input[name="photo"][value="${id}"]`) as HTMLInputElement).checked = true;
+		const p = selected();
+		form.querySelector<HTMLImageElement>('.stamp')!.src = urls.get(p.id)!;
+		form.querySelector('.postmark')!.innerHTML = (meta[p.mailboxId]?.postmark ?? []).join('<br>');
+	}
+
+	if (requireLogin()) {
+		photos = await getPhotos();
+		form.querySelector('.signature')!.textContent = getProfile().nickname;
+		if (!photos.length) $('no-photo').hidden = false;
+		else {
+			form.hidden = false;
+			for (const p of photos) {
+				urls.set(p.id, URL.createObjectURL(p.blob));
+				const label = document.createElement('label');
+				label.className = 'relative shrink-0 cursor-pointer';
+				label.innerHTML = `<input type="radio" name="photo" value="${p.id}" class="peer sr-only" />
+					<img src="${urls.get(p.id)}" alt="${meta[p.mailboxId]?.label ?? ''}" class="size-[72px] rounded-lg border border-transparent object-cover peer-checked:border-pink peer-focus-visible:outline-2 peer-focus-visible:outline-pink" />
+					<span class="absolute top-1 right-1 hidden size-3.5 place-items-center rounded-full bg-pink text-3xs font-bold text-white peer-checked:grid" aria-hidden="true">✓</span>`;
+				label.querySelector('input')!.addEventListener('change', () => pickPhoto(p.id));
+				$('photos').append(label);
+			}
+			pickPhoto(photos[0].id);
+		}
+	}
+
+	form.addEventListener('submit', (e) => {
+		e.preventDefault();
+		const bad = [...form.querySelectorAll<HTMLInputElement>('[required]')].find((el) => !el.value.trim());
+		if (bad) {
+			$('error').textContent = '請填寫留言、收件人和地址';
+			return bad.focus();
+		}
+		$('error').textContent = '';
+		const data = new FormData(form);
+		const p = selected();
+		$<HTMLImageElement>('front').src = urls.get(p.id)!;
+		$('from').textContent = `From ${meta[p.mailboxId]?.label ?? ''}`;
+		$('c-to').textContent = String(data.get('to'));
+		$('c-address').textContent = `${data.get('address1')}${data.get('address2')}`;
+		$('c-mode').textContent = data.get('mode') === 'future' ? '寄給未來的自己・實體明信片' : '寄給朋友・實體明信片';
+		go('confirm');
+	});
+
+	$('send').addEventListener('click', async () => {
+		const btn = $<HTMLButtonElement>('send');
+		btn.disabled = true;
+		const data = new FormData(form);
+		const p = selected();
+		const message = `${String(data.get('message')).trim()}\n—— ${getProfile().nickname}`;
+		try {
+			await addPostcard({
+				photoId: p.id,
+				mailboxId: p.mailboxId,
+				message,
+				to: String(data.get('to')).trim(),
+				address: `${data.get('address1')}${data.get('address2')}`.trim(),
+				mode: data.get('mode') === 'future' ? 'future' : 'friend',
+			});
+			$('sent-text').textContent = `${meta[p.mailboxId]?.nickname ?? '郵差'}會把你的心意送到${String(data.get('to')).trim()}手上`;
+			go('sent');
+		} catch {
+			alert('寄出失敗，請再試一次');
+		} finally {
+			btn.disabled = false;
+		}
+	});
+</script>

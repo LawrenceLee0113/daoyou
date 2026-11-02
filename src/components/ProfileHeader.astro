@@ -1,0 +1,72 @@
+---
+// Figma：個人檔案-相簿／郵票冊／我的信件 共用的上半部（頭像、等級、島幣、分頁）
+import { LEVELS } from '../lib/rules';
+
+interface Props {
+	tab: 'album' | 'stamps' | 'letters';
+}
+const { tab } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const stat = 'flex h-16 flex-1 flex-col-reverse items-center justify-center rounded-xl bg-butter/70';
+const tabs = [
+	{ id: 'album', name: '相簿', href: `${base}/profile/` },
+	{ id: 'stamps', name: '郵票冊', href: `${base}/profile/stamps/` },
+	{ id: 'letters', name: '我的信件', href: `${base}/profile/letters/` },
+];
+---
+
+<a id="back" href={`${base}/map/`} class="text-md font-bold text-olive">← 返回</a>
+
+<div class="mt-2 flex items-start gap-4">
+	<div id="avatar" class="grid size-16 shrink-0 place-items-center overflow-hidden rounded-full bg-butter/70 text-4xl font-bold text-pink" aria-hidden="true">旅</div>
+	<div class="min-w-0 flex-1 pt-1">
+		<h1 id="nickname" class="truncate text-2xl font-bold">旅人小島</h1>
+		<p id="level" class="mt-2 inline-block rounded-full bg-sage/50 px-3 py-[3px] text-xs font-bold text-olive">{LEVELS[0].name}</p>
+	</div>
+	<a href={`${base}/profile/edit/`} class="mt-2.5 rounded-full border border-pink px-4 py-1.5 text-sm font-bold text-pink">編輯</a>
+</div>
+
+<dl class="mt-5 flex gap-2">
+	<div class={stat}><dt class="text-xs text-muted">島幣</dt><dd id="coins" class="text-3xl font-bold text-pink">0</dd></div>
+	<div class={stat}><dt class="text-xs text-muted">打卡郵筒</dt><dd id="stamps" class="text-3xl font-bold text-pink">0</dd></div>
+	<div class={stat}><dt class="text-xs text-muted">寄出明信片</dt><dd id="sent" class="text-3xl font-bold text-pink">0</dd></div>
+</dl>
+
+<nav class="mt-4 flex border-b border-line" aria-label="個人檔案分頁">
+	{
+		tabs.map((t) => (
+			<a
+				href={t.href}
+				aria-current={t.id === tab ? 'page' : undefined}
+				class:list={['relative flex h-8 flex-1 items-start justify-center pt-1.5 text-base font-bold', t.id === tab ? 'text-pink' : 'text-muted']}
+			>
+				{t.name}
+				{t.id === tab && <span class="absolute bottom-0 h-[3px] w-16 rounded-sm bg-pink" />}
+			</a>
+		))
+	}
+</nav>
+
+<script>
+	import { getAvatar, getPhotos, getPostcards, getProfile, requireLogin } from '../lib/store';
+	import { summarize } from '../lib/rules';
+
+	const $ = (id: string) => document.getElementById(id)!;
+	// 原型的「返回」回到上一頁
+	$('back').addEventListener('click', (e) => {
+		if (history.length > 1) (e.preventDefault(), history.back());
+	});
+
+	if (requireLogin()) {
+		const [photos, postcards, avatar] = await Promise.all([getPhotos(), getPostcards(), getAvatar()]);
+		const { nickname } = getProfile();
+		const { coins, stamps, level } = summarize(photos, postcards.length);
+		$('nickname').textContent = nickname;
+		$('avatar').textContent = nickname.slice(0, 1);
+		if (avatar) $('avatar').replaceChildren(Object.assign(new Image(), { src: URL.createObjectURL(avatar), alt: '', className: 'size-full object-cover' }));
+		$('coins').textContent = String(coins);
+		$('stamps').textContent = String(stamps);
+		$('sent').textContent = String(postcards.length);
+		$('level').textContent = level;
+	}
+</script>

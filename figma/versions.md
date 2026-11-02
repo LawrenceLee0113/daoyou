@@ -22,6 +22,15 @@
 | 目錄封面 | `src/components/SiteHeader.astro` | 三槓打開的選單（popover），滑鼠移出關閉 |
 | 跑嗎燈燈 | `src/components/SiteHeader.astro` | 跑馬燈，10 句每 5 秒輪播 |
 | 島郵探索面板 | （不做） | v4 從地圖頁拿掉，使用者決定照設計稿拿掉 |
+| 個人檔案-郵票冊 | `src/pages/profile/stamps.astro` | 縣市有任一郵筒打卡過就點亮 |
+| 個人檔案-我的信件、…（已寄出） | `src/pages/profile/letters.astro` | 同一頁的「沒信件／有信件」狀態 |
+| 個人檔案-編輯 | `src/pages/profile/edit.astro` | 資料存在手機上；登出只清登入狀態 |
+| 明信片-撰寫、確認、已寄出 | `src/pages/postcard.astro` | 同一頁三個步驟；不會真的寄出，記在我的信件、狀態「寄送中」 |
+| 郵政知識 | `src/pages/knowledge/index.astro` | 4 張卡片是匯出的圖 |
+| 郵政知識/一～四 | `src/pages/knowledge/[slug].astro` | 文案在 `src/data/knowledge.ts` |
+| 在地風味 | `src/pages/local.astro` | 商品在 `src/data/products.ts`，照片匯不出來先放假圖 |
+| 島郵周邊 | `src/pages/shop.astro` | 設計稿是空白頁，先放「即將開放」 |
+| 關於島郵 | `src/pages/about.astro` | 設計稿只有信封圖，先放「即將開放」 |
 
 ## 版本紀錄（新的寫在最上面）
 
@@ -41,6 +50,7 @@
 - 決定：台北只放有詳細頁的郵筒；探索面板拿掉（頁首放大鏡一起拿掉）；Nightgazer 字型找不到，先用系統粗體並列入待辦
 - 改了：頁首、地圖、縣市頁、郵筒頁（新增台中菇鴿寄幸福）、個人檔案、封面、`global.css` token
 - 另外：所有頁面加上電腦版（頁首攤開選單、雙欄、照片格），手機寬度不同時內容置中
+- 第二批（同一份 v4）：做完設計稿上其餘所有頁面（郵政知識＋4 篇、在地風味、郵票冊、我的信件、編輯、明信片三步驟、島郵周邊／關於島郵「即將開放」）。決定：明信片不會真的寄出、狀態「寄送中」；每張 +10 島幣不限次數
 
 ### v3（同一份）— 2026-10-25 第一批頁面
 - 連結：未提供。重新擷取快照，跟 v3 基準比對沒有任何變更
