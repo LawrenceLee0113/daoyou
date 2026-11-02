@@ -37,7 +37,8 @@ const menu = [
 
 <!-- 使用者要求：手機、電腦版滑動時頁首都固定在最上面（高 87＋60＝147px） -->
 <header class="sticky top-0 z-40">
-	<div class="relative h-[87px] overflow-hidden">
+	<!-- 花紋圖是半透明的，墊白底：頁首固定後下面捲上來的內容才不會透出來 -->
+	<div class="relative h-[87px] overflow-hidden bg-white">
 		<picture>
 			<source media="(min-width: 1024px)" srcset={desktopBand.src} />
 			<Image src={headerTop} alt="" class="absolute inset-0 size-full object-cover lg:object-top" loading="eager" />

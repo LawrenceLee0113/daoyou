@@ -32,10 +32,10 @@ export const isLoggedIn = () => safe(() => localStorage.getItem(LOGIN_KEY) === D
 // 登出只清登入狀態，照片、明信片留在這支手機上，再登入就回來
 export const logout = () => safe(() => localStorage.removeItem(LOGIN_KEY), undefined);
 
-// 重置資料：這支手機上所有島郵的資料（登入、個人檔案、照片、明信片、頭像）全部刪掉，回到第一次來的狀態。
-// 只清 daoyou 開頭的 key，同網域其他專案的資料不動
+// 重置資料：這支手機上島郵的資料（個人檔案、照片、明信片、頭像）全部刪掉，像剛登入的新帳號。
+// 登入狀態保留（使用者要求重置不登出）；只清 daoyou 開頭的 key，同網域其他專案的資料不動
 export function resetAll() {
-	safe(() => Object.keys(localStorage).filter((k) => k.startsWith('daoyou')).forEach((k) => localStorage.removeItem(k)), undefined);
+	safe(() => Object.keys(localStorage).filter((k) => k.startsWith('daoyou') && k !== LOGIN_KEY).forEach((k) => localStorage.removeItem(k)), undefined);
 	return new Promise<void>((resolve) => {
 		try {
 			const req = indexedDB.deleteDatabase(DB_NAME);
