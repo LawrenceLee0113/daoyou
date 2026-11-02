@@ -50,7 +50,7 @@ const tabs = [
 </nav>
 
 <script>
-	import { getAvatar, getPhotos, getPostcards, getProfile, requireLogin } from '../lib/store';
+	import { getAvatar, getPhotos, getPostcards, getProfile, requireLogin, whenReady } from '../lib/store';
 	import { summarize } from '../lib/rules';
 
 	const $ = (id: string) => document.getElementById(id)!;
@@ -76,7 +76,7 @@ const tabs = [
 		a.addEventListener('click', (e) => (e.preventDefault(), location.replace(a.href))),
 	);
 
-	if (requireLogin()) {
+	if (requireLogin()) await whenReady(async () => {
 		const [photos, postcards, avatar] = await Promise.all([getPhotos(), getPostcards(), getAvatar()]);
 		const { nickname, bio } = getProfile();
 		$('bio').textContent = bio.trim();
@@ -88,5 +88,5 @@ const tabs = [
 		countUp($('stamps'), stamps);
 		countUp($('sent'), postcards.length);
 		$('level').textContent = level;
-	}
+	});
 </script>

@@ -43,13 +43,13 @@ const writeBtn = 'press inline-grid h-10 w-40 place-items-center rounded-full bg
 </Layout>
 
 <script>
-	import { getPhotos, getPostcards, isLoggedIn } from '../../lib/store';
+	import { getPhotos, getPostcards, isLoggedIn, whenReady } from '../../lib/store';
 
 	const $ = (id: string) => document.getElementById(id)!;
 	const fmt = (d: Date) => `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
 	// 鍵盤 Enter 也能打開
 	$('letters').addEventListener('keydown', (e) => e.key === 'Enter' && (e.target as HTMLElement).click());
-	if (isLoggedIn()) {
+	if (isLoggedIn()) await whenReady(async () => {
 		const [cards, photos] = await Promise.all([getPostcards(), getPhotos()]);
 		$('empty').hidden = cards.length > 0;
 		$('list').hidden = cards.length === 0;
@@ -72,7 +72,7 @@ const writeBtn = 'press inline-grid h-10 w-40 place-items-center rounded-full bg
 			});
 			$('letters').append(li);
 		}
-	} else {
+	}); else {
 		$('empty').hidden = false;
 	}
 </script>

@@ -109,7 +109,7 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 </Layout>
 
 <script>
-	import { addPostcard, getPhotos, getProfile, requireLogin, type Photo } from '../lib/store';
+	import { addPostcard, getPhotos, getProfile, requireLogin, whenReady, type Photo } from '../lib/store';
 
 	const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 	const form = $<HTMLFormElement>('compose');
@@ -140,7 +140,7 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 		form.querySelector('.postmark')!.innerHTML = (meta[p.mailboxId]?.postmark ?? []).join('<br>');
 	}
 
-	if (requireLogin()) {
+	if (requireLogin()) await whenReady(async () => {
 		photos = await getPhotos();
 		form.querySelector('.signature')!.textContent = getProfile().nickname;
 		if (!photos.length) $('no-photo').hidden = false;
@@ -158,7 +158,7 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 			}
 			pickPhoto(photos[0].id);
 		}
-	}
+	});
 
 	form.addEventListener('input', () => ($('error').textContent = ''));
 

@@ -41,13 +41,17 @@ export function requireLogin() {
 
 // 需要登入的頁面（Layout auth）在 <head> 先把內容藏起來，所有 whenReady 都填完才一起顯示，
 // 避免刷新時先閃出預設值（旅人小島、0、空相簿）再跳成真資料
+// 頁首和頁面是分開的 module script，等 DOMContentLoaded（所有 script 都開始跑了）才確定沒有別的要等
 let holds = 0;
+const parsed = typeof document === 'undefined' ? null : new Promise((r) => document.addEventListener('DOMContentLoaded', r, { once: true }));
 export async function whenReady(fill: () => Promise<void>) {
 	holds++;
 	try {
 		await fill();
 	} finally {
-		if (--holds === 0) delete document.documentElement.dataset.pending;
+		holds--;
+		await parsed;
+		if (!holds) delete document.documentElement.dataset.pending;
 	}
 }
 

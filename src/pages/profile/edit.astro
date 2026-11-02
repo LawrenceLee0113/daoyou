@@ -65,7 +65,7 @@ const box = 'mt-1.5 block w-full rounded-[10px] border border-input bg-white px-
 </Layout>
 
 <script>
-	import { getAvatar, getProfile, logout, requireLogin, saveAvatar, saveProfile } from '../../lib/store';
+	import { getAvatar, getProfile, logout, requireLogin, whenReady, saveAvatar, saveProfile } from '../../lib/store';
 
 	const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 	const form = document.getElementById('edit') as HTMLFormElement;
@@ -74,7 +74,7 @@ const box = 'mt-1.5 block w-full rounded-[10px] border border-input bg-white px-
 	const showAvatar = (blob: Blob) =>
 		avatarEl.replaceChildren(Object.assign(new Image(), { src: URL.createObjectURL(blob), alt: '', className: 'size-full object-cover' }));
 
-	if (requireLogin()) {
+	if (requireLogin()) await whenReady(async () => {
 		const p = getProfile();
 		(form.elements.namedItem('nickname') as HTMLInputElement).value = p.nickname;
 		(form.elements.namedItem('bio') as HTMLTextAreaElement).value = p.bio;
@@ -83,7 +83,7 @@ const box = 'mt-1.5 block w-full rounded-[10px] border border-input bg-white px-
 		avatarEl.textContent = p.nickname.slice(0, 1);
 		const avatar = await getAvatar();
 		if (avatar) showAvatar(avatar);
-	}
+	});
 
 	// 「4/12」這類字數
 	const counters = () =>

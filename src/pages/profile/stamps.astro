@@ -33,10 +33,10 @@ const countyOfMailbox = Object.fromEntries(mailboxes.map((m) => [m.id, m.county]
 </Layout>
 
 <script>
-	import { getPhotos, isLoggedIn } from '../../lib/store';
+	import { getPhotos, isLoggedIn, whenReady } from '../../lib/store';
 	import { summarize } from '../../lib/rules';
 
-	if (isLoggedIn()) {
+	if (isLoggedIn()) await whenReady(async () => {
 		const grid = document.getElementById('stamps-grid')!;
 		const map = JSON.parse(grid.dataset.map!) as Record<string, string>;
 		const photos = await getPhotos();
@@ -54,5 +54,5 @@ const countyOfMailbox = Object.fromEntries(mailboxes.map((m) => [m.id, m.county]
 		const total = grid.children.length;
 		document.getElementById('progress-text')!.textContent = `已收集 ${got.size} / ${total} 縣市`;
 		document.getElementById('progress')!.style.width = `${(got.size / total) * 100}%`;
-	}
+	});
 </script>
