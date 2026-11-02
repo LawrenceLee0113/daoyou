@@ -1,7 +1,6 @@
 ---
 // Figma：個人檔案-相簿／郵票冊／我的信件 共用的上半部（頭像、等級、島幣、分頁）
 import { LEVELS } from '../lib/rules';
-import { counties } from '../data/mailboxes';
 
 interface Props {
 	tab: 'album' | 'stamps' | 'letters';
@@ -22,11 +21,7 @@ const tabs = [
 	<div id="avatar" class="grid size-16 shrink-0 place-items-center overflow-hidden rounded-full bg-butter/70 text-4xl font-bold text-pink" aria-hidden="true">旅</div>
 	<div class="min-w-0 flex-1 pt-1">
 		<h1 id="nickname" class="truncate text-2xl font-bold">旅人小島</h1>
-		<p class="mt-2 flex flex-wrap gap-1.5">
-			<span id="level" class="rounded-full bg-sage/50 px-3 py-[3px] text-xs font-bold text-olive">{LEVELS[0].name}</span>
-			<!-- 編輯頁的「常駐縣市」（設計稿沒畫，使用者決定顯示出來） -->
-			<span id="home" class="rounded-full bg-butter/70 px-3 py-[3px] text-xs font-bold text-pink" data-names={JSON.stringify(Object.fromEntries(counties.map((c) => [c.slug, c.fullName])))}></span>
-		</p>
+		<p id="level" class="mt-2 inline-block rounded-full bg-sage/50 px-3 py-[3px] text-xs font-bold text-olive">{LEVELS[0].name}</p>
 	</div>
 	<a href={`${base}/profile/edit/`} class="mt-2.5 rounded-full border border-pink px-4 py-1.5 text-sm font-bold text-pink">編輯</a>
 </div>
@@ -71,9 +66,8 @@ const tabs = [
 
 	if (requireLogin()) {
 		const [photos, postcards, avatar] = await Promise.all([getPhotos(), getPostcards(), getAvatar()]);
-		const { nickname, bio, county } = getProfile();
+		const { nickname, bio } = getProfile();
 		$('bio').textContent = bio.trim();
-		$('home').textContent = `📍 ${JSON.parse($('home').dataset.names!)[county] ?? ''}`;
 		const { coins, stamps, level } = summarize(photos, postcards.length);
 		$('nickname').textContent = nickname;
 		$('avatar').textContent = nickname.slice(0, 1);

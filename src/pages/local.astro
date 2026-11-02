@@ -1,5 +1,6 @@
 ---
 // Figma：在地風味（商品列表＋搜尋）。商品資料照抄 i郵購，點了開 i郵購的商品頁購買
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import { products } from '../data/products';
 ---
@@ -22,8 +23,8 @@ import { products } from '../data/products';
 				products.map((p) => (
 					<li data-text={`${p.name} ${p.shop}`}>
 						<a href={p.url} target="_blank" rel="noopener" class="flex h-full flex-col rounded-product bg-sand p-[7px] pb-3 shadow-soft transition-transform hover:-translate-y-1">
-							<div class="relative grid aspect-square place-items-center rounded-product-photo bg-empty text-sm text-faint" role="img" aria-label="商品照片（準備中）">
-								照片準備中
+							<div class="relative overflow-hidden rounded-product-photo">
+								<Image src={p.image} alt={p.name} widths={[250, 500]} sizes="(min-width: 1024px) 230px, (min-width: 768px) 30vw, 45vw" class="aspect-square w-full object-cover" />
 								{p.soldOut && <span class="absolute top-2 left-2 rounded-full bg-black/55 px-2 py-0.5 text-2xs text-white">補貨中</span>}
 							</div>
 							<h2 class="mt-1 line-clamp-2 px-0.5 text-sm leading-tight">{p.name}</h2>
