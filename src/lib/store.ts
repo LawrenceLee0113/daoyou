@@ -32,6 +32,20 @@ export const isLoggedIn = () => safe(() => localStorage.getItem(LOGIN_KEY) === D
 // 登出只清登入狀態，照片、明信片留在這支手機上，再登入就回來
 export const logout = () => safe(() => localStorage.removeItem(LOGIN_KEY), undefined);
 
+// 重置資料：這支手機上所有島郵的資料（登入、個人檔案、照片、明信片、頭像）全部刪掉，回到第一次來的狀態。
+// 只清 daoyou 開頭的 key，同網域其他專案的資料不動
+export function resetAll() {
+	safe(() => Object.keys(localStorage).filter((k) => k.startsWith('daoyou')).forEach((k) => localStorage.removeItem(k)), undefined);
+	return new Promise<void>((resolve) => {
+		try {
+			const req = indexedDB.deleteDatabase(DB_NAME);
+			req.onsuccess = req.onerror = req.onblocked = () => resolve();
+		} catch {
+			resolve();
+		}
+	});
+}
+
 // 沒登入就導到登入頁，登入後回到原本的頁面
 export function requireLogin() {
 	if (isLoggedIn()) return true;
@@ -73,7 +87,11 @@ function openDb() {
 				if (!req.result.objectStoreNames.contains(name)) req.result.createObjectStore(name, { keyPath: 'id', autoIncrement: true });
 			if (!req.result.objectStoreNames.contains('avatar')) req.result.createObjectStore('avatar');
 		};
-		req.onsuccess = () => resolve(req.result);
+		req.onsuccess = () => {
+			// 重置資料要刪資料庫時先放手，不然 deleteDatabase 會被開著的連線擋住
+			req.result.onversionchange = () => req.result.close();
+			resolve(req.result);
+		};
 		req.onerror = () => reject(req.error);
 	});
 }

@@ -61,11 +61,15 @@ const box = 'mt-1.5 block w-full rounded-[10px] border border-input bg-white px-
 		</form>
 
 		<p class="mt-20 text-center"><button id="logout" type="button" class="text-base font-bold text-muted">登出</button></p>
+		<p class="mt-6 text-center">
+			<button id="reset" type="button" class="text-sm font-bold text-price">重置資料</button>
+			<span class="mt-1 block text-xs text-faint">刪除這支手機上的照片、郵票、明信片、島幣和個人檔案</span>
+		</p>
 	</Panel>
 </Layout>
 
 <script>
-	import { getAvatar, getProfile, logout, requireLogin, whenReady, saveAvatar, saveProfile } from '../../lib/store';
+	import { getAvatar, getProfile, logout, requireLogin, resetAll, whenReady, saveAvatar, saveProfile } from '../../lib/store';
 
 	const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 	const form = document.getElementById('edit') as HTMLFormElement;
@@ -109,5 +113,11 @@ const box = 'mt-1.5 block w-full rounded-[10px] border border-input bg-white px-
 	document.getElementById('logout')!.addEventListener('click', () => {
 		logout();
 		location.href = `${base}/`;
+	});
+
+	document.getElementById('reset')!.addEventListener('click', async () => {
+		if (!confirm('確定要重置資料嗎？\n這支手機上的照片、郵票、明信片、島幣和個人檔案都會刪除，無法復原。')) return;
+		await resetAll();
+		location.replace(`${base}/login/`);
 	});
 </script>
