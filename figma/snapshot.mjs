@@ -151,7 +151,7 @@ function renormalize() {
 // node figma/snapshot.mjs --report：跟最後一次 commit 比，列出每個 frame 是視覺還是非視覺變更、文字與圖層增減
 function report() {
 	git('add', '-N', 'snapshots');
-	const lines = git('diff', '--name-status', 'HEAD', '--', 'snapshots/*.json').trim().split('\n').filter(Boolean);
+	const lines = git('diff', '--name-status', '--no-renames', 'HEAD', '--', 'snapshots/*.json').trim().split('\n').filter(Boolean);
 	if (!lines.length) return console.log('沒有任何變更');
 	const groups = { 視覺變更: [], 非視覺變更: [], 新增: [], 刪除: [] };
 	for (const line of lines) {
