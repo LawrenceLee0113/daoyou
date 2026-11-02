@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Figma design tokens（v3 設計稿）。Tailwind 會自動產生對應 class：--color-pink → bg-pink / text-pink */
+/* Figma design tokens（v4 設計稿）。Tailwind 會自動產生對應 class：--color-pink → bg-pink / text-pink */
 @theme {
 	/* 中文用系統字型（設計稿的 Inter／Jura／Noto Sans 中文其實都是系統字型在顯示） */
 	--font-sans: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", sans-serif;
@@ -8,13 +8,16 @@
 	--font-sung: "Chiron Sung HK", serif;
 	--font-hei: "Chiron Hei HK", var(--font-sans);
 
-	/* 主色：島郵粉、郵筒綠 */
+	/* 主色：島郵粉、灰綠底、橄欖綠字、奶油黃按鈕 */
 	--color-pink: #c93378;
-	--color-pink-soft: #ffedf5;
+	--color-rose: #bf4a85;
 	--color-header-pink: #cc4f8c;
-	--color-forest: #01715a;
-	--color-pine: #006b4f;
-	--color-pine-soft: #e0f2eb;
+	--color-header-bar: #f5f5f0;
+	--color-sage: #b3c4b8;
+	--color-olive: #668029;
+	--color-butter: #faf5ad;
+	--color-new: #fff200;
+	--color-map-line: #01715a;
 	--color-news: #66ba7a;
 	--color-signup: #ff873d;
 	--color-facebook: #3a5896;
@@ -30,14 +33,6 @@
 	--color-input: #d9d9d9;
 	--color-toast: #1f1f1feb;
 
-	/* 島郵探索面板（米色系） */
-	--color-paper: #faf2e0;
-	--color-paper-light: #fffcf5;
-	--color-paper-line: #dbc9ad;
-	--color-paper-ink: #333833;
-	--color-paper-muted: #737066;
-	--color-brick: #c74a2e;
-
 	/* 字級：設計稿的 px 值 */
 	--text-2xs: 10px;
 	--text-3xs: 9px;
@@ -50,10 +45,37 @@
 	--text-2xl: 20px;
 	--text-3xl: 22px;
 	--text-4xl: 26px;
+	--text-5xl: 24px; /* 縣市大標（設計稿用 Nightgazer，找不到字型，先用系統粗體） */
 
 	--radius-card: 40px;
+	--radius-mailbox: 35px;
+	--radius-photo: 30px;
 	--radius-news: 24px;
 
 	--shadow-soft: 0 4px 4px #00000040;
-	--shadow-panel: 0 3px 10px #0000001f;
+}
+
+/* Figma 原型的換頁轉場：DISSOLVE 0.25s EASE_OUT（瀏覽器不支援時就直接換頁） */
+@view-transition {
+	navigation: auto;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 0.25s;
+	animation-timing-function: ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+	@view-transition {
+		navigation: none;
+	}
+}
+
+/* 預覽 dialog 也用同樣的淡入 */
+dialog[open] {
+	animation: dissolve 0.25s ease-out;
+}
+@keyframes dissolve {
+	from {
+		opacity: 0;
+	}
 }

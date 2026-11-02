@@ -71,7 +71,7 @@
 	},
 	"children": [
 		{
-			"name": "我們拍的圖",
+			"name": "我們拍圖",
 			"type": "RECTANGLE",
 			"scrollBehavior": "SCROLLS",
 			"blendMode": "PASS_THROUGH",
@@ -80,7 +80,7 @@
 					"blendMode": "NORMAL",
 					"type": "IMAGE",
 					"scaleMode": "FILL",
-					"imageRef": "0acae5ec7ba19df6af7e3bce7977a7e8e17f87b2"
+					"imageRef": "d4b37fe148db8e8c6fba20efd93956f3562e1e4d"
 				}
 			],
 			"strokes": [],
@@ -88,8 +88,8 @@
 			"strokeAlign": "INSIDE",
 			"preserveRatio": true,
 			"targetAspectRatio": {
-				"x": 959,
-				"y": 1705
+				"x": 960,
+				"y": 1706
 			},
 			"constraints": {
 				"vertical": "TOP",
@@ -101,10 +101,10 @@
 				"strokeType": "BASIC"
 			},
 			"box": {
-				"x": -229,
-				"y": -403,
-				"w": 852,
-				"h": 1515
+				"x": -58,
+				"y": -228,
+				"w": 507,
+				"h": 900
 			}
 		},
 		{
@@ -114,7 +114,6 @@
 			"blendMode": "PASS_THROUGH",
 			"fills": [
 				{
-					"opacity": 0.55,
 					"blendMode": "NORMAL",
 					"type": "SOLID",
 					"color": {
@@ -151,7 +150,6 @@
 			"blendMode": "PASS_THROUGH",
 			"fills": [
 				{
-					"opacity": 0.55,
 					"blendMode": "NORMAL",
 					"type": "SOLID",
 					"color": {
@@ -287,9 +285,9 @@
 			"strokeAlign": "OUTSIDE",
 			"constraints": {
 				"vertical": "TOP",
-				"horizontal": "LEFT"
+				"horizontal": "CENTER"
 			},
-			"characters": "對準歪腰郵筒",
+			"characters": "對準郵筒",
 			"characterStyleOverrides": [],
 			"styleOverrideTable": {},
 			"lineTypes": [
@@ -319,9 +317,9 @@
 				"strokeType": "BASIC"
 			},
 			"box": {
-				"x": 151.5,
-				"y": 56,
-				"w": 90,
+				"x": 167,
+				"y": 57,
+				"w": 60,
 				"h": 18
 			}
 		},
@@ -397,9 +395,9 @@
 			"strokeAlign": "OUTSIDE",
 			"constraints": {
 				"vertical": "TOP",
-				"horizontal": "LEFT"
+				"horizontal": "CENTER"
 			},
-			"characters": "把小紅小綠都框進來",
+			"characters": "把它框進來",
 			"characterStyleOverrides": [],
 			"styleOverrideTable": {},
 			"lineTypes": [
@@ -429,9 +427,9 @@
 				"strokeType": "BASIC"
 			},
 			"box": {
-				"x": 138,
+				"x": 164,
 				"y": 612,
-				"w": 117,
+				"w": 65,
 				"h": 16
 			}
 		},
@@ -554,5 +552,5 @@
 			}
 		}
 	],
-	"render": "9cb4e8c24caaba89"
+	"render": "1f1453c85c899558"
 }

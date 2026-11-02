@@ -1,13 +1,16 @@
 ---
-// Figma：資產 10 1（綠底＋白色圓角卡片），特色郵筒、縣市、郵筒、個人檔案共用
+// Figma：Exclude（灰綠底＋挖空的白色圓角卡片），郵筒頁、個人檔案共用。
+// 手機內容寬度照設計稿 337px、置中；頁面可以傳 md:max-w-… 放寬
 interface Props {
 	class?: string;
 }
 const { class: cls = '' } = Astro.props;
 ---
 
-<main class="flex flex-1 flex-col bg-forest px-2.5 py-3.5">
-	<div class:list={['relative min-h-[617px] flex-1 rounded-card bg-white', cls]}>
-		<slot />
+<main class="flex flex-1 flex-col bg-sage px-[15px] pt-5 pb-[21px] md:px-8 md:py-10">
+	<div class="relative mx-auto min-h-[665px] w-full max-w-6xl flex-1 md:min-h-0 md:flex-none rounded-card bg-white px-[13px] md:px-10 md:py-4">
+		<div class:list={['mx-auto w-full max-w-[337px]', cls]}>
+			<slot />
+		</div>
 	</div>
 </main>

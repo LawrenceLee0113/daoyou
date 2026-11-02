@@ -2,12 +2,14 @@
 // Figma：封面
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
-import cover from '../assets/cover.png';
+import cover from '../assets/cover.jpg';
 import newsTitle from '../assets/news-title.png';
 import texture from '../assets/header-top.png';
 
-// ponytail: 設計稿的 5 張活動照片匯不出來（外掛只匯得出畫面內的部分），先放空白框，拿到照片後換成 import 的圖片
-const newsPhotos = 5;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// 活動照片：暫用設計稿匯出的圖，使用者提供正式檔案後覆蓋同名檔案
+const newsPhotos = Object.values(import.meta.glob<{ default: ImageMetadata }>('../assets/news/*.jpg', { eager: true })).map((m) => m.default);
 const post = `回顧 08/14-08/15｜在戀曲盛典，讓故事透過《島郵》持續流動
 
 這兩天，我們帶著《島郵》計畫與「迴郵明信片交換」來到了戀曲盛典！
@@ -25,16 +27,30 @@ const post = `回顧 08/14-08/15｜在戀曲盛典，讓故事透過《島郵》
 ---
 
 <Layout>
-	<main class="flex-1">
+	<!-- 電腦版：左邊主視覺、右邊最新消息 -->
+	<main class="flex-1 lg:mx-auto lg:grid lg:w-full lg:max-w-6xl lg:grid-cols-[minmax(0,460px)_1fr] lg:items-start lg:gap-14 lg:px-8 lg:py-12">
 		<h1 class="sr-only">島郵 Isle Post：寄存島嶼的地方郵誌</h1>
-		<Image src={cover} alt="島郵 Isle Post：寄存島嶼的地方郵誌" widths={[393, 786]} sizes="(min-width: 448px) 448px, 100vw" class="w-full" loading="eager" />
+		<a href={`${base}/map/`} class="block md:mx-auto md:max-w-[460px] lg:sticky lg:top-8 lg:overflow-hidden lg:rounded-3xl">
+			<Image src={cover} alt="島郵 Isle Post：寄存島嶼的地方郵誌，前往特色郵筒地圖" widths={[393, 788]} sizes="(min-width: 460px) 460px, 100vw" class="w-full" loading="eager" />
+		</a>
 
-		<section class="pt-[53px]" aria-labelledby="news">
-			<h2 id="news" class="px-[22px]"><Image src={newsTitle} alt="NEWS 最新消息" width={93} height={16} /></h2>
-			<div class="mt-10 flex snap-x snap-mandatory gap-[26px] overflow-x-auto px-[45px] [scrollbar-width:none]">
-				{Array.from({ length: newsPhotos }, () => <div class="h-[200px] w-[300px] shrink-0 snap-center rounded-news bg-empty" role="img" aria-label="活動照片（準備中）" />)}
+		<section class="pt-[37px] lg:min-w-0 lg:pt-2" aria-labelledby="news">
+			<h2 id="news" class="px-[22px] md:mx-auto md:max-w-2xl md:px-8 lg:px-0"><Image src={newsTitle} alt="NEWS 最新消息" width={93} height={16} class="lg:w-[140px]" /></h2>
+			<!-- 手機：左右滑；平板以上：排成兩大三小的照片格 -->
+			<div class="mt-[19px] flex snap-x snap-mandatory gap-[26px] overflow-x-auto px-[calc((100%-300px)/2)] [scrollbar-width:none] md:mx-auto md:grid md:max-w-2xl md:grid-cols-6 md:gap-3 md:overflow-visible md:px-8 lg:px-0">
+				{
+					newsPhotos.map((src, i) => (
+						<Image
+							src={src}
+							alt={`戀曲盛典活動照片 ${i + 1}`}
+							widths={[300, 600]}
+							sizes="(min-width: 768px) 330px, 300px"
+							class:list={['h-[200px] w-[300px] shrink-0 snap-center rounded-news object-cover md:aspect-[3/2] md:h-auto md:w-full', i < 2 ? 'md:col-span-3' : 'md:col-span-2']}
+						/>
+					))
+				}
 			</div>
-			<p class="mx-auto mt-[18px] w-[300px] max-w-[calc(100%-84px)] text-sm whitespace-pre-line">{post}</p>
+			<p class="mx-auto mt-[18px] w-[300px] max-w-[calc(100%-84px)] text-sm whitespace-pre-line md:w-full md:max-w-2xl md:px-8 md:text-base md:leading-relaxed lg:px-0">{post}</p>
 		</section>
 	</main>
 

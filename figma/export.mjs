@@ -13,8 +13,10 @@ if (frameId === '--reactions') {
 	const doc = await figma.send('get_document_info');
 	const names = Object.fromEntries(doc.children.map((c) => [c.id, c.name]));
 	walk(await figma.send('get_node_info', { nodeId: outDir }), '', (n, p) => {
+		if (n.overflowDirection && n.overflowDirection !== 'NONE') console.log(`${p}\t（可捲動：${n.overflowDirection}）`);
 		for (const it of n.interactions ?? []) for (const a of (it.actions ?? []).filter(Boolean))
-			console.log(`${p}\t${it.trigger?.type}\t${a.navigation ?? a.type}\t${names[a.destinationId] ?? a.destinationId ?? ''}`);
+			console.log([p, it.trigger?.type + (it.trigger?.timeout ? `(${it.trigger.timeout}s)` : ''), a.navigation ?? a.type, names[a.destinationId] ?? a.destinationId ?? '',
+				a.transition ? `${a.transition.type}${a.transition.direction ? ' ' + a.transition.direction : ''} ${a.transition.duration}s ${a.transition.easing?.type ?? ''}` : ''].join('\t'));
 	});
 } else {
 	mkdirSync(outDir, { recursive: true });

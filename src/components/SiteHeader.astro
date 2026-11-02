@@ -2,7 +2,6 @@
 // Figma：Group 23（頁首）＋ 跑嗎燈燈（跑馬燈，每 5 秒換一句）＋ 目錄封面（三槓打開的選單）
 import { Image } from 'astro:assets';
 import headerTop from '../assets/header-top.png';
-import headerBar from '../assets/header-bar.png';
 import logo from '../assets/logo.png';
 import logoWhite from '../assets/logo-white.png';
 
@@ -42,25 +41,29 @@ const menu = [
 			{messages[0]}
 		</p>
 	</div>
-	<nav class="relative isolate flex h-[60px] items-center px-5" aria-label="主選單">
-		<Image src={headerBar} alt="" class="absolute inset-0 -z-10 size-full object-cover" loading="eager" />
-		<a href={`${base}/`} class="mr-auto"><Image src={logo} alt="島郵 Isle Post 首頁" width={48} height={30} /></a>
-		<a href={`${base}/map/#search`} class="p-2 text-header-pink" aria-label="搜尋郵筒">
-			<svg width="22" height="20" viewBox="0 0 22 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-				<circle cx="8.5" cy="8" r="7" /><path d="M13.8 13l6.6 5.5" />
-			</svg>
-		</a>
-		<button popovertarget="site-menu" class="ml-2 p-2 text-header-pink" aria-label="開啟選單">
-			<svg width="20" height="18" viewBox="0 0 20 18" stroke="currentColor" stroke-width="2" aria-hidden="true">
-				<path d="M0 1h20M0 9h20M0 17h20" />
-			</svg>
-		</button>
+	<nav class="bg-header-bar" aria-label="主選單">
+		<div class="mx-auto flex h-[60px] max-w-6xl items-center px-5 lg:px-8">
+			<a href={`${base}/`} class="mr-auto"><Image src={logo} alt="島郵 Isle Post 首頁" width={48} height={30} /></a>
+			<!-- 電腦版：選單直接攤開在頁首 -->
+			<ul class="hidden gap-8 font-round text-md text-header-pink lg:flex">
+				{
+					menu.map((m) => (
+						<li>{m.href ? <a href={m.href} class="hover:underline">{m.name}</a> : <span class="opacity-50">{m.name}<span class="sr-only">（即將開放）</span></span>}</li>
+					))
+				}
+			</ul>
+			<button popovertarget="site-menu" class="p-2 text-header-pink lg:hidden" aria-label="開啟選單">
+				<svg width="20" height="18" viewBox="0 0 20 18" stroke="currentColor" stroke-width="2" aria-hidden="true">
+					<path d="M0 1h20M0 9h20M0 17h20" />
+				</svg>
+			</button>
+		</div>
 	</nav>
 
 	<div
 		id="site-menu"
 		popover
-		class="fixed inset-auto top-[146px] right-0 m-0 h-[271px] w-[184px] bg-header-pink p-0 text-white shadow-soft md:right-[calc((100vw-28rem)/2)]"
+		class="fixed inset-auto top-[146px] right-0 m-0 h-[271px] w-[184px] bg-header-pink p-0 text-white shadow-soft md:right-[max(0px,calc((100vw-72rem)/2))]"
 	>
 		<div class="flex items-start justify-between px-2.5 pt-4">
 			<a href={`${base}/`}><Image src={logoWhite} alt="島郵 Isle Post 首頁" width={48} height={30} /></a>
@@ -84,6 +87,10 @@ const menu = [
 </header>
 
 <script is:inline define:vars={{ messages }}>
+	// 原型：滑鼠移出選單就關閉（MOUSE_LEAVE → CLOSE）；手機點選單外面關閉
+	const menu = document.getElementById('site-menu');
+	menu.addEventListener('pointerleave', (e) => e.pointerType === 'mouse' && menu.hidePopover());
+
 	const el = document.getElementById('ticker');
 	let i = 0;
 	setInterval(() => {

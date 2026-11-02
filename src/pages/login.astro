@@ -6,9 +6,9 @@ const field = 'mt-1.5 block h-[50px] rounded-[20px] border-2 border-black bg-whi
 ---
 
 <Layout title="登入">
-	<main class="flex flex-1 flex-col px-[42px] pt-[125px] pb-16">
+	<main class="flex flex-1 flex-col px-[42px] pt-[125px] pb-16 md:justify-center md:py-16">
 		<h1 class="sr-only">登入島郵</h1>
-		<form id="login" class="flex flex-col tracking-[0.1em]" novalidate>
+		<form id="login" class="mx-auto flex w-full max-w-[309px] flex-col tracking-[0.1em]" novalidate>
 			<label class="text-lg">
 				帳號
 				<input name="email" type="email" autocomplete="username" placeholder="repost116.grad@gmail.com" class:list={[field, 'ml-[5px] w-[304px] max-w-[calc(100%-5px)] tracking-normal']} />
@@ -21,7 +21,7 @@ const field = 'mt-1.5 block h-[50px] rounded-[20px] border-2 border-black bg-whi
 			<button class="mt-2 ml-[5px] h-[50px] w-[304px] max-w-[calc(100%-5px)] rounded-[20px] bg-input text-lg tracking-[0.2em] shadow-soft">登入</button>
 		</form>
 
-		<div class="mt-auto flex flex-col items-center">
+		<div class="mt-auto flex flex-col items-center md:mt-16">
 			<!-- 品牌圖示用 SVG 畫（設計稿匯出的 PNG 連陰影一起被裁到、又太糊） -->
 			<div class="flex gap-[26px]">
 				<button type="button" class="social grid size-[55px] place-items-center rounded-full bg-white shadow-soft" aria-label="使用 Google 登入">

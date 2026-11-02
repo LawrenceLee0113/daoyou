@@ -1,79 +1,81 @@
 ---
-// Figma：台灣分開_*（每個縣市一張圖）。改用政府開放資料畫成 SVG，資料來源見 scripts/gen-taiwan-map.mjs。
-// selected：縣市頁用，其他縣市淡出，只留選到的那塊（設計稿「台北 #2」→「台北」的過場）。
+// Figma：特色郵筒的 台灣分開_*（每個縣市一張圖）＋黃色縣市標籤。
+// 地圖改用政府開放資料畫成 SVG，資料來源見 scripts/gen-taiwan-map.mjs。
+// 座標是設計稿 frame 扣掉頁首（147px）後的位置。
 import map from '../data/taiwan-map.json';
 import { counties } from '../data/mailboxes';
 
-interface Props {
-	selected?: string;
-	region?: string;
-}
-const { selected, region } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const fullName = Object.fromEntries(counties.map((c) => [c.slug, c.fullName]));
+
+// [slug, x, y]；花東、宜蘭是直式標籤
+const labels: [string, number, number][] = [
+	['taipei', 216, 74], ['new-taipei', 151, 115], ['keelung', 108, 156.5], ['taoyuan', 86, 198],
+	['hsinchu', 60, 239], ['miaoli', 38, 280], ['taichung', 24, 321.5], ['changhua', 11, 363],
+	['nantou', 9, 404], ['yunlin', 5, 445], ['chiayi', 23, 486.5], ['tainan', 40, 528],
+	['kaohsiung', 87, 569], ['pingtung', 108, 618],
+];
+const vertical: [string, number, number][] = [['yilan', 352, 183], ['hualien', 319, 311], ['taitung', 263, 476]];
 ---
 
-<svg
-	id="taiwan-map"
-	viewBox={map.viewBox}
-	preserveAspectRatio="none"
-	class="absolute top-[87px] left-[70px] h-[470px] w-[245px]"
-	data-region={region}
-	aria-label="臺灣特色郵筒地圖"
-	role="group"
->
+<svg viewBox={map.viewBox} preserveAspectRatio="none" class="absolute top-[111px] left-[94px] h-[510px] w-[259px]" aria-hidden="true">
 	<defs>
-		<pattern id="dots" width="4" height="4" patternUnits="userSpaceOnUse">
-			<circle cx="2" cy="2" r="0.7" class="fill-forest/50" />
+		<pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse">
+			<circle cx="2.5" cy="2.5" r="0.9" class="fill-map-line/40" />
 		</pattern>
-		<pattern id="dots-on" width="4" height="4" patternUnits="userSpaceOnUse">
-			<rect width="4" height="4" class="fill-pink-soft" /><circle cx="2" cy="2" r="0.8" class="fill-pink/60" />
+		<pattern id="dots-on" width="5" height="5" patternUnits="userSpaceOnUse">
+			<rect width="5" height="5" class="fill-butter" /><circle cx="2.5" cy="2.5" r="0.9" class="fill-map-line/40" />
 		</pattern>
 	</defs>
 	{
 		counties.map((c) => (
-			<a
-				href={`${base}/map/${c.slug}/`}
-				data-region={c.region}
-				aria-label={c.name}
-				tabindex={selected && c.slug !== selected ? -1 : undefined}
-				aria-hidden={selected && c.slug !== selected ? 'true' : undefined}
-				class:list={['county', selected && (c.slug === selected ? 'selected' : 'faded')]}
-			>
+			<a href={`${base}/map/${c.slug}/`} tabindex="-1" class="county" data-slug={c.slug}>
 				<path d={map.paths[c.slug as keyof typeof map.paths]} />
 			</a>
 		))
 	}
 </svg>
 
+<nav aria-label="選擇縣市">
+	{
+		labels.map(([slug, x, y]) => (
+			<a href={`${base}/map/${slug}/`} data-slug={slug} class="label absolute grid h-[26px] w-[70px] place-items-center rounded-full bg-butter text-md font-extrabold text-rose" style={`left:${x}px;top:${y}px`}>
+				{fullName[slug]}
+			</a>
+		))
+	}
+	{
+		vertical.map(([slug, x, y]) => (
+			<a href={`${base}/map/${slug}/`} data-slug={slug} class="label absolute grid h-[70px] w-[30px] place-items-center rounded-full bg-butter text-md leading-none font-extrabold text-rose [writing-mode:vertical-rl]" style={`left:${x}px;top:${y}px`}>
+				{fullName[slug]}
+			</a>
+		))
+	}
+</nav>
+
 <style>
 	.county path {
 		fill: url(#dots);
-		stroke: var(--color-forest);
+		stroke: var(--color-map-line);
 		stroke-width: 3;
 		stroke-linejoin: round;
 		vector-effect: non-scaling-stroke;
 		transition: fill 0.2s;
 	}
 	.county:hover path,
-	.county:focus-visible path,
-	svg[data-region='north'] [data-region='north'] path,
-	svg[data-region='central'] [data-region='central'] path,
-	svg[data-region='south'] [data-region='south'] path,
-	svg[data-region='east'] [data-region='east'] path {
+	.county.on path {
 		fill: url(#dots-on);
 	}
-	.faded {
-		pointer-events: none;
-		animation: fade-out 0.6s ease forwards;
-	}
-	@keyframes fade-out {
-		to {
-			opacity: 0;
-		}
-	}
-	@media (prefers-reduced-motion: reduce) {
-		.faded {
-			animation-duration: 1ms;
-		}
-	}
 </style>
+
+<script>
+	// 滑到標籤時，地圖上的縣市一起亮起來
+	document.querySelectorAll<HTMLElement>('.label').forEach((label) => {
+		const county = document.querySelector(`.county[data-slug="${label.dataset.slug}"]`)!;
+		const on = (v: boolean) => () => county.classList.toggle('on', v);
+		label.addEventListener('pointerenter', on(true));
+		label.addEventListener('pointerleave', on(false));
+		label.addEventListener('focus', on(true));
+		label.addEventListener('blur', on(false));
+	});
+</script>

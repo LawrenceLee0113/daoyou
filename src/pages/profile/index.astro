@@ -3,24 +3,24 @@
 import Layout from '../../layouts/Layout.astro';
 import Panel from '../../components/Panel.astro';
 import { counties, mailboxes } from '../../data/mailboxes';
-import { COINS_FIRST_PHOTO, COINS_EXTRA_PHOTO, LEVELS } from '../../lib/rules';
+import { COINS_FIRST_PHOTO, LEVELS } from '../../lib/rules';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 // 相簿格子上的「台北・歪腰郵筒」
 const labels = Object.fromEntries(mailboxes.map((m) => [m.id, `${counties.find((c) => c.slug === m.county)!.name}・${m.name}`]));
-const stat = 'flex h-16 flex-1 flex-col-reverse items-center justify-center rounded-xl bg-pink-soft';
+const stat = 'flex h-16 flex-1 flex-col-reverse items-center justify-center rounded-xl bg-butter/70';
 const tab = 'flex h-8 flex-1 items-start justify-center pt-1.5 text-base font-bold';
 ---
 
 <Layout title="個人檔案">
-	<Panel class="px-[18px] pt-[11px] pb-6">
-		<a id="back" href={`${base}/map/`} class="text-md font-bold text-pine">← 返回</a>
+	<Panel class="pt-[34px] pb-6 md:max-w-3xl">
+		<a id="back" href={`${base}/map/`} class="text-md font-bold text-olive">← 返回</a>
 
 		<div class="mt-2 flex items-start gap-4">
-			<div class="grid size-16 shrink-0 place-items-center rounded-full bg-pink-soft text-4xl font-bold text-pink" aria-hidden="true">旅</div>
+			<div class="grid size-16 shrink-0 place-items-center rounded-full bg-butter/70 text-4xl font-bold text-pink" aria-hidden="true">旅</div>
 			<div class="flex-1 pt-1">
 				<h1 class="text-2xl font-bold">旅人小島</h1>
-				<p id="level" class="mt-2 inline-block rounded-full bg-pine-soft px-3 py-[3px] text-xs font-bold text-pine">{LEVELS[0].name}</p>
+				<p id="level" class="mt-2 inline-block rounded-full bg-sage/50 px-3 py-[3px] text-xs font-bold text-olive">{LEVELS[0].name}</p>
 			</div>
 			<span class="mt-2.5 rounded-full border border-pink px-4 py-1.5 text-sm font-bold text-pink">編輯</span>
 		</div>
@@ -39,21 +39,20 @@ const tab = 'flex h-8 flex-1 items-start justify-center pt-1.5 text-base font-bo
 			<span class:list={[tab, 'text-muted']}>我的信件</span>
 		</nav>
 
-		<ul id="album" class="mt-4 grid grid-cols-3 gap-2" data-labels={JSON.stringify(labels)}></ul>
+		<ul id="album" class="mt-4 grid grid-cols-3 gap-2 md:grid-cols-4 md:gap-3" data-labels={JSON.stringify(labels)}></ul>
 		<template id="empty-cell">
 			<li><a href={`${base}/map/`} class="grid aspect-square place-items-center rounded-[10px] bg-empty text-sm font-bold text-faint">去打卡</a></li>
 		</template>
 		<template id="photo-cell">
 			<li class="relative aspect-square overflow-hidden rounded-[10px]">
 				<img alt="" class="size-full object-cover" />
-				<span class="new absolute top-1.5 left-1.5 rounded-full bg-pink px-1.5 text-3xs leading-4 font-bold text-white">NEW</span>
+				<span class="new absolute top-1.5 left-1.5 rounded-full bg-new px-1.5 text-3xs leading-4 font-bold text-white">NEW</span>
 				<span class="label absolute inset-x-0 bottom-0 bg-black/50 px-1.5 py-1.5 text-xs font-bold text-white"></span>
 			</li>
 		</template>
 
-		<p class="mt-5 text-center text-sm text-muted">
-			第一次打卡可獲得 {COINS_FIRST_PHOTO} 島幣，同一郵筒再上傳每張 {COINS_EXTRA_PHOTO} 島幣
-		</p>
+		<!-- 設計稿文案；第 2、3 張只給 COINS_EXTRA_PHOTO，這裡沿用設計稿寫法 -->
+		<p class="mt-5 text-center text-sm text-muted">每上傳一張打卡照，可獲得 {COINS_FIRST_PHOTO} 島幣</p>
 	</Panel>
 </Layout>
 
@@ -75,13 +74,13 @@ const tab = 'flex h-8 flex-1 items-start justify-center pt-1.5 text-base font-bo
 
 		const album = $('album');
 		const labels = JSON.parse(album.dataset.labels!);
-		photos.forEach((p, i) => {
+		photos.forEach((p) => {
 			const cell = ($('photo-cell') as HTMLTemplateElement).content.cloneNode(true) as DocumentFragment;
 			const img = cell.querySelector('img')!;
 			img.src = URL.createObjectURL(p.blob);
 			img.alt = cell.querySelector('.label')!.textContent = labels[p.mailboxId] ?? '';
-			// 最新一張、而且是 24 小時內上傳的才標 NEW
-			if (i > 0 || Date.now() - p.createdAt > 86_400_000) cell.querySelector('.new')!.remove();
+			// 24 小時內上傳的標 NEW
+			if (Date.now() - p.createdAt > 86_400_000) cell.querySelector('.new')!.remove();
 			album.append(cell);
 		});
 		// 至少排滿兩行

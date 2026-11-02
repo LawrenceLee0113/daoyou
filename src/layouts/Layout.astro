@@ -29,8 +29,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		/>
 	</head>
 	<body class="bg-white font-sans text-ink antialiased">
-		<!-- 設計稿是手機版；電腦上置中、限制寬度 -->
-		<div class="mx-auto flex min-h-dvh w-full max-w-md flex-col">
+		<!-- 設計稿是手機版；平板、電腦版由各頁用 md:／lg: 調整（內容最寬 max-w-6xl） -->
+		<div class="flex min-h-dvh w-full flex-col">
 			{header && <SiteHeader />}
 			<slot />
 		</div>

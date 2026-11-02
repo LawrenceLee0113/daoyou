@@ -54,690 +54,7 @@
 	},
 	"children": [
 		{
-			"name": "Frame 11",
-			"type": "FRAME",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"clipsContent": true,
-			"background": [],
-			"fills": [],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"backgroundColor": {
-				"r": 0,
-				"g": 0,
-				"b": 0,
-				"a": 0
-			},
-			"overflowDirection": "VERTICAL_SCROLLING",
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": -54,
-				"y": 147,
-				"w": 497,
-				"h": 703
-			},
-			"children": [
-				{
-					"name": "Group 28",
-					"type": "GROUP",
-					"scrollBehavior": "SCROLLS",
-					"blendMode": "PASS_THROUGH",
-					"clipsContent": false,
-					"background": [],
-					"fills": [],
-					"strokes": [],
-					"strokeWeight": 1,
-					"strokeAlign": "INSIDE",
-					"backgroundColor": {
-						"r": 0,
-						"g": 0,
-						"b": 0,
-						"a": 0
-					},
-					"constraints": {
-						"vertical": "TOP",
-						"horizontal": "LEFT"
-					},
-					"effects": [],
-					"interactions": [],
-					"complexStrokeProperties": {
-						"strokeType": "BASIC"
-					},
-					"box": {
-						"x": -52,
-						"y": 147,
-						"w": 497,
-						"h": 2477
-					},
-					"children": [
-						{
-							"name": "Group 24",
-							"type": "GROUP",
-							"scrollBehavior": "SCROLLS",
-							"blendMode": "PASS_THROUGH",
-							"clipsContent": false,
-							"background": [],
-							"fills": [],
-							"strokes": [],
-							"strokeWeight": 1,
-							"strokeAlign": "INSIDE",
-							"backgroundColor": {
-								"r": 0,
-								"g": 0,
-								"b": 0,
-								"a": 0
-							},
-							"constraints": {
-								"vertical": "TOP",
-								"horizontal": "LEFT"
-							},
-							"effects": [],
-							"interactions": [],
-							"complexStrokeProperties": {
-								"strokeType": "BASIC"
-							},
-							"box": {
-								"x": -46,
-								"y": 147,
-								"w": 491,
-								"h": 751
-							},
-							"children": [
-								{
-									"name": "下載-removebg-preview 3",
-									"type": "RECTANGLE",
-									"scrollBehavior": "SCROLLS",
-									"blendMode": "PASS_THROUGH",
-									"fills": [
-										{
-											"blendMode": "NORMAL",
-											"type": "IMAGE",
-											"scaleMode": "STRETCH",
-											"imageRef": "dd07896ca49e7eefcfe3ef20c0bc4f8804bec498",
-											"imageTransform": [
-												[
-													1,
-													0,
-													0
-												],
-												[
-													0,
-													0.86,
-													0.14
-												]
-											]
-										}
-									],
-									"strokes": [],
-									"strokeWeight": 1,
-									"strokeAlign": "INSIDE",
-									"preserveRatio": true,
-									"targetAspectRatio": {
-										"x": 453,
-										"y": 693
-									},
-									"constraints": {
-										"vertical": "TOP",
-										"horizontal": "LEFT"
-									},
-									"effects": [],
-									"interactions": [],
-									"complexStrokeProperties": {
-										"strokeType": "BASIC"
-									},
-									"box": {
-										"x": -46,
-										"y": 147,
-										"w": 491,
-										"h": 751
-									}
-								},
-								{
-									"name": "一、郵筒的起源 ：從一隻靴子開始的故事 相傳西元 1488 年，一位葡萄牙航海家在探險途中遭遇船難，返航前，他將寫好的信放進自己的靴子裡，掛在海邊的樹枝上，希望失散的同伴有一天能夠找到這封信。然而，靴子在海邊歷經數年風雨，直到另一位葡萄牙航海士偶然發現其中的信件。為了紀念遇難的同胞，他在當地修建教堂，這段故事也逐漸流傳下來。據說，當時的船員便沿用靴子作為傳遞訊息的容器。 雖然這段故事的歷史真實性仍有待考證，但它呈現了人們最初對於傳遞訊息的渴望——即使相隔遙遠，也希望自己的心意能被另一個人收到。 在中國，古代也有利用竹筒傳遞詩文與訊息的說法。隨著交通與郵政制度逐步發展，傳遞信件的方式日益完善，郵筒也逐漸成為現代郵政系統中不可或缺的一部分。",
-									"type": "TEXT",
-									"scrollBehavior": "SCROLLS",
-									"blendMode": "PASS_THROUGH",
-									"fills": [
-										{
-											"blendMode": "NORMAL",
-											"type": "SOLID",
-											"color": {
-												"r": 0,
-												"g": 0,
-												"b": 0,
-												"a": 1
-											}
-										}
-									],
-									"strokes": [],
-									"strokeWeight": 1,
-									"strokeAlign": "OUTSIDE",
-									"constraints": {
-										"vertical": "TOP",
-										"horizontal": "LEFT"
-									},
-									"characters": "一、郵筒的起源\r\n\r\n：從一隻靴子開始的故事\r\n相傳西元 1488 年，一位葡萄牙航海家在探險途中遭遇船難，返航前，他將寫好的信放進自己的靴子裡，掛在海邊的樹枝上，希望失散的同伴有一天能夠找到這封信。然而，靴子在海邊歷經數年風雨，直到另一位葡萄牙航海士偶然發現其中的信件。為了紀念遇難的同胞，他在當地修建教堂，這段故事也逐漸流傳下來。據說，當時的船員便沿用靴子作為傳遞訊息的容器。\r\n雖然這段故事的歷史真實性仍有待考證，但它呈現了人們最初對於傳遞訊息的渴望——即使相隔遙遠，也希望自己的心意能被另一個人收到。\r\n在中國，古代也有利用竹筒傳遞詩文與訊息的說法。隨著交通與郵政制度逐步發展，傳遞信件的方式日益完善，郵筒也逐漸成為現代郵政系統中不可或缺的一部分。\r",
-									"characterStyleOverrides": [],
-									"styleOverrideTable": {},
-									"lineTypes": [
-										"NONE",
-										"NONE",
-										"NONE",
-										"NONE",
-										"NONE",
-										"NONE"
-									],
-									"lineIndentations": [
-										0,
-										0,
-										0,
-										0,
-										0,
-										0
-									],
-									"style": {
-										"fontFamily": "Inter",
-										"fontPostScriptName": null,
-										"fontStyle": "Regular",
-										"fontWeight": 400,
-										"fontSize": 14,
-										"textAlignHorizontal": "LEFT",
-										"textAlignVertical": "TOP",
-										"letterSpacing": 0,
-										"lineHeightPx": 16.94,
-										"lineHeightPercent": 100,
-										"lineHeightUnit": "INTRINSIC_%"
-									},
-									"layoutVersion": 5,
-									"effects": [],
-									"interactions": [],
-									"complexStrokeProperties": {
-										"strokeType": "BASIC"
-									},
-									"box": {
-										"x": 33,
-										"y": 247,
-										"w": 311,
-										"h": 346
-									}
-								}
-							]
-						},
-						{
-							"name": "Group 25",
-							"type": "GROUP",
-							"scrollBehavior": "SCROLLS",
-							"blendMode": "PASS_THROUGH",
-							"clipsContent": false,
-							"background": [],
-							"fills": [],
-							"strokes": [],
-							"strokeWeight": 1,
-							"strokeAlign": "INSIDE",
-							"backgroundColor": {
-								"r": 0,
-								"g": 0,
-								"b": 0,
-								"a": 0
-							},
-							"constraints": {
-								"vertical": "TOP",
-								"horizontal": "LEFT"
-							},
-							"effects": [],
-							"interactions": [],
-							"complexStrokeProperties": {
-								"strokeType": "BASIC"
-							},
-							"box": {
-								"x": -47,
-								"y": 722,
-								"w": 491,
-								"h": 751
-							},
-							"children": [
-								{
-									"name": "下載-removebg-preview 2",
-									"type": "RECTANGLE",
-									"scrollBehavior": "SCROLLS",
-									"blendMode": "PASS_THROUGH",
-									"fills": [
-										{
-											"blendMode": "NORMAL",
-											"type": "IMAGE",
-											"scaleMode": "STRETCH",
-											"imageRef": "dd07896ca49e7eefcfe3ef20c0bc4f8804bec498",
-											"imageTransform": [
-												[
-													1,
-													0,
-													0
-												],
-												[
-													0,
-													0.86,
-													0.14
-												]
-											]
-										}
-									],
-									"strokes": [],
-									"strokeWeight": 1,
-									"strokeAlign": "INSIDE",
-									"preserveRatio": true,
-									"targetAspectRatio": {
-										"x": 453,
-										"y": 693
-									},
-									"constraints": {
-										"vertical": "TOP",
-										"horizontal": "LEFT"
-									},
-									"effects": [],
-									"interactions": [],
-									"complexStrokeProperties": {
-										"strokeType": "BASIC"
-									},
-									"box": {
-										"x": -47,
-										"y": 722,
-										"w": 491,
-										"h": 751
-									}
-								},
-								{
-									"name": "二、臺灣郵筒的歷史演變 隨著近代郵政制度傳入，郵筒在臺灣逐漸普及，其外型、材質與功能也隨著時代需求不斷改變。 早期的郵筒多以鑄鐵製作，外型以圓柱狀為主，雖然堅固，卻有體積龐大、重量重及收信不便等問題。後來，郵筒逐漸改為方柱型，材質也從木材、水泥演變為鋼板及玻璃纖維，以提升耐用度、降低維護成本，並適應臺灣潮濕多雨的氣候。 郵筒的設計也會因應郵政業務而改變。1947 年，中華郵政推出「趕班信筒」，以黃色作為醒目的識別色，方便郵務人員迅速辨認並收取需要趕班處理的郵件。1956 年，雙口信筒問世，以黃、綠兩色區分本地與外埠郵件，簡化郵局的分類作業；後續也出現以不同顏色區分普通、限時等郵件的設計。 此外，1952 年臺北市曾設置「自助郵亭」，提供郵票、郵簡及明信片等郵政用品，讓民眾能自行購買郵政用品、書寫信件並投入郵筒。臺灣也曾出現設置於客運車輛上的「汽車郵箱」，以及專門收寄平常包裹的「平包郵筒」，展現郵政服務因應不同時代與地域需求所發展出的多元形式。 從外型、材質到顏色與功能，郵筒的每一次改變，都反映了當時的生活方式、郵政需求與設計思維。",
-									"type": "TEXT",
-									"scrollBehavior": "SCROLLS",
-									"blendMode": "PASS_THROUGH",
-									"fills": [
-										{
-											"blendMode": "NORMAL",
-											"type": "SOLID",
-											"color": {
-												"r": 0,
-												"g": 0,
-												"b": 0,
-												"a": 1
-											}
-										}
-									],
-									"strokes": [],
-									"strokeWeight": 1,
-									"strokeAlign": "OUTSIDE",
-									"constraints": {
-										"vertical": "TOP",
-										"horizontal": "LEFT"
-									},
-									"characters": "二、臺灣郵筒的歷史演變\r\n\r\n隨著近代郵政制度傳入，郵筒在臺灣逐漸普及，其外型、材質與功能也隨著時代需求不斷改變。\r\n早期的郵筒多以鑄鐵製作，外型以圓柱狀為主，雖然堅固，卻有體積龐大、重量重及收信不便等問題。後來，郵筒逐漸改為方柱型，材質也從木材、水泥演變為鋼板及玻璃纖維，以提升耐用度、降低維護成本，並適應臺灣潮濕多雨的氣候。\r\n郵筒的設計也會因應郵政業務而改變。1947 年，中華郵政推出「趕班信筒」，以黃色作為醒目的識別色，方便郵務人員迅速辨認並收取需要趕班處理的郵件。1956 年，雙口信筒問世，以黃、綠兩色區分本地與外埠郵件，簡化郵局的分類作業；後續也出現以不同顏色區分普通、限時等郵件的設計。\r\n此外，1952 年臺北市曾設置「自助郵亭」，提供郵票、郵簡及明信片等郵政用品，讓民眾能自行購買郵政用品、書寫信件並投入郵筒。臺灣也曾出現設置於客運車輛上的「汽車郵箱」，以及專門收寄平常包裹的「平包郵筒」，展現郵政服務因應不同時代與地域需求所發展出的多元形式。\r\n從外型、材質到顏色與功能，郵筒的每一次改變，都反映了當時的生活方式、郵政需求與設計思維。",
-									"characterStyleOverrides": [],
-									"styleOverrideTable": {},
-									"lineTypes": [
-										"NONE",
-										"NONE",
-										"NONE",
-										"NONE",
-										"NONE",
-										"NONE",
-										"NONE"
-									],
-									"lineIndentations": [
-										0,
-										0,
-										0,
-										0,
-										0,
-										0,
-										0
-									],
-									"style": {
-										"fontFamily": "Inter",
-										"fontPostScriptName": null,
-										"fontStyle": "Regular",
-										"fontWeight": 400,
-										"fontSize": 14,
-										"textAlignHorizontal": "LEFT",
-										"textAlignVertical": "TOP",
-										"letterSpacing": 0,
-										"lineHeightPx": 16.94,
-										"lineHeightPercent": 100,
-										"lineHeightUnit": "INTRINSIC_%"
-									},
-									"layoutVersion": 5,
-									"effects": [],
-									"interactions": [],
-									"complexStrokeProperties": {
-										"strokeType": "BASIC"
-									},
-									"box": {
-										"x": 43,
-										"y": 802,
-										"w": 311,
-										"h": 476
-									}
-								}
-							]
-						},
-						{
-							"name": "Group 26",
-							"type": "GROUP",
-							"scrollBehavior": "SCROLLS",
-							"blendMode": "PASS_THROUGH",
-							"clipsContent": false,
-							"background": [],
-							"fills": [],
-							"strokes": [],
-							"strokeWeight": 1,
-							"strokeAlign": "INSIDE",
-							"backgroundColor": {
-								"r": 0,
-								"g": 0,
-								"b": 0,
-								"a": 0
-							},
-							"constraints": {
-								"vertical": "TOP",
-								"horizontal": "LEFT"
-							},
-							"effects": [],
-							"interactions": [],
-							"complexStrokeProperties": {
-								"strokeType": "BASIC"
-							},
-							"box": {
-								"x": -52,
-								"y": 1297,
-								"w": 491,
-								"h": 751
-							},
-							"children": [
-								{
-									"name": "下載-removebg-preview 4",
-									"type": "RECTANGLE",
-									"scrollBehavior": "SCROLLS",
-									"blendMode": "PASS_THROUGH",
-									"fills": [
-										{
-											"blendMode": "NORMAL",
-											"type": "IMAGE",
-											"scaleMode": "STRETCH",
-											"imageRef": "dd07896ca49e7eefcfe3ef20c0bc4f8804bec498",
-											"imageTransform": [
-												[
-													1,
-													0,
-													0
-												],
-												[
-													0,
-													0.86,
-													0.14
-												]
-											]
-										}
-									],
-									"strokes": [],
-									"strokeWeight": 1,
-									"strokeAlign": "INSIDE",
-									"preserveRatio": true,
-									"targetAspectRatio": {
-										"x": 453,
-										"y": 693
-									},
-									"constraints": {
-										"vertical": "TOP",
-										"horizontal": "LEFT"
-									},
-									"effects": [],
-									"interactions": [],
-									"complexStrokeProperties": {
-										"strokeType": "BASIC"
-									},
-									"box": {
-										"x": -52,
-										"y": 1297,
-										"w": 491,
-										"h": 751
-									}
-								},
-								{
-									"name": "四、郵筒的文化價值與情感的連結 從最初承載訊息的容器，到今日街頭常見的郵政設施，郵筒始終和人們傳遞著訊息、分享情感的需求緊密相連。 在數位通訊快速發展的時代，訊息可以即時傳送，卻也讓實體書信的獨特性更加珍貴。一張明信片不僅能記錄當下的心情，也能透過文字、圖像與寄送過程，留下具有溫度的交流體驗。 因此，郵筒的價值不應只停留在郵政功能，更可以延伸至地方文化的保存與情感的傳遞。透過認識各地特色郵筒背後的歷史、景觀與人文故事，人們能重新發現地方的魅力，並建立與土地更深的連結。 郵筒不只是收寄信件的設施，更是地方文化的入口，也是人們寄託心意、傳遞故事與保存共同記憶的媒介。",
-									"type": "TEXT",
-									"scrollBehavior": "SCROLLS",
-									"blendMode": "PASS_THROUGH",
-									"fills": [
-										{
-											"blendMode": "NORMAL",
-											"type": "SOLID",
-											"color": {
-												"r": 0,
-												"g": 0,
-												"b": 0,
-												"a": 1
-											}
-										}
-									],
-									"strokes": [],
-									"strokeWeight": 1,
-									"strokeAlign": "OUTSIDE",
-									"constraints": {
-										"vertical": "TOP",
-										"horizontal": "LEFT"
-									},
-									"characters": "四、郵筒的文化價值與情感的連結\r\n\r\n從最初承載訊息的容器，到今日街頭常見的郵政設施，郵筒始終和人們傳遞著訊息、分享情感的需求緊密相連。\r\n在數位通訊快速發展的時代，訊息可以即時傳送，卻也讓實體書信的獨特性更加珍貴。一張明信片不僅能記錄當下的心情，也能透過文字、圖像與寄送過程，留下具有溫度的交流體驗。\r\n因此，郵筒的價值不應只停留在郵政功能，更可以延伸至地方文化的保存與情感的傳遞。透過認識各地特色郵筒背後的歷史、景觀與人文故事，人們能重新發現地方的魅力，並建立與土地更深的連結。\r\n郵筒不只是收寄信件的設施，更是地方文化的入口，也是人們寄託心意、傳遞故事與保存共同記憶的媒介。",
-									"characterStyleOverrides": [],
-									"styleOverrideTable": {},
-									"lineTypes": [
-										"NONE",
-										"NONE",
-										"NONE",
-										"NONE",
-										"NONE",
-										"NONE"
-									],
-									"lineIndentations": [
-										0,
-										0,
-										0,
-										0,
-										0,
-										0
-									],
-									"style": {
-										"fontFamily": "Inter",
-										"fontPostScriptName": null,
-										"fontStyle": "Regular",
-										"fontWeight": 400,
-										"fontSize": 14,
-										"textAlignHorizontal": "LEFT",
-										"textAlignVertical": "TOP",
-										"letterSpacing": 0,
-										"lineHeightPx": 16.94,
-										"lineHeightPercent": 100,
-										"lineHeightUnit": "INTRINSIC_%"
-									},
-									"layoutVersion": 5,
-									"effects": [],
-									"interactions": [],
-									"complexStrokeProperties": {
-										"strokeType": "BASIC"
-									},
-									"box": {
-										"x": 38,
-										"y": 1377,
-										"w": 311,
-										"h": 476
-									}
-								}
-							]
-						},
-						{
-							"name": "Group 27",
-							"type": "GROUP",
-							"scrollBehavior": "SCROLLS",
-							"blendMode": "PASS_THROUGH",
-							"clipsContent": false,
-							"background": [],
-							"fills": [],
-							"strokes": [],
-							"strokeWeight": 1,
-							"strokeAlign": "INSIDE",
-							"backgroundColor": {
-								"r": 0,
-								"g": 0,
-								"b": 0,
-								"a": 0
-							},
-							"constraints": {
-								"vertical": "TOP",
-								"horizontal": "LEFT"
-							},
-							"effects": [],
-							"interactions": [],
-							"complexStrokeProperties": {
-								"strokeType": "BASIC"
-							},
-							"box": {
-								"x": -52,
-								"y": 1873,
-								"w": 491,
-								"h": 751
-							},
-							"children": [
-								{
-									"name": "下載-removebg-preview 5",
-									"type": "RECTANGLE",
-									"scrollBehavior": "SCROLLS",
-									"blendMode": "PASS_THROUGH",
-									"fills": [
-										{
-											"blendMode": "NORMAL",
-											"type": "IMAGE",
-											"scaleMode": "STRETCH",
-											"imageRef": "dd07896ca49e7eefcfe3ef20c0bc4f8804bec498",
-											"imageTransform": [
-												[
-													1,
-													0,
-													0
-												],
-												[
-													0,
-													0.86,
-													0.14
-												]
-											]
-										}
-									],
-									"strokes": [],
-									"strokeWeight": 1,
-									"strokeAlign": "INSIDE",
-									"preserveRatio": true,
-									"targetAspectRatio": {
-										"x": 453,
-										"y": 693
-									},
-									"constraints": {
-										"vertical": "TOP",
-										"horizontal": "LEFT"
-									},
-									"effects": [],
-									"interactions": [],
-									"complexStrokeProperties": {
-										"strokeType": "BASIC"
-									},
-									"box": {
-										"x": -52,
-										"y": 1873,
-										"w": 491,
-										"h": 751
-									}
-								},
-								{
-									"name": "三、從郵政設施到地方特色 隨著數位通訊普及，實體書信的使用逐漸減少，郵筒也不再只是日常生活中收寄信件的工具。有些郵筒因特殊造型、歷史背景或地方故事，逐漸成為具有辨識度的文化地標。 例如，新北市平溪郵局前具有數十年歷史的直立式鑄鐵郵筒，以及屏東恆春因電影《海角七號》而受到關注的「阿嘉的家」門前懷舊信筒，都成為地方旅遊與文化記憶的一部分。它們的價值不僅在於郵件收寄功能，更來自人們對地方、歷史及影視故事的情感連結。 這些特色郵筒就像一枚枚時光戳印，記錄著不同年代的生活軌跡，也讓原本平凡的街道多了一份值得探索的故事。即使實際使用率不如以往，它們仍能吸引人們停下腳步、拍照留念，甚至能成為認識一座城市的起點。",
-									"type": "TEXT",
-									"scrollBehavior": "SCROLLS",
-									"blendMode": "PASS_THROUGH",
-									"fills": [
-										{
-											"blendMode": "NORMAL",
-											"type": "SOLID",
-											"color": {
-												"r": 0,
-												"g": 0,
-												"b": 0,
-												"a": 1
-											}
-										}
-									],
-									"strokes": [],
-									"strokeWeight": 1,
-									"strokeAlign": "OUTSIDE",
-									"constraints": {
-										"vertical": "TOP",
-										"horizontal": "LEFT"
-									},
-									"characters": "三、從郵政設施到地方特色\r\n\r\n隨著數位通訊普及，實體書信的使用逐漸減少，郵筒也不再只是日常生活中收寄信件的工具。有些郵筒因特殊造型、歷史背景或地方故事，逐漸成為具有辨識度的文化地標。\r\n例如，新北市平溪郵局前具有數十年歷史的直立式鑄鐵郵筒，以及屏東恆春因電影《海角七號》而受到關注的「阿嘉的家」門前懷舊信筒，都成為地方旅遊與文化記憶的一部分。它們的價值不僅在於郵件收寄功能，更來自人們對地方、歷史及影視故事的情感連結。\r\n這些特色郵筒就像一枚枚時光戳印，記錄著不同年代的生活軌跡，也讓原本平凡的街道多了一份值得探索的故事。即使實際使用率不如以往，它們仍能吸引人們停下腳步、拍照留念，甚至能成為認識一座城市的起點。\r",
-									"characterStyleOverrides": [],
-									"styleOverrideTable": {},
-									"lineTypes": [
-										"NONE",
-										"NONE",
-										"NONE",
-										"NONE",
-										"NONE"
-									],
-									"lineIndentations": [
-										0,
-										0,
-										0,
-										0,
-										0
-									],
-									"style": {
-										"fontFamily": "Inter",
-										"fontPostScriptName": null,
-										"fontStyle": "Regular",
-										"fontWeight": 400,
-										"fontSize": 14,
-										"textAlignHorizontal": "LEFT",
-										"textAlignVertical": "TOP",
-										"letterSpacing": 0,
-										"lineHeightPx": 16.94,
-										"lineHeightPercent": 100,
-										"lineHeightUnit": "INTRINSIC_%"
-									},
-									"layoutVersion": 5,
-									"effects": [],
-									"interactions": [],
-									"complexStrokeProperties": {
-										"strokeType": "BASIC"
-									},
-									"box": {
-										"x": 38,
-										"y": 1953,
-										"w": 311,
-										"h": 476
-									}
-								}
-							]
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "Group 23",
+			"name": "Group 24",
 			"type": "GROUP",
 			"scrollBehavior": "SCROLLS",
 			"blendMode": "PASS_THROUGH",
@@ -755,7 +72,7 @@
 			},
 			"constraints": {
 				"vertical": "TOP",
-				"horizontal": "LEFT"
+				"horizontal": "CENTER"
 			},
 			"effects": [],
 			"interactions": [],
@@ -763,24 +80,23 @@
 				"strokeType": "BASIC"
 			},
 			"box": {
-				"x": 0,
+				"x": -1,
 				"y": 0,
-				"w": 393,
+				"w": 395,
 				"h": 147
 			},
 			"children": [
 				{
-					"name": "資產 4 1",
+					"name": "資產 2 1",
 					"type": "RECTANGLE",
 					"scrollBehavior": "SCROLLS",
-					"rotation": 3.14,
 					"blendMode": "PASS_THROUGH",
 					"fills": [
 						{
 							"blendMode": "NORMAL",
 							"type": "IMAGE",
 							"scaleMode": "FILL",
-							"imageRef": "0b3c985665aec0db741dd62f96c9ed16370c6a03"
+							"imageRef": "c7f54cade8707efd3f031de141d57b535c583ac0"
 						}
 					],
 					"strokes": [],
@@ -789,7 +105,7 @@
 					"preserveRatio": true,
 					"targetAspectRatio": {
 						"x": 4096,
-						"y": 629
+						"y": 908
 					},
 					"constraints": {
 						"vertical": "TOP",
@@ -801,47 +117,9 @@
 						"strokeType": "BASIC"
 					},
 					"box": {
-						"x": 0,
-						"y": 87,
-						"w": 393,
-						"h": 60
-					}
-				},
-				{
-					"name": "資產 3 1",
-					"type": "RECTANGLE",
-					"scrollBehavior": "SCROLLS",
-					"rotation": -3.14,
-					"blendMode": "PASS_THROUGH",
-					"fills": [
-						{
-							"blendMode": "NORMAL",
-							"type": "IMAGE",
-							"scaleMode": "FILL",
-							"imageRef": "1d36fba3e5e715c91492131ba00035dbdbaffd3b"
-						}
-					],
-					"strokes": [],
-					"strokeWeight": 1,
-					"strokeAlign": "INSIDE",
-					"preserveRatio": true,
-					"targetAspectRatio": {
-						"x": 4096,
-						"y": 911
-					},
-					"constraints": {
-						"vertical": "TOP",
-						"horizontal": "LEFT"
-					},
-					"effects": [],
-					"interactions": [],
-					"complexStrokeProperties": {
-						"strokeType": "BASIC"
-					},
-					"box": {
-						"x": 0,
+						"x": -1,
 						"y": 0,
-						"w": 393,
+						"w": 394,
 						"h": 87
 					}
 				},
@@ -859,6 +137,9 @@
 					"overrides": [
 						{
 							"overriddenFields": [
+								"individualStrokeWeights",
+								"strokeWeight",
+								"strokes",
 								"targetAspectRatio"
 							]
 						}
@@ -867,8 +148,19 @@
 					"clipsContent": true,
 					"background": [],
 					"fills": [],
-					"strokes": [],
-					"strokeWeight": 1,
+					"strokes": [
+						{
+							"blendMode": "NORMAL",
+							"type": "SOLID",
+							"color": {
+								"r": 0.95,
+								"g": 0.93,
+								"b": 0.9,
+								"a": 1
+							}
+						}
+					],
+					"strokeWeight": 0,
 					"strokeAlign": "INSIDE",
 					"backgroundColor": {
 						"r": 0,
@@ -907,7 +199,7 @@
 						"strokeType": "BASIC"
 					},
 					"box": {
-						"x": 31,
+						"x": 30,
 						"y": 62,
 						"w": 331,
 						"h": 11
@@ -940,7 +232,7 @@
 								"strokeType": "BASIC"
 							},
 							"box": {
-								"x": 68.43,
+								"x": 67.43,
 								"y": 62.51,
 								"w": 256.17,
 								"h": 9.37
@@ -973,7 +265,7 @@
 										"strokeType": "BASIC"
 									},
 									"box": {
-										"x": 68.43,
+										"x": 67.43,
 										"y": 62.51,
 										"w": 256.17,
 										"h": 9.37
@@ -1009,7 +301,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 320.82,
+												"x": 319.82,
 												"y": 68.05,
 												"w": 3.78,
 												"h": 3.77
@@ -1045,7 +337,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 317.18,
+												"x": 316.18,
 												"y": 66.05,
 												"w": 2.52,
 												"h": 2.45
@@ -1081,7 +373,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 304.69,
+												"x": 303.69,
 												"y": 63.01,
 												"w": 8.9,
 												"h": 8.73
@@ -1117,7 +409,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 294.26,
+												"x": 293.26,
 												"y": 62.56,
 												"w": 9.39,
 												"h": 9.28
@@ -1153,7 +445,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 284.23,
+												"x": 283.23,
 												"y": 62.6,
 												"w": 9.61,
 												"h": 9.12
@@ -1189,7 +481,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 274.84,
+												"x": 273.84,
 												"y": 62.54,
 												"w": 8.54,
 												"h": 9.16
@@ -1225,7 +517,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 264.31,
+												"x": 263.31,
 												"y": 62.55,
 												"w": 9.5,
 												"h": 9.3
@@ -1261,7 +553,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 254.31,
+												"x": 253.31,
 												"y": 62.56,
 												"w": 9.42,
 												"h": 9.31
@@ -1297,7 +589,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 244.34,
+												"x": 243.34,
 												"y": 62.6,
 												"w": 9.27,
 												"h": 9.24
@@ -1333,7 +625,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 235.11,
+												"x": 234.11,
 												"y": 62.63,
 												"w": 7.9,
 												"h": 9.21
@@ -1369,7 +661,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 224.59,
+												"x": 223.59,
 												"y": 62.56,
 												"w": 8.88,
 												"h": 9.27
@@ -1405,7 +697,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 214.31,
+												"x": 213.31,
 												"y": 62.58,
 												"w": 9.34,
 												"h": 9.05
@@ -1441,7 +733,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 204.38,
+												"x": 203.38,
 												"y": 63.28,
 												"w": 9.36,
 												"h": 8.58
@@ -1477,7 +769,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 194.33,
+												"x": 193.33,
 												"y": 62.51,
 												"w": 9.43,
 												"h": 9.37
@@ -1513,7 +805,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 189.2,
+												"x": 188.2,
 												"y": 63.73,
 												"w": 1.42,
 												"h": 7.34
@@ -1549,7 +841,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 176.14,
+												"x": 175.14,
 												"y": 62.66,
 												"w": 9.34,
 												"h": 9.19
@@ -1585,7 +877,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 166.7,
+												"x": 165.7,
 												"y": 62.52,
 												"w": 8.61,
 												"h": 9.33
@@ -1621,7 +913,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 156.15,
+												"x": 155.15,
 												"y": 62.84,
 												"w": 8.89,
 												"h": 9
@@ -1657,7 +949,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 146.11,
+												"x": 145.11,
 												"y": 62.56,
 												"w": 9.37,
 												"h": 9.28
@@ -1693,7 +985,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 136.08,
+												"x": 135.08,
 												"y": 62.54,
 												"w": 9.42,
 												"h": 9.21
@@ -1729,7 +1021,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 125.99,
+												"x": 124.99,
 												"y": 62.54,
 												"w": 9.5,
 												"h": 9.3
@@ -1765,7 +1057,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 116.11,
+												"x": 115.11,
 												"y": 62.52,
 												"w": 3.04,
 												"h": 9.36
@@ -1801,7 +1093,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 110.39,
+												"x": 109.39,
 												"y": 65.47,
 												"w": 4.94,
 												"h": 5.64
@@ -1837,7 +1129,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 101.8,
+												"x": 100.8,
 												"y": 65.47,
 												"w": 7.41,
 												"h": 5.53
@@ -1873,7 +1165,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 95.53,
+												"x": 94.53,
 												"y": 65.47,
 												"w": 5.09,
 												"h": 5.64
@@ -1909,7 +1201,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 89.86,
+												"x": 88.86,
 												"y": 65.47,
 												"w": 4.78,
 												"h": 5.64
@@ -1945,7 +1237,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 87.61,
+												"x": 86.61,
 												"y": 63.73,
 												"w": 1.06,
 												"h": 7.27
@@ -1981,7 +1273,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 81.5,
+												"x": 80.5,
 												"y": 65.47,
 												"w": 4.94,
 												"h": 5.64
@@ -2017,7 +1309,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 72,
+												"x": 71,
 												"y": 63.73,
 												"w": 9.37,
 												"h": 7.27
@@ -2053,7 +1345,7 @@
 												"strokeType": "BASIC"
 											},
 											"box": {
-												"x": 68.43,
+												"x": 67.43,
 												"y": 62.52,
 												"w": 3.04,
 												"h": 9.36
@@ -2066,25 +1358,28 @@
 					]
 				},
 				{
-					"name": "Group 3",
-					"type": "GROUP",
+					"name": "Rectangle 19",
+					"type": "RECTANGLE",
 					"scrollBehavior": "SCROLLS",
 					"blendMode": "PASS_THROUGH",
-					"clipsContent": false,
-					"background": [],
-					"fills": [],
+					"fills": [
+						{
+							"blendMode": "NORMAL",
+							"type": "SOLID",
+							"color": {
+								"r": 0.96,
+								"g": 0.96,
+								"b": 0.94,
+								"a": 1
+							}
+						}
+					],
 					"strokes": [],
 					"strokeWeight": 1,
 					"strokeAlign": "INSIDE",
-					"backgroundColor": {
-						"r": 0,
-						"g": 0,
-						"b": 0,
-						"a": 0
-					},
 					"constraints": {
 						"vertical": "TOP",
-						"horizontal": "LEFT"
+						"horizontal": "CENTER"
 					},
 					"effects": [],
 					"interactions": [],
@@ -2092,89 +1387,11 @@
 						"strokeType": "BASIC"
 					},
 					"box": {
-						"x": 298,
-						"y": 107,
-						"w": 20,
-						"h": 18.05
-					},
-					"children": [
-						{
-							"name": "Vector_2",
-							"type": "VECTOR",
-							"scrollBehavior": "SCROLLS",
-							"blendMode": "PASS_THROUGH",
-							"fills": [],
-							"strokes": [
-								{
-									"blendMode": "NORMAL",
-									"type": "SOLID",
-									"color": {
-										"r": 0.8,
-										"g": 0.31,
-										"b": 0.55,
-										"a": 1
-									}
-								}
-							],
-							"strokeWeight": 2,
-							"strokeAlign": "CENTER",
-							"strokeJoin": "ROUND",
-							"strokeCap": "ROUND",
-							"constraints": {
-								"vertical": "SCALE",
-								"horizontal": "SCALE"
-							},
-							"effects": [],
-							"interactions": [],
-							"complexStrokeProperties": {
-								"strokeType": "BASIC"
-							},
-							"box": {
-								"x": 298,
-								"y": 107,
-								"w": 14.84,
-								"h": 14.18
-							}
-						},
-						{
-							"name": "Line 4",
-							"type": "LINE",
-							"scrollBehavior": "SCROLLS",
-							"rotation": 0.64,
-							"blendMode": "PASS_THROUGH",
-							"fills": [],
-							"strokes": [
-								{
-									"blendMode": "NORMAL",
-									"type": "SOLID",
-									"color": {
-										"r": 0.8,
-										"g": 0.31,
-										"b": 0.55,
-										"a": 1
-									}
-								}
-							],
-							"strokeWeight": 2,
-							"strokeAlign": "CENTER",
-							"strokeCap": "ROUND",
-							"constraints": {
-								"vertical": "TOP",
-								"horizontal": "LEFT"
-							},
-							"effects": [],
-							"interactions": [],
-							"complexStrokeProperties": {
-								"strokeType": "BASIC"
-							},
-							"box": {
-								"x": 310.26,
-								"y": 119.25,
-								"w": 7.74,
-								"h": 5.8
-							}
-						}
-					]
+						"x": -1,
+						"y": 87,
+						"w": 395,
+						"h": 60
+					}
 				},
 				{
 					"name": "三槓",
@@ -2230,7 +1447,7 @@
 						"strokeType": "BASIC"
 					},
 					"box": {
-						"x": 339.69,
+						"x": 338.69,
 						"y": 109.26,
 						"w": 20,
 						"h": 15.98
@@ -2267,7 +1484,7 @@
 								"strokeType": "BASIC"
 							},
 							"box": {
-								"x": 339.69,
+								"x": 338.69,
 								"y": 109.26,
 								"w": 20,
 								"h": 0
@@ -2304,7 +1521,7 @@
 								"strokeType": "BASIC"
 							},
 							"box": {
-								"x": 339.69,
+								"x": 338.69,
 								"y": 117.25,
 								"w": 20,
 								"h": 0
@@ -2341,10 +1558,121 @@
 								"strokeType": "BASIC"
 							},
 							"box": {
-								"x": 339.69,
+								"x": 338.69,
 								"y": 125.24,
 								"w": 20,
 								"h": 0
+							}
+						}
+					]
+				},
+				{
+					"name": "Group 3",
+					"type": "GROUP",
+					"scrollBehavior": "SCROLLS",
+					"blendMode": "PASS_THROUGH",
+					"clipsContent": false,
+					"background": [],
+					"fills": [],
+					"strokes": [],
+					"strokeWeight": 1,
+					"strokeAlign": "INSIDE",
+					"backgroundColor": {
+						"r": 0,
+						"g": 0,
+						"b": 0,
+						"a": 0
+					},
+					"constraints": {
+						"vertical": "TOP",
+						"horizontal": "LEFT"
+					},
+					"effects": [],
+					"interactions": [],
+					"complexStrokeProperties": {
+						"strokeType": "BASIC"
+					},
+					"box": {
+						"x": 297,
+						"y": 107,
+						"w": 20,
+						"h": 18.05
+					},
+					"children": [
+						{
+							"name": "Vector_2",
+							"type": "VECTOR",
+							"scrollBehavior": "SCROLLS",
+							"blendMode": "PASS_THROUGH",
+							"fills": [],
+							"strokes": [
+								{
+									"blendMode": "NORMAL",
+									"type": "SOLID",
+									"color": {
+										"r": 0.8,
+										"g": 0.31,
+										"b": 0.55,
+										"a": 1
+									}
+								}
+							],
+							"strokeWeight": 2,
+							"strokeAlign": "CENTER",
+							"strokeJoin": "ROUND",
+							"strokeCap": "ROUND",
+							"constraints": {
+								"vertical": "SCALE",
+								"horizontal": "SCALE"
+							},
+							"effects": [],
+							"interactions": [],
+							"complexStrokeProperties": {
+								"strokeType": "BASIC"
+							},
+							"box": {
+								"x": 297,
+								"y": 107,
+								"w": 14.84,
+								"h": 14.18
+							}
+						},
+						{
+							"name": "Line 4",
+							"type": "LINE",
+							"scrollBehavior": "SCROLLS",
+							"rotation": 0.64,
+							"blendMode": "PASS_THROUGH",
+							"fills": [],
+							"strokes": [
+								{
+									"blendMode": "NORMAL",
+									"type": "SOLID",
+									"color": {
+										"r": 0.8,
+										"g": 0.31,
+										"b": 0.55,
+										"a": 1
+									}
+								}
+							],
+							"strokeWeight": 2,
+							"strokeAlign": "CENTER",
+							"strokeCap": "ROUND",
+							"constraints": {
+								"vertical": "TOP",
+								"horizontal": "LEFT"
+							},
+							"effects": [],
+							"interactions": [],
+							"complexStrokeProperties": {
+								"strokeType": "BASIC"
+							},
+							"box": {
+								"x": 309.26,
+								"y": 119.25,
+								"w": 7.74,
+								"h": 5.8
 							}
 						}
 					]
@@ -2375,6 +1703,79 @@
 						"horizontal": "LEFT"
 					},
 					"effects": [],
+					"interactions": [],
+					"complexStrokeProperties": {
+						"strokeType": "BASIC"
+					},
+					"box": {
+						"x": 19,
+						"y": 102,
+						"w": 48,
+						"h": 30
+					}
+				}
+			]
+		},
+		{
+			"name": "Frame 11",
+			"type": "FRAME",
+			"scrollBehavior": "SCROLLS",
+			"blendMode": "PASS_THROUGH",
+			"clipsContent": true,
+			"background": [],
+			"fills": [],
+			"strokes": [],
+			"strokeWeight": 1,
+			"strokeAlign": "INSIDE",
+			"backgroundColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			},
+			"overflowDirection": "VERTICAL_SCROLLING",
+			"constraints": {
+				"vertical": "TOP",
+				"horizontal": "CENTER"
+			},
+			"effects": [],
+			"interactions": [],
+			"complexStrokeProperties": {
+				"strokeType": "BASIC"
+			},
+			"box": {
+				"x": 0,
+				"y": 147,
+				"w": 393,
+				"h": 705
+			},
+			"children": [
+				{
+					"name": "資產 10 2",
+					"type": "RECTANGLE",
+					"scrollBehavior": "SCROLLS",
+					"blendMode": "PASS_THROUGH",
+					"fills": [
+						{
+							"blendMode": "NORMAL",
+							"type": "IMAGE",
+							"scaleMode": "FILL",
+							"imageRef": "33b38ce6fd1a9ede53c17c0941b046d1b112cc62"
+						}
+					],
+					"strokes": [],
+					"strokeWeight": 1,
+					"strokeAlign": "INSIDE",
+					"preserveRatio": true,
+					"targetAspectRatio": {
+						"x": 4096,
+						"y": 1739
+					},
+					"constraints": {
+						"vertical": "TOP",
+						"horizontal": "CENTER"
+					},
+					"effects": [],
 					"transitionDuration": 300,
 					"transitionEasing": "EASE_OUT",
 					"interactions": [
@@ -2395,14 +1796,170 @@
 						"strokeType": "BASIC"
 					},
 					"box": {
-						"x": 20,
-						"y": 102,
-						"w": 48,
-						"h": 30
+						"x": 12,
+						"y": 181,
+						"w": 370,
+						"h": 157
+					}
+				},
+				{
+					"name": "資產 11 2",
+					"type": "RECTANGLE",
+					"scrollBehavior": "SCROLLS",
+					"blendMode": "PASS_THROUGH",
+					"fills": [
+						{
+							"blendMode": "NORMAL",
+							"type": "IMAGE",
+							"scaleMode": "FILL",
+							"imageRef": "72d14a69707a159f295ae2e74d766312402e503a"
+						}
+					],
+					"strokes": [],
+					"strokeWeight": 1,
+					"strokeAlign": "INSIDE",
+					"preserveRatio": true,
+					"targetAspectRatio": {
+						"x": 4096,
+						"y": 1702
+					},
+					"constraints": {
+						"vertical": "TOP",
+						"horizontal": "CENTER"
+					},
+					"effects": [],
+					"transitionDuration": 300,
+					"transitionEasing": "EASE_OUT",
+					"interactions": [
+						{
+							"trigger": {
+								"type": "ON_CLICK"
+							},
+							"actions": [
+								{
+									"type": "NODE",
+									"navigation": "NAVIGATE",
+									"transition": null
+								}
+							]
+						}
+					],
+					"complexStrokeProperties": {
+						"strokeType": "BASIC"
+					},
+					"box": {
+						"x": 12,
+						"y": 373,
+						"w": 370,
+						"h": 154
+					}
+				},
+				{
+					"name": "資產 12 1",
+					"type": "RECTANGLE",
+					"scrollBehavior": "SCROLLS",
+					"blendMode": "PASS_THROUGH",
+					"fills": [
+						{
+							"blendMode": "NORMAL",
+							"type": "IMAGE",
+							"scaleMode": "FILL",
+							"imageRef": "2ca15f39f104825ec07e57c45c88d65c7e331a41"
+						}
+					],
+					"strokes": [],
+					"strokeWeight": 1,
+					"strokeAlign": "INSIDE",
+					"preserveRatio": true,
+					"targetAspectRatio": {
+						"x": 4096,
+						"y": 1716
+					},
+					"constraints": {
+						"vertical": "TOP",
+						"horizontal": "CENTER"
+					},
+					"effects": [],
+					"transitionDuration": 300,
+					"transitionEasing": "EASE_OUT",
+					"interactions": [
+						{
+							"trigger": {
+								"type": "ON_CLICK"
+							},
+							"actions": [
+								{
+									"type": "NODE",
+									"navigation": "NAVIGATE",
+									"transition": null
+								}
+							]
+						}
+					],
+					"complexStrokeProperties": {
+						"strokeType": "BASIC"
+					},
+					"box": {
+						"x": 12,
+						"y": 562,
+						"w": 370,
+						"h": 155
+					}
+				},
+				{
+					"name": "資產 13 1",
+					"type": "RECTANGLE",
+					"scrollBehavior": "SCROLLS",
+					"blendMode": "PASS_THROUGH",
+					"fills": [
+						{
+							"blendMode": "NORMAL",
+							"type": "IMAGE",
+							"scaleMode": "FILL",
+							"imageRef": "e21911f954f7fcaac05da6e8e68b4cb06ce040a9"
+						}
+					],
+					"strokes": [],
+					"strokeWeight": 1,
+					"strokeAlign": "INSIDE",
+					"preserveRatio": true,
+					"targetAspectRatio": {
+						"x": 4096,
+						"y": 1739
+					},
+					"constraints": {
+						"vertical": "TOP",
+						"horizontal": "CENTER"
+					},
+					"effects": [],
+					"transitionDuration": 300,
+					"transitionEasing": "EASE_OUT",
+					"interactions": [
+						{
+							"trigger": {
+								"type": "ON_CLICK"
+							},
+							"actions": [
+								{
+									"type": "NODE",
+									"navigation": "NAVIGATE",
+									"transition": null
+								}
+							]
+						}
+					],
+					"complexStrokeProperties": {
+						"strokeType": "BASIC"
+					},
+					"box": {
+						"x": 12,
+						"y": 752,
+						"w": 370,
+						"h": 157
 					}
 				}
 			]
 		}
 	],
-	"render": "360e8b0457ab829e"
+	"render": "091708a3c7decc9a"
 }

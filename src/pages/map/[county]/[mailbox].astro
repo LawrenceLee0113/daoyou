@@ -1,5 +1,5 @@
 ---
-// Figma：台北-歪腰郵筒、台北-歪腰郵筒（已上傳）、歪腰郵筒-預覽。
+// Figma：台北-歪腰郵筒、台中-新社郵筒（上傳前）、…（已上傳）、…-預覽。
 // 「歪腰郵筒-相機」不做：拍照直接叫出手機內建相機（也可從相簿選），拍完在這頁跳出預覽。
 import { Image } from 'astro:assets';
 import Layout from '../../../layouts/Layout.astro';
@@ -11,71 +11,77 @@ export const getStaticPaths = () => mailboxes.map((m) => ({ params: { county: m.
 const { mailbox: m } = Astro.props;
 const county = countyOf(m.county);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const slide = 'h-[200px] w-[337px] max-w-full shrink-0 snap-start rounded-2xl object-cover';
+// 電腦版照片放大成整欄寬
+const slide = 'h-[190px] w-[320px] max-w-full shrink-0 snap-start rounded-2xl object-cover lg:aspect-[32/19] lg:h-auto lg:w-full';
 ---
 
 <Layout title={`${county.name}・${m.name}`}>
-	<Panel class="px-[18px] pt-[11px] pb-4">
-		<a href={`${base}/map/${county.slug}/`} class="text-md font-bold text-pine">← 返回{county.name}</a>
+	<Panel class="pt-[34px] pb-6 lg:max-w-none">
+		<a href={`${base}/map/${county.slug}/`} class="text-md font-bold text-olive">← 返回{county.name}</a>
 
-		<div class="relative mt-3">
-			<div id="carousel" data-mailbox={m.id} data-slide={slide} class="-mr-[18px] flex snap-x snap-mandatory gap-2.5 overflow-x-auto pr-[18px] [scrollbar-width:none]">
-				<Image src={m.photo} alt={m.name} widths={[337, 674]} sizes="337px" class={slide} loading="eager" />
-			</div>
-			<a
-				id="toast"
-				href={`${base}/profile/`}
-				hidden
-				class="absolute inset-x-1 top-2.5 flex h-11 items-center justify-center rounded-full bg-toast text-md font-bold text-white"
-			>
-				✓ 已上傳！也收進了你的相簿　查看 →
-			</a>
-		</div>
-
-		<h1 class="mt-7 text-4xl font-bold text-pink">{m.name}</h1>
-		<p class="mt-1.5 text-md font-bold text-pine">{m.address}</p>
-		{
-			m.sections.map((s, i) => (
-				<section class={i === 0 ? 'mt-[18px]' : 'mt-[23px]'}>
-					<h2 class="text-lg font-bold">{s.title}</h2>
-					<p class="mt-1.5 text-base whitespace-pre-line text-body">{s.body}</p>
-				</section>
-			))
-		}
-
-		<section class="mt-[21px]">
-			<h2 class="text-lg font-bold">旅人打卡照</h2>
-			<div class="mt-2.5 flex items-center gap-3">
-				<button
-					id="shoot"
-					type="button"
-					class="h-10 w-[140px] shrink-0 rounded-full bg-pink text-lg font-bold text-white disabled:opacity-50"
-				>
-					📷 拍照打卡
-				</button>
-				<input id="file" type="file" accept="image/*" capture="environment" hidden />
-				<p id="first" class="text-sm text-muted">成為第一位打卡的旅人！</p>
-				<div id="mine" hidden class="flex items-center gap-2">
-					<img id="mine-img" alt="你的打卡照" class="size-10 rounded-lg object-cover" />
-					<div>
-						<p class="text-sm font-bold">你的打卡照</p>
-						<p id="mine-time" class="text-xs text-muted"></p>
-					</div>
+		<!-- 電腦版：左邊照片、右邊介紹 -->
+		<div class="lg:mt-5 lg:grid lg:grid-cols-2 lg:items-start lg:gap-12">
+			<div class="relative mt-5 ml-[9px] lg:mt-0 lg:ml-0">
+				<div id="carousel" data-mailbox={m.id} data-slide={slide} class="-mr-[13px] flex snap-x snap-mandatory gap-2.5 overflow-x-auto pr-[13px] [scrollbar-width:none] lg:mr-0 lg:pr-0">
+					<Image src={m.photo} alt={m.name} widths={[320, 640]} sizes="(min-width: 1024px) 500px, 320px" class={slide} loading="eager" />
 				</div>
+				<a
+					id="toast"
+					href={`${base}/profile/`}
+					hidden
+					class="absolute top-px left-[21px] flex h-11 w-[274px] max-w-[calc(100%-42px)] items-center justify-center rounded-full bg-toast text-md font-bold text-white"
+				>
+					✓ 已上傳！也收進了你的相簿　查看 →
+				</a>
 			</div>
-		</section>
+
+			<div>
+				<h1 class="mt-7 text-4xl font-bold text-pink lg:mt-0">{m.name}</h1>
+				<p class="mt-1.5 text-md font-bold text-olive">{m.address}</p>
+				{
+					m.sections.map((s, i) => (
+						<section class={i === 0 ? 'mt-[18px]' : 'mt-[23px]'}>
+							<h2 class="text-lg font-bold">{s.title}</h2>
+							<p class="mt-1.5 text-base whitespace-pre-line text-body">{s.body}</p>
+						</section>
+					))
+				}
+
+				<section class="mt-[21px]">
+					<h2 class="text-lg font-bold">旅人打卡照</h2>
+					<div class="mt-2.5 flex items-center gap-3">
+						<button
+							id="shoot"
+							type="button"
+							class="h-10 w-[140px] shrink-0 rounded-full bg-butter text-lg font-bold text-rose disabled:opacity-50"
+						>
+							📷 拍照打卡
+						</button>
+						<input id="file" type="file" accept="image/*" capture="environment" hidden />
+						<p id="first" class="text-sm text-muted">成為第一位打卡的旅人！</p>
+						<div id="mine" hidden class="flex items-center gap-2">
+							<img id="mine-img" alt="你的打卡照" class="size-10 rounded-lg object-cover" />
+							<div>
+								<p class="text-sm font-bold">你的打卡照</p>
+								<p id="mine-time" class="text-xs text-muted"></p>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
 	</Panel>
 
 	<dialog
 		id="preview"
-		class="m-0 h-dvh max-h-none w-full max-w-none bg-black text-white backdrop:bg-black md:mx-auto md:max-w-md"
+		class="m-0 h-dvh max-h-none w-full max-w-none bg-black text-white backdrop:bg-black md:m-auto md:h-auto md:max-h-[95dvh] md:max-w-md md:rounded-3xl md:pb-8 md:backdrop:bg-black/70"
 		aria-labelledby="preview-title"
 	>
 		<div class="relative flex h-[100px] items-start justify-center pt-14">
 			<button id="close" type="button" class="absolute top-[52px] left-6 text-3xl leading-none font-bold" aria-label="關閉">✕</button>
 			<h2 id="preview-title" class="text-lg font-bold">預覽</h2>
 		</div>
-		<img id="preview-img" alt="剛拍的照片" class="h-[524px] w-full object-cover" />
+		<img id="preview-img" alt="剛拍的照片" class="h-[524px] w-full object-cover md:h-[min(524px,55dvh)]" />
 		<label class="mt-6 flex items-center gap-2.5 px-10 text-base">
 			<input id="save" type="checkbox" checked class="size-5 accent-pink" />
 			同時儲存到手機相簿
@@ -102,17 +108,17 @@ const slide = 'h-[200px] w-[337px] max-w-full shrink-0 snap-start rounded-2xl ob
 		const photos = await getPhotos(mailboxId);
 		const carousel = $('carousel');
 		carousel.querySelectorAll('[data-mine]').forEach((el) => el.remove());
-		for (const p of [...photos].reverse()) {
+		for (const p of photos) {
 			const img = Object.assign(document.createElement('img'), { src: URL.createObjectURL(p.blob), alt: '你的打卡照', className: slide });
 			img.dataset.mine = '';
-			carousel.prepend(img);
+			carousel.append(img);
 		}
 		carousel.scrollLeft = 0;
 		$('first').hidden = photos.length > 0;
 		$('mine').hidden = photos.length === 0;
 		$<HTMLButtonElement>('shoot').disabled = photos.length >= max;
 		if (!photos.length) return;
-		$<HTMLImageElement>('mine-img').src = (carousel.firstElementChild as HTMLImageElement).src;
+		$<HTMLImageElement>('mine-img').src = (carousel.querySelector('[data-mine]') as HTMLImageElement).src;
 		const t = new Date(photos[0].createdAt);
 		const when = Date.now() - photos[0].createdAt < 60_000 ? '剛剛' : `${t.getMonth() + 1}/${t.getDate()}`;
 		$('mine-time').textContent = photos.length >= max ? `已達每個郵筒 ${max} 張上限` : `${when}・已收進相簿`;
