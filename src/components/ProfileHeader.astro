@@ -57,6 +57,11 @@ const tabs = [
 		if (history.length > 1) (e.preventDefault(), history.back());
 	});
 
+	// 分頁之間切換用 replace，不然「返回」會在分頁之間來回
+	document.querySelectorAll<HTMLAnchorElement>('nav[aria-label="個人檔案分頁"] a').forEach((a) =>
+		a.addEventListener('click', (e) => (e.preventDefault(), location.replace(a.href))),
+	);
+
 	if (requireLogin()) {
 		const [photos, postcards, avatar] = await Promise.all([getPhotos(), getPostcards(), getAvatar()]);
 		const { nickname } = getProfile();

@@ -15,7 +15,7 @@ const labels = Object.fromEntries(mailboxes.map((m) => [m.id, `${counties.find((
 	<Panel class="pt-[34px] pb-6 md:max-w-3xl">
 		<ProfileHeader tab="album" />
 
-		<ul id="album" class="mt-4 grid grid-cols-3 gap-2 md:grid-cols-4 md:gap-3" data-labels={JSON.stringify(labels)}></ul>
+		<ul id="album" class="mt-4 grid grid-cols-3 gap-2 md:grid-cols-6 md:gap-3" data-labels={JSON.stringify(labels)}></ul>
 		<template id="empty-cell">
 			<li><a href={`${base}/map/`} class="grid aspect-square place-items-center rounded-[10px] bg-empty text-sm font-bold text-faint">去打卡</a></li>
 		</template>

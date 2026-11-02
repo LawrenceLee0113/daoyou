@@ -6,6 +6,7 @@ import logo from '../assets/logo.png';
 import logoWhite from '../assets/logo-white.png';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const here = Astro.url.pathname;
 
 const messages = [
 	'【Welcome】歡迎來到島郵！今天想寄出什麼樣的心情呢 ⋆⸜',
@@ -47,7 +48,7 @@ const menu = [
 			<ul class="hidden gap-8 font-round text-md text-header-pink lg:flex">
 				{
 					menu.map((m) => (
-						<li>{m.href ? <a href={m.href} class="hover:underline">{m.name}</a> : <span class="opacity-50">{m.name}<span class="sr-only">（即將開放）</span></span>}</li>
+						<li>{m.href ? <a href={m.href} aria-current={here.startsWith(m.href) ? 'page' : undefined} class="hover:underline aria-[current]:font-bold aria-[current]:underline">{m.name}</a> : <span class="opacity-50">{m.name}<span class="sr-only">（即將開放）</span></span>}</li>
 					))
 				}
 			</ul>

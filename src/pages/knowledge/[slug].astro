@@ -21,7 +21,7 @@ const bg = await getImage({ src: a.background, width: 740, format: 'webp' });
 			<h1 class="mt-4 text-5xl font-bold tracking-wider">{a.title}</h1>
 			{a.illustrationAt === 'behind' && <Image src={a.illustration} alt="" class="absolute top-[165px] left-1/2 -z-10 w-[262px] -translate-x-1/2 opacity-5" />}
 			<p class="mt-6 text-base leading-[1.9] font-light whitespace-pre-line">{a.body}</p>
-			{a.illustrationAt === 'bottom' && <Image src={a.illustration} alt="" class="absolute right-[27px] bottom-6 h-auto w-24 opacity-75" />}
+			{a.illustrationAt === 'bottom' && <Image src={a.illustration} alt="" class="absolute right-[27px] bottom-6 h-auto w-24 opacity-75 mix-blend-multiply" />}
 		</article>
 		{
 			next && (
