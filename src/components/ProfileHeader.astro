@@ -23,7 +23,7 @@ const tabs = [
 		<h1 id="nickname" class="truncate text-2xl font-bold">旅人小島</h1>
 		<p id="level" class="mt-2 inline-block rounded-full bg-sage/50 px-3 py-[3px] text-xs font-bold text-olive">{LEVELS[0].name}</p>
 	</div>
-	<a href={`${base}/profile/edit/`} class="mt-2.5 rounded-full border border-pink px-4 py-1.5 text-sm font-bold text-pink">編輯</a>
+	<a href={`${base}/profile/edit/`} class="press mt-2.5 rounded-full border border-pink px-4 py-1.5 text-sm font-bold text-pink">編輯</a>
 </div>
 
 <p id="bio" class="mt-3 text-sm whitespace-pre-line text-body empty:hidden"></p>
@@ -54,6 +54,18 @@ const tabs = [
 	import { summarize } from '../lib/rules';
 
 	const $ = (id: string) => document.getElementById(id)!;
+
+	// 數字從 0 跳到目前的值（減少動態效果時直接顯示）
+	function countUp(el: HTMLElement, to: number) {
+		if (!to || matchMedia('(prefers-reduced-motion: reduce)').matches) return void (el.textContent = String(to));
+		const start = performance.now();
+		const tick = (now: number) => {
+			const t = Math.min(1, (now - start) / 700);
+			el.textContent = String(Math.round(to * (1 - (1 - t) ** 3)));
+			if (t < 1) requestAnimationFrame(tick);
+		};
+		requestAnimationFrame(tick);
+	}
 	// 原型的「返回」回到上一頁
 	$('back').addEventListener('click', (e) => {
 		if (history.length > 1) (e.preventDefault(), history.back());
@@ -72,9 +84,9 @@ const tabs = [
 		$('nickname').textContent = nickname;
 		$('avatar').textContent = nickname.slice(0, 1);
 		if (avatar) $('avatar').replaceChildren(Object.assign(new Image(), { src: URL.createObjectURL(avatar), alt: '', className: 'size-full object-cover' }));
-		$('coins').textContent = String(coins);
-		$('stamps').textContent = String(stamps);
-		$('sent').textContent = String(postcards.length);
+		countUp($('coins'), coins);
+		countUp($('stamps'), stamps);
+		countUp($('sent'), postcards.length);
 		$('level').textContent = level;
 	}
 </script>

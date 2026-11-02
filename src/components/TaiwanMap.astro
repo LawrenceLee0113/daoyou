@@ -2,6 +2,8 @@
 // Figma：特色郵筒的 台灣分開_*（每個縣市一張圖）＋黃色縣市標籤。
 // 地圖改用政府開放資料畫成 SVG，資料來源見 scripts/gen-taiwan-map.mjs。
 // 座標是設計稿 frame 扣掉頁首（147px）後的位置。
+// 點縣市時，被點的標籤會「長成」縣市頁的大標（設計稿 台中→台中 #2 的過場）。
+// 轉場名稱只在換頁那一刻加在被點的那一個標籤上（pageswap／pagereveal），不常駐在 17 個標籤上
 import map from '../data/taiwan-map.json';
 import { counties, mailboxes } from '../data/mailboxes';
 
@@ -74,6 +76,20 @@ const vertical: [string, number, number][] = [['yilan', 352, 183], ['hualien', 3
 </style>
 
 <script>
+	// 離開地圖去縣市頁：被點的標籤取名 county-title，跟縣市頁 h1 同名就會補間
+	const labelFor = (url?: string | null) => {
+		const slug = url && new URL(url).pathname.match(/\/map\/([^/]+)\/$/)?.[1];
+		return slug ? document.querySelector<HTMLElement>(`.label[data-slug="${slug}"]`) : null;
+	};
+	const name = (el: HTMLElement | null, t?: ViewTransition) => {
+		if (!el || !t) return;
+		el.style.viewTransitionName = 'county-title';
+		t.finished.finally(() => (el.style.viewTransitionName = ''));
+	};
+	addEventListener('pageswap', (e: any) => name(labelFor(e.activation?.entry?.url), e.viewTransition));
+	// 從縣市頁回到地圖：大標縮回標籤
+	addEventListener('pagereveal', (e: any) => name(labelFor((navigation as any)?.activation?.from?.url), e.viewTransition));
+
 	// 滑到標籤時，地圖上的縣市一起亮起來
 	document.querySelectorAll<HTMLElement>('.label').forEach((label) => {
 		const county = document.querySelector(`.county[data-slug="${label.dataset.slug}"]`)!;

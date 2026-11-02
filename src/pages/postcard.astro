@@ -10,7 +10,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const meta = Object.fromEntries(
 	mailboxes.map((m) => [m.id, { label: `${counties.find((c) => c.slug === m.county)!.name}・${m.name}`, nickname: m.nickname, postmark: m.postmark }]),
 );
-const bigBtn = 'mt-auto grid h-12 w-full place-items-center rounded-full bg-butter text-lg font-bold text-pink disabled:opacity-50';
+const bigBtn = 'press mt-auto grid h-12 w-full place-items-center rounded-full bg-butter text-lg font-bold text-pink disabled:opacity-50';
 const line = 'block w-full border-b border-input bg-transparent py-1.5 text-sm outline-none focus:border-pink';
 const pill = 'inline-flex h-9 items-center rounded-full border border-input px-5 text-lg font-bold text-muted peer-checked:border-butter peer-checked:bg-butter peer-checked:text-pink peer-focus-visible:outline-2 peer-focus-visible:outline-pink';
 const row = 'flex gap-6 border-b border-input py-3.5 text-md';
@@ -23,7 +23,7 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 			<p class="text-emoji leading-none" aria-hidden="true">📷</p>
 			<h1 class="mt-6 text-lg font-bold">先去郵筒打卡吧</h1>
 			<p class="mt-2.5 text-sm text-muted">明信片的正面會用你的打卡照，<br />到特色郵筒拍一張再回來寫。</p>
-			<a href={`${base}/map/`} class="mt-9 inline-grid h-10 w-40 place-items-center rounded-full bg-butter text-lg font-bold text-pink">去打卡</a>
+			<a href={`${base}/map/`} class="press mt-9 inline-grid h-10 w-40 place-items-center rounded-full bg-butter text-lg font-bold text-pink">去打卡</a>
 		</div>
 
 		<form id="compose" data-step="compose" hidden class="flex flex-1 flex-col" data-meta={JSON.stringify(meta)} novalidate>
@@ -94,10 +94,14 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 		</div>
 
 		<div id="sent" data-step="sent" hidden class="flex flex-1 flex-col items-center text-center">
-			<p class="mt-28 text-emoji-lg leading-none" aria-hidden="true">📮</p>
+			<!-- 信飛進郵筒 → 郵筒晃一下 → 島幣彈出來（步驟顯示出來時動畫自動播） -->
+			<p class="relative mt-28 text-emoji-lg leading-none" aria-hidden="true">
+				<span class="mailbox-gulp inline-block">📮</span>
+				<span class="letter-fly absolute top-1 left-1/2 -ml-4 text-4xl">✉️</span>
+			</p>
 			<h1 class="mt-8 text-3xl font-bold text-pink">明信片已寄出！</h1>
 			<p id="sent-text" class="mt-2 text-md text-muted"></p>
-			<p class="mt-5 rounded-full bg-butter/70 px-6 py-1.5 text-md font-bold text-pink">+{COINS_POSTCARD} 島幣</p>
+			<p class="pop-in mt-5 rounded-full bg-butter/70 px-6 py-1.5 text-md font-bold text-pink">+{COINS_POSTCARD} 島幣</p>
 			<a href={`${base}/profile/letters/`} onclick="event.preventDefault(); location.replace(this.href)" class:list={[bigBtn, 'mt-auto']}>查看我的信件</a>
 			<button type="button" data-go="compose" data-reset class="mt-4 text-md font-bold text-olive">再寫一張</button>
 		</div>

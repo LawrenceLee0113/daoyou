@@ -92,11 +92,55 @@ const slide = 'h-[190px] w-[320px] max-w-full shrink-0 snap-start rounded-2xl ob
 		</div>
 		<p class="mt-5 text-center text-sm text-muted">照片會自動收進「個人檔案 › 我的相簿」</p>
 	</dialog>
+	<!-- 上傳後的獎勵：第一次蓋郵票＋島幣，之後只飄島幣 -->
+	<div id="reward" hidden class="pointer-events-none fixed inset-0 z-50 grid place-items-center" aria-live="polite">
+		<div class="relative grid place-items-center">
+			<div id="reward-stamp" class="grid size-36 place-items-center rounded-full border-4 border-double border-pink bg-white/95 p-3 text-center text-pink shadow-soft">
+				<span class="text-xs font-bold">{county.fullName}</span>
+				<span class="text-xl leading-tight font-bold">{m.name}</span>
+				<span class="text-2xs font-bold tracking-widest">郵票 GET!</span>
+			</div>
+			<p id="reward-coins" class="absolute -bottom-12 rounded-full bg-butter px-5 py-1.5 text-2xl font-bold whitespace-nowrap text-pink shadow-soft"></p>
+		</div>
+	</div>
 </Layout>
 
 <script>
 	import { addPhoto, getPhotos, requireLogin } from '../../../lib/store';
-	import { MAX_PHOTOS_PER_MAILBOX as max } from '../../../lib/rules';
+	import { MAX_PHOTOS_PER_MAILBOX as max, COINS_FIRST_PHOTO, COINS_EXTRA_PHOTO } from '../../../lib/rules';
+
+	// 動畫跑完再藏起來：先移掉 class 重新觸發動畫
+	function play(el: HTMLElement, cls: string) {
+		el.classList.remove(cls);
+		void el.offsetWidth;
+		el.classList.add(cls);
+	}
+
+	function showReward(first: boolean) {
+		const box = $('reward'), stamp = $('reward-stamp'), coins = $('reward-coins');
+		box.classList.remove('fade-out');
+		box.hidden = false;
+		stamp.hidden = !first;
+		coins.textContent = `+${first ? COINS_FIRST_PHOTO : COINS_EXTRA_PHOTO} 島幣`;
+		if (first) play(stamp, 'stamp-in');
+		play(coins, 'coins-up');
+		setTimeout(() => play(box, 'fade-out'), 1800);
+		setTimeout(() => (box.hidden = true), 2100);
+	}
+
+	// 「已上傳！」滑下來，6 秒後收起來
+	let toastTimer = 0;
+	function showToast() {
+		const toast = $('toast');
+		clearTimeout(toastTimer);
+		toast.classList.remove('fade-out');
+		toast.hidden = false;
+		play(toast, 'toast-in');
+		toastTimer = setTimeout(() => {
+			play(toast, 'fade-out');
+			setTimeout(() => (toast.hidden = true), 300);
+		}, 6000);
+	}
 
 	const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 	const { mailbox: mailboxId, slide } = $('carousel').dataset as { mailbox: string; slide: string };
@@ -148,10 +192,12 @@ const slide = 'h-[190px] w-[320px] max-w-full shrink-0 snap-start rounded-2xl ob
 		btn.disabled = true;
 		if ($<HTMLInputElement>('save').checked) saveToDevice(picked); // 要在使用者點擊的當下呼叫
 		try {
+			const first = (await getPhotos(mailboxId)).length === 0;
 			await addPhoto(mailboxId, picked);
 			dialog.close();
 			await render();
-			$('toast').hidden = false;
+			showToast();
+			showReward(first);
 		} catch (e) {
 			alert(e instanceof Error ? e.message : '上傳失敗，請再試一次');
 		} finally {

@@ -18,13 +18,13 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 		<div class="relative mx-auto mt-[29px] h-6 max-w-[393px]">
 			<a href={`${base}/map/`} class="absolute top-1 left-[27px] text-md font-bold text-olive">← 返回</a>
 			<!-- 設計稿用 Nightgazer 字型，找不到下載來源，先用系統粗體（已記入待辦） -->
-			<h1 class="text-center text-5xl font-bold tracking-wider text-sage">{county.fullName}</h1>
+			<h1 class="mx-auto w-fit text-5xl font-bold tracking-wider text-sage" style="view-transition-name:county-title">{county.fullName}</h1>
 		</div>
 
 		<div class="mt-2 flex snap-x snap-mandatory justify-center-safe gap-[11px] overflow-x-auto px-[19px] pt-[11px] [scrollbar-width:none]">
 			{
-				list.map((m) => (
-					<article class:list={[card, 'h-[600px]']}>
+				list.map((m, i) => (
+					<article class:list={[card, 'rise h-[600px]']} style={`--i:${i}`}>
 						<Image src={m.cardPhoto} alt={m.name} widths={[320, 640]} sizes="320px" class="h-[240px] w-full rounded-photo object-cover" loading="eager" />
 						<h2 class="mt-[29px] text-2xl font-bold text-olive">{m.name}</h2>
 						<p class="mt-1.5 text-xs font-bold text-sage">{m.area}</p>
@@ -38,7 +38,7 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 			}
 			{
 				list.length === 0 && (
-					<article class:list={[card, 'h-[240px] justify-center pt-0']}>
+					<article class:list={[card, 'rise h-[240px] justify-center pt-0']}>
 						<h2 class="text-2xl font-bold text-olive">即將開放</h2>
 						<p class="mt-2.5 text-sm text-body">這裡的特色郵筒還在整理中，敬請期待！</p>
 						<a href={`${base}/map/`} class="mt-4 text-md font-bold text-pink">← 回到地圖</a>

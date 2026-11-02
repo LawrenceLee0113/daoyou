@@ -55,8 +55,8 @@ const menu = [
 				}
 			</ul>
 			<button popovertarget="site-menu" class="p-2 text-header-pink lg:hidden" aria-label="開啟選單">
-				<svg width="20" height="18" viewBox="0 0 20 18" stroke="currentColor" stroke-width="2" aria-hidden="true">
-					<path d="M0 1h20M0 9h20M0 17h20" />
+				<svg class="burger" width="20" height="18" viewBox="0 0 20 18" stroke="currentColor" stroke-width="2" aria-hidden="true">
+					<line x1="0" y1="1" x2="20" y2="1" /><line x1="0" y1="9" x2="20" y2="9" /><line x1="0" y1="17" x2="20" y2="17" />
 				</svg>
 			</button>
 		</div>
@@ -77,8 +77,8 @@ const menu = [
 		</div>
 		<ul class="mt-5 flex flex-col gap-3.5 px-2.5 font-round text-sm">
 			{
-				menu.map((m) => (
-					<li><a href={m.href} aria-current={here.startsWith(m.href) ? 'page' : undefined} class="aria-[current]:font-bold">{m.name}</a></li>
+				menu.map((m, i) => (
+					<li style={`--i:${i}`}><a href={m.href} aria-current={here.startsWith(m.href) ? 'page' : undefined} class="aria-[current]:font-bold">{m.name}</a></li>
 				))
 			}
 		</ul>

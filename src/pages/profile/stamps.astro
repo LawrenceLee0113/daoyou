@@ -39,10 +39,16 @@ const countyOfMailbox = Object.fromEntries(mailboxes.map((m) => [m.id, m.county]
 	if (isLoggedIn()) {
 		const grid = document.getElementById('stamps-grid')!;
 		const map = JSON.parse(grid.dataset.map!) as Record<string, string>;
-		const got = new Set(summarize(await getPhotos()).stampIds.map((id) => map[id]));
+		const photos = await getPhotos();
+		const got = new Set(summarize(photos).stampIds.map((id) => map[id]));
+		// 每個縣市第一次打卡的時間：24 小時內的算「新收集」，翻一下亮起來
+		const first = new Map<string, number>();
+		for (const p of photos) first.set(map[p.mailboxId], Math.min(first.get(map[p.mailboxId]) ?? Infinity, p.createdAt));
+		let n = 0;
 		grid.querySelectorAll<HTMLElement>('[data-county]').forEach((li) => {
 			if (!got.has(li.dataset.county!)) return;
 			li.dataset.on = '';
+			if (Date.now() - first.get(li.dataset.county!)! < 86_400_000) (li.dataset.new = ''), li.style.setProperty('--i', String(n++));
 			li.append(Object.assign(document.createElement('span'), { className: 'sr-only', textContent: '（已收集）' }));
 		});
 		const total = grid.children.length;
