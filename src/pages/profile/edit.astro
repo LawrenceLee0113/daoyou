@@ -112,7 +112,7 @@ const box = 'mt-1.5 block w-full rounded-[10px] border border-input bg-white px-
 
 	document.getElementById('logout')!.addEventListener('click', () => {
 		logout();
-		location.href = `${base}/`;
+		location.replace(`${base}/login/`);
 	});
 
 	document.getElementById('reset')!.addEventListener('click', async () => {

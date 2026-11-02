@@ -10,9 +10,11 @@ interface Props {
 	header?: boolean;
 	// 需要登入的頁面：沒登入在畫面出來前就導去登入頁；有登入先藏內容，頁面用 store.whenReady 填好資料才顯示
 	auth?: boolean;
+	// 只給沒登入的人看的頁面（登入頁）：已登入在畫面出來前就轉到 ?next= 指的站內頁，沒有就到個人檔案
+	guest?: boolean;
 }
 
-const { title, description = '寄存島嶼的地方郵誌', header = true, auth = false } = Astro.props;
+const { title, description = '寄存島嶼的地方郵誌', header = true, auth = false, guest = false } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
@@ -24,6 +26,21 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<title>{title ? `${title}｜島郵 Isle Post` : '島郵 Isle Post'}</title>
+		{
+			guest && (
+				<script is:inline define:vars={{ key: LOGIN_KEY, email: DEMO_EMAIL, base }}>
+					let ok = false;
+					try {
+						ok = localStorage.getItem(key) === email;
+					} catch {}
+					if (ok) {
+						// 只接受站內路徑，避免被帶到別的網站（同 login.astro）
+						const next = new URLSearchParams(location.search).get('next');
+						location.replace(next?.startsWith(`${base}/`) && !next.startsWith('//') ? next : `${base}/profile/`);
+					}
+				</script>
+			)
+		}
 		{
 			auth && (
 				<script is:inline define:vars={{ key: LOGIN_KEY, email: DEMO_EMAIL, login: `${base}/login/` }}>

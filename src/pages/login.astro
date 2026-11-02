@@ -5,7 +5,7 @@ import Layout from '../layouts/Layout.astro';
 const field = 'mt-1.5 block h-[50px] rounded-[20px] border-2 border-black bg-white px-4 text-md outline-none placeholder:text-input focus:border-pink';
 ---
 
-<Layout title="登入">
+<Layout guest title="登入">
 	<main class="flex flex-1 flex-col px-[42px] pt-[125px] pb-16 md:justify-center md:py-16">
 		<h1 class="sr-only">登入島郵</h1>
 		<form id="login" class="mx-auto flex w-full max-w-[309px] flex-col tracking-[0.1em]" novalidate>
@@ -62,7 +62,7 @@ const field = 'mt-1.5 block h-[50px] rounded-[20px] border-2 border-black bg-whi
 		}
 		// 只接受站內路徑，避免被帶到別的網站
 		const next = new URLSearchParams(location.search).get('next');
-		location.href = next?.startsWith(`${base}/`) && !next.startsWith('//') ? next : `${base}/map/`;
+		location.href = next?.startsWith(`${base}/`) && !next.startsWith('//') ? next : `${base}/profile/`;
 	});
 	document.querySelectorAll('.social').forEach((b) =>
 		b.addEventListener('click', () => (error.textContent = '目前只開放示範帳號登入')),
