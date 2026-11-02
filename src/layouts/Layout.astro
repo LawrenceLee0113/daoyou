@@ -23,9 +23,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		<title>{title ? `${title}｜島郵 Isle Post` : '島郵 Isle Post'}</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<!-- 字型樣式表不擋住第一次繪製（media=print 先不套用，載完再切成 all），換頁才不會卡在等字型 -->
 		<link
 			rel="stylesheet"
 			href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC&family=Chiron+Hei+HK:wght@500&family=Chiron+Sung+HK:wght@700&display=swap"
+			media="print"
+			onload="this.media='all'"
 		/>
 	</head>
 	<body class="bg-white font-sans text-ink antialiased">

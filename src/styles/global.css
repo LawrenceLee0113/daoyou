@@ -67,6 +67,11 @@
 	--shadow-soft: 0 4px 4px #00000040;
 }
 
+/* iPhone 點連結、按鈕時預設會閃一塊藍色／灰色底，關掉（鍵盤操作的焦點框還在） */
+html {
+	-webkit-tap-highlight-color: transparent;
+}
+
 /* Figma 原型的換頁轉場：DISSOLVE 0.25s EASE_OUT（瀏覽器不支援時就直接換頁） */
 @view-transition {
 	navigation: auto;

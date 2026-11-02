@@ -74,7 +74,8 @@ const slide = 'h-[190px] w-[320px] max-w-full shrink-0 snap-start rounded-2xl ob
 
 	<dialog
 		id="preview"
-		class="m-0 h-dvh max-h-none w-full max-w-none bg-black text-white backdrop:bg-black md:m-auto md:h-auto md:max-h-[95dvh] md:max-w-md md:rounded-3xl md:pb-8 md:backdrop:bg-black/70"
+		tabindex="-1"
+		class="m-0 h-dvh outline-none max-h-none w-full max-w-none bg-black text-white backdrop:bg-black md:m-auto md:h-auto md:max-h-[95dvh] md:max-w-md md:rounded-3xl md:pb-8 md:backdrop:bg-black/70"
 		aria-labelledby="preview-title"
 	>
 		<div class="relative flex h-[100px] items-start justify-center pt-14">
@@ -184,7 +185,8 @@ const slide = 'h-[190px] w-[320px] max-w-full shrink-0 snap-start rounded-2xl ob
 		file.value = ''; // 同一張再選一次也要觸發 change
 		if (!picked) return;
 		$<HTMLImageElement>('preview-img').src = URL.createObjectURL(picked);
-		if (!dialog.open) dialog.showModal();
+		// 焦點放在對話框本身，不然瀏覽器會自動跳到 ✕ 上畫藍框
+		if (!dialog.open) dialog.showModal(), dialog.focus();
 	});
 	$('upload').addEventListener('click', async () => {
 		if (!picked) return;
