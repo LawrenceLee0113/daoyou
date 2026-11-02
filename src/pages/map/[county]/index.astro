@@ -1,8 +1,8 @@
 ---
 // Figma：台北、台中 #2（有卡片的台中）。設計稿另有只有地圖的「台中」等 frame，是點進來時的過場，網頁不做。
 // 卡片照設計稿：有詳細頁的郵筒（mailboxes）＋還沒有詳細頁的（upcoming，看更多換成「即將開放」）。
-// 手機卡片固定 600px 高，內容比較長的（直式照片）在卡片裡上下捲（原型 Frame 15～17 VERTICAL_SCROLLING）；
-// 平板以上空間夠，卡片長到內容高度、同一列等高。
+// 卡片一整排左右滑（原型 Frame 12 HORIZONTAL_SCROLLING），平板以上加左右箭頭給滑鼠用。
+// 卡片固定 600px 高，內容比較長的（直式照片）在卡片裡上下捲（原型 Frame 15～17 VERTICAL_SCROLLING）。
 // 沒有郵筒資料的縣市顯示「即將開放」
 import { Image } from 'astro:assets';
 import Layout from '../../../layouts/Layout.astro';
@@ -25,11 +25,11 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 			<h1 class="mx-auto w-fit text-5xl font-bold tracking-wider text-sage" style="view-transition-name:county-title">{county.fullName}</h1>
 		</div>
 
-		<!-- 手機：左右滑；平板以上：卡片排成多列置中 -->
-		<div class="mt-2 flex snap-x snap-mandatory justify-center-safe gap-[11px] overflow-x-auto px-[19px] pt-[11px] [scrollbar-width:none] md:mx-auto md:max-w-6xl md:flex-wrap md:justify-center md:gap-4 md:overflow-visible md:px-8">
+		<div class="relative mx-auto max-w-6xl">
+		<div id="cards" class="mt-2 flex snap-x snap-mandatory justify-center-safe gap-[11px] overflow-x-auto scroll-smooth px-[19px] pt-[11px] [scrollbar-width:none] md:px-16">
 			{
 				list.map((m, i) => (
-					<article class:list={[card, 'rise h-[600px] overflow-y-auto overscroll-contain [scrollbar-width:none] md:h-auto md:min-h-[600px] md:overflow-visible']} style={`--i:${i}`}>
+					<article class:list={[card, 'rise h-[600px] overflow-y-auto overscroll-y-contain [scrollbar-width:none]']} style={`--i:${i}`}>
 						{/* 橫式照片 320×240、直式 320×427，照原圖比例 */}
 						<Image src={m.cardPhoto} alt={m.name} widths={[320, 640, 960]} sizes="320px" class="h-auto w-full shrink-0 rounded-photo" loading={i < 2 ? 'eager' : 'lazy'} />
 						<h2 class="mt-[29px] text-2xl font-bold text-olive">{m.name}</h2>
@@ -61,5 +61,33 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 				)
 			}
 		</div>
+		{
+			list.length > 1 &&
+				[-1, 1].map((dir) => (
+					<button
+						type="button"
+						data-dir={dir}
+						class:list={['absolute top-1/2 hidden size-11 -translate-y-1/2 place-items-center rounded-full border-[1.5px] border-sage bg-white text-xl font-bold text-olive shadow-soft disabled:opacity-0 md:grid', dir < 0 ? 'left-2' : 'right-2']}
+						aria-label={dir < 0 ? '上一張' : '下一張'}
+						aria-controls="cards"
+					>
+						{dir < 0 ? '←' : '→'}
+					</button>
+				))
+		}
+		</div>
 	</main>
 </Layout>
+
+<script>
+	// 平板以上的左右箭頭：一次捲一張卡片，捲到頭的那一邊隱藏
+	const cards = document.getElementById('cards')!;
+	const buttons = document.querySelectorAll<HTMLButtonElement>('[aria-controls="cards"]');
+	const step = () => (cards.firstElementChild as HTMLElement).offsetWidth + parseFloat(getComputedStyle(cards).columnGap);
+	const sync = () =>
+		buttons.forEach((b) => (b.disabled = b.dataset.dir === '-1' ? cards.scrollLeft <= 1 : cards.scrollLeft + cards.clientWidth >= cards.scrollWidth - 1));
+	buttons.forEach((b) => b.addEventListener('click', () => cards.scrollBy({ left: Number(b.dataset.dir) * step() })));
+	cards.addEventListener('scroll', sync, { passive: true });
+	addEventListener('resize', sync);
+	sync();
+</script>
