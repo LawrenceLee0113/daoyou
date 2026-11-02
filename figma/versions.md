@@ -13,7 +13,7 @@
 | 封面 | `src/pages/index.astro` | 主視覺可點，進特色郵筒 |
 | 登入 | `src/pages/login.astro` | 第三方登入、註冊沒有功能 |
 | 特色郵筒 | `src/pages/map/index.astro` | 地圖改用開放資料 SVG（`src/components/TaiwanMap.astro`），17 個縣市標籤都能點 |
-| 台北、台中 #2（有卡片的台中） | `src/pages/map/[county]/index.astro` | 標題＋整排左右滑的郵筒卡片（台北 5 張、台中 1 張，平板以上加左右箭頭）；沒有詳細頁的郵筒在 `upcoming`，看更多換成「詳細介紹即將開放」；直式照片的卡片在卡片內上下捲 |
+| 台北、台中 #2（有卡片的台中） | `src/pages/map/[county]/index.astro` | 標題＋整排左右滑的郵筒卡片（台北 5 張、台中 1 張，平板以上加左右箭頭）；沒有詳細頁的郵筒在 `upcoming`，看更多點了顯示「詳細介紹即將開放」提示；卡片高度跟著內容（使用者決定不在卡片內捲動） |
 | 台中（只有地圖）、新北…臺東 | `src/pages/map/[county]/index.astro` | 「台中」是點進來的過場，不做；沒資料的縣市顯示「即將開放」 |
 | 台北-歪腰郵筒、台中-新社郵筒、…（已上傳） | `src/pages/map/[county]/[mailbox].astro` | 同一頁的「上傳前／上傳後」狀態 |
 | 歪腰郵筒-預覽、台中郵筒-預覽 | `src/pages/map/[county]/[mailbox].astro` | 郵筒頁裡的全螢幕 `<dialog>` |

@@ -1,8 +1,9 @@
 ---
 // Figma：台北、台中 #2（有卡片的台中）。設計稿另有只有地圖的「台中」等 frame，是點進來時的過場，網頁不做。
-// 卡片照設計稿：有詳細頁的郵筒（mailboxes）＋還沒有詳細頁的（upcoming，看更多換成「即將開放」）。
+// 卡片照設計稿：有詳細頁的郵筒（mailboxes）＋還沒有詳細頁的（upcoming）。
 // 卡片一整排左右滑（原型 Frame 12 HORIZONTAL_SCROLLING），平板以上加左右箭頭給滑鼠用。
-// 卡片固定 600px 高，內容比較長的（直式照片）在卡片裡上下捲（原型 Frame 15～17 VERTICAL_SCROLLING）。
+// 卡片高度跟著內容、頂端對齊（使用者決定：不照原型 Frame 15～17 在卡片內上下捲）。
+// 每張最下面都有「看更多」；還沒有詳細頁的郵筒點了顯示「詳細介紹即將開放」提示。
 // 沒有郵筒資料的縣市顯示「即將開放」
 import { Image } from 'astro:assets';
 import Layout from '../../../layouts/Layout.astro';
@@ -26,26 +27,26 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 		</div>
 
 		<div class="relative mx-auto max-w-6xl">
-		<div id="cards" class="mt-2 flex snap-x snap-mandatory justify-center-safe gap-[11px] overflow-x-auto scroll-smooth px-[19px] pt-[11px] [scrollbar-width:none] md:px-16">
+		<div id="cards" class="mt-2 flex snap-x snap-mandatory items-start justify-center-safe gap-[11px] overflow-x-auto scroll-smooth px-[19px] pt-[11px] [scrollbar-width:none] md:px-16">
 			{
 				list.map((m, i) => (
-					<article class:list={[card, 'rise h-[600px] overflow-y-auto overscroll-y-contain [scrollbar-width:none]']} style={`--i:${i}`}>
+					<article class:list={[card, 'rise']} style={`--i:${i}`}>
 						{/* 橫式照片 320×240、直式 320×427，照原圖比例 */}
-						<Image src={m.cardPhoto} alt={m.name} widths={[320, 640, 960]} sizes="320px" class="h-auto w-full shrink-0 rounded-photo" loading={i < 2 ? 'eager' : 'lazy'} />
+						<Image src={m.cardPhoto} alt={m.name} widths={[320, 640, 960]} sizes="320px" class="h-auto w-full rounded-photo" loading={i < 2 ? 'eager' : 'lazy'} />
 						<h2 class="mt-[29px] text-2xl font-bold text-olive">{m.name}</h2>
 						<p class="mt-1.5 text-xs font-bold text-sage">{m.area}</p>
 						{/* 有手動換行的照設計稿斷行（較長的行允許超出卡片內距一點）；沒換行的限寬自動折行 */}
 						<p class:list={['mt-2.5 text-sm whitespace-pre-line text-body', m.summary.includes('\n') ? '-mx-2' : 'max-w-[200px]']}>{m.summary}</p>
-						{/* 短的卡片把插圖推到底部，長的至少留 24px */}
-						<div class="min-h-6 flex-1 shrink-0"></div>
-						<Image src={m.illustration} alt="" height={102} densities={[1, 2, 3]} class="h-[102px] w-auto shrink-0" />
+						<Image src={m.illustration} alt="" height={102} densities={[1, 2, 3]} class="mt-6 h-[102px] w-auto" />
 						{
 							hasPage.has(m.id) ? (
 								<a href={`${base}/map/${county.slug}/${m.id}/`} class="mt-4 mb-6 text-md font-bold text-pink after:absolute after:inset-0 after:rounded-mailbox">
 									看更多 →<span class="sr-only">：{m.name}</span>
 								</a>
 							) : (
-								<p class="mt-4 mb-6 shrink-0 text-md font-bold text-faint">詳細介紹即將開放</p>
+								<button type="button" data-soon class="mt-4 mb-6 text-md font-bold text-pink">
+									看更多 →<span class="sr-only">：{m.name}</span>
+								</button>
 							)
 						}
 					</article>
@@ -76,6 +77,9 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 				))
 		}
 		</div>
+		<p id="soon" role="status" hidden class="fixed inset-x-0 bottom-8 z-50 mx-auto flex h-11 w-[274px] items-center justify-center rounded-full bg-toast text-md font-bold text-white">
+			詳細介紹即將開放，敬請期待！
+		</p>
 	</main>
 </Layout>
 
@@ -88,6 +92,20 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 		buttons.forEach((b) => (b.disabled = b.dataset.dir === '-1' ? cards.scrollLeft <= 1 : cards.scrollLeft + cards.clientWidth >= cards.scrollWidth - 1));
 	buttons.forEach((b) => b.addEventListener('click', () => cards.scrollBy({ left: Number(b.dataset.dir) * step() })));
 	cards.addEventListener('scroll', sync, { passive: true });
+
+	// 還沒有詳細頁的「看更多」：提示從上面滑進來，2 秒後收起
+	const soon = document.getElementById('soon')!;
+	let timer = 0;
+	document.querySelectorAll('[data-soon]').forEach((b) =>
+		b.addEventListener('click', () => {
+			clearTimeout(timer);
+			soon.hidden = false;
+			soon.classList.remove('toast-in');
+			void soon.offsetWidth; // 連點時重播動畫
+			soon.classList.add('toast-in');
+			timer = setTimeout(() => (soon.hidden = true), 2000);
+		}),
+	);
 	addEventListener('resize', sync);
 	sync();
 </script>
