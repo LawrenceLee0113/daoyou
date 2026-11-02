@@ -1,5 +1,5 @@
 ---
-// Figma：在地風味（商品列表＋搜尋）。設計稿沒有購買流程，只展示
+// Figma：在地風味（商品列表＋搜尋）。商品資料照抄 i郵購，點了開 i郵購的商品頁購買
 import Layout from '../layouts/Layout.astro';
 import { products } from '../data/products';
 ---
@@ -20,19 +20,26 @@ import { products } from '../data/products';
 		<ul id="products" class="mt-[33px] grid grid-cols-2 gap-x-6 gap-y-10 font-round md:grid-cols-3 lg:grid-cols-4">
 			{
 				products.map((p) => (
-					<li data-text={`${p.name} ${p.shop}`} class="flex flex-col rounded-product bg-sand p-[7px] pb-3 shadow-soft">
-						<div class="grid aspect-square place-items-center rounded-product-photo bg-empty text-sm text-faint" role="img" aria-label="商品照片（準備中）">照片準備中</div>
-						<h2 class="mt-1 px-0.5 text-sm leading-tight whitespace-pre-line">{p.name}</h2>
-						<p class="mt-auto flex items-baseline gap-1.5 px-0.5 pt-1">
-							<span class="text-2xl text-price">NT${p.price}</span>
-							<s class="text-sm text-stone">NT${p.original}</s>
-						</p>
-						<p class="px-0.5 text-2xs text-black/60">{p.shop}</p>
+					<li data-text={`${p.name} ${p.shop}`}>
+						<a href={p.url} target="_blank" rel="noopener" class="flex h-full flex-col rounded-product bg-sand p-[7px] pb-3 shadow-soft transition-transform hover:-translate-y-1">
+							<div class="relative grid aspect-square place-items-center rounded-product-photo bg-empty text-sm text-faint" role="img" aria-label="商品照片（準備中）">
+								照片準備中
+								{p.soldOut && <span class="absolute top-2 left-2 rounded-full bg-black/55 px-2 py-0.5 text-2xs text-white">補貨中</span>}
+							</div>
+							<h2 class="mt-1 line-clamp-2 px-0.5 text-sm leading-tight">{p.name}</h2>
+							<p class="mt-auto flex items-baseline gap-1.5 px-0.5 pt-1">
+								<span class="text-2xl text-price">NT${p.price.toLocaleString()}</span>
+								<s class="text-sm text-stone">NT${p.original.toLocaleString()}</s>
+							</p>
+							<p class="truncate px-0.5 text-2xs text-black/60">{p.shop}</p>
+							<span class="sr-only">（在 i郵購開啟）</span>
+						</a>
 					</li>
 				))
 			}
 		</ul>
 		<p id="none" hidden class="mt-16 text-center text-sm text-muted">找不到符合的商品</p>
+		<p class="mt-10 text-center text-xs text-muted">商品資料來自 <a href="https://www.postmall.com.tw/mallProductList.aspx?kind=517&pkind=1" target="_blank" rel="noopener" class="underline">中華郵政 i郵購</a>，價格與庫存以 i郵購為準</p>
 	</main>
 </Layout>
 
