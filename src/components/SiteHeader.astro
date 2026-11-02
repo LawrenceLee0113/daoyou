@@ -45,7 +45,7 @@ const menu = [
 	</div>
 	<nav class="bg-header-bar" aria-label="主選單">
 		<div class="mx-auto flex h-[60px] max-w-6xl items-center px-5 lg:px-8">
-			<a href={`${base}/`} class="mr-auto"><Image src={logo} alt="島郵 Isle Post 首頁" width={48} height={30} /></a>
+			<a href={`${base}/`} class="mr-auto"><Image src={logo} alt="島郵 Isle Post 首頁" width={48} densities={[1, 2, 3]} loading="eager" /></a>
 			<!-- 電腦版：選單直接攤開在頁首 -->
 			<ul class="hidden gap-8 font-round text-md text-pink lg:flex">
 				{
@@ -68,7 +68,7 @@ const menu = [
 		class="fixed inset-auto top-[146px] right-0 m-0 w-[184px] bg-header-pink p-0 pb-5 text-white shadow-soft md:right-[max(0px,calc((100vw-72rem)/2))]"
 	>
 		<div class="flex items-start justify-between px-2.5 pt-4">
-			<a href={`${base}/`}><Image src={logoWhite} alt="島郵 Isle Post 首頁" width={48} height={30} /></a>
+			<a href={`${base}/`}><Image src={logoWhite} alt="島郵 Isle Post 首頁" width={48} densities={[1, 2, 3]} /></a>
 			<button popovertarget="site-menu" popovertargetaction="hide" class="mr-6 p-1" aria-label="關閉選單">
 				<svg width="20" height="20" viewBox="0 0 20 20" stroke="currentColor" stroke-width="2" aria-hidden="true">
 					<path d="M0 0l20 20M20 0L0 20" />
