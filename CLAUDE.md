@@ -12,7 +12,7 @@
 
 - Astro 7（純靜態輸出）+ Tailwind CSS 4（`@tailwindcss/vite`）
 - Node 24（見 `.nvmrc`；Astro 需要 >= 22.23.4，執行前先 `nvm use`）
-- 部署：push 到 `main` → `.github/workflows/deploy.yml` → https://lawrencelee0113.github.io/daoyou/
+- 部署：push 到 `main` → `.github/workflows/deploy.yml` → https://isleposts.com/（自訂網域，GitHub repo → Settings → Pages 設定；DNS 在 IONOS）
 
 ## 指令
 
@@ -22,7 +22,7 @@
 
 ## GitHub Pages 注意事項
 
-- 網站掛在子路徑 `/daoyou`。站內連結與 `public/` 的資源**不可寫死 `/` 開頭**，要接上 base：
+- 網站在網域根目錄（2026-11-03 從子路徑 `/daoyou` 搬到 isleposts.com）。站內連結與 `public/` 的資源仍一律接上 base、**不可寫死 `/` 開頭**，之後換路徑只要改 `astro.config.mjs`：
   `const base = import.meta.env.BASE_URL.replace(/\/$/, '');` → `href={`${base}/about/`}`
 - `src/` 裡用 `import` 引入的圖片、CSS 會自動處理 base，不需要手動加。
 - 只能輸出靜態檔：不要用 SSR、API routes、server actions。
@@ -63,7 +63,7 @@ Figma 裡的登入、上傳照片等流程**只做前端**，不串接任何後�
 - 所有讀寫都集中在 `src/lib/store.ts`，頁面和元件不要直接碰 `localStorage` 或 IndexedDB。之後要接真的後端時只需要改這個檔案。
 - 登入：只有一組預設帳號，寫成 `store.ts` 裡的常數（帳號 `repost116.grad@gmail.com`、密碼 `re123456`，使用者已確認可以公開）。登入狀態存在 `localStorage`。需要登入的頁面用前端 JS 檢查，沒登入就導回登入頁。這不是安全機制，不要存任何真實的密碼或個資。
 - 照片：**每個郵筒最多 3 張**（郵筒數量不限）。用 `<input type="file" accept="image/*" capture="environment">` 叫出手機內建相機（也可從相簿選），不在網頁裡做即時取景。存在 IndexedDB（以 Blob 形式），**不能用 localStorage**（上限只有約 5MB）。存之前先用 canvas 把最長邊縮到 1600px、轉成 JPEG（品質 0.8）。
-- 命名：`localStorage` 的 key 和 IndexedDB 的資料庫名稱都要加上 `daoyou` 前綴，因為 `lawrencelee0113.github.io` 底下的其他專案共用同一塊儲存空間。
+- 命名：`localStorage` 的 key 和 IndexedDB 的資料庫名稱都要加上 `daoyou` 前綴（當初掛在 `lawrencelee0113.github.io` 底下，跟其他專案共用儲存空間；搬到自己的網域後保留，改名會讓既有資料讀不到）。
 - 首次寫入時呼叫 `navigator.storage.persist()`，降低 iOS Safari 清除資料的機率。不做 PWA／加入主畫面：使用者已接受 iOS Safari 在 7 天沒使用後可能清掉資料。
 - 所有讀取都要能處理「資料不存在」（無痕模式、被清除）的情況，畫面退回初始狀態，不可以壞掉。
 

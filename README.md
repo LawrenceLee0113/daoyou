@@ -1,11 +1,11 @@
 # daoyou
 
-依照 Figma 設計稿製作的靜態網站，網址：https://lawrencelee0113.github.io/daoyou/
+依照 Figma 設計稿製作的靜態網站，網址：https://isleposts.com/
 
 ```sh
 nvm use        # Node 24
 npm install
-npm run dev    # http://localhost:4321/daoyou/
+npm run dev    # http://localhost:4321/
 npm run build  # 輸出到 dist/
 ```
 
