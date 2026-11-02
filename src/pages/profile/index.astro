@@ -12,7 +12,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const labels = Object.fromEntries(mailboxes.map((m) => [m.id, `${counties.find((c) => c.slug === m.county)!.name}・${m.name}`]));
 ---
 
-<Layout title="個人檔案">
+<Layout auth title="個人檔案">
 	<Panel class="pt-[34px] pb-6 md:max-w-3xl">
 		<ProfileHeader tab="album" />
 

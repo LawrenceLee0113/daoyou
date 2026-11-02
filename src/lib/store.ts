@@ -3,11 +3,11 @@
 import { MAX_PHOTOS_PER_MAILBOX } from './rules';
 
 // 示範用的預設帳號，使用者已確認可以公開。這不是安全機制。
-const DEMO_EMAIL = 'repost116.grad@gmail.com';
+export const DEMO_EMAIL = 'repost116.grad@gmail.com';
 const DEMO_PASSWORD = 're123456';
 
 // lawrencelee0113.github.io 底下的專案共用同一塊儲存空間，key 一律加 daoyou 前綴
-const LOGIN_KEY = 'daoyou:login';
+export const LOGIN_KEY = 'daoyou:login';
 const DB_NAME = 'daoyou';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -37,6 +37,18 @@ export function requireLogin() {
 	if (isLoggedIn()) return true;
 	location.href = `${base}/login/?next=${encodeURIComponent(location.pathname + location.search)}`;
 	return false;
+}
+
+// 需要登入的頁面（Layout auth）在 <head> 先把內容藏起來，所有 whenReady 都填完才一起顯示，
+// 避免刷新時先閃出預設值（旅人小島、0、空相簿）再跳成真資料
+let holds = 0;
+export async function whenReady(fill: () => Promise<void>) {
+	holds++;
+	try {
+		await fill();
+	} finally {
+		if (--holds === 0) delete document.documentElement.dataset.pending;
+	}
 }
 
 export interface Photo {

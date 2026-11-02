@@ -214,7 +214,7 @@ dialog[open] {
 	}
 }
 
-/* 9. 選單：從右上角展開、項目依序出現；三槓變叉叉 */
+/* 9. 選單：從右上角展開、項目依序出現；三槓收起來 */
 #site-menu {
 	transform-origin: top right;
 	transition:
@@ -228,6 +228,7 @@ dialog[open] {
 #site-menu:popover-open {
 	opacity: 1;
 	transform: none;
+	transition-delay: 0.08s;
 }
 @starting-style {
 	#site-menu:popover-open {
@@ -239,21 +240,23 @@ dialog[open] {
 	animation: rise 0.3s both;
 	animation-delay: calc(0.06s + var(--i, 0) * 0.04s);
 }
+/* 打開選單時三條線依序往右縮掉（像被收進選單），選單接著展開；選單裡有自己的 ✕，所以三槓不變叉叉 */
 .burger line {
 	transform-box: fill-box;
-	transform-origin: center;
+	transform-origin: right center;
 	transition:
-		transform 0.25s,
+		transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
 		opacity 0.2s;
 }
-header:has(#site-menu:popover-open) .burger line:nth-child(1) {
-	transform: translateY(8px) rotate(45deg);
+.burger line:nth-child(2) {
+	transition-delay: 0.04s;
 }
-header:has(#site-menu:popover-open) .burger line:nth-child(2) {
+.burger line:nth-child(3) {
+	transition-delay: 0.08s;
+}
+header:has(#site-menu:popover-open) .burger line {
 	opacity: 0;
-}
-header:has(#site-menu:popover-open) .burger line:nth-child(3) {
-	transform: translateY(-8px) rotate(-45deg);
+	transform: scaleX(0);
 }
 
 /* 10. 「已上傳！」提示從上面滑下來 */

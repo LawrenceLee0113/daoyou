@@ -8,7 +8,7 @@ import { counties, mailboxes } from '../../data/mailboxes';
 const countyOfMailbox = Object.fromEntries(mailboxes.map((m) => [m.id, m.county]));
 ---
 
-<Layout title="郵票冊">
+<Layout auth title="郵票冊">
 	<Panel class="pt-[34px] pb-6 md:max-w-3xl">
 		<ProfileHeader tab="stamps" />
 

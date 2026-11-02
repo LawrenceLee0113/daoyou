@@ -10,8 +10,7 @@ import mapTitle from '../../assets/map-title.png';
 	<main class="h-[705px] overflow-hidden">
 		<!-- 地圖跟標籤照設計稿 393px 寬的座標排，螢幕比較寬時整塊置中 -->
 		<div id="map-stage" class="relative mx-auto h-full w-[393px]">
-			<h1 class="absolute top-8 left-[27px]"><Image src={mapTitle} alt="臺灣特色郵筒地圖" width={187} height={20} loading="eager" /></h1>
-			<p class="absolute top-[60px] left-[27px] flex items-center gap-1 text-2xs text-muted" aria-hidden="true"><span class="size-2 rounded-full bg-pink"></span>有特色郵筒</p>
+			<h1 class="absolute top-8 left-[27px]"><Image src={mapTitle} alt="臺灣特色郵筒地圖" width={187} height={20} densities={[1, 2]} loading="eager" /></h1>
 			<TaiwanMap />
 		</div>
 	</main>

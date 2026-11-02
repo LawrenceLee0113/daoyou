@@ -29,7 +29,7 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 						<h2 class="mt-[29px] text-2xl font-bold text-olive">{m.name}</h2>
 						<p class="mt-1.5 text-xs font-bold text-sage">{m.area}</p>
 						<p class="mt-2.5 max-w-[200px] text-sm whitespace-pre-line text-body">{m.summary}</p>
-						<Image src={m.illustration} alt="" height={102} class="mt-auto h-[102px] w-auto" />
+						<Image src={m.illustration} alt="" height={102} densities={[1, 2, 3]} class="mt-auto h-[102px] w-auto" />
 						<a href={`${base}/map/${county.slug}/${m.id}/`} class="mt-4 mb-6 text-md font-bold text-pink after:absolute after:inset-0 after:rounded-mailbox">
 							看更多 →<span class="sr-only">：{m.name}</span>
 						</a>

@@ -1,15 +1,18 @@
 ---
 import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
+import { DEMO_EMAIL, LOGIN_KEY } from '../lib/store';
 
 interface Props {
 	title?: string;
 	description?: string;
 	// 相機、預覽這類全螢幕畫面不要頁首
 	header?: boolean;
+	// 需要登入的頁面：沒登入在畫面出來前就導去登入頁；有登入先藏內容，頁面用 store.whenReady 填好資料才顯示
+	auth?: boolean;
 }
 
-const { title, description = '寄存島嶼的地方郵誌', header = true } = Astro.props;
+const { title, description = '寄存島嶼的地方郵誌', header = true, auth = false } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
@@ -21,6 +24,29 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<title>{title ? `${title}｜島郵 Isle Post` : '島郵 Isle Post'}</title>
+		{
+			auth && (
+				<script is:inline define:vars={{ key: LOGIN_KEY, email: DEMO_EMAIL, login: `${base}/login/` }}>
+					// 同步執行、還沒畫第一格就決定：比 module script 早，才不會先閃一下。規則同 store.isLoggedIn
+					let ok = false;
+					try {
+						ok = localStorage.getItem(key) === email;
+					} catch {}
+					if (!ok) location.replace(`${login}?next=${encodeURIComponent(location.pathname + location.search)}`);
+					else {
+						document.documentElement.dataset.pending = '';
+						// ponytail: 保險，script 載入失敗也不會一直空白
+						setTimeout(() => delete document.documentElement.dataset.pending, 3000);
+					}
+				</script>
+				<style is:global>
+					/* 只藏 Panel 裡的內容，底色和頁首照常出現 */
+					html[data-pending] main > * > * {
+						visibility: hidden;
+					}
+				</style>
+			)
+		}
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<!-- 字型樣式表不擋住第一次繪製（media=print 先不套用，載完再切成 all），換頁才不會卡在等字型 -->

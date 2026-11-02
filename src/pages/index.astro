@@ -31,11 +31,11 @@ const post = `回顧 08/14-08/15｜在戀曲盛典，讓故事透過《島郵》
 	<main class="flex-1 lg:mx-auto lg:grid lg:w-full lg:max-w-6xl lg:grid-cols-[minmax(0,460px)_1fr] lg:items-start lg:gap-14 lg:px-8 lg:py-12">
 		<h1 class="sr-only">島郵 Isle Post：寄存島嶼的地方郵誌</h1>
 		<a href={`${base}/map/`} class="block md:mx-auto md:max-w-[460px] lg:sticky lg:top-8 lg:overflow-hidden lg:rounded-3xl">
-			<Image src={cover} alt="島郵 Isle Post：寄存島嶼的地方郵誌，前往特色郵筒地圖" widths={[393, 788]} sizes="(min-width: 460px) 460px, 100vw" class="w-full" loading="eager" />
+			<Image src={cover} alt="島郵 Isle Post：寄存島嶼的地方郵誌，前往特色郵筒地圖" widths={[393, 788, 1200]} sizes="(min-width: 460px) 460px, 100vw" class="w-full" loading="eager" />
 		</a>
 
 		<section class="pt-[37px] lg:min-w-0 lg:pt-2" aria-labelledby="news">
-			<h2 id="news" class="px-[22px] md:mx-auto md:max-w-2xl md:px-8 lg:px-0"><Image src={newsTitle} alt="NEWS 最新消息" width={93} height={16} class="lg:w-[140px]" /></h2>
+			<h2 id="news" class="px-[22px] md:mx-auto md:max-w-2xl md:px-8 lg:px-0"><Image src={newsTitle} alt="NEWS 最新消息" width={93} height={16} densities={[1, 2]} class="lg:w-[140px]" /></h2>
 			<!-- 手機：左右滑；平板以上：排成兩大三小的照片格 -->
 			<div class="mt-[19px] flex snap-x snap-mandatory gap-[26px] overflow-x-auto px-[calc((100%-300px)/2)] [scrollbar-width:none] md:mx-auto md:grid md:max-w-2xl md:grid-cols-6 md:gap-3 md:overflow-visible md:px-8 lg:px-0">
 				{

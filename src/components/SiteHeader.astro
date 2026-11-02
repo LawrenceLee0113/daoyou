@@ -1,12 +1,15 @@
 ---
 // Figma：Group 23（頁首）＋ 跑嗎燈燈（跑馬燈，每 5 秒換一句）＋ 目錄封面（三槓打開的選單）
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import headerTop from '../assets/header-top.png';
+import headerTopDesktop from '../assets/header-top-desktop.jpg';
 import logo from '../assets/logo.png';
 import logoWhite from '../assets/logo-white.png';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const here = Astro.url.pathname;
+// 「網站放的圖片／首頁頁首-電腦板」裁出上面的花紋那段（下面米白那段就是導覽列底色）
+const desktopBand = await getImage({ src: headerTopDesktop, width: 2880, format: 'webp' });
 
 const messages = [
 	'【Welcome】歡迎來到島郵！今天想寄出什麼樣的心情呢 ⋆⸜',
@@ -34,7 +37,10 @@ const menu = [
 
 <header class="relative">
 	<div class="relative h-[87px] overflow-hidden">
-		<Image src={headerTop} alt="" class="absolute inset-0 size-full object-cover" loading="eager" />
+		<picture>
+			<source media="(min-width: 1024px)" srcset={desktopBand.src} />
+			<Image src={headerTop} alt="" class="absolute inset-0 size-full object-cover" loading="eager" />
+		</picture>
 		<p
 			id="ticker"
 			class="absolute inset-x-0 top-[59px] truncate px-8 text-center text-2xs text-white transition-opacity duration-500"
