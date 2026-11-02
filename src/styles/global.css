@@ -9,8 +9,8 @@
 	--font-hei: "Chiron Hei HK", var(--font-sans);
 
 	/* 主色：島郵粉、灰綠底、橄欖綠字、奶油黃按鈕 */
-	--color-pink: #c93378;
-	--color-rose: #bf4a85;
+	/* 使用者指定：所有粉紅色的字統一 #C04B85（設計稿原本混用 #c93378、#bf4a85） */
+	--color-pink: #c04b85;
 	--color-header-pink: #cc4f8c;
 	--color-header-bar: #f5f5f0;
 	--color-sage: #b3c4b8;

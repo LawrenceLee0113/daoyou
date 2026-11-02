@@ -8,7 +8,7 @@ import texture from '../assets/header-top.png';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-// 活動照片：暫用設計稿匯出的圖，使用者提供正式檔案後覆蓋同名檔案
+// 活動照片：使用者提供的「網站放的圖片／封面-2～6」，縮到 1200px 寬
 const newsPhotos = Object.values(import.meta.glob<{ default: ImageMetadata }>('../assets/news/*.jpg', { eager: true })).map((m) => m.default);
 const post = `回顧 08/14-08/15｜在戀曲盛典，讓故事透過《島郵》持續流動
 

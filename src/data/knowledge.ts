@@ -1,8 +1,8 @@
-// 郵政知識：4 篇文章。文案照設計稿原文（scan_text_nodes），卡片圖從 Figma 匯出
+// 郵政知識：4 篇文章。文案照設計稿原文（scan_text_nodes），圖片用使用者提供的「網站放的圖片」
 import card1 from '../assets/knowledge/card-1.png';
 import card2 from '../assets/knowledge/card-2.png';
 import card3 from '../assets/knowledge/card-3.png';
-import card4 from '../assets/knowledge/card-4.png'; // ponytail: 外掛只匯得出上半部，請設計師另外匯出完整的卡片
+import card4 from '../assets/knowledge/card-4.png';
 import bgYellow from '../assets/knowledge/bg-yellow.png';
 import bgSage from '../assets/knowledge/bg-sage.png';
 import illust1 from '../assets/knowledge/illust-1.png';

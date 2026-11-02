@@ -3,6 +3,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Panel from '../../components/Panel.astro';
 import ProfileHeader from '../../components/ProfileHeader.astro';
+import PhotoViewer from '../../components/PhotoViewer.astro';
 import { counties, mailboxes } from '../../data/mailboxes';
 import { COINS_FIRST_PHOTO } from '../../lib/rules';
 
@@ -21,15 +22,16 @@ const labels = Object.fromEntries(mailboxes.map((m) => [m.id, `${counties.find((
 		</template>
 		<template id="photo-cell">
 			<li class="relative aspect-square overflow-hidden rounded-[10px]">
-				<img alt="" class="size-full object-cover" />
-				<span class="new absolute top-1.5 left-1.5 rounded-full bg-new px-1.5 text-3xs leading-4 font-bold text-white">NEW</span>
-				<span class="label absolute inset-x-0 bottom-0 bg-black/50 px-1.5 py-1.5 text-xs font-bold text-white"></span>
+				<button type="button" class="size-full"><img alt="" class="size-full object-cover" /></button>
+				<span class="new pointer-events-none absolute top-1.5 left-1.5 rounded-full bg-new px-1.5 text-3xs leading-4 font-bold text-white">NEW</span>
+				<span class="label pointer-events-none absolute inset-x-0 bottom-0 bg-black/50 px-1.5 py-1.5 text-xs font-bold text-white"></span>
 			</li>
 		</template>
 
 		<!-- 設計稿文案；第 2、3 張只給 COINS_EXTRA_PHOTO，這裡沿用設計稿寫法 -->
 		<p class="mt-5 text-center text-sm text-muted">每上傳一張打卡照，可獲得 {COINS_FIRST_PHOTO} 島幣</p>
 	</Panel>
+	<PhotoViewer />
 </Layout>
 
 <script>
@@ -45,6 +47,12 @@ const labels = Object.fromEntries(mailboxes.map((m) => [m.id, `${counties.find((
 			const img = cell.querySelector('img')!;
 			img.src = URL.createObjectURL(p.blob);
 			img.alt = cell.querySelector('.label')!.textContent = labels[p.mailboxId] ?? '';
+			const d = new Date(p.createdAt);
+			Object.assign(cell.querySelector('button')!.dataset, {
+				viewSrc: img.src,
+				viewAlt: img.alt,
+				viewText: `${img.alt}\n${d.getFullYear()}.${d.getMonth() + 1}.${d.getDate()} 打卡`,
+			});
 			// 24 小時內上傳的標 NEW
 			if (Date.now() - p.createdAt > 86_400_000) cell.querySelector('.new')!.remove();
 			album.append(cell);

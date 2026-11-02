@@ -1,5 +1,5 @@
 // 縣市與特色郵筒資料。新增郵筒時填進 mailboxes，對應的縣市頁就會出現卡片、郵筒頁也會自動產生。
-// ponytail: 照片暫用設計稿匯出的圖，使用者會另外提供正式檔案，到時直接覆蓋同名檔案
+// 台中的照片、插圖用使用者提供的「網站放的圖片」；台北的照片暫用設計稿匯出的（提供的版本解析度較低）
 import waiyaoPhoto from '../assets/mailboxes/waiyao.jpg';
 import waiyaoCard from '../assets/mailboxes/waiyao-card.jpg';
 import waiyaoIllust from '../assets/mailboxes/waiyao-illust.png';

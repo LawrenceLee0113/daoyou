@@ -27,6 +27,8 @@ const menu = [
 	{ name: '在地風味', href: `${base}/local/` },
 	{ name: '島郵周邊', href: `${base}/shop/` },
 	{ name: '關於島郵', href: `${base}/about/` },
+	// 設計稿沒有個人檔案的入口，使用者決定加在選單最後；沒登入會先導到登入頁
+	{ name: '個人檔案', href: `${base}/profile/` },
 ];
 ---
 
@@ -45,10 +47,10 @@ const menu = [
 		<div class="mx-auto flex h-[60px] max-w-6xl items-center px-5 lg:px-8">
 			<a href={`${base}/`} class="mr-auto"><Image src={logo} alt="島郵 Isle Post 首頁" width={48} height={30} /></a>
 			<!-- 電腦版：選單直接攤開在頁首 -->
-			<ul class="hidden gap-8 font-round text-md text-header-pink lg:flex">
+			<ul class="hidden gap-8 font-round text-md text-pink lg:flex">
 				{
 					menu.map((m) => (
-						<li>{m.href ? <a href={m.href} aria-current={here.startsWith(m.href) ? 'page' : undefined} class="hover:underline aria-[current]:font-bold aria-[current]:underline">{m.name}</a> : <span class="opacity-50">{m.name}<span class="sr-only">（即將開放）</span></span>}</li>
+						<li><a href={m.href} aria-current={here.startsWith(m.href) ? 'page' : undefined} class="hover:underline aria-[current]:font-bold aria-[current]:underline">{m.name}</a></li>
 					))
 				}
 			</ul>
@@ -63,7 +65,7 @@ const menu = [
 	<div
 		id="site-menu"
 		popover
-		class="fixed inset-auto top-[146px] right-0 m-0 h-[271px] w-[184px] bg-header-pink p-0 text-white shadow-soft md:right-[max(0px,calc((100vw-72rem)/2))]"
+		class="fixed inset-auto top-[146px] right-0 m-0 w-[184px] bg-header-pink p-0 pb-5 text-white shadow-soft md:right-[max(0px,calc((100vw-72rem)/2))]"
 	>
 		<div class="flex items-start justify-between px-2.5 pt-4">
 			<a href={`${base}/`}><Image src={logoWhite} alt="島郵 Isle Post 首頁" width={48} height={30} /></a>
@@ -76,7 +78,7 @@ const menu = [
 		<ul class="mt-5 flex flex-col gap-3.5 px-2.5 font-round text-sm">
 			{
 				menu.map((m) => (
-					<li>{m.href ? <a href={m.href}>{m.name}</a> : <span class="opacity-60">{m.name}<span class="sr-only">（即將開放）</span></span>}</li>
+					<li><a href={m.href} aria-current={here.startsWith(m.href) ? 'page' : undefined} class="aria-[current]:font-bold">{m.name}</a></li>
 				))
 			}
 		</ul>

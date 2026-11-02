@@ -10,7 +10,7 @@ export const getStaticPaths = () => counties.map((c) => ({ params: { county: c.s
 const { county } = Astro.props;
 const list = mailboxes.filter((m) => m.county === county.slug);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const card = 'flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-center flex-col items-center rounded-mailbox border-[1.5px] border-sage px-[15px] pt-3.5 text-center';
+const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-center flex-col items-center rounded-mailbox border-[1.5px] border-sage px-[15px] pt-3.5 text-center';
 ---
 
 <Layout title={county.name}>
@@ -30,7 +30,7 @@ const card = 'flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-center flex-
 						<p class="mt-1.5 text-xs font-bold text-sage">{m.area}</p>
 						<p class="mt-2.5 max-w-[200px] text-sm whitespace-pre-line text-body">{m.summary}</p>
 						<Image src={m.illustration} alt="" height={102} class="mt-auto h-[102px] w-auto" />
-						<a href={`${base}/map/${county.slug}/${m.id}/`} class="mt-4 mb-6 text-md font-bold text-pink">
+						<a href={`${base}/map/${county.slug}/${m.id}/`} class="mt-4 mb-6 text-md font-bold text-pink after:absolute after:inset-0 after:rounded-mailbox">
 							看更多 →<span class="sr-only">：{m.name}</span>
 						</a>
 					</article>

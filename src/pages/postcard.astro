@@ -10,9 +10,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const meta = Object.fromEntries(
 	mailboxes.map((m) => [m.id, { label: `${counties.find((c) => c.slug === m.county)!.name}・${m.name}`, nickname: m.nickname, postmark: m.postmark }]),
 );
-const bigBtn = 'mt-auto grid h-12 w-full place-items-center rounded-full bg-butter text-lg font-bold text-rose disabled:opacity-50';
+const bigBtn = 'mt-auto grid h-12 w-full place-items-center rounded-full bg-butter text-lg font-bold text-pink disabled:opacity-50';
 const line = 'block w-full border-b border-input bg-transparent py-1.5 text-sm outline-none focus:border-pink';
-const pill = 'inline-flex h-9 items-center rounded-full border border-input px-5 text-lg font-bold text-muted peer-checked:border-butter peer-checked:bg-butter peer-checked:text-rose peer-focus-visible:outline-2 peer-focus-visible:outline-pink';
+const pill = 'inline-flex h-9 items-center rounded-full border border-input px-5 text-lg font-bold text-muted peer-checked:border-butter peer-checked:bg-butter peer-checked:text-pink peer-focus-visible:outline-2 peer-focus-visible:outline-pink';
 const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 ---
 
@@ -23,7 +23,7 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 			<p class="text-emoji leading-none" aria-hidden="true">📷</p>
 			<h1 class="mt-6 text-lg font-bold">先去郵筒打卡吧</h1>
 			<p class="mt-2.5 text-sm text-muted">明信片的正面會用你的打卡照，<br />到特色郵筒拍一張再回來寫。</p>
-			<a href={`${base}/map/`} class="mt-9 inline-grid h-10 w-40 place-items-center rounded-full bg-butter text-lg font-bold text-rose">去打卡</a>
+			<a href={`${base}/map/`} class="mt-9 inline-grid h-10 w-40 place-items-center rounded-full bg-butter text-lg font-bold text-pink">去打卡</a>
 		</div>
 
 		<form id="compose" data-step="compose" hidden class="flex flex-1 flex-col" data-meta={JSON.stringify(meta)} novalidate>
@@ -64,6 +64,11 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 					<label><input type="radio" name="mode" value="future" class="peer sr-only" /><span class={pill}>寄給未來的自己</span></label>
 				</div>
 			</fieldset>
+			<!-- 寄給未來的自己：收件人帶自己、選想收到的日子 -->
+			<label id="deliver-field" hidden class="mt-4 block text-md font-bold">
+				想在哪一天收到
+				<input name="deliverAt" type="date" class="mt-1.5 block h-10 w-full max-w-60 rounded-[10px] border border-input px-3 text-base font-normal outline-none focus:border-pink" />
+			</label>
 			<p class="mt-4 mb-8 text-sm text-muted">由在地郵局寄出實體明信片，寄出可獲得 {COINS_POSTCARD} 島幣</p>
 			<p id="error" class="mb-3 text-sm text-pink" aria-live="polite"></p>
 
@@ -83,7 +88,7 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 				<div class={row}><dt class="w-14 shrink-0 text-muted">收件人</dt><dd id="c-to" class="font-bold"></dd></div>
 				<div class={row}><dt class="w-14 shrink-0 text-muted">地址</dt><dd id="c-address" class="font-bold"></dd></div>
 				<div class={row}><dt class="w-14 shrink-0 text-muted">寄送方式</dt><dd id="c-mode" class="font-bold"></dd></div>
-				<div class={row}><dt class="w-14 shrink-0 text-muted">預計送達</dt><dd class="font-bold">3–5 個工作天</dd></div>
+				<div class={row}><dt class="w-14 shrink-0 text-muted">預計送達</dt><dd id="c-when" class="font-bold"></dd></div>
 			</dl>
 			<button id="send" type="button" class={bigBtn}>寄出明信片 📮</button>
 		</div>
@@ -118,7 +123,7 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 	}
 	document.querySelectorAll<HTMLElement>('[data-go]').forEach((b) =>
 		b.addEventListener('click', () => {
-			if (b.hasAttribute('data-reset')) form.reset(), pickPhoto(photos[0].id);
+			if (b.hasAttribute('data-reset')) form.reset(), pickPhoto(photos[0].id), syncMode();
 			go(b.dataset.go!);
 		}),
 	);
@@ -153,11 +158,31 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 
 	form.addEventListener('input', () => ($('error').textContent = ''));
 
+	const fmt = (d: Date) => `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+	const field = <T extends HTMLElement>(name: string) => form.elements.namedItem(name) as unknown as T;
+	const isFuture = () => new FormData(form).get('mode') === 'future';
+	// 日期欄：最早明天，預設一年後
+	const iso = (d: Date) => d.toISOString().slice(0, 10);
+	const dateInput = field<HTMLInputElement>('deliverAt');
+	dateInput.min = iso(new Date(Date.now() + 86_400_000));
+	function syncMode() {
+		const to = field<HTMLInputElement>('to');
+		const nickname = getProfile().nickname;
+		const future = isFuture();
+		$('deliver-field').hidden = !future;
+		dateInput.required = future;
+		if (future && !dateInput.value) dateInput.value = iso(new Date(Date.now() + 365 * 86_400_000));
+		if (future) to.value = nickname;
+		else if (to.readOnly) to.value = '';
+		to.readOnly = future;
+	}
+	form.querySelectorAll('input[name="mode"]').forEach((r) => r.addEventListener('change', syncMode));
+
 	form.addEventListener('submit', (e) => {
 		e.preventDefault();
 		const bad = [...form.querySelectorAll<HTMLInputElement>('[required]')].find((el) => !el.value.trim());
 		if (bad) {
-			$('error').textContent = '請填寫留言、收件人和地址';
+			$('error').textContent = isFuture() ? '請填寫留言、地址和送達日期' : '請填寫留言、收件人和地址';
 			return bad.focus();
 		}
 		$('error').textContent = '';
@@ -167,7 +192,8 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 		$('from').textContent = `From ${meta[p.mailboxId]?.label ?? ''}`;
 		$('c-to').textContent = String(data.get('to'));
 		$('c-address').textContent = `${data.get('address1')}${data.get('address2')}`;
-		$('c-mode').textContent = data.get('mode') === 'future' ? '寄給未來的自己・實體明信片' : '寄給朋友・實體明信片';
+		$('c-mode').textContent = isFuture() ? '寄給未來的自己・實體明信片' : '寄給朋友・實體明信片';
+		$('c-when').textContent = isFuture() ? fmt(new Date(String(data.get('deliverAt')))) : '3–5 個工作天';
 		go('confirm');
 	});
 
@@ -184,9 +210,13 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 				message,
 				to: String(data.get('to')).trim(),
 				address: `${data.get('address1')}${data.get('address2')}`.trim(),
-				mode: data.get('mode') === 'future' ? 'future' : 'friend',
+				mode: isFuture() ? 'future' : 'friend',
+				deliverAt: isFuture() ? new Date(String(data.get('deliverAt'))).getTime() : undefined,
 			});
-			$('sent-text').textContent = `${meta[p.mailboxId]?.nickname ?? '郵差'}會把你的心意送到${String(data.get('to')).trim()}手上`;
+			const nick = meta[p.mailboxId]?.nickname ?? '郵差';
+			$('sent-text').textContent = isFuture()
+				? `${nick}會在 ${fmt(new Date(String(data.get('deliverAt'))))} 把心意送到未來的你手上`
+				: `${nick}會把你的心意送到${String(data.get('to')).trim()}手上`;
 			go('sent');
 		} catch {
 			alert('寄出失敗，請再試一次');

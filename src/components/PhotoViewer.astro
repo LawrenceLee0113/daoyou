@@ -1,0 +1,24 @@
+---
+// 點相簿照片、我的信件時放大看。頁面上任何帶 data-view-src 的元素點了都會打開（data-view-text 是說明文字）
+---
+
+<dialog id="viewer" class="m-auto max-h-[90dvh] w-[min(92vw,560px)] overflow-auto rounded-3xl bg-white p-0 backdrop:bg-black/70" aria-label="查看照片">
+	<img id="viewer-img" alt="" class="max-h-[60dvh] w-full bg-black object-contain" />
+	<p id="viewer-text" class="px-5 pt-4 text-md leading-relaxed whitespace-pre-line"></p>
+	<form method="dialog" class="px-5 pt-2 pb-5 text-right"><button class="text-md font-bold text-olive">關閉</button></form>
+</dialog>
+
+<script>
+	const dialog = document.getElementById('viewer') as HTMLDialogElement;
+	document.addEventListener('click', (e) => {
+		const t = (e.target as HTMLElement).closest<HTMLElement>('[data-view-src]');
+		if (!t) return;
+		const img = document.getElementById('viewer-img') as HTMLImageElement;
+		img.src = t.dataset.viewSrc!;
+		img.alt = t.dataset.viewAlt ?? '';
+		document.getElementById('viewer-text')!.textContent = t.dataset.viewText ?? '';
+		dialog.showModal();
+	});
+	// 點對話框外面也關閉
+	dialog.addEventListener('click', (e) => e.target === dialog && dialog.close());
+</script>

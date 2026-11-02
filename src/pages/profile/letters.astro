@@ -3,9 +3,10 @@
 import Layout from '../../layouts/Layout.astro';
 import Panel from '../../components/Panel.astro';
 import ProfileHeader from '../../components/ProfileHeader.astro';
+import PhotoViewer from '../../components/PhotoViewer.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const writeBtn = 'inline-grid h-10 w-40 place-items-center rounded-full bg-butter text-lg font-bold text-rose';
+const writeBtn = 'inline-grid h-10 w-40 place-items-center rounded-full bg-butter text-lg font-bold text-pink';
 ---
 
 <Layout title="我的信件">
@@ -25,7 +26,7 @@ const writeBtn = 'inline-grid h-10 w-40 place-items-center rounded-full bg-butte
 		</div>
 
 		<template id="letter">
-			<li class="flex gap-3 rounded-xl bg-butter/70 p-3">
+			<li class="flex cursor-pointer gap-3 rounded-xl bg-butter/70 p-3 transition-colors hover:bg-butter" role="button" tabindex="0">
 				<img alt="" class="size-[72px] shrink-0 rounded-md object-cover" />
 				<div class="min-w-0 flex-1">
 					<div class="flex items-baseline justify-between gap-2">
@@ -38,12 +39,16 @@ const writeBtn = 'inline-grid h-10 w-40 place-items-center rounded-full bg-butte
 			</li>
 		</template>
 	</Panel>
+	<PhotoViewer />
 </Layout>
 
 <script>
 	import { getPhotos, getPostcards, isLoggedIn } from '../../lib/store';
 
 	const $ = (id: string) => document.getElementById(id)!;
+	const fmt = (d: Date) => `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+	// 鍵盤 Enter 也能打開
+	$('letters').addEventListener('keydown', (e) => e.key === 'Enter' && (e.target as HTMLElement).click());
 	if (isLoggedIn()) {
 		const [cards, photos] = await Promise.all([getPostcards(), getPhotos()]);
 		$('empty').hidden = cards.length > 0;
@@ -57,8 +62,14 @@ const writeBtn = 'inline-grid h-10 w-40 place-items-center rounded-full bg-butte
 			const d = new Date(c.createdAt);
 			const time = li.querySelector('time')!;
 			time.dateTime = d.toISOString();
-			time.textContent = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+			time.textContent = fmt(d);
 			li.querySelector('.message')!.textContent = c.message.split('\n')[0];
+			const when = c.deliverAt ? `預計 ${fmt(new Date(c.deliverAt))} 送達` : '預計 3–5 個工作天送達';
+			Object.assign(li.querySelector('li')!.dataset, {
+				viewSrc: li.querySelector('img')!.src,
+				viewAlt: '明信片正面',
+				viewText: `給 ${c.to}\n${c.address}\n\n${c.message}\n\n寄送中・${when}`,
+			});
 			$('letters').append(li);
 		}
 	} else {

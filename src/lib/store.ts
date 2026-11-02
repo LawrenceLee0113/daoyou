@@ -108,6 +108,7 @@ export interface Postcard {
 	to: string;
 	address: string;
 	mode: 'friend' | 'future';
+	deliverAt?: number; // 寄給未來的自己：指定送達日
 	createdAt: number;
 }
 
