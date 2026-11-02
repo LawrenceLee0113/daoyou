@@ -1,14 +1,18 @@
 ---
 // Figma：台北、台中 #2（有卡片的台中）。設計稿另有只有地圖的「台中」等 frame，是點進來時的過場，網頁不做。
-// 只放有詳細頁的郵筒；沒有郵筒資料的縣市顯示「即將開放」
+// 卡片照設計稿：有詳細頁的郵筒（mailboxes）＋還沒有詳細頁的（upcoming，看更多換成「即將開放」）。
+// 手機卡片固定 600px 高，內容比較長的（直式照片）在卡片裡上下捲（原型 Frame 15～17 VERTICAL_SCROLLING）；
+// 平板以上空間夠，卡片長到內容高度、同一列等高。
+// 沒有郵筒資料的縣市顯示「即將開放」
 import { Image } from 'astro:assets';
 import Layout from '../../../layouts/Layout.astro';
-import { counties, mailboxes } from '../../../data/mailboxes';
+import { counties, mailboxes, upcoming } from '../../../data/mailboxes';
 
 export const getStaticPaths = () => counties.map((c) => ({ params: { county: c.slug }, props: { county: c } }));
 
 const { county } = Astro.props;
-const list = mailboxes.filter((m) => m.county === county.slug);
+const hasPage = new Set(mailboxes.map((m) => m.id));
+const list = [...mailboxes, ...upcoming].filter((m) => m.county === county.slug);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-center flex-col items-center rounded-mailbox border-[1.5px] border-sage px-[15px] pt-3.5 text-center';
 ---
@@ -21,18 +25,29 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 			<h1 class="mx-auto w-fit text-5xl font-bold tracking-wider text-sage" style="view-transition-name:county-title">{county.fullName}</h1>
 		</div>
 
-		<div class="mt-2 flex snap-x snap-mandatory justify-center-safe gap-[11px] overflow-x-auto px-[19px] pt-[11px] [scrollbar-width:none]">
+		<!-- 手機：左右滑；平板以上：卡片排成多列置中 -->
+		<div class="mt-2 flex snap-x snap-mandatory justify-center-safe gap-[11px] overflow-x-auto px-[19px] pt-[11px] [scrollbar-width:none] md:mx-auto md:max-w-6xl md:flex-wrap md:justify-center md:gap-4 md:overflow-visible md:px-8">
 			{
 				list.map((m, i) => (
-					<article class:list={[card, 'rise h-[600px]']} style={`--i:${i}`}>
-						<Image src={m.cardPhoto} alt={m.name} widths={[320, 640]} sizes="320px" class="h-[240px] w-full rounded-photo object-cover" loading="eager" />
+					<article class:list={[card, 'rise h-[600px] overflow-y-auto overscroll-contain [scrollbar-width:none] md:h-auto md:min-h-[600px] md:overflow-visible']} style={`--i:${i}`}>
+						{/* 橫式照片 320×240、直式 320×427，照原圖比例 */}
+						<Image src={m.cardPhoto} alt={m.name} widths={[320, 640, 960]} sizes="320px" class="h-auto w-full shrink-0 rounded-photo" loading={i < 2 ? 'eager' : 'lazy'} />
 						<h2 class="mt-[29px] text-2xl font-bold text-olive">{m.name}</h2>
 						<p class="mt-1.5 text-xs font-bold text-sage">{m.area}</p>
-						<p class="mt-2.5 max-w-[200px] text-sm whitespace-pre-line text-body">{m.summary}</p>
-						<Image src={m.illustration} alt="" height={102} densities={[1, 2, 3]} class="mt-auto h-[102px] w-auto" />
-						<a href={`${base}/map/${county.slug}/${m.id}/`} class="mt-4 mb-6 text-md font-bold text-pink after:absolute after:inset-0 after:rounded-mailbox">
-							看更多 →<span class="sr-only">：{m.name}</span>
-						</a>
+						{/* 有手動換行的照設計稿斷行（較長的行允許超出卡片內距一點）；沒換行的限寬自動折行 */}
+						<p class:list={['mt-2.5 text-sm whitespace-pre-line text-body', m.summary.includes('\n') ? '-mx-2' : 'max-w-[200px]']}>{m.summary}</p>
+						{/* 短的卡片把插圖推到底部，長的至少留 24px */}
+						<div class="min-h-6 flex-1 shrink-0"></div>
+						<Image src={m.illustration} alt="" height={102} densities={[1, 2, 3]} class="h-[102px] w-auto shrink-0" />
+						{
+							hasPage.has(m.id) ? (
+								<a href={`${base}/map/${county.slug}/${m.id}/`} class="mt-4 mb-6 text-md font-bold text-pink after:absolute after:inset-0 after:rounded-mailbox">
+									看更多 →<span class="sr-only">：{m.name}</span>
+								</a>
+							) : (
+								<p class="mt-4 mb-6 shrink-0 text-md font-bold text-faint">詳細介紹即將開放</p>
+							)
+						}
 					</article>
 				))
 			}

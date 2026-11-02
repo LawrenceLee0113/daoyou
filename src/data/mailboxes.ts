@@ -6,6 +6,14 @@ import waiyaoIllust from '../assets/mailboxes/waiyao-illust.png';
 import xinshePhoto from '../assets/mailboxes/xinshe.jpg';
 import xinsheCard from '../assets/mailboxes/xinshe-card.jpg';
 import xinsheIllust from '../assets/mailboxes/xinshe-illust.png';
+import beimenCard from '../assets/mailboxes/beimen-card.jpg';
+import beimenIllust from '../assets/mailboxes/beimen-illust.png';
+import goldUtaipeiCard from '../assets/mailboxes/gold-utaipei-card.jpg';
+import goldUtaipeiIllust from '../assets/mailboxes/gold-utaipei-illust.png';
+import goldMinquanCard from '../assets/mailboxes/gold-minquan-card.jpg';
+import goldMinquanIllust from '../assets/mailboxes/gold-minquan-illust.png';
+import beitouCard from '../assets/mailboxes/beitou-card.jpg';
+import beitouIllust from '../assets/mailboxes/beitou-illust.png';
 
 // 順序照設計稿郵票冊（北→南，宜花東在最後）。slug 對應 src/data/taiwan-map.json 的 paths。name：「← 返回台北」這類短名；fullName：地圖標籤、縣市頁大標
 export const counties: { slug: string; name: string; fullName: string }[] = [
@@ -66,5 +74,47 @@ export const mailboxes = [
 ];
 
 export type Mailbox = (typeof mailboxes)[number];
+
+// 設計稿縣市頁有卡片、但還沒有詳細頁的郵筒：只出現在縣市頁卡片，不能打卡（地圖、郵票冊、明信片都不算）。
+// 要開放時補上 nickname、postmark、address、sections、photo，搬到上面的 mailboxes 就會產生郵筒頁。
+// 照片從設計稿匯出（使用者提供的版本解析度較低），插圖用使用者提供的「網站放的圖片」
+export const upcoming = [
+	{
+		id: 'beimen',
+		county: 'taipei',
+		name: '北門老郵筒',
+		area: '臺北市中正區光復里忠孝西路1段114號',
+		summary: '北門旁的圓柱形懷舊郵筒，\n仿製自平溪郵局全臺使用中歷史最悠久的老郵筒。\n它與臺北郵局的古蹟建築相映成趣，\n彷彿將時光裝進信封，帶領旅人走入臺北西區的昔日風華。',
+		cardPhoto: beimenCard,
+		illustration: beimenIllust,
+	},
+	{
+		id: 'gold-utaipei',
+		county: 'taipei',
+		name: '中華郵政奧運金牌郵筒',
+		area: '臺北市中正區建國里愛國西路一號',
+		summary: '為紀念「麟洋配」王齊麟與李洋於2021年\n東京奧運勇奪臺灣首面羽球男子雙打金牌，\n中華郵政特別於兩人母校\n臺北市立大學設置金色郵筒，\n象徵奪金榮耀，留下珍貴的歷史紀念。',
+		cardPhoto: goldUtaipeiCard,
+		illustration: goldUtaipeiIllust,
+	},
+	{
+		id: 'gold-minquan',
+		county: 'taipei',
+		name: '中華郵政奧運金牌郵筒',
+		area: '臺北市松山區三民里民權東路四段200號',
+		summary: '從東京首金到巴黎衛冕，\n「麟洋配」王齊麟與李洋兩度寫下臺灣羽球傳奇。\n中華郵政特別於王齊麟母校民權國小設置金色郵筒，\n以耀眼金色象徵雙金榮耀，承載奮鬥的足跡，\n也將這份感動與驕傲永遠留存。',
+		cardPhoto: goldMinquanCard,
+		illustration: goldMinquanIllust,
+	},
+	{
+		id: 'beitou',
+		county: 'taipei',
+		name: '新北投火車站特色郵筒',
+		area: '臺北市北投區中心里七星街1號',
+		summary: '走出新北投捷運站，\n七星公園裡藏著一座化身復古列車的特色郵筒。\n佇立於百年新北投車站旁，\n它承載著昔日鐵道的歲月記憶，\n讓每封寄出的信件，都彷彿搭上穿越時光的列車。',
+		cardPhoto: beitouCard,
+		illustration: beitouIllust,
+	},
+];
 
 export const countyOf = (slug: string) => counties.find((c) => c.slug === slug)!;
