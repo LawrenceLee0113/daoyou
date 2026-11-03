@@ -99,13 +99,13 @@ const notchBand = await getImage({ src: headerTop, width: 786 });
 			{
 				header && (
 					<script is:inline>
-						// 頁面本身鎖在剛好藏住 #notch-fill 的位置（鍵盤跳出等情況被系統捲動時拉回來）
-						if (matchMedia('(width < 64rem)').matches) {
-							const pin = () => scrollY !== 100 && scrollTo(0, 100);
-							pin();
-							addEventListener('scroll', pin, { passive: true });
-							addEventListener('resize', pin);
-						}
+						// 頁面本身鎖在剛好藏住 #notch-fill 的位置（鍵盤跳出等情況被系統捲動時拉回來）。
+						// 每次都重新判斷寬度：iPad 轉橫向變成電腦版時要放開，不然頁面捲不動
+						const mobile = matchMedia('(width < 64rem)');
+						const pin = () => mobile.matches && scrollY !== 100 && scrollTo(0, 100);
+						pin();
+						addEventListener('scroll', pin, { passive: true });
+						addEventListener('resize', pin);
 					</script>
 				)
 			}
