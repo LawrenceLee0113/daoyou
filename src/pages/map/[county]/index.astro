@@ -1,19 +1,17 @@
 ---
 // Figma：台北、台中 #2（有卡片的台中）。設計稿另有只有地圖的「台中」等 frame，是點進來時的過場，網頁不做。
-// 卡片照設計稿：有詳細頁的郵筒（mailboxes）＋還沒有詳細頁的（upcoming）。
+// 卡片照設計稿，每張都能點進郵筒頁（設計稿只畫了歪腰、新社，其他照同一版型）。
 // 卡片一整排左右滑（原型 Frame 12 HORIZONTAL_SCROLLING），平板以上加左右箭頭給滑鼠用。
 // 卡片高度跟著內容、頂端對齊（使用者決定：不照原型 Frame 15～17 在卡片內上下捲）。
-// 每張最下面都有「看更多」；還沒有詳細頁的郵筒點了顯示「詳細介紹即將開放」提示。
 // 沒有郵筒資料的縣市顯示「即將開放」
 import { Image } from 'astro:assets';
 import Layout from '../../../layouts/Layout.astro';
-import { counties, mailboxes, upcoming } from '../../../data/mailboxes';
+import { counties, mailboxes } from '../../../data/mailboxes';
 
 export const getStaticPaths = () => counties.map((c) => ({ params: { county: c.slug }, props: { county: c } }));
 
 const { county } = Astro.props;
-const hasPage = new Set(mailboxes.map((m) => m.id));
-const list = [...mailboxes, ...upcoming].filter((m) => m.county === county.slug);
+const list = mailboxes.filter((m) => m.county === county.slug);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-center flex-col items-center rounded-mailbox border-[1.5px] border-sage px-[15px] pt-3.5 text-center';
 ---
@@ -38,17 +36,9 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 						{/* 有手動換行的照設計稿斷行（較長的行允許超出卡片內距一點）；沒換行的限寬自動折行 */}
 						<p class:list={['mt-2.5 text-sm whitespace-pre-line text-body', m.summary.includes('\n') ? '-mx-2' : 'max-w-[200px]']}>{m.summary}</p>
 						<Image src={m.illustration} alt="" height={102} densities={[1, 2, 3]} class="mt-6 h-[102px] w-auto" />
-						{
-							hasPage.has(m.id) ? (
-								<a href={`${base}/map/${county.slug}/${m.id}/`} class="mt-4 mb-6 text-md font-bold text-pink after:absolute after:inset-0 after:rounded-mailbox">
-									看更多 →<span class="sr-only">：{m.name}</span>
-								</a>
-							) : (
-								<button type="button" data-soon class="mt-4 mb-6 text-md font-bold text-pink">
-									看更多 →<span class="sr-only">：{m.name}</span>
-								</button>
-							)
-						}
+						<a href={`${base}/map/${county.slug}/${m.id}/`} class="mt-4 mb-6 text-md font-bold text-pink after:absolute after:inset-0 after:rounded-mailbox">
+							看更多 →<span class="sr-only">：{m.name}</span>
+						</a>
 					</article>
 				))
 			}
@@ -81,7 +71,6 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 </Layout>
 
 <script>
-	import { toast } from '../../../lib/toast';
 	// 平板以上的左右箭頭：一次捲一張卡片，捲到頭的那一邊隱藏
 	const cards = document.getElementById('cards')!;
 	const buttons = document.querySelectorAll<HTMLButtonElement>('[aria-controls="cards"]');
@@ -91,8 +80,6 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 	buttons.forEach((b) => b.addEventListener('click', () => cards.scrollBy({ left: Number(b.dataset.dir) * step() })));
 	cards.addEventListener('scroll', sync, { passive: true });
 
-	// 還沒有詳細頁的「看更多」：提示從下面滑上來，2 秒後收起
-	document.querySelectorAll('[data-soon]').forEach((b) => b.addEventListener('click', () => toast('詳細介紹即將開放，敬請期待！')));
 	addEventListener('resize', sync);
 	sync();
 </script>

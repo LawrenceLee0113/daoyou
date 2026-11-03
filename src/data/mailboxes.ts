@@ -1,5 +1,7 @@
 // 縣市與特色郵筒資料。新增郵筒時填進 mailboxes，對應的縣市頁就會出現卡片、郵筒頁也會自動產生。
 // 台中的照片、插圖用使用者提供的「網站放的圖片」；台北的照片暫用設計稿匯出的（提供的版本解析度較低）
+// 設計稿只畫了歪腰、新社的詳細頁。其他郵筒（beimen 以後）的 nickname、postmark、address、sections 是依卡片簡介
+// 自行撰寫的暫定文案（使用者 2026-11-04 要求每張卡片都能點進去），業主有正式文案再換；photo 沿用卡片照片
 import waiyaoPhoto from '../assets/mailboxes/waiyao.jpg';
 import waiyaoCard from '../assets/mailboxes/waiyao-card.jpg';
 import waiyaoIllust from '../assets/mailboxes/waiyao-illust.png';
@@ -36,6 +38,8 @@ import hlaaluaCard from '../assets/mailboxes/hlaalua-card.jpg';
 import hlaaluaIllust from '../assets/mailboxes/hlaalua-illust.png';
 import kanakanavuCard from '../assets/mailboxes/kanakanavu-card.jpg';
 import kanakanavuIllust from '../assets/mailboxes/kanakanavu-illust.png';
+import hlaaluaPhoto from '../assets/mailboxes/hlaalua.jpg';
+import kanakanavuPhoto from '../assets/mailboxes/kanakanavu.jpg';
 
 // 順序照設計稿郵票冊（北→南，宜花東在最後）。slug 對應 src/data/taiwan-map.json 的 paths。name：「← 返回台北」這類短名；fullName：地圖標籤、縣市頁大標
 export const counties: { slug: string; name: string; fullName: string }[] = [
@@ -93,20 +97,20 @@ export const mailboxes = [
 		cardPhoto: xinsheCard,
 		illustration: xinsheIllust,
 	},
-];
-
-export type Mailbox = (typeof mailboxes)[number];
-
-// 設計稿縣市頁有卡片、但還沒有詳細頁的郵筒：只出現在縣市頁卡片，不能打卡（地圖、郵票冊、明信片都不算）。
-// 要開放時補上 nickname、postmark、address、sections、photo，搬到上面的 mailboxes 就會產生郵筒頁。
-// 照片從設計稿匯出（使用者提供的版本解析度較低），插圖用使用者提供的「網站放的圖片」
-export const upcoming = [
 	{
 		id: 'beimen',
 		county: 'taipei',
 		name: '北門老郵筒',
 		area: '臺北市中正區光復里忠孝西路1段114號',
 		summary: '北門旁的圓柱形懷舊郵筒，\n仿製自平溪郵局全臺使用中歷史最悠久的老郵筒。\n它與臺北郵局的古蹟建築相映成趣，\n彷彿將時光裝進信封，帶領旅人走入臺北西區的昔日風華。',
+		nickname: '老郵筒',
+		postmark: ['台北', '中正'],
+		address: '臺北市中正區光復里忠孝西路1段114號',
+		sections: [
+			{ title: '仿製百年老郵筒', body: '北門旁的圓柱形懷舊郵筒，仿製自平溪郵局\n全臺使用中歷史最悠久的老郵筒，\n墨綠色的圓筒身留著舊時代的樣貌。' },
+			{ title: '與古蹟相映的街角', body: '它與臺北郵局的古蹟建築相映成趣，\n逛完北門與西區老街，不妨在這裡寄出\n一封信，把時光裝進信封帶回家。' },
+		],
+		photo: beimenCard,
 		cardPhoto: beimenCard,
 		illustration: beimenIllust,
 	},
@@ -116,6 +120,14 @@ export const upcoming = [
 		name: '中華郵政奧運金牌郵筒',
 		area: '臺北市中正區建國里愛國西路一號',
 		summary: '為紀念「麟洋配」王齊麟與李洋於2021年\n東京奧運勇奪臺灣首面羽球男子雙打金牌，\n中華郵政特別於兩人母校\n臺北市立大學設置金色郵筒，\n象徵奪金榮耀，留下珍貴的歷史紀念。',
+		nickname: '金牌郵筒',
+		postmark: ['台北', '中正'],
+		address: '臺北市中正區建國里愛國西路一號（臺北市立大學）',
+		sections: [
+			{ title: '紀念麟洋配東京奪金', body: '為紀念「麟洋配」王齊麟與李洋於 2021 年\n東京奧運勇奪臺灣首面羽球男子雙打金牌，\n中華郵政在兩人的母校臺北市立大學\n設置了這座金色郵筒。' },
+			{ title: '寄出一份榮耀', body: '金光閃閃的筒身象徵奪金的榮耀，\n來這裡投一封信替選手加油，\n也替自己的目標許下一個願望。' },
+		],
+		photo: goldUtaipeiCard,
 		cardPhoto: goldUtaipeiCard,
 		illustration: goldUtaipeiIllust,
 	},
@@ -125,6 +137,14 @@ export const upcoming = [
 		name: '中華郵政奧運金牌郵筒',
 		area: '臺北市松山區三民里民權東路四段200號',
 		summary: '從東京首金到巴黎衛冕，\n「麟洋配」王齊麟與李洋兩度寫下臺灣羽球傳奇。\n中華郵政特別於王齊麟母校民權國小設置金色郵筒，\n以耀眼金色象徵雙金榮耀，承載奮鬥的足跡，\n也將這份感動與驕傲永遠留存。',
+		nickname: '金牌郵筒',
+		postmark: ['台北', '松山'],
+		address: '臺北市松山區三民里民權東路四段200號（民權國小）',
+		sections: [
+			{ title: '從東京到巴黎', body: '從東京首金到巴黎衛冕，「麟洋配」\n王齊麟與李洋兩度寫下臺灣羽球傳奇。\n中華郵政特別在王齊麟的母校民權國小\n設置了金色郵筒。' },
+			{ title: '雙金的感動', body: '耀眼的金色象徵雙金榮耀，\n承載著奮鬥的足跡，\n也把這份感動與驕傲留在校園旁。' },
+		],
+		photo: goldMinquanCard,
 		cardPhoto: goldMinquanCard,
 		illustration: goldMinquanIllust,
 	},
@@ -134,6 +154,14 @@ export const upcoming = [
 		name: '新北投火車站特色郵筒',
 		area: '臺北市北投區中心里七星街1號',
 		summary: '走出新北投捷運站，\n七星公園裡藏著一座化身復古列車的特色郵筒。\n佇立於百年新北投車站旁，\n它承載著昔日鐵道的歲月記憶，\n讓每封寄出的信件，都彷彿搭上穿越時光的列車。',
+		nickname: '小火車',
+		postmark: ['台北', '北投'],
+		address: '臺北市北投區中心里七星街1號（七星公園）',
+		sections: [
+			{ title: '化身復古列車', body: '走出新北投捷運站，七星公園裡藏著\n一座化身復古列車的特色郵筒，\n火車頭造型一眼就能認出來。' },
+			{ title: '搭上時光列車', body: '它佇立於百年新北投車站旁，承載著\n昔日鐵道的歲月記憶，讓每封寄出的信，\n都彷彿搭上穿越時光的列車。' },
+		],
+		photo: beitouCard,
 		cardPhoto: beitouCard,
 		illustration: beitouIllust,
 	},
@@ -145,6 +173,14 @@ export const upcoming = [
 		name: '螃蟹郵筒',
 		area: '新北市萬里區・野柳漁港／萬里蟹產區',
 		summary: '結合萬里在地最著名的「萬里蟹」海鮮意象，立體大螃蟹抱著綠色郵筒的造型極具趣味，充滿濃濃的港灣海洋風情。',
+		nickname: '萬里蟹',
+		postmark: ['新北', '萬里'],
+		address: '新北市萬里區・野柳漁港／萬里蟹產區',
+		sections: [
+			{ title: '港邊的大螃蟹', body: '結合萬里在地最著名的「萬里蟹」意象，\n立體大螃蟹抱著綠色郵筒，\n瞪大的眼睛和大螯造型極具趣味。' },
+			{ title: '寄一封海風味的信', body: '逛完野柳、吃完萬里蟹，\n別忘了在這裡寄張明信片，\n把港灣的海洋風情分享給遠方的朋友。' },
+		],
+		photo: wanliCrabCard,
 		cardPhoto: wanliCrabCard,
 		illustration: wanliCrabIllust,
 	},
@@ -154,6 +190,14 @@ export const upcoming = [
 		name: '鐵道天燈郵筒',
 		area: '新北市平溪區・平溪車站／菁桐車站旁',
 		summary: '結合平溪經典的天燈文化與鐵道風情，天燈造型的特色郵筒佇立於山城鐵道旁，成為造訪平溪、菁桐時必拍的標誌性打卡點。',
+		nickname: '天燈郵筒',
+		postmark: ['新北', '平溪'],
+		address: '新北市平溪區・平溪車站／菁桐車站旁',
+		sections: [
+			{ title: '天燈與鐵道', body: '結合平溪經典的天燈文化與鐵道風情，\n天燈造型的特色郵筒佇立於山城鐵道旁，\n是造訪平溪、菁桐必拍的打卡點。' },
+			{ title: '把願望一起寄出', body: '在平溪，人們把願望寫在天燈上放飛；\n你也可以把想說的話寫進信裡，\n讓這座天燈郵筒替你送到遠方。' },
+		],
+		photo: pingxiLanternCard,
 		cardPhoto: pingxiLanternCard,
 		illustration: pingxiLanternIllust,
 	},
@@ -163,6 +207,14 @@ export const upcoming = [
 		name: '中華郵政奧運金牌郵筒',
 		area: '新北市鶯歌區・尖山埔路（鶯歌國中對面）',
 		summary: '為紀念「臺灣拳后」林郁婷於 2024 年巴黎奧運勇奪臺灣首面拳擊金牌，中華郵政特別於母校鶯歌國中對面設置金色郵筒，象徵奪金榮耀，留下珍貴的歷史紀念。',
+		nickname: '金牌郵筒',
+		postmark: ['新北', '鶯歌'],
+		address: '新北市鶯歌區・尖山埔路（鶯歌國中對面）',
+		sections: [
+			{ title: '臺灣拳后的金牌', body: '為紀念「臺灣拳后」林郁婷於 2024 年\n巴黎奧運勇奪臺灣首面拳擊金牌，\n中華郵政在她的母校鶯歌國中對面\n設置了金色郵筒。' },
+			{ title: '老街旁的榮耀', body: '逛鶯歌老街時不妨順路來看看，\n金色的筒身象徵奪金榮耀，\n也為小鎮留下珍貴的歷史紀念。' },
+		],
+		photo: goldYinggeCard,
 		cardPhoto: goldYinggeCard,
 		illustration: goldYinggeIllust,
 	},
@@ -172,6 +224,14 @@ export const upcoming = [
 		name: '一般特色郵筒',
 		area: '桃園市桃園區・文昌里成功路一段',
 		summary: '坐落於桃園成功路郵局前，\n這座特色郵筒融合桃園77藝文町的復古風情\n與99網美牆的設計巧思。兩側設有造型座椅，\n讓旅人在城市街角稍作停留，\n將寄信的溫度化為值得收藏的旅行記憶。',
+		nickname: '粉綠郵筒',
+		postmark: ['桃園', '桃園'],
+		address: '桃園市桃園區・文昌里成功路一段（成功路郵局前）',
+		sections: [
+			{ title: '復古風情的街角', body: '坐落於桃園成功路郵局前，這座特色郵筒\n融合桃園77藝文町的復古風情\n與99網美牆的設計巧思。' },
+			{ title: '坐下來寫張明信片', body: '郵筒兩側設有造型座椅，\n讓旅人在城市街角稍作停留，\n將寄信的溫度化為值得收藏的旅行記憶。' },
+		],
+		photo: taoyuanChenggongCard,
 		cardPhoto: taoyuanChenggongCard,
 		illustration: taoyuanChenggongIllust,
 	},
@@ -181,6 +241,14 @@ export const upcoming = [
 		name: '順風耳',
 		area: '臺南市安南區東和里・長和路一段',
 		summary: '結合傳統廟宇文化中媽祖駕前的「順風耳」與「千里眼」神將意象，將傳統神明公仔與紅綠郵筒相結合，展現濃厚的府城信仰魅力。',
+		nickname: '順風耳',
+		postmark: ['台南', '安南'],
+		address: '臺南市安南區東和里・長和路一段',
+		sections: [
+			{ title: '媽祖駕前的神將', body: '結合傳統廟宇文化中媽祖駕前的\n「順風耳」與「千里眼」神將意象，\n將神明公仔與紅綠郵筒相結合。' },
+			{ title: '府城的信仰魅力', body: '一個聽得遠、一個看得遠，\n讓寄出的心意不會走丟。\n來臺南走走，感受濃厚的府城信仰魅力。' },
+		],
+		photo: shunfengErCard,
 		cardPhoto: shunfengErCard,
 		illustration: shunfengErIllust,
 	},
@@ -190,6 +258,14 @@ export const upcoming = [
 		name: '劍獅郵筒',
 		area: '臺南市北區公園里・成功路',
 		summary: '結合安平在地數百年傳承的「劍獅」民俗文化與郵政意象，將鮮豔彩繪與立體劍獅造型融入郵筒設計，成為造訪安平古堡與老街巷弄時必拍的古都文化地標。',
+		nickname: '劍獅',
+		postmark: ['台南', '北區'],
+		address: '臺南市北區公園里・成功路',
+		sections: [
+			{ title: '安平的守護神', body: '「劍獅」是安平流傳數百年的民俗文化，\n郵筒將鮮豔彩繪與立體劍獅造型\n融入設計，紅綠兩座威風凜凜。' },
+			{ title: '古都的文化地標', body: '造訪安平古堡與老街巷弄之餘，\n別忘了和劍獅郵筒合照，\n再寄一封帶著古都味道的信。' },
+		],
+		photo: swordLionCard,
 		cardPhoto: swordLionCard,
 		illustration: swordLionIllust, // 設計稿是兩張插圖並排（郵筒＋劍獅），合成一張
 	},
@@ -199,6 +275,14 @@ export const upcoming = [
 		name: '橘貓信差郵筒',
 		area: '高雄市橋頭區・捷運橋頭糖廠站',
 		summary: '甲仙郵局於巷道（當地暱稱貓巷）特別設置「橘貓信差」特色郵筒，將趣味的橘貓公仔與郵政意象結合，為小鎮增添豐富的人文色彩，成為相合照的熱門景點。',
+		nickname: '橘貓信差',
+		postmark: ['高雄', '橋頭'],
+		address: '高雄市橋頭區・捷運橋頭糖廠站',
+		sections: [
+			{ title: '巷弄裡的橘貓', body: '在當地暱稱「貓巷」的巷道裡，\n特別設置了「橘貓信差」特色郵筒，\n戴著郵差帽的橘貓公仔十分討喜。' },
+			{ title: '和信差合照', body: '趣味的橘貓公仔與郵政意象結合，\n為小鎮增添豐富的人文色彩，\n成為旅人合照的熱門景點。' },
+		],
+		photo: catMessengerCard,
 		cardPhoto: catMessengerCard,
 		illustration: catMessengerIllust,
 	},
@@ -208,6 +292,14 @@ export const upcoming = [
 		name: '月光精靈貓頭鷹郵筒',
 		area: '高雄市杉林區・月眉里／杉林郵局周邊',
 		summary: '結合杉林在地布農族與原住民族傳說中代表吉祥與幸福的貓頭鷹意象，大大的圓眼睛與立體羽毛造型，佇立在山城間非常吸睛。',
+		nickname: '貓頭鷹',
+		postmark: ['高雄', '杉林'],
+		address: '高雄市杉林區・月眉里／杉林郵局周邊',
+		sections: [
+			{ title: '山城的吉祥鳥', body: '結合杉林在地布農族與原住民族傳說中\n代表吉祥與幸福的貓頭鷹意象，\n佇立在山城間非常吸睛。' },
+			{ title: '大眼睛守著信件', body: '大大的圓眼睛與立體羽毛造型，\n像是替大家守護著每一封信，\n把山城的祝福送到遠方。' },
+		],
+		photo: moonOwlCard,
 		cardPhoto: moonOwlCard,
 		illustration: moonOwlIllust,
 	},
@@ -217,6 +309,14 @@ export const upcoming = [
 		name: '章魚郵筒',
 		area: '高雄市梓官區・信蚵里港九街68號（梓官蚵仔寮郵局外）',
 		summary: '蚵仔寮郵局因鄰近漁港，於新局屋落成啟用時特別設置「章魚郵筒」（限時與普通郵筒各一座）。粉黃雙色的章魚公仔呈現出活潑的海洋人文特色，成為在地獨特的觀光亮點。',
+		nickname: '章魚',
+		postmark: ['高雄', '梓官'],
+		address: '高雄市梓官區・信蚵里港九街68號（梓官蚵仔寮郵局外）',
+		sections: [
+			{ title: '漁港邊的章魚', body: '蚵仔寮郵局因鄰近漁港，\n在新局屋落成啟用時特別設置\n「章魚郵筒」，限時與普通郵筒各一座。' },
+			{ title: '粉黃雙色的海洋風情', body: '粉色與黃色的章魚公仔抱著郵筒，\n呈現出活潑的海洋人文特色，\n成為在地獨特的觀光亮點。' },
+		],
+		photo: octopusCard,
 		cardPhoto: octopusCard, // ponytail: 業主給的原圖只有 396px 寬，有大張的再換
 		illustration: octopusIllust,
 	},
@@ -226,6 +326,14 @@ export const upcoming = [
 		name: '拉阿魯哇族郵筒',
 		area: '高雄市桃源區 / 那瑪夏區',
 		summary: '郵筒以「拉阿魯哇族聖貝祭」為設計核心，將神聖貝殼「takiaru」作為主要文化元素，結合部落傳統圖紋與色彩，呈現族群獨特的祭儀文化與敬畏自然、祖靈的精神。',
+		nickname: '拉阿魯哇郵筒',
+		postmark: ['高雄', '桃源'],
+		address: '高雄市桃源區 / 那瑪夏區',
+		sections: [
+			{ title: '聖貝祭的意象', body: '郵筒以「拉阿魯哇族聖貝祭」為設計核心，\n將神聖貝殼「takiaru」\n作為主要的文化元素。' },
+			{ title: '敬畏自然與祖靈', body: '結合部落傳統圖紋與色彩，\n呈現族群獨特的祭儀文化，\n以及敬畏自然、祖靈的精神。' },
+		],
+		photo: hlaaluaPhoto,
 		cardPhoto: hlaaluaCard,
 		illustration: hlaaluaIllust,
 	},
@@ -235,9 +343,19 @@ export const upcoming = [
 		name: '卡那卡那富族文化特色郵筒',
 		area: '高雄市那瑪夏區・瑪雅部落／達卡努瓦部落',
 		summary: '郵筒以臺灣原住民族第 16 族「卡那卡那富族（Kanakanavu）」的文化意象為設計核心，融入部落傳統服飾、織紋色彩與米呼彌濃（Mi humisang）的問候精神，展現族人對自然與土地的深厚情感。',
+		nickname: '卡那卡那富郵筒',
+		postmark: ['高雄', '那瑪夏'],
+		address: '高雄市那瑪夏區・瑪雅部落／達卡努瓦部落',
+		sections: [
+			{ title: '第 16 族的文化意象', body: '郵筒以臺灣原住民族第 16 族\n「卡那卡那富族（Kanakanavu）」\n的文化意象為設計核心。' },
+			{ title: '米呼彌濃的問候', body: '融入部落傳統服飾、織紋色彩\n與米呼彌濃（Mi humisang）的問候精神，\n展現族人對自然與土地的深厚情感。' },
+		],
+		photo: kanakanavuPhoto,
 		cardPhoto: kanakanavuCard,
 		illustration: kanakanavuIllust,
 	},
 ];
+
+export type Mailbox = (typeof mailboxes)[number];
 
 export const countyOf = (slug: string) => counties.find((c) => c.slug === slug)!;
