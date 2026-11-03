@@ -28,6 +28,8 @@ import shunfengErCard from '../assets/mailboxes/shunfeng-er-card.jpg';
 import shunfengErIllust from '../assets/mailboxes/shunfeng-er-illust.png';
 import swordLionCard from '../assets/mailboxes/sword-lion-card.jpg';
 import swordLionIllust from '../assets/mailboxes/sword-lion-illust.png';
+import anpingSwordLionCard from '../assets/mailboxes/anping-sword-lion-card.jpg';
+import anpingSwordLionIllust from '../assets/mailboxes/anping-sword-lion-illust.png';
 import catMessengerCard from '../assets/mailboxes/cat-messenger-card.jpg';
 import catMessengerIllust from '../assets/mailboxes/cat-messenger-illust.png';
 import moonOwlCard from '../assets/mailboxes/moon-owl-card.jpg';
@@ -256,19 +258,36 @@ export const mailboxes = [
 		id: 'sword-lion',
 		county: 'tainan',
 		name: '劍獅郵筒',
-		// 使用者 2026-11-04：劍獅郵筒有兩座（北區臺南郵局前的彩繪版、安平的立體版），卡片照設計稿只放一張，地點寫兩區
-		area: '臺南市北區公園里・成功路／安平區',
-		summary: '結合安平在地數百年傳承的「劍獅」民俗文化與郵政意象，將鮮豔彩繪與立體劍獅造型融入郵筒設計，成為造訪安平古堡與老街巷弄時必拍的古都文化地標。',
+		// 台南兩座劍獅郵筒的地址、介紹是業主 2026-11-04 提供的文字稿；卡片簡介用第一段介紹
+		area: '臺南市北區・成功路8號（成功路郵局前）',
+		summary: '「劍獅」是臺南特有文物，源自四百年前鄭氏水師將威猛獅頭盾牌與寶劍懸掛門前、辟邪祈福的傳統。成功路郵局將此民俗意象融入彩繪郵筒，讓紅綠兩座郵筒佇立街頭默默守護這塊土地。',
 		nickname: '劍獅',
 		postmark: ['台南', '北區'],
-		address: '臺南市北區公園里・成功路（臺南郵局前）／安平區',
+		address: '臺南市北區・成功路8號（成功路郵局前）',
 		sections: [
-			{ title: '安平的守護神', body: '「劍獅」是安平流傳數百年的民俗文化，\n郵筒將鮮豔彩繪與立體劍獅造型\n融入設計，紅綠兩座威風凜凜。' },
-			{ title: '兩座劍獅郵筒', body: '劍獅郵筒共有兩座：一座在北區臺南郵局前，\n筒身彩繪著劍獅的面孔；另一座在安平，\n是立體的劍獅造型。兩座都找到了嗎？' },
+			{ title: '四百年來的府城守護神', body: '「劍獅」是臺南特有文物，源自四百年前鄭氏水師將威猛獅頭盾牌與寶劍懸掛門前、辟邪祈福的傳統。成功路郵局將此民俗意象融入彩繪郵筒，讓紅綠兩座郵筒佇立街頭默默守護這塊土地。' },
+			{ title: '將滿滿平安隨信寄出', body: '劍獅口咬利劍象徵擋掉壞運、緊緊咬住幸福。來到成功路郵局前，不妨駐足寫張明信片投進郵筒，讓帶有四百年歷史溫度與闔家平安的祝福親手傳遞至遠方。' },
 		],
 		photo: swordLionCard,
 		cardPhoto: swordLionCard,
-		illustration: swordLionIllust, // 設計稿是兩張插圖並排（郵筒＋劍獅），合成一張
+		illustration: swordLionIllust,
+	},
+	{
+		id: 'anping-sword-lion',
+		county: 'tainan',
+		name: '劍獅郵筒',
+		area: '臺南市安平區・安平路708號（安平郵局前）',
+		summary: '不同於平面彩繪，安平郵局直接打造了全台唯一的「立體劍獅郵筒」！大大的立體獅頭、威風的爪子與口中緊咬的實體寶劍，把傳統避邪守護神化身為超萌的打卡地標。',
+		nickname: '立體劍獅',
+		postmark: ['台南', '安平'],
+		address: '臺南市安平區・安平路708號（安平郵局前）',
+		sections: [
+			{ title: '最 Q 萌的立體劍獅實體化', body: '不同於平面彩繪，安平郵局直接打造了全台唯一的「立體劍獅郵筒」！大大的立體獅頭、威風的爪子與口中緊咬的實體寶劍，把傳統避邪守護神化身為超萌的打卡地標。' },
+			{ title: '在劍獅故鄉寄出滿滿平安', body: '安平是劍獅文化發源地，這對紅綠立體劍獅佇立於老街旁默默守護旅人。來到安平散步，別忘了停下腳步寫張明信片，讓立體劍獅幫你緊咬祝福、把平安親手寄給重要的人！' },
+		],
+		photo: anpingSwordLionCard,
+		cardPhoto: anpingSwordLionCard, // 業主的「台南-3」是直式，卡片裁成 4:3 才會跟其他卡片一樣高
+		illustration: anpingSwordLionIllust,
 	},
 	{
 		id: 'cat-messenger',
