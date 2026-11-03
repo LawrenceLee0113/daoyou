@@ -40,18 +40,13 @@ const menu = [
 <!-- 使用者要求：電腦版滑動時整個頁首固定在最上面（高 87＋60＝147px）；
      手機、平板（2026-11-03）：花紋捲到上緣切齊瀏海上緣就停（top -59px，Dynamic Island 機型瀏海高 59px），
      下面露出的那段花紋＋導覽列固定，米白的導覽列不會頂到最上面。header 用 contents 讓花紋、導覽列各自 sticky。
-     瀏海：iOS 26 Safari 頂端碰到 sticky 元素時會拿它的底色塗滿瀏海（之前的白條）。手機版花紋不墊底色、
-     pointer-events-none（裡面沒有可點的東西），讓 Safari 跳過它、照實畫出花紋；花紋再往上多畫一段，沒捲動時也填滿瀏海。
+     瀏海：iOS 26 Safari 頂端碰到 sticky 元素時會拿它的底色塗滿瀏海（之前的白條），而且 sticky／fixed 的東西畫不進瀏海。
+     手機版花紋不墊底色、pointer-events-none（裡面沒有可點的東西），讓 Safari 跳過它不塗色；
+     瀏海裡的花紋由下面的 #notch-fill 負責：它是一般內容（Safari 會畫進瀏海），用捲動連動動畫跟著捲動往下移，看起來固定不動。
      ?notch=sage 是對照組：花紋墊 sage，讓 Safari 把瀏海塗成花紋底色（實機測試用，選定後拿掉） -->
 <header class="contents">
 	<!-- 電腦版花紋圖是半透明的，墊白底：頁首固定後下面捲上來的內容才不會透出來；手機版的圖不透明 -->
 	<div id="band" class="pointer-events-none sticky -top-[59px] z-40 h-[87px] lg:pointer-events-auto lg:top-0 lg:bg-white">
-		<div
-			class="absolute inset-x-0 bottom-full h-[120px] lg:hidden"
-			style={`background: url(${notchBand.src}) center bottom / 100% auto repeat-y`}
-			aria-hidden="true"
-		>
-		</div>
 		<picture>
 			<source media="(min-width: 1024px)" srcset={desktopBand.src} />
 			<Image src={headerTop} alt="" class="absolute inset-0 size-full object-cover lg:object-top" loading="eager" />
@@ -63,6 +58,16 @@ const menu = [
 		>
 			{messages[0]}
 		</p>
+	</div>
+	<!-- 瀏海後面的花紋：從畫面頂端往上 320px 到導覽列底部（88px），蓋住捲到瀏海後面的內容。
+	     往下延伸到導覽列底部是為了多留餘裕，捲動時就算慢一點點也不會露出內容（下半段被花紋、導覽列擋著看不到）。
+	     捲動連動在 global.css 的 #notch-fill；不支援的瀏覽器它就停在頁面最上面，不影響畫面 -->
+	<div
+		id="notch-fill"
+		class="pointer-events-none absolute inset-x-0 -top-[320px] z-30 h-[408px] lg:hidden"
+		style={`background: url(${notchBand.src}) center top / 100% auto repeat-y`}
+		aria-hidden="true"
+	>
 	</div>
 	<nav class="sticky top-[28px] z-40 bg-header-bar lg:top-[87px]" aria-label="主選單">
 		<div class="mx-auto flex h-[60px] max-w-6xl items-center px-5 lg:px-8">
@@ -111,6 +116,11 @@ const menu = [
 
 <script is:inline>
 	if (location.search.includes('notch=sage')) document.getElementById('band').classList.replace('pointer-events-none', 'bg-sage');
+	// #notch-fill 要往下移的總距離＝可以捲動的總距離（捲動連動動畫是照比例算的）
+	const root = document.documentElement;
+	const setMax = () => root.style.setProperty('--scroll-max', `${root.scrollHeight - root.clientHeight}px`);
+	new ResizeObserver(setMax).observe(document.body);
+	addEventListener('resize', setMax);
 </script>
 
 <script is:inline define:vars={{ messages }}>

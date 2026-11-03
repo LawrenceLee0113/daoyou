@@ -293,3 +293,18 @@ html:has(dialog[open]) {
 		transition-duration: 1ms !important;
 	}
 }
+
+/* 11. 手機瀏海後面的花紋（SiteHeader 的 #notch-fill）：跟著捲動往下移同樣的距離，看起來固定在畫面頂端。
+   不用 fixed／sticky 是因為 iOS 26 Safari 不會把固定的東西畫進瀏海。不算動態效果，減少動態效果時也照常跟著 */
+@supports (animation-timeline: scroll()) {
+	#notch-fill {
+		animation: notch-follow linear both;
+		animation-duration: auto !important;
+		animation-timeline: scroll(root);
+	}
+}
+@keyframes notch-follow {
+	to {
+		transform: translateY(var(--scroll-max, 0px));
+	}
+}
