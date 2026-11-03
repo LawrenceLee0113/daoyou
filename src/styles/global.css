@@ -77,9 +77,21 @@ html {
 	navigation: auto;
 }
 ::view-transition-old(root),
-::view-transition-new(root) {
+::view-transition-new(root),
+::view-transition-old(page),
+::view-transition-new(page) {
 	animation-duration: 0.25s;
 	animation-timing-function: ease-out;
+}
+/* 手機、平板只讓內容區（Layout 的 #scroller）淡入淡出，整頁不參與：轉場中參與的部分是疊在最上層的截圖，
+   iOS Safari 不畫進瀏海，整頁參與的話瀏海會白一下。頁首、瀏海的花紋留在原本的頁面上，照常顯示 */
+@media (width < 64rem) {
+	:root {
+		view-transition-name: none;
+	}
+	#scroller {
+		view-transition-name: page;
+	}
 }
 @media (prefers-reduced-motion: reduce) {
 	@view-transition {
