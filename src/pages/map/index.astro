@@ -25,7 +25,7 @@ import mapTitle from '../../assets/map-title.png';
 </script>
 
 <script>
-	// 隱藏開關（使用者 2026-11-04）：沒登入或用舊密碼時，7 秒內點頁首綠色花紋 10 次就顯示全部縣市，再點一次切回部分。
+	// 隱藏開關（使用者 2026-11-04）：沒登入或用舊密碼時，7 秒內點頁首綠色花紋 10 次就顯示全部縣市，再 10 次切回部分。
 	// 用 apple1119 登入的本來就看得到全部，不受影響。狀態存在這支手機上，換頁後還在
 	import { hasFullPassword, isUnlocked, setUnlocked } from '../../lib/store';
 	const TAPS = 10;
@@ -34,16 +34,11 @@ import mapTitle from '../../assets/map-title.png';
 	const apply = () => document.documentElement.toggleAttribute('data-full', hasFullPassword() || isUnlocked());
 	document.getElementById('header-band')!.addEventListener('click', () => {
 		if (hasFullPassword()) return;
-		if (isUnlocked()) {
-			setUnlocked(false);
-			taps = [];
-			return apply();
-		}
 		const now = Date.now();
 		taps = [...taps.filter((t) => now - t < WINDOW_MS), now];
 		if (taps.length < TAPS) return;
 		taps = [];
-		setUnlocked(true);
+		setUnlocked(!isUnlocked());
 		apply();
 	});
 </script>
