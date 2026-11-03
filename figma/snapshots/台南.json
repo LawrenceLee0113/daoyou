@@ -3,7 +3,7 @@
 	"type": "FRAME",
 	"scrollBehavior": "SCROLLS",
 	"blendMode": "PASS_THROUGH",
-	"clipsContent": true,
+	"clipsContent": false,
 	"background": [
 		{
 			"blendMode": "NORMAL",
@@ -90,672 +90,6 @@
 				"y": 170,
 				"w": 445,
 				"h": 629
-			}
-		},
-		{
-			"name": "資產 11 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "c050243337c7412bdbe47243e34758089f3b8343"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 2556,
-				"y": 273
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 27,
-				"y": 179,
-				"w": 187,
-				"h": 20
-			}
-		},
-		{
-			"name": "台灣分開_新北市 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "1431f5570f19edc56e01b87e28e5f53e0d63011c"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 1112,
-				"y": 798
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 181,
-				"y": 222,
-				"w": 199,
-				"h": 143
-			}
-		},
-		{
-			"name": "台灣分開_臺北市 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "66ebf7824465ad2cef9137b60de1fe23d5b9b321"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 1112,
-				"y": 798
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 169,
-				"y": 211,
-				"w": 199,
-				"h": 143
-			}
-		},
-		{
-			"name": "台灣分開_桃園市 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "bfa05965758d32434df530f08d8cde56201a5fa8"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 1112,
-				"y": 798
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 126,
-				"y": 240,
-				"w": 199,
-				"h": 143
-			}
-		},
-		{
-			"name": "台灣分開_苗栗縣 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "d70376f187eba2f398135a9b2cfc1566acb8619d"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 1112,
-				"y": 798
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 89,
-				"y": 285,
-				"w": 199,
-				"h": 143
-			}
-		},
-		{
-			"name": "台灣分開_臺中市 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "2fff924d00817a53c323345dc6705076aca21573"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 1111,
-				"y": 798
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 93,
-				"y": 325,
-				"w": 199,
-				"h": 143
-			}
-		},
-		{
-			"name": "台灣分開_彰化縣 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "5effc78ac49a1095936867000898a870a0575faf"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 1112,
-				"y": 798
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 27,
-				"y": 355,
-				"w": 199,
-				"h": 143
-			}
-		},
-		{
-			"name": "台灣分開_雲林縣 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "4df4a7a1a133786b70a06ec93367f5b66dc6c89d"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 1112,
-				"y": 798
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 21,
-				"y": 400,
-				"w": 199,
-				"h": 143
-			}
-		},
-		{
-			"name": "台灣分開_嘉義縣市 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "a19eb9d332eb06214c73a6c0f9f44b127969ff6c"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 1111,
-				"y": 798
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 33,
-				"y": 434,
-				"w": 199,
-				"h": 143
-			}
-		},
-		{
-			"name": "台灣分開_臺南市 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "7c8f5ca826bfeef7e585dd8598d270b2fe436303"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 1112,
-				"y": 798
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 10,
-				"y": 474,
-				"w": 199,
-				"h": 143
-			}
-		},
-		{
-			"name": "台灣分開_高雄市 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "5ad03c968c38f7c0a0195e96f878924daa499565"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 1112,
-				"y": 828
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 43,
-				"y": 499,
-				"w": 199,
-				"h": 148
-			}
-		},
-		{
-			"name": "台灣分開_屏東縣 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "f9d1fc73df2e18f085efefd9912b9702f88aafa5"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 1112,
-				"y": 798
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 51,
-				"y": 578,
-				"w": 199,
-				"h": 143
-			}
-		},
-		{
-			"name": "台灣分開_宜蘭縣 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "075136bb404557e349788b37eb73c7b98c299dae"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 1111,
-				"y": 798
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 186,
-				"y": 267,
-				"w": 199,
-				"h": 143
-			}
-		},
-		{
-			"name": "台灣分開_花蓮縣 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "619ceff2d1a07adcf49744c475e1ef8caa68b36f"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 1112,
-				"y": 970
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 148,
-				"y": 375,
-				"w": 199,
-				"h": 174
-			}
-		},
-		{
-			"name": "台灣分開_臺東縣 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "4b786a071886b2170ddd6880214056310de61e3c"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 1112,
-				"y": 970
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 114,
-				"y": 500,
-				"w": 199,
-				"h": 174
-			}
-		},
-		{
-			"name": "台灣分開_基隆市 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "4dec54c9e1fddb464220c3975085d060293fcd5b"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 1111,
-				"y": 798
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 192,
-				"y": 207,
-				"w": 199,
-				"h": 143
-			}
-		},
-		{
-			"name": "台灣分開_新竹縣市 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "78549230a09a95d700252f12cd113413b0274015"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 1112,
-				"y": 798
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 114,
-				"y": 262,
-				"w": 199,
-				"h": 143
-			}
-		},
-		{
-			"name": "台灣分開_南投縣 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "d37384673136db7483ec67e8cfad8f0921ca76f3"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 1112,
-				"y": 798
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "LEFT"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 93,
-				"y": 379,
-				"w": 199,
-				"h": 143
 			}
 		},
 		{
@@ -2408,7 +1742,22 @@
 						"horizontal": "LEFT"
 					},
 					"effects": [],
-					"interactions": [],
+					"transitionDuration": 300,
+					"transitionEasing": "EASE_OUT",
+					"interactions": [
+						{
+							"trigger": {
+								"type": "ON_CLICK"
+							},
+							"actions": [
+								{
+									"type": "NODE",
+									"navigation": "NAVIGATE",
+									"transition": null
+								}
+							]
+						}
+					],
 					"complexStrokeProperties": {
 						"strokeType": "BASIC"
 					},
@@ -2420,7 +1769,1029 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "臺南市",
+			"type": "TEXT",
+			"scrollBehavior": "SCROLLS",
+			"blendMode": "PASS_THROUGH",
+			"fills": [
+				{
+					"blendMode": "NORMAL",
+					"type": "SOLID",
+					"color": {
+						"r": 0.7,
+						"g": 0.77,
+						"b": 0.72,
+						"a": 1
+					}
+				}
+			],
+			"strokes": [],
+			"strokeWeight": 1,
+			"strokeAlign": "OUTSIDE",
+			"constraints": {
+				"vertical": "TOP",
+				"horizontal": "CENTER"
+			},
+			"characters": "臺南市",
+			"characterStyleOverrides": [],
+			"styleOverrideTable": {},
+			"lineTypes": [
+				"NONE"
+			],
+			"lineIndentations": [
+				0
+			],
+			"style": {
+				"fontFamily": "Nightgazer 12",
+				"fontPostScriptName": "Nightgazer-12-B",
+				"fontStyle": "Bold",
+				"fontWeight": 700,
+				"textAutoResize": "WIDTH_AND_HEIGHT",
+				"fontSize": 24,
+				"textAlignHorizontal": "CENTER",
+				"textAlignVertical": "TOP",
+				"letterSpacing": 0,
+				"lineHeightPx": 24,
+				"lineHeightPercent": 100,
+				"lineHeightUnit": "INTRINSIC_%"
+			},
+			"layoutVersion": 5,
+			"effects": [],
+			"interactions": [],
+			"complexStrokeProperties": {
+				"strokeType": "BASIC"
+			},
+			"box": {
+				"x": 161,
+				"y": 176,
+				"w": 72,
+				"h": 24
+			}
+		},
+		{
+			"name": "返回",
+			"type": "TEXT",
+			"scrollBehavior": "SCROLLS",
+			"blendMode": "PASS_THROUGH",
+			"fills": [
+				{
+					"blendMode": "NORMAL",
+					"type": "SOLID",
+					"color": {
+						"r": 0.4,
+						"g": 0.5,
+						"b": 0.16,
+						"a": 1
+					}
+				}
+			],
+			"strokes": [],
+			"strokeWeight": 1,
+			"strokeAlign": "OUTSIDE",
+			"constraints": {
+				"vertical": "TOP",
+				"horizontal": "LEFT"
+			},
+			"characters": "← 返回",
+			"characterStyleOverrides": [],
+			"styleOverrideTable": {},
+			"lineTypes": [
+				"NONE"
+			],
+			"lineIndentations": [
+				0
+			],
+			"style": {
+				"fontFamily": "Inter",
+				"fontPostScriptName": null,
+				"fontStyle": "Bold",
+				"fontWeight": 700,
+				"textAutoResize": "WIDTH_AND_HEIGHT",
+				"fontSize": 13,
+				"textAlignHorizontal": "LEFT",
+				"textAlignVertical": "TOP",
+				"letterSpacing": 0,
+				"lineHeightPx": 15.73,
+				"lineHeightPercent": 100,
+				"lineHeightUnit": "INTRINSIC_%"
+			},
+			"layoutVersion": 5,
+			"effects": [],
+			"transitionDuration": 300,
+			"transitionEasing": "EASE_OUT",
+			"interactions": [
+				{
+					"trigger": {
+						"type": "ON_CLICK"
+					},
+					"actions": [
+						{
+							"type": "NODE",
+							"navigation": "NAVIGATE",
+							"transition": null
+						}
+					]
+				}
+			],
+			"complexStrokeProperties": {
+				"strokeType": "BASIC"
+			},
+			"box": {
+				"x": 27,
+				"y": 180,
+				"w": 42,
+				"h": 16
+			}
+		},
+		{
+			"name": "Frame 17",
+			"type": "FRAME",
+			"scrollBehavior": "SCROLLS",
+			"blendMode": "PASS_THROUGH",
+			"clipsContent": false,
+			"background": [],
+			"fills": [],
+			"strokes": [],
+			"strokeWeight": 1,
+			"strokeAlign": "INSIDE",
+			"backgroundColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			},
+			"overflowDirection": "VERTICAL_SCROLLING",
+			"constraints": {
+				"vertical": "TOP",
+				"horizontal": "LEFT"
+			},
+			"effects": [],
+			"interactions": [],
+			"complexStrokeProperties": {
+				"strokeType": "BASIC"
+			},
+			"box": {
+				"x": 1463,
+				"y": 225,
+				"w": 350,
+				"h": 600
+			},
+			"children": [
+				{
+					"name": "Group 64",
+					"type": "GROUP",
+					"scrollBehavior": "SCROLLS",
+					"blendMode": "PASS_THROUGH",
+					"clipsContent": false,
+					"background": [],
+					"fills": [],
+					"strokes": [],
+					"rectangleCornerRadii": [
+						0,
+						0,
+						0,
+						0
+					],
+					"cornerSmoothing": 0,
+					"strokeWeight": 1,
+					"strokeAlign": "INSIDE",
+					"backgroundColor": {
+						"r": 0,
+						"g": 0,
+						"b": 0,
+						"a": 0
+					},
+					"constraints": {
+						"vertical": "TOP",
+						"horizontal": "LEFT"
+					},
+					"effects": [],
+					"interactions": [],
+					"complexStrokeProperties": {
+						"strokeType": "BASIC"
+					},
+					"box": {
+						"x": 380,
+						"y": 225,
+						"w": 350,
+						"h": 600
+					},
+					"children": [
+						{
+							"name": "看更多",
+							"type": "TEXT",
+							"scrollBehavior": "SCROLLS",
+							"blendMode": "PASS_THROUGH",
+							"fills": [
+								{
+									"blendMode": "NORMAL",
+									"type": "SOLID",
+									"color": {
+										"r": 0.75,
+										"g": 0.29,
+										"b": 0.52,
+										"a": 1
+									}
+								}
+							],
+							"strokes": [],
+							"strokeWeight": 1,
+							"strokeAlign": "OUTSIDE",
+							"constraints": {
+								"vertical": "TOP",
+								"horizontal": "CENTER"
+							},
+							"characters": "看更多 →",
+							"characterStyleOverrides": [],
+							"styleOverrideTable": {},
+							"lineTypes": [
+								"NONE"
+							],
+							"lineIndentations": [
+								0
+							],
+							"style": {
+								"fontFamily": "Inter",
+								"fontPostScriptName": null,
+								"fontStyle": "Bold",
+								"fontWeight": 700,
+								"fontSize": 13,
+								"textAlignHorizontal": "CENTER",
+								"textAlignVertical": "TOP",
+								"letterSpacing": 0,
+								"lineHeightPx": 15.73,
+								"lineHeightPercent": 100,
+								"lineHeightUnit": "INTRINSIC_%"
+							},
+							"layoutVersion": 5,
+							"effects": [],
+							"interactions": [],
+							"complexStrokeProperties": {
+								"strokeType": "BASIC"
+							},
+							"box": {
+								"x": 523,
+								"y": 780,
+								"w": 64.17,
+								"h": 22.59
+							}
+						},
+						{
+							"name": "Group 62",
+							"type": "GROUP",
+							"scrollBehavior": "SCROLLS",
+							"blendMode": "PASS_THROUGH",
+							"clipsContent": false,
+							"background": [],
+							"fills": [],
+							"strokes": [],
+							"strokeWeight": 1,
+							"strokeAlign": "INSIDE",
+							"backgroundColor": {
+								"r": 0,
+								"g": 0,
+								"b": 0,
+								"a": 0
+							},
+							"constraints": {
+								"vertical": "TOP",
+								"horizontal": "LEFT"
+							},
+							"effects": [],
+							"interactions": [],
+							"complexStrokeProperties": {
+								"strokeType": "BASIC"
+							},
+							"box": {
+								"x": 424,
+								"y": 674,
+								"w": 261,
+								"h": 92
+							},
+							"children": [
+								{
+									"name": "資產 21 1",
+									"type": "RECTANGLE",
+									"scrollBehavior": "SCROLLS",
+									"blendMode": "PASS_THROUGH",
+									"fills": [
+										{
+											"blendMode": "NORMAL",
+											"type": "IMAGE",
+											"scaleMode": "FILL",
+											"imageRef": "e9bc1b0019c60200b2cf0839d69d440c03bb1df8"
+										}
+									],
+									"strokes": [],
+									"strokeWeight": 1,
+									"strokeAlign": "INSIDE",
+									"preserveRatio": true,
+									"targetAspectRatio": {
+										"x": 1191,
+										"y": 950
+									},
+									"constraints": {
+										"vertical": "TOP",
+										"horizontal": "LEFT"
+									},
+									"effects": [],
+									"interactions": [],
+									"complexStrokeProperties": {
+										"strokeType": "BASIC"
+									},
+									"box": {
+										"x": 571,
+										"y": 674,
+										"w": 114,
+										"h": 92
+									}
+								},
+								{
+									"name": "資產 20 1",
+									"type": "RECTANGLE",
+									"scrollBehavior": "SCROLLS",
+									"blendMode": "PASS_THROUGH",
+									"fills": [
+										{
+											"blendMode": "NORMAL",
+											"type": "IMAGE",
+											"scaleMode": "FILL",
+											"imageRef": "86b2b33f608bbce9df11feca6ab2edbbb16b9180"
+										}
+									],
+									"strokes": [],
+									"strokeWeight": 1,
+									"strokeAlign": "INSIDE",
+									"preserveRatio": true,
+									"targetAspectRatio": {
+										"x": 1274,
+										"y": 950
+									},
+									"constraints": {
+										"vertical": "TOP",
+										"horizontal": "LEFT"
+									},
+									"effects": [],
+									"interactions": [],
+									"complexStrokeProperties": {
+										"strokeType": "BASIC"
+									},
+									"box": {
+										"x": 424,
+										"y": 674,
+										"w": 123,
+										"h": 92
+									}
+								}
+							]
+						},
+						{
+							"name": "標題",
+							"type": "TEXT",
+							"scrollBehavior": "SCROLLS",
+							"blendMode": "PASS_THROUGH",
+							"fills": [
+								{
+									"blendMode": "NORMAL",
+									"type": "SOLID",
+									"color": {
+										"r": 0.4,
+										"g": 0.5,
+										"b": 0.16,
+										"a": 1
+									}
+								}
+							],
+							"strokes": [],
+							"strokeWeight": 1,
+							"strokeAlign": "OUTSIDE",
+							"constraints": {
+								"vertical": "TOP",
+								"horizontal": "CENTER"
+							},
+							"characters": "劍獅郵筒",
+							"characterStyleOverrides": [],
+							"styleOverrideTable": {},
+							"lineTypes": [
+								"NONE"
+							],
+							"lineIndentations": [
+								0
+							],
+							"style": {
+								"fontFamily": "Inter",
+								"fontPostScriptName": null,
+								"fontStyle": "Bold",
+								"fontWeight": 700,
+								"fontSize": 20,
+								"textAlignHorizontal": "CENTER",
+								"textAlignVertical": "TOP",
+								"letterSpacing": 0,
+								"lineHeightPx": 24.2,
+								"lineHeightPercent": 100,
+								"lineHeightUnit": "INTRINSIC_%"
+							},
+							"layoutVersion": 5,
+							"effects": [],
+							"interactions": [],
+							"complexStrokeProperties": {
+								"strokeType": "BASIC"
+							},
+							"box": {
+								"x": 500,
+								"y": 508,
+								"w": 110,
+								"h": 34
+							}
+						},
+						{
+							"name": "地點",
+							"type": "TEXT",
+							"scrollBehavior": "SCROLLS",
+							"blendMode": "PASS_THROUGH",
+							"fills": [
+								{
+									"blendMode": "NORMAL",
+									"type": "SOLID",
+									"color": {
+										"r": 0.7,
+										"g": 0.77,
+										"b": 0.72,
+										"a": 1
+									}
+								}
+							],
+							"strokes": [],
+							"strokeWeight": 1,
+							"strokeAlign": "OUTSIDE",
+							"constraints": {
+								"vertical": "TOP",
+								"horizontal": "CENTER"
+							},
+							"characters": "臺南市北區公園里・成功路",
+							"characterStyleOverrides": [],
+							"styleOverrideTable": {},
+							"lineTypes": [
+								"NONE"
+							],
+							"lineIndentations": [
+								0
+							],
+							"style": {
+								"fontFamily": "Inter",
+								"fontPostScriptName": null,
+								"fontStyle": "Bold",
+								"fontWeight": 700,
+								"fontSize": 11,
+								"textAlignHorizontal": "CENTER",
+								"textAlignVertical": "TOP",
+								"letterSpacing": 0,
+								"lineHeightPx": 13.31,
+								"lineHeightPercent": 100,
+								"lineHeightUnit": "INTRINSIC_%"
+							},
+							"layoutVersion": 5,
+							"effects": [],
+							"interactions": [],
+							"complexStrokeProperties": {
+								"strokeType": "BASIC"
+							},
+							"box": {
+								"x": 450,
+								"y": 548,
+								"w": 209,
+								"h": 18
+							}
+						},
+						{
+							"name": "簡介",
+							"type": "TEXT",
+							"scrollBehavior": "SCROLLS",
+							"blendMode": "PASS_THROUGH",
+							"fills": [
+								{
+									"blendMode": "NORMAL",
+									"type": "SOLID",
+									"color": {
+										"r": 0.3,
+										"g": 0.3,
+										"b": 0.3,
+										"a": 1
+									}
+								}
+							],
+							"strokes": [],
+							"strokeWeight": 1,
+							"strokeAlign": "OUTSIDE",
+							"constraints": {
+								"vertical": "TOP",
+								"horizontal": "CENTER"
+							},
+							"characters": "結合安平在地數百年傳承的「劍獅」民俗文化與郵政意象，將鮮豔彩繪與立體劍獅造型融入郵筒設計，成為造訪安平古堡與老街巷弄時必拍的古都文化地標。",
+							"characterStyleOverrides": [],
+							"styleOverrideTable": {},
+							"lineTypes": [
+								"NONE"
+							],
+							"lineIndentations": [
+								0
+							],
+							"style": {
+								"fontFamily": "Inter",
+								"fontPostScriptName": null,
+								"fontStyle": "Regular",
+								"fontWeight": 400,
+								"fontSize": 12,
+								"textAlignHorizontal": "CENTER",
+								"textAlignVertical": "TOP",
+								"letterSpacing": 0,
+								"lineHeightPx": 14.52,
+								"lineHeightPercent": 100,
+								"lineHeightUnit": "INTRINSIC_%"
+							},
+							"layoutVersion": 5,
+							"effects": [],
+							"interactions": [],
+							"complexStrokeProperties": {
+								"strokeType": "BASIC"
+							},
+							"box": {
+								"x": 450,
+								"y": 576,
+								"w": 219,
+								"h": 84
+							}
+						},
+						{
+							"name": "Rectangle 20",
+							"type": "RECTANGLE",
+							"scrollBehavior": "SCROLLS",
+							"blendMode": "PASS_THROUGH",
+							"fills": [],
+							"strokes": [
+								{
+									"blendMode": "NORMAL",
+									"type": "SOLID",
+									"color": {
+										"r": 0.7,
+										"g": 0.77,
+										"b": 0.72,
+										"a": 1
+									}
+								}
+							],
+							"strokeWeight": 1.5,
+							"strokeAlign": "INSIDE",
+							"cornerRadius": 35,
+							"cornerSmoothing": 0,
+							"constraints": {
+								"vertical": "TOP",
+								"horizontal": "LEFT"
+							},
+							"effects": [],
+							"interactions": [],
+							"complexStrokeProperties": {
+								"strokeType": "BASIC"
+							},
+							"box": {
+								"x": 380,
+								"y": 225,
+								"w": 350,
+								"h": 600
+							}
+						},
+						{
+							"name": "B6933F7E-751D-4AA1-AB7C-89C907973DCA 1",
+							"type": "RECTANGLE",
+							"scrollBehavior": "SCROLLS",
+							"blendMode": "PASS_THROUGH",
+							"fills": [
+								{
+									"blendMode": "NORMAL",
+									"type": "IMAGE",
+									"scaleMode": "FILL",
+									"imageRef": "e4585dbc83cb2e54b605105faed8f9898e17bb48"
+								}
+							],
+							"strokes": [],
+							"strokeWeight": 1,
+							"strokeAlign": "INSIDE",
+							"cornerRadius": 30,
+							"cornerSmoothing": 0,
+							"preserveRatio": true,
+							"targetAspectRatio": {
+								"x": 1440,
+								"y": 1080
+							},
+							"constraints": {
+								"vertical": "TOP",
+								"horizontal": "LEFT"
+							},
+							"effects": [],
+							"interactions": [],
+							"complexStrokeProperties": {
+								"strokeType": "BASIC"
+							},
+							"box": {
+								"x": 396,
+								"y": 239,
+								"w": 320,
+								"h": 240
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Group 63",
+			"type": "GROUP",
+			"scrollBehavior": "SCROLLS",
+			"blendMode": "PASS_THROUGH",
+			"clipsContent": false,
+			"background": [],
+			"fills": [],
+			"strokes": [],
+			"rectangleCornerRadii": [
+				0,
+				0,
+				0,
+				0
+			],
+			"cornerSmoothing": 0,
+			"strokeWeight": 1,
+			"strokeAlign": "INSIDE",
+			"backgroundColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			},
+			"constraints": {
+				"vertical": "TOP",
+				"horizontal": "LEFT"
+			},
+			"effects": [],
+			"interactions": [],
+			"complexStrokeProperties": {
+				"strokeType": "BASIC"
+			},
+			"box": {
+				"x": 19,
+				"y": 225,
+				"w": 350,
+				"h": 600
+			},
+			"children": [
+				{
+					"name": "標題",
+					"type": "TEXT",
+					"scrollBehavior": "SCROLLS",
+					"blendMode": "PASS_THROUGH",
+					"fills": [
+						{
+							"blendMode": "NORMAL",
+							"type": "SOLID",
+							"color": {
+								"r": 0.4,
+								"g": 0.5,
+								"b": 0.16,
+								"a": 1
+							}
+						}
+					],
+					"strokes": [],
+					"strokeWeight": 1,
+					"strokeAlign": "OUTSIDE",
+					"constraints": {
+						"vertical": "TOP",
+						"horizontal": "CENTER"
+					},
+					"characters": "順風耳",
+					"characterStyleOverrides": [],
+					"styleOverrideTable": {},
+					"lineTypes": [
+						"NONE"
+					],
+					"lineIndentations": [
+						0
+					],
+					"style": {
+						"fontFamily": "Inter",
+						"fontPostScriptName": null,
+						"fontStyle": "Bold",
+						"fontWeight": 700,
+						"fontSize": 20,
+						"textAlignHorizontal": "CENTER",
+						"textAlignVertical": "TOP",
+						"letterSpacing": 0,
+						"lineHeightPx": 24.2,
+						"lineHeightPercent": 100,
+						"lineHeightUnit": "INTRINSIC_%"
+					},
+					"layoutVersion": 5,
+					"effects": [],
+					"interactions": [],
+					"complexStrokeProperties": {
+						"strokeType": "BASIC"
+					},
+					"box": {
+						"x": 149,
+						"y": 508,
+						"w": 93.33,
+						"h": 33.88
+					}
+				},
+				{
+					"name": "地點",
+					"type": "TEXT",
+					"scrollBehavior": "SCROLLS",
+					"blendMode": "PASS_THROUGH",
+					"fills": [
+						{
+							"blendMode": "NORMAL",
+							"type": "SOLID",
+							"color": {
+								"r": 0.7,
+								"g": 0.77,
+								"b": 0.72,
+								"a": 1
+							}
+						}
+					],
+					"strokes": [],
+					"strokeWeight": 1,
+					"strokeAlign": "OUTSIDE",
+					"constraints": {
+						"vertical": "TOP",
+						"horizontal": "CENTER"
+					},
+					"characters": "臺南市安南區東和里・長和路一段",
+					"characterStyleOverrides": [],
+					"styleOverrideTable": {},
+					"lineTypes": [
+						"NONE"
+					],
+					"lineIndentations": [
+						0
+					],
+					"style": {
+						"fontFamily": "Inter",
+						"fontPostScriptName": null,
+						"fontStyle": "Bold",
+						"fontWeight": 700,
+						"fontSize": 11,
+						"textAlignHorizontal": "CENTER",
+						"textAlignVertical": "TOP",
+						"letterSpacing": 0,
+						"lineHeightPx": 13.31,
+						"lineHeightPercent": 100,
+						"lineHeightUnit": "INTRINSIC_%"
+					},
+					"layoutVersion": 5,
+					"effects": [],
+					"interactions": [],
+					"complexStrokeProperties": {
+						"strokeType": "BASIC"
+					},
+					"box": {
+						"x": 99,
+						"y": 546,
+						"w": 189,
+						"h": 18
+					}
+				},
+				{
+					"name": "簡介",
+					"type": "TEXT",
+					"scrollBehavior": "SCROLLS",
+					"blendMode": "PASS_THROUGH",
+					"fills": [
+						{
+							"blendMode": "NORMAL",
+							"type": "SOLID",
+							"color": {
+								"r": 0.3,
+								"g": 0.3,
+								"b": 0.3,
+								"a": 1
+							}
+						}
+					],
+					"strokes": [],
+					"strokeWeight": 1,
+					"strokeAlign": "OUTSIDE",
+					"constraints": {
+						"vertical": "TOP",
+						"horizontal": "CENTER"
+					},
+					"characters": "結合傳統廟宇文化中媽祖駕前的「順風耳」與「千里眼」神將意象，將傳統神明公仔與紅綠郵筒相結合，展現濃厚的府城信仰魅力。",
+					"characterStyleOverrides": [],
+					"styleOverrideTable": {},
+					"lineTypes": [
+						"NONE"
+					],
+					"lineIndentations": [
+						0
+					],
+					"style": {
+						"fontFamily": "Inter",
+						"fontPostScriptName": null,
+						"fontStyle": "Regular",
+						"fontWeight": 400,
+						"fontSize": 12,
+						"textAlignHorizontal": "CENTER",
+						"textAlignVertical": "TOP",
+						"letterSpacing": 0,
+						"lineHeightPx": 14.52,
+						"lineHeightPercent": 100,
+						"lineHeightUnit": "INTRINSIC_%"
+					},
+					"layoutVersion": 5,
+					"effects": [],
+					"interactions": [],
+					"complexStrokeProperties": {
+						"strokeType": "BASIC"
+					},
+					"box": {
+						"x": 74,
+						"y": 571,
+						"w": 243,
+						"h": 84
+					}
+				},
+				{
+					"name": "3F66346F-C299-4192-AA17-FCAD8D9B8393 1",
+					"type": "RECTANGLE",
+					"scrollBehavior": "SCROLLS",
+					"blendMode": "PASS_THROUGH",
+					"fills": [
+						{
+							"blendMode": "NORMAL",
+							"type": "IMAGE",
+							"scaleMode": "FILL",
+							"imageRef": "55a193ba8f81b02064b933866a1dfb3773051b8d"
+						}
+					],
+					"strokes": [],
+					"strokeWeight": 1,
+					"strokeAlign": "INSIDE",
+					"cornerRadius": 30,
+					"cornerSmoothing": 0,
+					"constraints": {
+						"vertical": "TOP",
+						"horizontal": "CENTER"
+					},
+					"effects": [],
+					"interactions": [],
+					"complexStrokeProperties": {
+						"strokeType": "BASIC"
+					},
+					"box": {
+						"x": 34,
+						"y": 239,
+						"w": 320,
+						"h": 240
+					}
+				},
+				{
+					"name": "Rectangle 20",
+					"type": "RECTANGLE",
+					"scrollBehavior": "SCROLLS",
+					"blendMode": "PASS_THROUGH",
+					"fills": [],
+					"strokes": [
+						{
+							"blendMode": "NORMAL",
+							"type": "SOLID",
+							"color": {
+								"r": 0.7,
+								"g": 0.77,
+								"b": 0.72,
+								"a": 1
+							}
+						}
+					],
+					"strokeWeight": 1.5,
+					"strokeAlign": "INSIDE",
+					"cornerRadius": 35,
+					"cornerSmoothing": 0,
+					"constraints": {
+						"vertical": "TOP",
+						"horizontal": "LEFT"
+					},
+					"effects": [],
+					"interactions": [],
+					"complexStrokeProperties": {
+						"strokeType": "BASIC"
+					},
+					"box": {
+						"x": 19,
+						"y": 225,
+						"w": 350,
+						"h": 600
+					}
+				},
+				{
+					"name": "看更多",
+					"type": "TEXT",
+					"scrollBehavior": "SCROLLS",
+					"blendMode": "PASS_THROUGH",
+					"fills": [
+						{
+							"blendMode": "NORMAL",
+							"type": "SOLID",
+							"color": {
+								"r": 0.75,
+								"g": 0.29,
+								"b": 0.52,
+								"a": 1
+							}
+						}
+					],
+					"strokes": [],
+					"strokeWeight": 1,
+					"strokeAlign": "OUTSIDE",
+					"constraints": {
+						"vertical": "TOP",
+						"horizontal": "CENTER"
+					},
+					"characters": "看更多 →",
+					"characterStyleOverrides": [],
+					"styleOverrideTable": {},
+					"lineTypes": [
+						"NONE"
+					],
+					"lineIndentations": [
+						0
+					],
+					"style": {
+						"fontFamily": "Inter",
+						"fontPostScriptName": null,
+						"fontStyle": "Bold",
+						"fontWeight": 700,
+						"fontSize": 13,
+						"textAlignHorizontal": "CENTER",
+						"textAlignVertical": "TOP",
+						"letterSpacing": 0,
+						"lineHeightPx": 15.73,
+						"lineHeightPercent": 100,
+						"lineHeightUnit": "INTRINSIC_%"
+					},
+					"layoutVersion": 5,
+					"effects": [],
+					"interactions": [],
+					"complexStrokeProperties": {
+						"strokeType": "BASIC"
+					},
+					"box": {
+						"x": 162,
+						"y": 782,
+						"w": 64.17,
+						"h": 22.59
+					}
+				},
+				{
+					"name": "資產 22 1",
+					"type": "RECTANGLE",
+					"scrollBehavior": "SCROLLS",
+					"blendMode": "PASS_THROUGH",
+					"fills": [
+						{
+							"blendMode": "NORMAL",
+							"type": "IMAGE",
+							"scaleMode": "FILL",
+							"imageRef": "8fe6e9d517db3d57480177fe970f683f8eec80b0"
+						}
+					],
+					"strokes": [],
+					"strokeWeight": 1,
+					"strokeAlign": "INSIDE",
+					"preserveRatio": true,
+					"targetAspectRatio": {
+						"x": 1367,
+						"y": 950
+					},
+					"constraints": {
+						"vertical": "TOP",
+						"horizontal": "LEFT"
+					},
+					"effects": [],
+					"interactions": [],
+					"complexStrokeProperties": {
+						"strokeType": "BASIC"
+					},
+					"box": {
+						"x": 127,
+						"y": 655,
+						"w": 137,
+						"h": 95
+					}
+				}
+			]
 		}
 	],
-	"render": "6ac5f634bd726c43"
+	"render": "78a81de098ad57c0"
 }

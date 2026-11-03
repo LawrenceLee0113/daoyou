@@ -273,9 +273,9 @@
 					"blendMode": "NORMAL",
 					"type": "SOLID",
 					"color": {
-						"r": 0.79,
-						"g": 0.2,
-						"b": 0.47,
+						"r": 0.97,
+						"g": 0.96,
+						"b": 0.68,
 						"a": 1
 					}
 				}
@@ -311,9 +311,9 @@
 					"blendMode": "NORMAL",
 					"type": "SOLID",
 					"color": {
-						"r": 1,
-						"g": 1,
-						"b": 1,
+						"r": 0.75,
+						"g": 0.29,
+						"b": 0.52,
 						"a": 1
 					}
 				}
@@ -588,9 +588,9 @@
 					"blendMode": "NORMAL",
 					"type": "SOLID",
 					"color": {
-						"r": 0.79,
-						"g": 0.2,
-						"b": 0.47,
+						"r": 0.97,
+						"g": 0.96,
+						"b": 0.68,
 						"a": 1
 					}
 				}
@@ -600,9 +600,9 @@
 					"blendMode": "NORMAL",
 					"type": "SOLID",
 					"color": {
-						"r": 0.79,
-						"g": 0.2,
-						"b": 0.47,
+						"r": 0.97,
+						"g": 0.96,
+						"b": 0.68,
 						"a": 1
 					}
 				}
@@ -613,9 +613,9 @@
 			"strokeWeight": 1,
 			"strokeAlign": "INSIDE",
 			"backgroundColor": {
-				"r": 0.79,
-				"g": 0.2,
-				"b": 0.47,
+				"r": 0.97,
+				"g": 0.96,
+				"b": 0.68,
 				"a": 1
 			},
 			"constraints": {
@@ -668,9 +668,9 @@
 							"blendMode": "NORMAL",
 							"type": "SOLID",
 							"color": {
-								"r": 1,
-								"g": 1,
-								"b": 1,
+								"r": 0.75,
+								"g": 0.29,
+								"b": 0.52,
 								"a": 1
 							}
 						}
@@ -781,5 +781,5 @@
 			}
 		}
 	],
-	"render": "309ed053c63657f6"
+	"render": "7bea1b52bf6ec29d"
 }

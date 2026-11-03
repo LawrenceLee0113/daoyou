@@ -130,43 +130,6 @@
 			}
 		},
 		{
-			"name": "資產 10 1",
-			"type": "RECTANGLE",
-			"scrollBehavior": "SCROLLS",
-			"blendMode": "PASS_THROUGH",
-			"fills": [
-				{
-					"blendMode": "NORMAL",
-					"type": "IMAGE",
-					"scaleMode": "FILL",
-					"imageRef": "e43d658e6f3832366a1ad0bf0bcf3e069fb61cb6"
-				}
-			],
-			"strokes": [],
-			"strokeWeight": 1,
-			"strokeAlign": "INSIDE",
-			"preserveRatio": true,
-			"targetAspectRatio": {
-				"x": 2497,
-				"y": 4096
-			},
-			"constraints": {
-				"vertical": "TOP",
-				"horizontal": "CENTER"
-			},
-			"effects": [],
-			"interactions": [],
-			"complexStrokeProperties": {
-				"strokeType": "BASIC"
-			},
-			"box": {
-				"x": 0,
-				"y": 147,
-				"w": 393,
-				"h": 645
-			}
-		},
-		{
 			"name": "台灣分開_新北市 1",
 			"type": "RECTANGLE",
 			"scrollBehavior": "SCROLLS",
@@ -2459,5 +2422,5 @@
 			]
 		}
 	],
-	"render": "683ccf920d87725a"
+	"render": "10fdb2c91064be6f"
 }

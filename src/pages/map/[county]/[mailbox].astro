@@ -77,12 +77,13 @@ const slide = 'h-[190px] w-[320px] max-w-full shrink-0 snap-start rounded-2xl ob
 		</div>
 		<img id="preview-img" alt="剛拍的照片" class="max-h-[524px] min-h-0 w-full flex-1 object-contain md:h-[min(524px,55dvh)] md:flex-none" />
 		<label class="mt-6 flex shrink-0 items-center gap-2.5 px-10 text-base">
-			<input id="save" type="checkbox" checked class="size-5 accent-pink" />
+			<!-- v5：奶油黃方框＋粉紅勾（原生 checkbox 的勾勾顏色改不了，自己畫） -->
+			<input id="save" type="checkbox" checked class="grid size-5 shrink-0 appearance-none place-items-center rounded bg-butter text-[13px] font-bold text-pink checked:after:content-['✓'] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" />
 			同時儲存到手機相簿
 		</label>
 		<div class="mt-8 flex shrink-0 gap-4 px-10">
 			<button id="retake" type="button" class="h-12 w-[140px] rounded-full border border-white text-lg font-bold">重拍</button>
-			<button id="upload" type="button" class="h-12 flex-1 rounded-full bg-pink text-lg font-bold disabled:opacity-50">上傳到此頁</button>
+			<button id="upload" type="button" class="h-12 flex-1 rounded-full bg-butter text-lg font-bold text-pink disabled:opacity-50">上傳到此頁</button>
 		</div>
 		<p class="mt-5 mb-[max(20px,env(safe-area-inset-bottom))] shrink-0 text-center text-sm text-muted md:mb-0">照片會自動收進「個人檔案 › 我的相簿」</p>
 	</dialog>
