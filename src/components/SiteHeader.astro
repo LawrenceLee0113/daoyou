@@ -36,18 +36,17 @@ const menu = [
 ---
 
 <!-- 使用者要求：電腦版滑動時整個頁首固定在最上面（高 87＋60＝147px）；
-     手機、平板（2026-11-03）綠色花紋那段跟著捲走，只留導覽列：top 設成 -87px。
-     瀏海：花紋往上延伸 safe-area-inset-top 填滿瀏海那條；捲動時那條留在導覽列上面，導覽列不會鑽進瀏海 -->
+     手機、平板（2026-11-03）綠色花紋那段跟著捲走，只留導覽列：top 設成 -87px -->
 <header class="sticky -top-[87px] z-40 lg:top-0">
 	<!-- 花紋圖是半透明的，墊白底：頁首固定後下面捲上來的內容才不會透出來 -->
-	<div class="relative h-[calc(87px+env(safe-area-inset-top))] overflow-hidden bg-white">
+	<div class="relative h-[87px] overflow-hidden bg-white">
 		<picture>
 			<source media="(min-width: 1024px)" srcset={desktopBand.src} />
 			<Image src={headerTop} alt="" class="absolute inset-0 size-full object-cover lg:object-top" loading="eager" />
 		</picture>
 		<p
 			id="ticker"
-			class="absolute inset-x-0 top-[calc(59px+env(safe-area-inset-top))] truncate px-8 text-center text-2xs text-white transition-opacity duration-500"
+			class="absolute inset-x-0 top-[59px] truncate px-8 text-center text-2xs text-white transition-opacity duration-500"
 			aria-live="off"
 		>
 			{messages[0]}
