@@ -38,28 +38,27 @@ const menu = [
 ---
 
 <!-- 使用者要求：電腦版滑動時整個頁首固定在最上面（高 87＋60＝147px）；
-     手機、平板（2026-11-03）：花紋捲到上緣切齊瀏海上緣就停（top -59px，Dynamic Island 機型瀏海高 59px），
-     下面露出的那段花紋＋導覽列固定，米白的導覽列不會頂到最上面。header 用 contents 讓花紋、導覽列各自 sticky。
+     手機、平板（2026-11-03）：一載入就是固定狀態、不會動：瀏海裡是花紋（#notch-fill），下面露出 28px 花紋（跑馬燈），再下面是導覽列。
+     （等於原本 87px 的花紋上面 59px 藏在瀏海後面，Dynamic Island 機型瀏海高 59px。）header 用 contents 讓花紋、導覽列各自 sticky。
      瀏海：iOS 26 Safari 頂端碰到 sticky 元素時會拿它的底色塗滿瀏海（之前的白條），而且 sticky／fixed 的東西畫不進瀏海。
      手機版花紋不墊底色、pointer-events-none（裡面沒有可點的東西），讓 Safari 跳過它不塗色；
-     瀏海裡的花紋由下面的 #notch-fill 負責：它是一般內容（Safari 會畫進瀏海），用捲動連動動畫跟著捲動往下移，看起來固定不動。
-     ?notch=sage 是對照組：花紋墊 sage，讓 Safari 把瀏海塗成花紋底色（實機測試用，選定後拿掉） -->
+     瀏海裡的花紋由下面的 #notch-fill 負責：它是一般內容（Safari 會畫進瀏海），用捲動連動動畫跟著捲動往下移，看起來固定不動。 -->
 <header class="contents">
 	<!-- 電腦版花紋圖是半透明的，墊白底：頁首固定後下面捲上來的內容才不會透出來；手機版的圖不透明 -->
-	<div id="band" class="pointer-events-none sticky -top-[59px] z-40 h-[87px] lg:pointer-events-auto lg:top-0 lg:bg-white">
+	<div class="pointer-events-none sticky top-0 z-40 h-[28px] lg:pointer-events-auto lg:h-[87px] lg:bg-white">
 		<picture>
 			<source media="(min-width: 1024px)" srcset={desktopBand.src} />
-			<Image src={headerTop} alt="" class="absolute inset-0 size-full object-cover lg:object-top" loading="eager" />
+			<Image src={headerTop} alt="" class="absolute inset-0 size-full object-cover object-bottom lg:object-top" loading="eager" />
 		</picture>
 		<p
 			id="ticker"
-			class="absolute inset-x-0 top-[59px] truncate px-8 text-center text-2xs text-white transition-opacity duration-500"
+			class="absolute inset-x-0 top-0 truncate lg:top-[59px] px-8 text-center text-2xs text-white transition-opacity duration-500"
 			aria-live="off"
 		>
 			{messages[0]}
 		</p>
 	</div>
-	<!-- 瀏海後面的花紋：從畫面頂端往上 320px 到導覽列底部（88px），蓋住捲到瀏海後面的內容。
+	<!-- 瀏海後面的花紋：從畫面頂端往上 320px 到導覽列底部（88px），花紋接縫對齊上面的 28px 花紋；蓋住捲到瀏海後面的內容。
 	     往下延伸到導覽列底部是為了多留餘裕，捲動時就算慢一點點也不會露出內容（下半段被花紋、導覽列擋著看不到）。
 	     捲動連動在 global.css 的 #notch-fill；不支援的瀏覽器它就停在頁面最上面，不影響畫面 -->
 	<div
@@ -115,7 +114,6 @@ const menu = [
 </header>
 
 <script is:inline>
-	if (location.search.includes('notch=sage')) document.getElementById('band').classList.replace('pointer-events-none', 'bg-sage');
 	// #notch-fill 要往下移的總距離＝可以捲動的總距離（捲動連動動畫是照比例算的）
 	const root = document.documentElement;
 	const setMax = () => root.style.setProperty('--scroll-max', `${root.scrollHeight - root.clientHeight}px`);
