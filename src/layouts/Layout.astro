@@ -101,12 +101,10 @@ const notchBand = await getImage({ src: headerTop, width: 786 });
 					<script is:inline>
 						// 頁面本身鎖在剛好藏住 #notch-fill 的位置（鍵盤跳出等情況被系統捲動時拉回來）
 						if (matchMedia('(width < 64rem)').matches) {
-							history.scrollRestoration = 'manual';
 							const pin = () => scrollY !== 100 && scrollTo(0, 100);
 							pin();
 							addEventListener('scroll', pin, { passive: true });
 							addEventListener('resize', pin);
-							addEventListener('pageshow', pin);
 						}
 					</script>
 				)

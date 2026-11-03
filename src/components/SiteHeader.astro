@@ -43,7 +43,7 @@ const menu = [
      頁首 touch-none：手指從頁首拖不會帶動頁面本身。電腦版維持整個頁首 sticky、頁面本身捲動。header 用 contents 讓花紋、導覽列各自排。 -->
 <header class="contents">
 	<!-- 電腦版花紋圖是半透明的，墊白底：頁首固定後下面捲上來的內容才不會透出來；手機版的圖不透明 -->
-	<div class="relative z-40 h-[28px] touch-none lg:sticky lg:touch-auto lg:top-0 lg:h-[87px] lg:bg-white">
+	<div class="relative h-[28px] touch-none lg:sticky lg:top-0 lg:z-40 lg:touch-auto lg:h-[87px] lg:bg-white">
 		<picture>
 			<source media="(min-width: 1024px)" srcset={desktopBand.src} />
 			<Image src={headerTop} alt="" class="absolute inset-0 size-full object-cover object-bottom lg:object-top" loading="eager" />
@@ -56,7 +56,7 @@ const menu = [
 			{messages[0]}
 		</p>
 	</div>
-	<nav class="relative z-40 touch-none bg-header-bar lg:sticky lg:touch-auto lg:top-[87px]" aria-label="主選單">
+	<nav class="touch-none bg-header-bar lg:sticky lg:top-[87px] lg:z-40 lg:touch-auto" aria-label="主選單">
 		<div class="mx-auto flex h-[60px] max-w-6xl items-center px-5 lg:px-8">
 			<a href={`${base}/`} class="mr-auto"><Image src={logo} alt="島郵 Isle Post 首頁" width={48} densities={[1, 2, 3]} loading="eager" /></a>
 			<!-- 電腦版：選單直接攤開在頁首 -->
@@ -78,7 +78,7 @@ const menu = [
 	<div
 		id="site-menu"
 		popover
-		class="fixed inset-auto top-[146px] right-0 touch-none lg:touch-auto m-0 w-[184px] bg-header-pink p-0 pb-5 text-white shadow-soft md:right-[max(0px,calc((100vw-72rem)/2))]"
+		class="fixed inset-auto top-[87px] right-0 m-0 touch-none w-[184px] bg-header-pink p-0 pb-5 text-white shadow-soft"
 	>
 		<div class="flex items-start justify-between px-2.5 pt-4">
 			<a href={`${base}/`}><Image src={logoWhite} alt="島郵 Isle Post 首頁" width={48} densities={[1, 2, 3]} /></a>
@@ -104,10 +104,6 @@ const menu = [
 <script is:inline define:vars={{ messages }}>
 	// 原型：滑鼠移出選單就關閉（MOUSE_LEAVE → CLOSE）；手機點選單外面關閉
 	const menu = document.getElementById('site-menu');
-	// 花紋捲走後導覽列會往上移，選單打開時貼齊導覽列底部
-	const nav = menu.previousElementSibling;
-	const place = () => (menu.style.top = `${nav.getBoundingClientRect().bottom - 1}px`);
-	menu.addEventListener('beforetoggle', place);
 	menu.addEventListener('pointerleave', (e) => e.pointerType === 'mouse' && menu.hidePopover());
 
 	// iOS 16 以下沒有 popover：選單會一直在（只是透明）擋住點擊。改成自己切換 hidden，不做動畫
@@ -116,10 +112,8 @@ const menu = [
 		Object.assign(menu.style, { opacity: '1', transform: 'none' });
 		document.addEventListener('click', (e) => {
 			const b = e.target.closest('[popovertarget="site-menu"]');
-			if (b) {
-				menu.hidden = b.getAttribute('popovertargetaction') === 'hide' || !menu.hidden;
-				if (!menu.hidden) place();
-			} else if (!menu.contains(e.target)) menu.hidden = true;
+			if (b) menu.hidden = b.getAttribute('popovertargetaction') === 'hide' || !menu.hidden;
+			else if (!menu.contains(e.target)) menu.hidden = true;
 		});
 	}
 

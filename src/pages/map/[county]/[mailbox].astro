@@ -21,7 +21,7 @@ const slide = 'h-[190px] w-[320px] max-w-full shrink-0 snap-start rounded-2xl ob
 
 		<!-- 電腦版：左邊照片、右邊介紹 -->
 		<div class="lg:mt-5 lg:grid lg:grid-cols-2 lg:items-start lg:gap-12">
-			<div class="relative mt-5 ml-[9px] lg:mt-0 lg:ml-0">
+			<div class="mt-5 ml-[9px] lg:mt-0 lg:ml-0">
 				<div id="carousel" data-mailbox={m.id} data-slide={slide} class="-mr-[13px] flex snap-x snap-mandatory gap-2.5 overflow-x-auto pr-[13px] [scrollbar-width:none] lg:mr-0 lg:pr-0">
 					<Image src={m.photo} alt={m.name} widths={[320, 640]} sizes="(min-width: 1024px) 500px, 320px" class={slide} loading="eager" />
 				</div>
