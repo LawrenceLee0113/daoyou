@@ -81,8 +81,7 @@ html {
 	animation-duration: 0.25s;
 	animation-timing-function: ease-out;
 }
-/* 手機、平板不做（2026-11-03 使用者決定）：轉場時畫面是疊在最上層的截圖，iOS Safari 不畫進瀏海，瀏海會白一下 */
-@media (prefers-reduced-motion: reduce), (width < 64rem) {
+@media (prefers-reduced-motion: reduce) {
 	@view-transition {
 		navigation: none;
 	}
