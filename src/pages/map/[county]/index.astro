@@ -3,6 +3,8 @@
 // 卡片照設計稿，每張都能點進郵筒頁（設計稿只畫了歪腰、新社，其他照同一版型）。
 // 卡片一整排左右滑（原型 Frame 12 HORIZONTAL_SCROLLING），平板以上加左右箭頭給滑鼠用。
 // 卡片高度跟著內容、頂端對齊（使用者決定：不照原型 Frame 15～17 在卡片內上下捲）。
+// 簡介固定佔 5 行高（不足 5 行下面留白），橫式照片統一 4:3，所以卡片一樣高；只有台北的直式照片卡片比較長（使用者 2026-11-04 要求）。
+// 新增簡介超過 5 行時，加寬 max-w 或在文案裡手動換行。
 // 沒有郵筒資料的縣市顯示「即將開放」
 import { Image } from 'astro:assets';
 import Layout from '../../../layouts/Layout.astro';
@@ -34,7 +36,7 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 						<h2 class="mt-[29px] text-2xl font-bold text-olive">{m.name}</h2>
 						<p class="mt-1.5 text-xs font-bold text-sage">{m.area}</p>
 						{/* 有手動換行的照設計稿斷行（較長的行允許超出卡片內距一點）；沒換行的限寬自動折行 */}
-						<p class:list={['mt-2.5 text-sm whitespace-pre-line text-body', m.summary.includes('\n') ? '-mx-2' : 'max-w-[200px]']}>{m.summary}</p>
+						<p class:list={['mt-2.5 min-h-[5lh] text-sm whitespace-pre-line text-body', m.summary.includes('\n') ? '-mx-2' : 'max-w-[220px]']}>{m.summary}</p>
 						<Image src={m.illustration} alt="" height={102} densities={[1, 2, 3]} class="mt-6 h-[102px] w-auto" />
 						<a href={`${base}/map/${county.slug}/${m.id}/`} class="mt-4 mb-6 text-md font-bold text-pink after:absolute after:inset-0 after:rounded-mailbox">
 							看更多 →<span class="sr-only">：{m.name}</span>
