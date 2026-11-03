@@ -60,9 +60,9 @@ const field = 'mt-1.5 block h-[50px] rounded-[20px] border-2 border-black bg-whi
 			error.textContent = '帳號或密碼錯誤';
 			return;
 		}
-		// 只接受站內路徑，避免被帶到別的網站
-		const next = new URLSearchParams(location.search).get('next');
-		location.href = next?.startsWith(`${base}/`) && !next.startsWith('//') ? next : `${base}/profile/`;
+		// 只接受站內路徑，避免被帶到別的網站：比對解析後的 origin（「/\evil.com」這類寫法字串檢查擋不住）
+		const next = new URL(new URLSearchParams(location.search).get('next') ?? `${base}/profile/`, location.href);
+		location.href = next.origin === location.origin ? next.href : `${base}/profile/`;
 	});
 	document.querySelectorAll('.social').forEach((b) =>
 		b.addEventListener('click', () => (error.textContent = '目前只開放示範帳號登入')),

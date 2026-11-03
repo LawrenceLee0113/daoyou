@@ -166,7 +166,8 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 	const field = <T extends HTMLElement>(name: string) => form.elements.namedItem(name) as unknown as T;
 	const isFuture = () => new FormData(form).get('mode') === 'future';
 	// 日期欄：最早明天，預設一年後
-	const iso = (d: Date) => d.toISOString().slice(0, 10);
+	// 用本地日期：toISOString 是 UTC，台灣凌晨 0–8 點會少一天
+	const iso = (d: Date) => fmt(d).replaceAll('.', '-');
 	const dateInput = field<HTMLInputElement>('deliverAt');
 	dateInput.min = iso(new Date(Date.now() + 86_400_000));
 	function syncMode() {

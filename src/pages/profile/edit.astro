@@ -106,7 +106,12 @@ const box = 'mt-1.5 block w-full rounded-[10px] border border-input bg-white px-
 		const nickname = String(data.get('nickname')).trim();
 		if (!nickname) return (form.elements.namedItem('nickname') as HTMLInputElement).focus();
 		saveProfile({ nickname, bio: String(data.get('bio')), county: String(data.get('county')), publicAlbum: data.get('publicAlbum') === 'on' });
-		if (avatarFile.files?.[0]) await saveAvatar(avatarFile.files[0]);
+		try {
+			if (avatarFile.files?.[0]) await saveAvatar(avatarFile.files[0]);
+		} catch (err) {
+			// 之前失敗會卡在這頁、按儲存沒反應
+			return alert(`個人檔案已儲存，但頭像沒換成功：${(err as Error).message}`);
+		}
 		location.replace(`${base}/profile/`);
 	});
 

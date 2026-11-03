@@ -35,8 +35,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 					} catch {}
 					if (ok) {
 						// 只接受站內路徑，避免被帶到別的網站（同 login.astro）
-						const next = new URLSearchParams(location.search).get('next');
-						location.replace(next?.startsWith(`${base}/`) && !next.startsWith('//') ? next : `${base}/profile/`);
+						const next = new URL(new URLSearchParams(location.search).get('next') ?? `${base}/profile/`, location.href);
+						location.replace(next.origin === location.origin ? next.href : `${base}/profile/`);
 					}
 				</script>
 			)

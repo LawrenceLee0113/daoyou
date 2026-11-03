@@ -22,7 +22,7 @@ function safe<T>(fn: () => T, fallback: T): T {
 }
 
 export function login(email: string, password: string) {
-	if (email.trim() !== DEMO_EMAIL || password !== DEMO_PASSWORD) return false;
+	if (email.trim().toLowerCase() !== DEMO_EMAIL || password !== DEMO_PASSWORD) return false;
 	safe(() => localStorage.setItem(LOGIN_KEY, DEMO_EMAIL), undefined);
 	return true;
 }
@@ -134,11 +134,22 @@ async function shrink(file: Blob, max = 1600) {
 	);
 }
 
+// 錯誤訊息會直接給使用者看，瀏覽器原本的英文訊息換成中文
+const toBuffer = (file: Blob, max: number) =>
+	shrink(file, max)
+		.then((b) => b.arrayBuffer())
+		.catch(() => {
+			throw new Error('這張照片讀不出來，請換一張再試');
+		});
+const saveFailed = (e: unknown): never => {
+	throw new Error(e instanceof DOMException && e.name === 'QuotaExceededError' ? '手機儲存空間不足，清出一些空間再試' : '照片存不進去，請重新整理頁面再試一次');
+};
+
 export async function addPhoto(mailboxId: string, file: Blob) {
 	if ((await getPhotos(mailboxId)).length >= MAX_PHOTOS_PER_MAILBOX) throw new Error(`每個郵筒最多 ${MAX_PHOTOS_PER_MAILBOX} 張`);
 	navigator.storage?.persist?.(); // 降低 iOS Safari 清除資料的機率
-	const blob = await (await shrink(file)).arrayBuffer();
-	await tx('readwrite', (s) => s.add({ mailboxId, blob, createdAt: Date.now() }));
+	const blob = await toBuffer(file, 1600);
+	await tx('readwrite', (s) => s.add({ mailboxId, blob, createdAt: Date.now() })).catch(saveFailed);
 }
 
 export interface Postcard {
@@ -187,6 +198,6 @@ export const getAvatar = () =>
 		.catch(() => undefined);
 
 export async function saveAvatar(file: Blob) {
-	const blob = await (await shrink(file, 400)).arrayBuffer();
-	await tx('readwrite', (s) => s.put(blob, 'me'), 'avatar');
+	const blob = await toBuffer(file, 400);
+	await tx('readwrite', (s) => s.put(blob, 'me'), 'avatar').catch(saveFailed);
 }
