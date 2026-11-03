@@ -36,13 +36,11 @@ const menu = [
 ---
 
 <!-- 使用者要求：電腦版滑動時整個頁首固定在最上面（高 87＋60＝147px）；
-     手機、平板（2026-11-03）綠色花紋那段跟著捲走，只留導覽列。
-     瀏海：iOS 26 Safari 會拿貼在畫面頂端（往下約 4px）的 sticky 元素的底色塗滿瀏海那條，網頁本身畫不進去。
-     所以捲動時花紋留最下面 12px 在導覽列上面（top -75px），花紋那段墊 sage（花紋的底色），瀏海就會塗成同一個綠、跟花紋接起來；
-     沒捲動時頂端也是花紋，一樣是 sage。safe-area-inset-top 是給加到主畫面等「網頁真的畫得到瀏海」的情況 -->
-<header class="sticky -top-[75px] z-40 lg:top-0">
-	<!-- 電腦版花紋圖是半透明的，墊白底：頁首固定後下面捲上來的內容才不會透出來；手機版的圖不透明 -->
-	<div class="relative h-[calc(87px+env(safe-area-inset-top))] overflow-hidden bg-sage lg:bg-white">
+     手機、平板（2026-11-03）綠色花紋那段跟著捲走，只留導覽列：top 設成 -87px。
+     瀏海：花紋往上延伸 safe-area-inset-top 填滿瀏海那條；捲動時那條留在導覽列上面，導覽列不會鑽進瀏海 -->
+<header class="sticky -top-[87px] z-40 lg:top-0">
+	<!-- 花紋圖是半透明的，墊白底：頁首固定後下面捲上來的內容才不會透出來 -->
+	<div class="relative h-[calc(87px+env(safe-area-inset-top))] overflow-hidden bg-white">
 		<picture>
 			<source media="(min-width: 1024px)" srcset={desktopBand.src} />
 			<Image src={headerTop} alt="" class="absolute inset-0 size-full object-cover lg:object-top" loading="eager" />
