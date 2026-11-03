@@ -26,6 +26,12 @@ const notchBand = await getImage({ src: headerTop, width: 786 });
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<!-- iOS 點到字小於 16px 的輸入框會自動放大（使用者 2026-11-03 要求維持原比例）。只對 iOS 加 maximum-scale=1：
+		     iOS 照樣可以用兩指放大（系統忽略這個限制），只是不會自動放大；Android 不加，才不會擋住兩指放大 -->
+		<script is:inline>
+			if (/iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
+				document.querySelector('meta[name=viewport]').content += ', maximum-scale=1';
+		</script>
 		<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
