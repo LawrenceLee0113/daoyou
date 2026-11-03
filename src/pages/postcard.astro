@@ -126,7 +126,8 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 			if (matchMedia('(width >= 64rem)').matches) scrollTo(0, 0);
 			else document.getElementById('scroller')!.scrollTo(0, 0);
 		};
-		document.startViewTransition ? document.startViewTransition(show) : show();
+		// 手機、平板不做轉場：轉場中瀏海會白一下（見 global.css 的 @view-transition）
+		document.startViewTransition && matchMedia('(width >= 64rem)').matches ? document.startViewTransition(show) : show();
 	}
 	document.querySelectorAll<HTMLElement>('[data-go]').forEach((b) =>
 		b.addEventListener('click', () => {
