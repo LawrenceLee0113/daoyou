@@ -10,8 +10,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const here = Astro.url.pathname;
 // 「網站放的圖片／首頁頁首-電腦板」只裁出上面的花紋那段（下面米白那段就是導覽列底色）；使用者要求不壓縮，維持 PNG 無損
 const desktopBand = await getImage({ src: headerTopDesktop, format: 'png' });
-// 手機往上延伸進瀏海的那段花紋（見下面頁首的說明）
-const notchBand = await getImage({ src: headerTop, width: 786 });
 
 const messages = [
 	'【Welcome】歡迎來到島郵！今天想寄出什麼樣的心情呢 ⋆⸜',
@@ -38,15 +36,14 @@ const menu = [
 ---
 
 <!-- 使用者要求：電腦版滑動時整個頁首固定在最上面（高 87＋60＝147px）；
-     手機、平板（2026-11-03）：頁首完全不動：瀏海裡是花紋（#notch-fill），下面露出 28px 花紋（跑馬燈），再下面是導覽列。
+     手機、平板（2026-11-03）：頁首完全不動：瀏海裡是花紋（Layout 的 #notch-fill），下面露出 28px 花紋（跑馬燈），再下面是導覽列。
      （等於原本 87px 的花紋上面 59px 藏在瀏海後面，Dynamic Island 機型瀏海高 59px。）
-     頁面最外層不捲動，改由頁首下面的內容區（Layout 的 #scroller）自己捲，所以頁首、花紋不用 sticky 就固定在上面。
-     瀏海：iOS 26 Safari 頂端碰到 sticky／fixed 元素時會拿它的底色塗滿瀏海（之前的白條），而且固定的東西畫不進瀏海；
-     內容區自己捲也不會捲進瀏海。花紋不墊底色、pointer-events-none（裡面沒有可點的東西），讓 Safari 跳過它不塗色，
-     瀏海就照實畫出 #notch-fill。電腦版維持整個頁首 sticky、頁面本身捲動。header 用 contents 讓花紋、導覽列各自排。 -->
+     頁面本身鎖住不捲，改由頁首下面的內容區（Layout 的 #scroller）自己捲，所以頁首不用 sticky 就固定在上面。
+     手機版不能有 sticky／fixed 的頁首：iOS 26 Safari 頂端碰到它們就拿底色塗滿瀏海（之前的白條）。
+     頁首 touch-none：手指從頁首拖不會帶動頁面本身。電腦版維持整個頁首 sticky、頁面本身捲動。header 用 contents 讓花紋、導覽列各自排。 -->
 <header class="contents">
 	<!-- 電腦版花紋圖是半透明的，墊白底：頁首固定後下面捲上來的內容才不會透出來；手機版的圖不透明 -->
-	<div class="pointer-events-none relative z-40 h-[28px] lg:pointer-events-auto lg:sticky lg:top-0 lg:h-[87px] lg:bg-white">
+	<div class="relative z-40 h-[28px] touch-none lg:sticky lg:touch-auto lg:top-0 lg:h-[87px] lg:bg-white">
 		<picture>
 			<source media="(min-width: 1024px)" srcset={desktopBand.src} />
 			<Image src={headerTop} alt="" class="absolute inset-0 size-full object-cover object-bottom lg:object-top" loading="eager" />
@@ -59,15 +56,7 @@ const menu = [
 			{messages[0]}
 		</p>
 	</div>
-	<!-- 瀏海後面的花紋：頁面頂端往上 320px（畫面外，只有瀏海看得到），花紋接縫對齊下面的 28px 花紋 -->
-	<div
-		id="notch-fill"
-		class="pointer-events-none absolute inset-x-0 -top-[320px] h-[320px] lg:hidden"
-		style={`background: url(${notchBand.src}) center top / 100% auto repeat-y`}
-		aria-hidden="true"
-	>
-	</div>
-	<nav class="relative z-40 bg-header-bar lg:sticky lg:top-[87px]" aria-label="主選單">
+	<nav class="relative z-40 touch-none bg-header-bar lg:sticky lg:touch-auto lg:top-[87px]" aria-label="主選單">
 		<div class="mx-auto flex h-[60px] max-w-6xl items-center px-5 lg:px-8">
 			<a href={`${base}/`} class="mr-auto"><Image src={logo} alt="島郵 Isle Post 首頁" width={48} densities={[1, 2, 3]} loading="eager" /></a>
 			<!-- 電腦版：選單直接攤開在頁首 -->
@@ -89,7 +78,7 @@ const menu = [
 	<div
 		id="site-menu"
 		popover
-		class="fixed inset-auto top-[146px] right-0 m-0 w-[184px] bg-header-pink p-0 pb-5 text-white shadow-soft md:right-[max(0px,calc((100vw-72rem)/2))]"
+		class="fixed inset-auto top-[146px] right-0 touch-none lg:touch-auto m-0 w-[184px] bg-header-pink p-0 pb-5 text-white shadow-soft md:right-[max(0px,calc((100vw-72rem)/2))]"
 	>
 		<div class="flex items-start justify-between px-2.5 pt-4">
 			<a href={`${base}/`}><Image src={logoWhite} alt="島郵 Isle Post 首頁" width={48} densities={[1, 2, 3]} /></a>
