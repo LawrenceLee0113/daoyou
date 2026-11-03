@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
-import { DEMO_EMAIL, LOGIN_KEY } from '../lib/store';
+import { DEMO_EMAIL, FULL_KEY, LOGIN_KEY } from '../lib/store';
 
 interface Props {
 	title?: string;
@@ -12,9 +12,11 @@ interface Props {
 	auth?: boolean;
 	// 只給沒登入的人看的頁面（登入頁）：已登入在畫面出來前就轉到 ?next= 指的站內頁，沒有就到個人檔案
 	guest?: boolean;
+	// 只有完整權限（FULL_PASSWORD 登入）看得到的頁面：沒有權限在畫面出來前就轉到這個網址
+	locked?: string;
 }
 
-const { title, description = '寄存島嶼的地方郵誌', header = true, auth = false, guest = false } = Astro.props;
+const { title, description = '寄存島嶼的地方郵誌', header = true, auth = false, guest = false, locked } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
@@ -32,6 +34,15 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<title>{title ? `${title}｜島郵 Isle Post` : '島郵 Isle Post'}</title>
+		<!-- 完整權限（用 FULL_PASSWORD 登入）：<html data-full>，未開放縣市的內容才會顯示（見 data/mailboxes.ts openCounties）。規則同 store.login -->
+		<script is:inline define:vars={{ key: LOGIN_KEY, fullKey: FULL_KEY, email: DEMO_EMAIL, locked }}>
+			let full = false;
+			try {
+				full = localStorage.getItem(key) === email && !!localStorage.getItem(fullKey);
+			} catch {}
+			if (full) document.documentElement.dataset.full = '';
+			else if (locked) location.replace(locked);
+		</script>
 		{
 			guest && (
 				<script is:inline define:vars={{ key: LOGIN_KEY, email: DEMO_EMAIL, base }}>

@@ -72,6 +72,12 @@ html {
 	-webkit-tap-highlight-color: transparent;
 }
 
+/* 未開放縣市：[data-locked] 只有完整權限看得到，[data-locked-alt]（即將開放）反過來。<html data-full> 由 Layout 的 <head> 設定 */
+html:not([data-full]) [data-locked],
+html[data-full] [data-locked-alt] {
+	display: none;
+}
+
 /* Figma 原型的換頁轉場：DISSOLVE 0.25s EASE_OUT（瀏覽器不支援時就直接換頁） */
 @view-transition {
 	navigation: auto;

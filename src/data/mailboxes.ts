@@ -378,4 +378,9 @@ export const mailboxes = [
 
 export type Mailbox = (typeof mailboxes)[number];
 
+// 沒登入、或用一般密碼登入時只開放這些縣市；其他縣市的地圖小點、卡片、郵筒頁要用 FULL_PASSWORD 登入才看得到（使用者 2026-11-04）。
+// 判斷在 Layout 的 <head>：完整權限時 <html data-full>，global.css 依此藏 [data-locked]／[data-locked-alt]。純前端、不是安全機制，內容仍在 HTML 裡
+export const openCounties = new Set(['taipei', 'taichung']);
+export const isLocked = (slug: string) => !openCounties.has(slug);
+
 export const countyOf = (slug: string) => counties.find((c) => c.slug === slug)!;

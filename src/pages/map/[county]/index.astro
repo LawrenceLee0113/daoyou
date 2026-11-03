@@ -5,15 +5,16 @@
 // 卡片高度跟著內容、頂端對齊（使用者決定：不照原型 Frame 15～17 在卡片內上下捲）。
 // 簡介固定佔 5 行高（不足 5 行下面留白），橫式照片統一 4:3，所以卡片一樣高；只有台北的直式照片卡片比較長（使用者 2026-11-04 要求）。
 // 新增簡介超過 5 行時，加寬 max-w 或在文案裡手動換行。
-// 沒有郵筒資料的縣市顯示「即將開放」
+// 沒有郵筒資料的縣市顯示「即將開放」；未開放縣市（openCounties 以外）沒有完整權限時也是（卡片 data-locked、即將開放 data-locked-alt）
 import { Image } from 'astro:assets';
 import Layout from '../../../layouts/Layout.astro';
-import { counties, mailboxes } from '../../../data/mailboxes';
+import { counties, isLocked, mailboxes } from '../../../data/mailboxes';
 
 export const getStaticPaths = () => counties.map((c) => ({ params: { county: c.slug }, props: { county: c } }));
 
 const { county } = Astro.props;
 const list = mailboxes.filter((m) => m.county === county.slug);
+const locked = isLocked(county.slug) || undefined;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-center flex-col items-center rounded-mailbox border-[1.5px] border-sage px-[15px] pt-3.5 text-center';
 ---
@@ -30,7 +31,7 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 		<div id="cards" class="mt-2 flex snap-x snap-mandatory items-start justify-center-safe gap-[11px] overflow-x-auto scroll-smooth px-[19px] pt-[11px] [scrollbar-width:none] md:px-16">
 			{
 				list.map((m, i) => (
-					<article class:list={[card, 'rise']} style={`--i:${i}`}>
+					<article class:list={[card, 'rise']} style={`--i:${i}`} data-locked={locked}>
 						{/* 橫式照片 320×240、直式 320×427，照原圖比例 */}
 						<Image src={m.cardPhoto} alt={m.name} widths={[320, 640, 960]} sizes="320px" class="h-auto w-full rounded-photo" loading={i < 2 ? 'eager' : 'lazy'} />
 						<h2 class="mt-[29px] text-2xl font-bold text-olive">{m.name}</h2>
@@ -45,8 +46,8 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 				))
 			}
 			{
-				list.length === 0 && (
-					<article class:list={[card, 'rise h-[240px] justify-center pt-0']}>
+				(list.length === 0 || locked) && (
+					<article class:list={[card, 'rise h-[240px] justify-center pt-0']} data-locked-alt={list.length > 0 || undefined}>
 						<h2 class="text-2xl font-bold text-olive">即將開放</h2>
 						<p class="mt-2.5 text-sm text-body">這裡的特色郵筒還在整理中，敬請期待！</p>
 						<a href={`${base}/map/`} class="mt-4 text-md font-bold text-pink">← 回到地圖</a>
@@ -63,6 +64,7 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 						class:list={['absolute top-1/2 hidden size-11 -translate-y-1/2 place-items-center rounded-full border-[1.5px] border-sage bg-white text-xl font-bold text-olive shadow-soft disabled:opacity-0 md:grid', dir < 0 ? 'left-2' : 'right-2']}
 						aria-label={dir < 0 ? '上一張' : '下一張'}
 						aria-controls="cards"
+						data-locked={locked}
 					>
 						{dir < 0 ? '←' : '→'}
 					</button>

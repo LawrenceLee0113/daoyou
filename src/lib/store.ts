@@ -5,9 +5,12 @@ import { MAX_PHOTOS_PER_MAILBOX } from './rules';
 // 示範用的預設帳號，使用者已確認可以公開。這不是安全機制。
 export const DEMO_EMAIL = 'repost116.grad@gmail.com';
 const DEMO_PASSWORD = 're123456';
+// 同一個帳號用這組密碼登入才看得到所有縣市（使用者 2026-11-04）；沒登入或用上面的密碼只看得到 data/mailboxes.ts 的 openCounties
+const FULL_PASSWORD = 'apple1119';
 
 // lawrencelee0113.github.io 底下的專案共用同一塊儲存空間，key 一律加 daoyou 前綴
 export const LOGIN_KEY = 'daoyou:login';
+export const FULL_KEY = 'daoyou:login-full'; // 有值 = 用 FULL_PASSWORD 登入
 const DB_NAME = 'daoyou';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -22,20 +25,25 @@ function safe<T>(fn: () => T, fallback: T): T {
 }
 
 export function login(email: string, password: string) {
-	if (email.trim().toLowerCase() !== DEMO_EMAIL || password !== DEMO_PASSWORD) return false;
-	safe(() => localStorage.setItem(LOGIN_KEY, DEMO_EMAIL), undefined);
+	const full = password === FULL_PASSWORD;
+	if (email.trim().toLowerCase() !== DEMO_EMAIL || (password !== DEMO_PASSWORD && !full)) return false;
+	safe(() => {
+		localStorage.setItem(LOGIN_KEY, DEMO_EMAIL);
+		if (full) localStorage.setItem(FULL_KEY, '1');
+		else localStorage.removeItem(FULL_KEY);
+	}, undefined);
 	return true;
 }
 
 export const isLoggedIn = () => safe(() => localStorage.getItem(LOGIN_KEY) === DEMO_EMAIL, false);
 
 // 登出只清登入狀態，照片、明信片留在這支手機上，再登入就回來
-export const logout = () => safe(() => localStorage.removeItem(LOGIN_KEY), undefined);
+export const logout = () => safe(() => [LOGIN_KEY, FULL_KEY].forEach((k) => localStorage.removeItem(k)), undefined);
 
 // 重置資料：這支手機上島郵的資料（個人檔案、照片、明信片、頭像）全部刪掉，像剛登入的新帳號。
 // 登入狀態保留（使用者要求重置不登出）；只清 daoyou 開頭的 key，同網域其他專案的資料不動
 export function resetAll() {
-	safe(() => Object.keys(localStorage).filter((k) => k.startsWith('daoyou') && k !== LOGIN_KEY).forEach((k) => localStorage.removeItem(k)), undefined);
+	safe(() => Object.keys(localStorage).filter((k) => k.startsWith('daoyou') && k !== LOGIN_KEY && k !== FULL_KEY).forEach((k) => localStorage.removeItem(k)), undefined);
 	return new Promise<void>((resolve) => {
 		try {
 			const req = indexedDB.deleteDatabase(DB_NAME);

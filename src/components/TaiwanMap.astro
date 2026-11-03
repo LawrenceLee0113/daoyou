@@ -5,13 +5,12 @@
 // 點縣市時，被點的標籤會「長成」縣市頁的大標（設計稿 台中→台中 #2 的過場）。
 // 轉場名稱只在換頁那一刻加在被點的那一個標籤上（pageswap／pagereveal），不常駐在 17 個標籤上
 import map from '../data/taiwan-map.json';
-import { counties, mailboxes } from '../data/mailboxes';
+import { counties, isLocked, mailboxes } from '../data/mailboxes';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const fullName = Object.fromEntries(counties.map((c) => [c.slug, c.fullName]));
 const hasMailbox = new Set(mailboxes.map((m) => m.county));
-// 有特色郵筒的縣市標籤右上角加粉紅小點（設計稿沒有，讓人知道哪裡點進去有內容）
-const dot = (slug: string) => (hasMailbox.has(slug) ? 'after:absolute after:-top-0.5 after:-right-0.5 after:size-2.5 after:rounded-full after:border-2 after:border-white after:bg-pink' : '');
+// 有特色郵筒的縣市標籤右上角加粉紅小點（設計稿沒有，讓人知道哪裡點進去有內容）；未開放縣市只有完整權限看得到（data-locked）
 
 // [slug, x, y]；花東、宜蘭是直式標籤
 const labels: [string, number, number][] = [
@@ -44,17 +43,27 @@ const vertical: [string, number, number][] = [['yilan', 352, 183], ['hualien', 3
 <nav aria-label="選擇縣市">
 	{
 		labels.map(([slug, x, y]) => (
-			<a href={`${base}/map/${slug}/`} data-slug={slug} class:list={['label absolute grid h-[26px] w-[70px] place-items-center rounded-full bg-butter text-md font-extrabold text-pink', dot(slug)]} style={`left:${x}px;top:${y}px`}>
+			<a href={`${base}/map/${slug}/`} data-slug={slug} class:list={['label absolute grid h-[26px] w-[70px] place-items-center rounded-full bg-butter text-md font-extrabold text-pink']} style={`left:${x}px;top:${y}px`}>
 				{fullName[slug]}
-				{hasMailbox.has(slug) && <span class="sr-only">（有特色郵筒）</span>}
+				{hasMailbox.has(slug) && (
+					<span class="contents" data-locked={isLocked(slug) || undefined}>
+						<span class="absolute -top-0.5 -right-0.5 size-2.5 rounded-full border-2 border-white bg-pink" aria-hidden="true" />
+						<span class="sr-only">（有特色郵筒）</span>
+					</span>
+				)}
 			</a>
 		))
 	}
 	{
 		vertical.map(([slug, x, y]) => (
-			<a href={`${base}/map/${slug}/`} data-slug={slug} class:list={['label absolute grid h-[70px] w-[30px] place-items-center rounded-full bg-butter text-md leading-none font-extrabold text-pink [writing-mode:vertical-rl]', dot(slug)]} style={`left:${x}px;top:${y}px`}>
+			<a href={`${base}/map/${slug}/`} data-slug={slug} class:list={['label absolute grid h-[70px] w-[30px] place-items-center rounded-full bg-butter text-md leading-none font-extrabold text-pink [writing-mode:vertical-rl]']} style={`left:${x}px;top:${y}px`}>
 				{fullName[slug]}
-				{hasMailbox.has(slug) && <span class="sr-only">（有特色郵筒）</span>}
+				{hasMailbox.has(slug) && (
+					<span class="contents" data-locked={isLocked(slug) || undefined}>
+						<span class="absolute -top-0.5 -right-0.5 size-2.5 rounded-full border-2 border-white bg-pink" aria-hidden="true" />
+						<span class="sr-only">（有特色郵筒）</span>
+					</span>
+				)}
 			</a>
 		))
 	}
