@@ -46,14 +46,16 @@ const menu = [
      瀏海就照實畫出 #notch-fill。電腦版維持整個頁首 sticky、頁面本身捲動。header 用 contents 讓花紋、導覽列各自排。 -->
 <header class="contents">
 	<!-- 電腦版花紋圖是半透明的，墊白底：頁首固定後下面捲上來的內容才不會透出來；手機版的圖不透明 -->
-	<div class="pointer-events-none relative z-40 h-[28px] lg:pointer-events-auto lg:sticky lg:top-0 lg:h-[87px] lg:bg-white">
+	<!-- 再加一層保險（使用者 2026-11-03 要求再試）：瀏覽器真的把瀏海算進網頁時（safe-area-inset-top > 0，例如從主畫面打開），
+	     花紋直接往上長、蓋滿瀏海，跑馬燈往下避開。Safari 一般分頁這個值是 0，畫面不變，瀏海靠 #notch-fill。?safe 會顯示目前的值 -->
+	<div class="pointer-events-none relative z-40 h-[calc(28px+env(safe-area-inset-top))] lg:pointer-events-auto lg:sticky lg:top-0 lg:h-[87px] lg:bg-white">
 		<picture>
 			<source media="(min-width: 1024px)" srcset={desktopBand.src} />
 			<Image src={headerTop} alt="" class="absolute inset-0 size-full object-cover object-bottom lg:object-top" loading="eager" />
 		</picture>
 		<p
 			id="ticker"
-			class="absolute inset-x-0 top-0 truncate lg:top-[59px] px-8 text-center text-2xs text-white transition-opacity duration-500"
+			class="absolute inset-x-0 top-[env(safe-area-inset-top)] truncate lg:top-[59px] px-8 text-center text-2xs text-white transition-opacity duration-500"
 			aria-live="off"
 		>
 			{messages[0]}
@@ -111,6 +113,18 @@ const menu = [
 		</svg>
 	</div>
 </header>
+
+<script is:inline>
+	// 實機檢查用：網址加 ?safe 會在左上角顯示瀏覽器給的瀏海高度（safe-area-inset-top）
+	if (new URLSearchParams(location.search).has('safe')) {
+		const probe = Object.assign(document.createElement('p'), { style: 'position:fixed;left:8px;top:120px;z-index:99;background:#000;color:#fff;padding:4px 8px;font-size:14px' });
+		probe.style.paddingTop = 'env(safe-area-inset-top)';
+		document.body.append(probe);
+		const top = getComputedStyle(probe).paddingTop;
+		probe.style.paddingTop = '4px';
+		probe.textContent = `safe-area-inset-top = ${top}`;
+	}
+</script>
 
 <script is:inline define:vars={{ messages }}>
 	// 原型：滑鼠移出選單就關閉（MOUSE_LEAVE → CLOSE）；手機點選單外面關閉
