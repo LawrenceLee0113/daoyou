@@ -74,9 +74,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 			onload="this.media='all'"
 		/>
 	</head>
-	<body class="bg-white font-sans text-ink antialiased">
+	<!-- 底色用花紋的底色（sage）：iOS Safari 依它染瀏海那條，才會跟頁首花紋接起來（使用者 2026-11-03 選的做法）。內容的白底放在下面的 div -->
+	<body class="bg-sage font-sans text-ink antialiased">
 		<!-- 設計稿是手機版；平板、電腦版由各頁用 md:／lg: 調整（內容最寬 max-w-6xl） -->
-		<div class="flex min-h-dvh w-full flex-col">
+		<div class="flex min-h-dvh w-full flex-col bg-white">
 			{header && <SiteHeader />}
 			<slot />
 		</div>
