@@ -10,6 +10,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const here = Astro.url.pathname;
 // 「網站放的圖片／首頁頁首-電腦板」只裁出上面的花紋那段（下面米白那段就是導覽列底色）；使用者要求不壓縮，維持 PNG 無損
 const desktopBand = await getImage({ src: headerTopDesktop, format: 'png' });
+// 手機往上延伸進瀏海的那段花紋（見下面頁首的說明）
+const notchBand = await getImage({ src: headerTop, width: 786 });
 
 const messages = [
 	'【Welcome】歡迎來到島郵！今天想寄出什麼樣的心情呢 ⋆⸜',
@@ -36,10 +38,19 @@ const menu = [
 ---
 
 <!-- 使用者要求：電腦版滑動時整個頁首固定在最上面（高 87＋60＝147px）；
-     手機、平板（2026-11-03）綠色花紋那段跟著捲走，只留導覽列：top 設成 -87px -->
-<header class="sticky -top-[87px] z-40 lg:top-0">
-	<!-- 花紋圖是半透明的，墊白底：頁首固定後下面捲上來的內容才不會透出來 -->
-	<div class="relative h-[87px] overflow-hidden bg-white">
+     手機、平板（2026-11-03）綠色花紋那段跟著捲走，只留導覽列固定。
+     瀏海（2026-11-03）：iOS 26 Safari 只要頂端碰到 sticky／fixed 元素，就拿它的底色塗滿瀏海（之前的白條），
+     固定的東西也畫不進瀏海；只有一般捲動的內容能出現在瀏海後面。所以手機版花紋那段不 sticky（header 用 contents
+     讓花紋、導覽列各自排），花紋再往上多畫一段到頁面頂端外面，沒捲動時就會填滿瀏海。捲動後瀏海是導覽列的米白 -->
+<header class="contents">
+	<!-- 電腦版花紋圖是半透明的，墊白底：頁首固定後下面捲上來的內容才不會透出來 -->
+	<div class="relative h-[87px] bg-white lg:sticky lg:top-0 lg:z-40">
+		<div
+			class="absolute inset-x-0 bottom-full h-[120px] lg:hidden"
+			style={`background: url(${notchBand.src}) center bottom / 100% auto repeat-y`}
+			aria-hidden="true"
+		>
+		</div>
 		<picture>
 			<source media="(min-width: 1024px)" srcset={desktopBand.src} />
 			<Image src={headerTop} alt="" class="absolute inset-0 size-full object-cover lg:object-top" loading="eager" />
@@ -52,7 +63,7 @@ const menu = [
 			{messages[0]}
 		</p>
 	</div>
-	<nav class="bg-header-bar" aria-label="主選單">
+	<nav class="sticky top-0 z-40 bg-header-bar lg:top-[87px]" aria-label="主選單">
 		<div class="mx-auto flex h-[60px] max-w-6xl items-center px-5 lg:px-8">
 			<a href={`${base}/`} class="mr-auto"><Image src={logo} alt="島郵 Isle Post 首頁" width={48} densities={[1, 2, 3]} loading="eager" /></a>
 			<!-- 電腦版：選單直接攤開在頁首 -->
