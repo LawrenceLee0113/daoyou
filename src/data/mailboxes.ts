@@ -28,6 +28,8 @@ import shunfengErCard from '../assets/mailboxes/shunfeng-er-card.jpg';
 import shunfengErIllust from '../assets/mailboxes/shunfeng-er-illust.png';
 import swordLionCard from '../assets/mailboxes/sword-lion-card.jpg';
 import swordLionIllust from '../assets/mailboxes/sword-lion-illust.png';
+import anpingSwordLionCard from '../assets/mailboxes/anping-sword-lion-card.jpg';
+import anpingSwordLionIllust from '../assets/mailboxes/anping-sword-lion-illust.png';
 import catMessengerCard from '../assets/mailboxes/cat-messenger-card.jpg';
 import catMessengerIllust from '../assets/mailboxes/cat-messenger-illust.png';
 import moonOwlCard from '../assets/mailboxes/moon-owl-card.jpg';
@@ -257,27 +259,45 @@ export const mailboxes = [
 		county: 'tainan',
 		name: '劍獅郵筒',
 		area: '臺南市北區公園里・成功路',
-		summary: '結合安平在地數百年傳承的「劍獅」民俗文化與郵政意象，將鮮豔彩繪與立體劍獅造型融入郵筒設計，成為造訪安平古堡與老街巷弄時必拍的古都文化地標。',
+		// 使用者 2026-11-04：劍獅郵筒有兩座，這座是北區臺南郵局前的彩繪版；設計稿的簡介寫的是安平那座，搬到 anping-sword-lion，這裡自己寫（暫定）
+		summary: '臺南郵局前的一對紅綠郵筒，筒身彩繪上安平劍獅的威武面孔，不用走到安平，在市區也能和劍獅合照。',
 		nickname: '劍獅',
 		postmark: ['台南', '北區'],
-		address: '臺南市北區公園里・成功路',
+		address: '臺南市北區公園里・成功路（臺南郵局前）',
+		sections: [
+			{ title: '郵局前的劍獅臉', body: '臺南郵局前的一對紅綠郵筒，\n筒身彩繪上安平劍獅的威武面孔，\n咬著寶劍守護每一封信。' },
+			{ title: '市區就能遇見劍獅', body: '不用走到安平，在市區辦完郵務\n就能順便和劍獅合照，\n再寄一封帶著府城味道的信。' },
+		],
+		photo: swordLionCard,
+		cardPhoto: swordLionCard,
+		illustration: swordLionIllust,
+	},
+	{
+		id: 'anping-sword-lion',
+		county: 'tainan',
+		name: '安平劍獅郵筒',
+		area: '臺南市安平區', // 查不到確切位置，等業主補
+		summary: '結合安平在地數百年傳承的「劍獅」民俗文化與郵政意象，將鮮豔彩繪與立體劍獅造型融入郵筒設計，成為造訪安平古堡與老街巷弄時必拍的古都文化地標。',
+		nickname: '安平劍獅',
+		postmark: ['台南', '安平'],
+		address: '臺南市安平區',
 		sections: [
 			{ title: '安平的守護神', body: '「劍獅」是安平流傳數百年的民俗文化，\n郵筒將鮮豔彩繪與立體劍獅造型\n融入設計，紅綠兩座威風凜凜。' },
 			{ title: '古都的文化地標', body: '造訪安平古堡與老街巷弄之餘，\n別忘了和劍獅郵筒合照，\n再寄一封帶著古都味道的信。' },
 		],
-		photo: swordLionCard,
-		cardPhoto: swordLionCard,
-		illustration: swordLionIllust, // 設計稿是兩張插圖並排（郵筒＋劍獅），合成一張
+		photo: anpingSwordLionCard,
+		cardPhoto: anpingSwordLionCard, // ponytail: 業主給的「台南-2備用」只有 338px，有大圖再換
+		illustration: anpingSwordLionIllust,
 	},
 	{
 		id: 'cat-messenger',
 		county: 'kaohsiung',
 		name: '橘貓信差郵筒',
-		area: '高雄市橋頭區・捷運橋頭糖廠站',
+		area: '高雄市甲仙區・甲仙郵局旁（貓巷）',
 		summary: '甲仙郵局於巷道（當地暱稱貓巷）特別設置「橘貓信差」特色郵筒，將趣味的橘貓公仔與郵政意象結合，為小鎮增添豐富的人文色彩，成為相合照的熱門景點。',
 		nickname: '橘貓信差',
-		postmark: ['高雄', '橋頭'],
-		address: '高雄市橋頭區・捷運橋頭糖廠站',
+		postmark: ['高雄', '甲仙'],
+		address: '高雄市甲仙區・甲仙郵局旁（貓巷）', // 設計稿寫橋頭區，使用者 2026-11-04 更正為甲仙區
 		sections: [
 			{ title: '巷弄裡的橘貓', body: '在當地暱稱「貓巷」的巷道裡，\n特別設置了「橘貓信差」特色郵筒，\n戴著郵差帽的橘貓公仔十分討喜。' },
 			{ title: '和信差合照', body: '趣味的橘貓公仔與郵政意象結合，\n為小鎮增添豐富的人文色彩，\n成為旅人合照的熱門景點。' },
