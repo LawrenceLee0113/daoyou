@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
-import { DEMO_EMAIL, FULL_KEY, LOGIN_KEY } from '../lib/store';
+import { DEMO_EMAIL, FULL_KEY, LOGIN_KEY, UNLOCK_KEY } from '../lib/store';
 
 interface Props {
 	title?: string;
@@ -34,11 +34,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<title>{title ? `${title}｜島郵 Isle Post` : '島郵 Isle Post'}</title>
-		<!-- 完整權限（用 FULL_PASSWORD 登入）：<html data-full>，未開放縣市的內容才會顯示（見 data/mailboxes.ts openCounties）。規則同 store.login -->
-		<script is:inline define:vars={{ key: LOGIN_KEY, fullKey: FULL_KEY, email: DEMO_EMAIL, locked }}>
+		<!-- 完整權限（用 FULL_PASSWORD 登入，或在地圖頁點頁首解鎖）：<html data-full>，未開放縣市的內容才會顯示（見 data/mailboxes.ts openCounties）。規則同 store.login -->
+		<script is:inline define:vars={{ key: LOGIN_KEY, fullKey: FULL_KEY, unlockKey: UNLOCK_KEY, email: DEMO_EMAIL, locked }}>
 			let full = false;
 			try {
-				full = localStorage.getItem(key) === email && !!localStorage.getItem(fullKey);
+				full = (localStorage.getItem(key) === email && !!localStorage.getItem(fullKey)) || !!localStorage.getItem(unlockKey);
 			} catch {}
 			if (full) document.documentElement.dataset.full = '';
 			else if (locked) location.replace(locked);

@@ -11,6 +11,7 @@ const FULL_PASSWORD = 'apple1119';
 // lawrencelee0113.github.io 底下的專案共用同一塊儲存空間，key 一律加 daoyou 前綴
 export const LOGIN_KEY = 'daoyou:login';
 export const FULL_KEY = 'daoyou:login-full'; // 有值 = 用 FULL_PASSWORD 登入
+export const UNLOCK_KEY = 'daoyou:unlock'; // 有值 = 在地圖頁點頁首綠色花紋解鎖（沒登入、舊密碼也能看全部）
 const DB_NAME = 'daoyou';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -36,6 +37,9 @@ export function login(email: string, password: string) {
 }
 
 export const isLoggedIn = () => safe(() => localStorage.getItem(LOGIN_KEY) === DEMO_EMAIL, false);
+export const hasFullPassword = () => isLoggedIn() && safe(() => !!localStorage.getItem(FULL_KEY), false);
+export const isUnlocked = () => safe(() => !!localStorage.getItem(UNLOCK_KEY), false);
+export const setUnlocked = (on: boolean) => safe(() => (on ? localStorage.setItem(UNLOCK_KEY, '1') : localStorage.removeItem(UNLOCK_KEY)), undefined);
 
 // 登出只清登入狀態，照片、明信片留在這支手機上，再登入就回來
 export const logout = () => safe(() => [LOGIN_KEY, FULL_KEY].forEach((k) => localStorage.removeItem(k)), undefined);

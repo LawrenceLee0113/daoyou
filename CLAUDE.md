@@ -63,6 +63,7 @@ Figma 裡的登入、上傳照片等流程**只做前端**，不串接任何後�
 - 所有讀寫都集中在 `src/lib/store.ts`，頁面和元件不要直接碰 `localStorage` 或 IndexedDB。之後要接真的後端時只需要改這個檔案。
 - 登入：只有一組預設帳號，寫成 `store.ts` 裡的常數（帳號 `repost116.grad@gmail.com`、密碼 `re123456`，使用者已確認可以公開）。登入狀態存在 `localStorage`。需要登入的頁面用前端 JS 檢查，沒登入就導回登入頁。這不是安全機制，不要存任何真實的密碼或個資。
 - 完整權限（使用者 2026-11-04）：同一個帳號用密碼 `apple1119` 登入才看得到所有縣市；沒登入或用 `re123456` 只看得到 `src/data/mailboxes.ts` 的 `openCounties`（台北、台中），其他縣市的地圖小點、卡片隱藏、顯示「即將開放」，郵筒頁轉回縣市頁。`Layout` 的 `<head>` 判斷後設 `<html data-full>`，標記用 `data-locked`（只有完整權限看得到）／`data-locked-alt`（反過來）。純前端，內容仍在 HTML 裡。
+  - 隱藏開關：只有地圖頁（`src/pages/map/index.astro`），沒登入或舊密碼時 7 秒內點頁首綠色花紋（`#header-band`）10 次 → 顯示全部（`daoyou:unlock`，換頁後還在），再點一次切回部分。`apple1119` 登入的不受影響。
 - 照片：**每個郵筒最多 3 張**（郵筒數量不限）。用 `<input type="file" accept="image/*" capture="environment">` 叫出手機內建相機（也可從相簿選），不在網頁裡做即時取景。存在 IndexedDB（以 Blob 形式），**不能用 localStorage**（上限只有約 5MB）。存之前先用 canvas 把最長邊縮到 1600px、轉成 JPEG（品質 0.8）。
 - 命名：`localStorage` 的 key 和 IndexedDB 的資料庫名稱都要加上 `daoyou` 前綴（當初掛在 `lawrencelee0113.github.io` 底下，跟其他專案共用儲存空間；搬到自己的網域後保留，改名會讓既有資料讀不到）。
 - 首次寫入時呼叫 `navigator.storage.persist()`，降低 iOS Safari 清除資料的機率。不做 PWA／加入主畫面：使用者已接受 iOS Safari 在 7 天沒使用後可能清掉資料。
