@@ -134,16 +134,19 @@ async function shrink(file: Blob, max = 1600) {
 	);
 }
 
-// 錯誤訊息會直接給使用者看，瀏覽器原本的英文訊息換成中文
+// 錯誤訊息會直接給使用者看：中文說明＋原始錯誤（回報問題時用得到）。
+// 失敗多半發生在 LINE、IG、FB 的內建瀏覽器（記憶體少、IndexedDB 有 bug），建議改用外部瀏覽器
+const OPEN_EXTERNAL = '如果是從 LINE、IG、FB 等 App 開啟的，建議點右上角選單，改用 Safari 或 Chrome 開啟本網站再試一次。';
+const fail = (what: string, e: unknown): never => {
+	const detail = e instanceof Error ? `${e.name}: ${e.message}` : String(e);
+	if (e instanceof DOMException && e.name === 'QuotaExceededError') throw new Error(`手機儲存空間不足，清出一些空間再試。\n（${detail}）`);
+	throw new Error(`${what}。\n（${detail}）\n\n${OPEN_EXTERNAL}`);
+};
 const toBuffer = (file: Blob, max: number) =>
 	shrink(file, max)
 		.then((b) => b.arrayBuffer())
-		.catch(() => {
-			throw new Error('這張照片讀不出來，請換一張再試');
-		});
-const saveFailed = (e: unknown): never => {
-	throw new Error(e instanceof DOMException && e.name === 'QuotaExceededError' ? '手機儲存空間不足，清出一些空間再試' : '照片存不進去，請重新整理頁面再試一次');
-};
+		.catch((e) => fail('這張照片讀不出來', e));
+const saveFailed = (e: unknown) => fail('存檔失敗', e);
 
 export async function addPhoto(mailboxId: string, file: Blob) {
 	if ((await getPhotos(mailboxId)).length >= MAX_PHOTOS_PER_MAILBOX) throw new Error(`每個郵筒最多 ${MAX_PHOTOS_PER_MAILBOX} 張`);
@@ -172,7 +175,7 @@ export async function getPostcards(): Promise<Postcard[]> {
 // 純前端：不會真的寄出，只記錄在「我的信件」，狀態一直是「寄送中」
 export async function addPostcard(card: Omit<Postcard, 'id' | 'createdAt'>) {
 	navigator.storage?.persist?.();
-	await tx('readwrite', (s) => s.add({ ...card, createdAt: Date.now() }), 'postcards');
+	await tx('readwrite', (s) => s.add({ ...card, createdAt: Date.now() }), 'postcards').catch(saveFailed);
 }
 
 export interface Profile {

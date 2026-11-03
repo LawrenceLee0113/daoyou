@@ -101,6 +101,17 @@ const menu = [
 	const menu = document.getElementById('site-menu');
 	menu.addEventListener('pointerleave', (e) => e.pointerType === 'mouse' && menu.hidePopover());
 
+	// iOS 16 以下沒有 popover：選單會一直在（只是透明）擋住點擊。改成自己切換 hidden，不做動畫
+	if (!('popover' in HTMLElement.prototype)) {
+		Object.assign(menu, { hidden: true, hidePopover: () => (menu.hidden = true) });
+		Object.assign(menu.style, { opacity: '1', transform: 'none' });
+		document.addEventListener('click', (e) => {
+			const b = e.target.closest('[popovertarget="site-menu"]');
+			if (b) menu.hidden = b.getAttribute('popovertargetaction') === 'hide' || !menu.hidden;
+			else if (!menu.contains(e.target)) menu.hidden = true;
+		});
+	}
+
 	const el = document.getElementById('ticker');
 	let i = 0;
 	setInterval(() => {

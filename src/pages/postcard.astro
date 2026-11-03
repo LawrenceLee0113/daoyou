@@ -223,8 +223,8 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 				? `${nick}會在 ${fmt(new Date(String(data.get('deliverAt'))))} 把心意送到未來的你手上`
 				: `${nick}會把你的心意送到${String(data.get('to')).trim()}手上`;
 			go('sent');
-		} catch {
-			alert('寄出失敗，請再試一次');
+		} catch (e) {
+			alert(`寄出失敗：${(e as Error).message}`);
 		} finally {
 			btn.disabled = false;
 		}
