@@ -55,7 +55,6 @@
 - **電腦版每頁都要做**（使用者 2026-11-02 要求，依專業判斷即可）：正常寬螢幕要好用。內容最寬 `max-w-6xl` 置中；頁首在 `lg:` 攤開選單；能並排的用雙欄（封面：主視覺＋最新消息；郵筒頁：照片＋介紹）；照片輪播在平板以上改成格狀。用 `md:`（≥768）／`lg:`（≥1024）調整，不要動到手機版。
 - **互動要照 Figma 原型**：不只做畫面。用 `node figma/export.mjs <channel> --reactions <frame id>` 看點擊目標、轉場（例如 DISSOLVE 0.25s）、可捲動區域，網頁要做出一樣的行為。
 - 基本 a11y：圖片要有 `alt`、語意化標籤（`header`/`nav`/`main`/`footer`）、可點擊的元素用 `a` 或 `button`。
-- **手機、平板（< lg）的捲動**（2026-11-03 為了讓頁首花紋填滿 iPhone 瀏海）：頁面本身鎖在往下 100px（藏住 `Layout` 的 `#notch-fill`），實際捲動的是 `#scroller`。要捲回頂端用 `#scroller.scrollTo`，不要用 `window.scrollTo`；手機版頁首不能用 `sticky`／`fixed`（iOS 26 Safari 會拿它的底色把瀏海塗白）。電腦版照常由頁面捲動、頁首 sticky。
 
 ## 純前端資料規則
 

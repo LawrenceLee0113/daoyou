@@ -122,9 +122,7 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 	function go(step: string) {
 		const show = () => {
 			document.querySelectorAll<HTMLElement>('[data-step]').forEach((el) => (el.hidden = el.dataset.step !== step));
-			// 手機、平板是內容區在捲，頁面本身鎖住不能動（見 Layout）
-			if (matchMedia('(width >= 64rem)').matches) scrollTo(0, 0);
-			else document.getElementById('scroller')!.scrollTo(0, 0);
+			scrollTo(0, 0);
 		};
 		document.startViewTransition ? document.startViewTransition(show) : show();
 	}

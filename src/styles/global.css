@@ -77,21 +77,9 @@ html {
 	navigation: auto;
 }
 ::view-transition-old(root),
-::view-transition-new(root),
-::view-transition-old(page),
-::view-transition-new(page) {
+::view-transition-new(root) {
 	animation-duration: 0.25s;
 	animation-timing-function: ease-out;
-}
-/* 手機、平板只讓內容區（Layout 的 #scroller）淡入淡出，整頁不參與：轉場中參與的部分是疊在最上層的截圖，
-   iOS Safari 不畫進瀏海，整頁參與的話瀏海會白一下。頁首、瀏海的花紋留在原本的頁面上，照常顯示 */
-@media (width < 64rem) {
-	:root {
-		view-transition-name: none;
-	}
-	#scroller {
-		view-transition-name: page;
-	}
 }
 @media (prefers-reduced-motion: reduce) {
 	@view-transition {
@@ -283,8 +271,7 @@ header:has(#site-menu:popover-open) .burger line {
 }
 
 /* 全螢幕預覽、照片檢視（<dialog>）打開時，後面的頁面不能跟著上下滑（iOS 會穿透捲動） */
-html:has(dialog[open]),
-html:has(dialog[open]) #scroller {
+html:has(dialog[open]) {
 	overflow: hidden;
 }
 
@@ -304,12 +291,5 @@ html:has(dialog[open]) #scroller {
 		animation-duration: 1ms !important;
 		animation-delay: 0s !important;
 		transition-duration: 1ms !important;
-	}
-}
-
-/* 12. 手機、平板頁面本身不捲（由 Layout 的 #scroller 捲），拖頁首時整頁也不要彈 */
-@media (width < 64rem) {
-	html {
-		overscroll-behavior: none;
 	}
 }

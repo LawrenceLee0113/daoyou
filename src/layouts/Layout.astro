@@ -1,8 +1,6 @@
 ---
 import '../styles/global.css';
-import { getImage } from 'astro:assets';
 import SiteHeader from '../components/SiteHeader.astro';
-import headerTop from '../assets/header-top.png';
 import { DEMO_EMAIL, LOGIN_KEY } from '../lib/store';
 
 interface Props {
@@ -18,8 +16,6 @@ interface Props {
 
 const { title, description = '寄存島嶼的地方郵誌', header = true, auth = false, guest = false } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-// 手機瀏海裡的花紋（同頁首花紋）
-const notchBand = await getImage({ src: headerTop, width: 786 });
 ---
 
 <html lang="zh-Hant">
@@ -86,39 +82,9 @@ const notchBand = await getImage({ src: headerTop, width: 786 });
 	</head>
 	<body class="bg-white font-sans text-ink antialiased">
 		<!-- 設計稿是手機版；平板、電腦版由各頁用 md:／lg: 調整（內容最寬 max-w-6xl） -->
-		<!-- 手機、平板的瀏海：iOS Safari 不畫「頁面頂端以外」，也不畫固定在畫面上的東西，只畫捲到畫面上方的一般內容。
-		     所以頁面最上面放 100px 花紋，載入時頁面本身捲下 100px 把它藏進瀏海後面、之後鎖在這個位置（下面的 script）。
-		     花紋位置對齊頁首露出的那 28px（頁首花紋 87px 的最下面 28px） -->
-		{
-			header && (
-				<div
-					id="notch-fill"
-					class="h-[100px] lg:hidden"
-					style={`background: url(${notchBand.src}) center calc(100% + 28px) / 100% auto repeat-y`}
-					aria-hidden="true"
-				/>
-			)
-		}
-		<!-- 手機、平板：整頁剛好一個螢幕高、本身不捲，由頁首下面的 #scroller 捲動，頁首和瀏海的花紋才會完全不動（見 SiteHeader）。
-		     代價：Safari 網址列不會隨捲動縮小、點時鐘不會回頂端、上一頁回來不記得捲到哪。電腦版照常由頁面捲動 -->
-		<div class="flex h-dvh w-full flex-col lg:h-auto lg:min-h-dvh">
-			{
-				header && (
-					<script is:inline>
-						// 頁面本身鎖在剛好藏住 #notch-fill 的位置（鍵盤跳出等情況被系統捲動時拉回來）。
-						// 每次都重新判斷寬度：iPad 轉橫向變成電腦版時要放開，不然頁面捲不動
-						const mobile = matchMedia('(width < 64rem)');
-						const pin = () => mobile.matches && scrollY !== 100 && scrollTo(0, 100);
-						pin();
-						addEventListener('scroll', pin, { passive: true });
-						addEventListener('resize', pin);
-					</script>
-				)
-			}
+		<div class="flex min-h-dvh w-full flex-col">
 			{header && <SiteHeader />}
-			<div id="scroller" class="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-y-contain lg:overflow-visible">
-				<slot />
-			</div>
+			<slot />
 		</div>
 	</body>
 </html>
