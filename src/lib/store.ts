@@ -107,10 +107,17 @@ function tx<T>(mode: IDBTransactionMode, fn: (s: IDBObjectStore) => IDBRequest<T
 	);
 }
 
+// iOS WebKit（App 內建瀏覽器、無痕）存 Blob 會丟「Error preparing Blob/File data to be stored in object store」，
+// 所以一律存 ArrayBuffer，讀出來再轉回 Blob。舊資料存的是 Blob，原樣回傳
+const toBlob = (b: Blob | ArrayBuffer) => (b instanceof Blob ? b : new Blob([b], { type: 'image/jpeg' }));
+
 // 讀不到（無痕、被清除、不支援）就當成沒有照片
 export async function getPhotos(mailboxId?: string): Promise<Photo[]> {
 	const all = await tx<Photo[]>('readonly', (s) => s.getAll()).catch(() => []);
-	return all.filter((p) => !mailboxId || p.mailboxId === mailboxId).sort((a, b) => b.createdAt - a.createdAt);
+	return all
+		.filter((p) => !mailboxId || p.mailboxId === mailboxId)
+		.map((p) => ({ ...p, blob: toBlob(p.blob) }))
+		.sort((a, b) => b.createdAt - a.createdAt);
 }
 
 // 最長邊縮到 1600px、轉成 JPEG 0.8 再存，避免一張手機照片就好幾 MB
@@ -130,7 +137,7 @@ async function shrink(file: Blob, max = 1600) {
 export async function addPhoto(mailboxId: string, file: Blob) {
 	if ((await getPhotos(mailboxId)).length >= MAX_PHOTOS_PER_MAILBOX) throw new Error(`每個郵筒最多 ${MAX_PHOTOS_PER_MAILBOX} 張`);
 	navigator.storage?.persist?.(); // 降低 iOS Safari 清除資料的機率
-	const blob = await shrink(file);
+	const blob = await (await shrink(file)).arrayBuffer();
 	await tx('readwrite', (s) => s.add({ mailboxId, blob, createdAt: Date.now() }));
 }
 
@@ -174,9 +181,12 @@ export const getProfile = (): Profile =>
 export const saveProfile = (p: Profile) => safe(() => localStorage.setItem(PROFILE_KEY, JSON.stringify(p)), undefined);
 
 // 頭像也是照片，存 IndexedDB（縮到 400px）
-export const getAvatar = () => tx<Blob | undefined>('readonly', (s) => s.get('me'), 'avatar').catch(() => undefined);
+export const getAvatar = () =>
+	tx<Blob | ArrayBuffer | undefined>('readonly', (s) => s.get('me'), 'avatar')
+		.then((b) => b && toBlob(b))
+		.catch(() => undefined);
 
 export async function saveAvatar(file: Blob) {
-	const blob = await shrink(file, 400);
+	const blob = await (await shrink(file, 400)).arrayBuffer();
 	await tx('readwrite', (s) => s.put(blob, 'me'), 'avatar');
 }
