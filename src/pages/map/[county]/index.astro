@@ -77,13 +77,11 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 				))
 		}
 		</div>
-		<p id="soon" role="status" hidden class="fixed inset-x-0 bottom-8 z-50 mx-auto flex h-11 w-[274px] items-center justify-center rounded-full bg-toast text-md font-bold text-white">
-			詳細介紹即將開放，敬請期待！
-		</p>
 	</main>
 </Layout>
 
 <script>
+	import { toast } from '../../../lib/toast';
 	// 平板以上的左右箭頭：一次捲一張卡片，捲到頭的那一邊隱藏
 	const cards = document.getElementById('cards')!;
 	const buttons = document.querySelectorAll<HTMLButtonElement>('[aria-controls="cards"]');
@@ -93,19 +91,8 @@ const card = 'relative flex w-[350px] max-w-[calc(100vw-38px)] shrink-0 snap-cen
 	buttons.forEach((b) => b.addEventListener('click', () => cards.scrollBy({ left: Number(b.dataset.dir) * step() })));
 	cards.addEventListener('scroll', sync, { passive: true });
 
-	// 還沒有詳細頁的「看更多」：提示從上面滑進來，2 秒後收起
-	const soon = document.getElementById('soon')!;
-	let timer = 0;
-	document.querySelectorAll('[data-soon]').forEach((b) =>
-		b.addEventListener('click', () => {
-			clearTimeout(timer);
-			soon.hidden = false;
-			soon.classList.remove('toast-in');
-			void soon.offsetWidth; // 連點時重播動畫
-			soon.classList.add('toast-in');
-			timer = setTimeout(() => (soon.hidden = true), 2000);
-		}),
-	);
+	// 還沒有詳細頁的「看更多」：提示從下面滑上來，2 秒後收起
+	document.querySelectorAll('[data-soon]').forEach((b) => b.addEventListener('click', () => toast('詳細介紹即將開放，敬請期待！')));
 	addEventListener('resize', sync);
 	sync();
 </script>

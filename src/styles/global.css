@@ -259,14 +259,14 @@ header:has(#site-menu:popover-open) .burger line {
 	transform: scaleX(0);
 }
 
-/* 10. 「已上傳！」提示從上面滑下來 */
+/* 10. 通知（src/lib/toast.ts）從畫面下方滑上來 */
 .toast-in {
 	animation: toast-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 @keyframes toast-in {
 	from {
 		opacity: 0;
-		transform: translateY(-24px);
+		transform: translateY(24px);
 	}
 }
 

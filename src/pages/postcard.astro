@@ -110,6 +110,7 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 
 <script>
 	import { addPostcard, getPhotos, getProfile, requireLogin, whenReady, type Photo } from '../lib/store';
+	import { toast } from '../lib/toast';
 
 	const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 	const form = $<HTMLFormElement>('compose');
@@ -224,7 +225,7 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 				: `${nick}會把你的心意送到${String(data.get('to')).trim()}手上`;
 			go('sent');
 		} catch (e) {
-			alert(`寄出失敗：${(e as Error).message}`);
+			toast(`寄出失敗：${(e as Error).message}`, { error: true, ms: 6000 });
 		} finally {
 			btn.disabled = false;
 		}

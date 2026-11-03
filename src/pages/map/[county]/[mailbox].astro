@@ -25,14 +25,6 @@ const slide = 'h-[190px] w-[320px] max-w-full shrink-0 snap-start rounded-2xl ob
 				<div id="carousel" data-mailbox={m.id} data-slide={slide} class="-mr-[13px] flex snap-x snap-mandatory gap-2.5 overflow-x-auto pr-[13px] [scrollbar-width:none] lg:mr-0 lg:pr-0">
 					<Image src={m.photo} alt={m.name} widths={[320, 640]} sizes="(min-width: 1024px) 500px, 320px" class={slide} loading="eager" />
 				</div>
-				<a
-					id="toast"
-					href={`${base}/profile/`}
-					hidden
-					class="absolute top-px left-[21px] flex h-11 w-[274px] max-w-[calc(100%-42px)] items-center justify-center rounded-full bg-toast text-md font-bold text-white"
-				>
-					✓ 已上傳！也收進了你的相簿　查看 →
-				</a>
 			</div>
 
 			<div>
@@ -109,6 +101,7 @@ const slide = 'h-[190px] w-[320px] max-w-full shrink-0 snap-start rounded-2xl ob
 
 <script>
 	import { addPhoto, getPhotos, requireLogin } from '../../../lib/store';
+	import { toast } from '../../../lib/toast';
 	import { MAX_PHOTOS_PER_MAILBOX as max, COINS_FIRST_PHOTO, COINS_EXTRA_PHOTO } from '../../../lib/rules';
 
 	// 動畫跑完再藏起來：先移掉 class 重新觸發動畫
@@ -128,20 +121,6 @@ const slide = 'h-[190px] w-[320px] max-w-full shrink-0 snap-start rounded-2xl ob
 		play(coins, 'coins-up');
 		setTimeout(() => play(box, 'fade-out'), 1800);
 		setTimeout(() => (box.hidden = true), 2100);
-	}
-
-	// 「已上傳！」滑下來，6 秒後收起來
-	let toastTimer = 0;
-	function showToast() {
-		const toast = $('toast');
-		clearTimeout(toastTimer);
-		toast.classList.remove('fade-out');
-		toast.hidden = false;
-		play(toast, 'toast-in');
-		toastTimer = setTimeout(() => {
-			play(toast, 'fade-out');
-			setTimeout(() => (toast.hidden = true), 300);
-		}, 6000);
 	}
 
 	const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -199,10 +178,11 @@ const slide = 'h-[190px] w-[320px] max-w-full shrink-0 snap-start rounded-2xl ob
 			await addPhoto(mailboxId, picked);
 			dialog.close();
 			await render();
-			showToast();
+			// Figma 畫在照片上方；使用者要求改到畫面最下方，按完拍照打卡捲在下面也看得到
+			toast('✓ 已上傳！也收進了你的相簿　查看 →', { href: `${import.meta.env.BASE_URL.replace(/\/$/, '')}/profile/`, ms: 6000 });
 			showReward(first);
 		} catch (e) {
-			alert(e instanceof Error ? e.message : '上傳失敗，請再試一次');
+			toast(e instanceof Error ? e.message : '上傳失敗，請再試一次', { error: true, ms: 6000 });
 		} finally {
 			btn.disabled = false;
 		}
