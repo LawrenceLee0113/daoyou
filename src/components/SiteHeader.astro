@@ -38,13 +38,14 @@ const menu = [
 ---
 
 <!-- 使用者要求：電腦版滑動時整個頁首固定在最上面（高 87＋60＝147px）；
-     手機、平板（2026-11-03）綠色花紋那段跟著捲走，只留導覽列固定。
-     瀏海（2026-11-03）：iOS 26 Safari 只要頂端碰到 sticky／fixed 元素，就拿它的底色塗滿瀏海（之前的白條），
-     固定的東西也畫不進瀏海；只有一般捲動的內容能出現在瀏海後面。所以手機版花紋那段不 sticky（header 用 contents
-     讓花紋、導覽列各自排），花紋再往上多畫一段到頁面頂端外面，沒捲動時就會填滿瀏海。捲動後瀏海是導覽列的米白 -->
+     手機、平板（2026-11-03）：花紋捲到上緣切齊瀏海上緣就停（top -59px，Dynamic Island 機型瀏海高 59px），
+     下面露出的那段花紋＋導覽列固定，米白的導覽列不會頂到最上面。header 用 contents 讓花紋、導覽列各自 sticky。
+     瀏海：iOS 26 Safari 頂端碰到 sticky 元素時會拿它的底色塗滿瀏海（之前的白條）。手機版花紋不墊底色、
+     pointer-events-none（裡面沒有可點的東西），讓 Safari 跳過它、照實畫出花紋；花紋再往上多畫一段，沒捲動時也填滿瀏海。
+     ?notch=sage 是對照組：花紋墊 sage，讓 Safari 把瀏海塗成花紋底色（實機測試用，選定後拿掉） -->
 <header class="contents">
-	<!-- 電腦版花紋圖是半透明的，墊白底：頁首固定後下面捲上來的內容才不會透出來 -->
-	<div class="relative h-[87px] bg-white lg:sticky lg:top-0 lg:z-40">
+	<!-- 電腦版花紋圖是半透明的，墊白底：頁首固定後下面捲上來的內容才不會透出來；手機版的圖不透明 -->
+	<div id="band" class="pointer-events-none sticky -top-[59px] z-40 h-[87px] lg:pointer-events-auto lg:top-0 lg:bg-white">
 		<div
 			class="absolute inset-x-0 bottom-full h-[120px] lg:hidden"
 			style={`background: url(${notchBand.src}) center bottom / 100% auto repeat-y`}
@@ -63,7 +64,7 @@ const menu = [
 			{messages[0]}
 		</p>
 	</div>
-	<nav class="sticky top-0 z-40 bg-header-bar lg:top-[87px]" aria-label="主選單">
+	<nav class="sticky top-[28px] z-40 bg-header-bar lg:top-[87px]" aria-label="主選單">
 		<div class="mx-auto flex h-[60px] max-w-6xl items-center px-5 lg:px-8">
 			<a href={`${base}/`} class="mr-auto"><Image src={logo} alt="島郵 Isle Post 首頁" width={48} densities={[1, 2, 3]} loading="eager" /></a>
 			<!-- 電腦版：選單直接攤開在頁首 -->
@@ -107,6 +108,10 @@ const menu = [
 		</svg>
 	</div>
 </header>
+
+<script is:inline>
+	if (location.search.includes('notch=sage')) document.getElementById('band').classList.replace('pointer-events-none', 'bg-sage');
+</script>
 
 <script is:inline define:vars={{ messages }}>
 	// 原型：滑鼠移出選單就關閉（MOUSE_LEAVE → CLOSE）；手機點選單外面關閉
