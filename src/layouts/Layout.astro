@@ -76,9 +76,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 	</head>
 	<body class="bg-white font-sans text-ink antialiased">
 		<!-- 設計稿是手機版；平板、電腦版由各頁用 md:／lg: 調整（內容最寬 max-w-6xl） -->
-		<div class="flex min-h-dvh w-full flex-col">
+		<!-- 手機、平板：整頁剛好一個螢幕高、本身不捲，由頁首下面的 #scroller 捲動，頁首和瀏海的花紋才會完全不動（見 SiteHeader）。
+		     代價：Safari 網址列不會隨捲動縮小、點時鐘不會回頂端、上一頁回來不記得捲到哪。電腦版照常由頁面捲動 -->
+		<div class="flex h-dvh w-full flex-col lg:h-auto lg:min-h-dvh">
 			{header && <SiteHeader />}
-			<slot />
+			<div id="scroller" class="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-y-contain lg:overflow-visible">
+				<slot />
+			</div>
 		</div>
 	</body>
 </html>

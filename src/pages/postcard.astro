@@ -123,6 +123,7 @@ const row = 'flex gap-6 border-b border-input py-3.5 text-md';
 		const show = () => {
 			document.querySelectorAll<HTMLElement>('[data-step]').forEach((el) => (el.hidden = el.dataset.step !== step));
 			scrollTo(0, 0);
+			document.getElementById('scroller')?.scrollTo(0, 0); // 手機、平板是內容區在捲（見 Layout）
 		};
 		document.startViewTransition ? document.startViewTransition(show) : show();
 	}
