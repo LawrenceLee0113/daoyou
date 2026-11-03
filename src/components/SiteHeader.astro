@@ -123,6 +123,8 @@ const menu = [
 		const top = getComputedStyle(probe).paddingTop;
 		probe.style.paddingTop = '4px';
 		probe.textContent = `safe-area-inset-top = ${top}`;
+		// 頁面頂端外那層（#notch-fill）塗紅：瀏海是紅的＝它在負責；是花紋＝safe-area 那層在負責
+		document.getElementById('notch-fill').style.background = 'red';
 	}
 </script>
 
