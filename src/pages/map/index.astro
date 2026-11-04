@@ -17,9 +17,24 @@ import mapTitle from '../../assets/map-title.png';
 </Layout>
 
 <script is:inline>
-	// 比 393px 窄的手機（例如 iPhone SE 375px）整塊等比縮小，標籤才不會被切掉
 	const stage = document.getElementById('map-stage');
-	const fit = () => (stage.style.zoom = String(Math.min(1, innerWidth / 393)));
+	// 平板、電腦版放大地圖。限制高度才不會動到橫放的手機（寬度也可能超過 768px）
+	const large = matchMedia('(min-width: 768px) and (min-height: 500px)');
+	const fit = () => {
+		const main = stage.parentElement;
+		if (!large.matches) {
+			// 比 393px 窄的手機（例如 iPhone SE 375px）整塊等比縮小，標籤才不會被切掉
+			stage.style.zoom = String(Math.min(1, innerWidth / 393));
+			main.style.height = '';
+			return;
+		}
+		// 舞台內容到 660px（最下面的標籤到 644px）。盡量放到一整個畫面高，但至少 1.3 倍，寬度不超過 max-w-6xl（1152px）
+		// 用 clientHeight：不會隨行動瀏覽器網址列收合而變，捲動時地圖才不會跟著跳
+		const room = document.documentElement.clientHeight - main.offsetTop;
+		const zoom = Math.min(Math.min(innerWidth, 1152) / 393, Math.max(1.3, room / 660));
+		stage.style.zoom = String(zoom);
+		main.style.height = `${660 * zoom}px`;
+	};
 	fit();
 	addEventListener('resize', fit);
 </script>

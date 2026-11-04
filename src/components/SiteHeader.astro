@@ -43,13 +43,15 @@ const menu = [
 			<source media="(min-width: 1024px)" srcset={desktopBand.src} />
 			<Image src={headerTop} alt="" class="absolute inset-0 size-full object-cover lg:object-top" loading="eager" />
 		</picture>
-		<p
-			id="ticker"
-			class="absolute inset-x-0 top-[59px] truncate px-8 text-center text-2xs text-white transition-opacity duration-500"
-			aria-live="off"
-		>
-			{messages[0]}
-		</p>
+		<!-- 色塊包住文字、寬度跟著句子：換句時只有文字淡出，色塊不閃，寬度在文字透明時才平滑過渡。
+		     外層 px-5＋色塊 px-3＝原本的 px-8，文字可用寬度不變；py-0.5 讓色塊往上下各長 2px，top 同步上移，文字位置不動 -->
+		<div class="absolute inset-x-0 top-[57px] flex justify-center px-5">
+			<div class="max-w-full rounded-md bg-sage/30 px-3 py-0.5 transition-[width] duration-300">
+				<p id="ticker" class="truncate text-center text-2xs text-white transition-opacity duration-500" aria-live="off">
+					{messages[0]}
+				</p>
+			</div>
+		</div>
 	</div>
 	<nav class="bg-header-bar" aria-label="主選單">
 		<div class="mx-auto flex h-[60px] max-w-6xl items-center px-5 lg:px-8">
@@ -90,9 +92,11 @@ const menu = [
 				))
 			}
 		</ul>
-		<svg class="mt-3.5 ml-[23px]" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f2ede6" stroke-width="2" aria-label="Instagram">
-			<rect x="1" y="1" width="22" height="22" rx="6" /><circle cx="12" cy="12" r="4.9" /><circle cx="17.5" cy="6" r="1" fill="#f2ede6" />
-		</svg>
+		<a href="https://www.instagram.com/repost.2u" target="_blank" rel="noopener noreferrer" class="mt-3.5 ml-[23px] block w-fit" aria-label="Instagram">
+			<svg class="block" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f2ede6" stroke-width="2" aria-hidden="true">
+				<rect x="1" y="1" width="22" height="22" rx="6" /><circle cx="12" cy="12" r="4.9" /><circle cx="17.5" cy="6" r="1" fill="#f2ede6" />
+			</svg>
+		</a>
 	</div>
 </header>
 
@@ -113,12 +117,22 @@ const menu = [
 	}
 
 	const el = document.getElementById('ticker');
+	const pill = el.parentElement;
 	let i = 0;
 	setInterval(() => {
 		el.style.opacity = '0';
 		setTimeout(() => {
+			// 換字前後各量一次寬度，文字透明時過渡（300ms 同 duration-300）完才淡入，才不會看到句子被裁切
+			const from = pill.getBoundingClientRect().width;
 			el.textContent = messages[(i = (i + 1) % messages.length)];
-			el.style.opacity = '1';
+			const to = pill.getBoundingClientRect().width;
+			pill.style.width = `${from}px`;
+			pill.getBoundingClientRect(); // 強制套用起點，下一行的變化才會有過渡
+			pill.style.width = `${to}px`;
+			setTimeout(() => {
+				pill.style.width = ''; // 交還給 CSS，之後轉向或縮放視窗才會跟著版面走
+				el.style.opacity = '1';
+			}, 300);
 		}, 500);
 	}, 5000);
 </script>
